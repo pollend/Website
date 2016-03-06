@@ -1,0 +1,23 @@
+// Load bootstrap overrides before we load bootstrap so they're overwritten in the compile process
+@import "bootstrap-overrides";
+@import "../libs/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "topbar";
+@import "background";
+
+body {
+  overflow-y: scroll;
+  padding-bottom: 40px;
+}
+
+h1 {
+  margin: 15px 0;
+}
+
+h2, h3, h4 {
+  margin: 5px 0;
+}
+
+#site {
+  background-color: #ffffff;
+}

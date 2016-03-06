@@ -1,0 +1,14 @@
+// Define before loading vars so the bootstrap uses this in calculations
+$brand-primary: #3592DB;
+
+// Load original vars so we may use them
+@import "../libs/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+
+$navbar-border-radius: 0px;
+$navbar-default-bg: darken($gray-lighter, 10%);
+$navbar-default-border: darken($gray-lighter, 15%);
+$navbar-default-link-hover-bg: darken($gray-lighter, 20%);
+$navbar-default-link-active-bg: darken($gray-lighter, 20%);
+$navbar-default-brand-color: $gray-dark;
+$navbar-default-link-color: $gray;
+$navbar-default-link-hover-color: $gray-dark;
