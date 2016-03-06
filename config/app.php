@@ -154,6 +154,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -167,6 +168,8 @@ return [
         PN\BuildOffs\Providers\BuildOffServiceProvider::class,
         PN\Foundation\Providers\FoundationServiceProvider::class,
         PN\Resources\Providers\ResourceServiceProvider::class,
+        PN\Users\Providers\AuthServiceProvider::class,
+        PN\Users\Providers\UserServiceProvider::class,
     ],
 
     /*
@@ -217,6 +220,7 @@ return [
          * Package Facades
          */
         'Image'         => Intervention\Image\Facades\Image::class,
+        'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
 
         /**
          * Application Facades

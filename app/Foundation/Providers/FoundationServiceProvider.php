@@ -16,8 +16,11 @@ class FoundationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::controller('', HomeController::class, [
-            'getIndex' => 'home.index'
-        ]);
+        \Route::group(['middleware' => ['web']], function(){
+            \Route::get('', [
+                'as' => 'home.index',
+                'uses' => HomeController::class . '@getIndex'
+            ]);
+        });
     }
 }

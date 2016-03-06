@@ -9,6 +9,6 @@ class ParkPresenter extends Presenter
 {
     public function imageUrl()
     {
-        return $this->entity->image->source;
+        return $this->model->image->source;
     }
 }

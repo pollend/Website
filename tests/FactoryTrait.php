@@ -32,13 +32,20 @@ trait FactoryTrait
      */
     public function login($attributes = [])
     {
-        $user = factory(User::class)->create($attributes);
+        $user = $this->createUser($attributes);
 
         \Auth::login($user);
 
         $this->user = $user;
 
         return $this->user;
+    }
+
+    public function createUser($attributes = [])
+    {
+        $user = factory(User::class)->create(array_merge($attributes, ['password' => \Hash::make(array_get($attributes, 'password', '123456'))]));
+
+        return $user;
     }
 
     public $blueprint = 'blueprint';

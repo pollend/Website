@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "bower": "^1.7.7",
+    "elixir-typescript": "^2.0.0",
     "gulp": "^3.9.1",
     "laravel-elixir": "^4.2.1"
   }

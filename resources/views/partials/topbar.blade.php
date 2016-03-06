@@ -59,6 +59,7 @@
                     </a>
                 </li>
             </ul>
+            @include('partials/navbar')
         </nav>
     </div>
 </header>

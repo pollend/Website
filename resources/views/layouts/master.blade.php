@@ -25,6 +25,9 @@
     </div>
 @show
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
 @yield('js')
 </body>
 </html>

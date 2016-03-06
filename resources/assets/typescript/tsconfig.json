@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "out": "public/js/app.js",
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "vendor"
+  ]
+}

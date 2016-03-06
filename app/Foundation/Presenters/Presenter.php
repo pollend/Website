@@ -5,11 +5,11 @@ namespace PN\Foundation\Presenters;
 
 class Presenter
 {
-    protected $entity;
+    protected $model;
 
-    public function __construct($entity)
+    public function __construct($model)
     {
-        $this->entity = $entity;
+        $this->model = $model;
     }
 
     public function __get($key)

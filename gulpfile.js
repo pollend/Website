@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 
+var elixirTypscript = require('elixir-typescript');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -14,7 +15,10 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass('app.scss');
 
+    mix.typescript('app.ts');
+
     mix.version([
-        'css/app.css'
+        'css/app.css',
+        'js/app.js'
     ])
 });

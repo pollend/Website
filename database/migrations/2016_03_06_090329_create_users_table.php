@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('confirmed');
 			$table->string('api_key', 100);
 			$table->boolean('social');
+			$table->string('social_id', 50);
 			$table->string('social_name', 100);
 			$table->boolean('notification_rate');
 			$table->integer('recap_rate');
