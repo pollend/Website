@@ -33,12 +33,26 @@ class Blueprint extends Model implements ResourceInterface
         $this->image_id = $image->id;
     }
 
+    public function setSourceAttribute($source)
+    {
+        // is source local? make it remote
+        if (\File::exists($source)) {
+            $remoteSource = 'blueprints/' . basename($source);
+
+            \Storage::disk()->put($remoteSource, file_get_contents($source));
+
+            $source = $remoteSource;
+        }
+
+        $this->attributes['source'] = $source;
+    }
+
     public function overwriteImageWithDefault()
     {
         /**
          * Load park from storage to local to parse
          */
-        $image = Image::make(\Image::make(\Storage::disk()->get($this->getSource()))->resize(512, 512)->encode('jpg',
+        $image = Image::make(\Image::make(\Storage::disk()->get($this->source))->resize(512, 512)->encode('jpg',
             100));
 
         $image->save();

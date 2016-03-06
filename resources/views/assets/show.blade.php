@@ -2,10 +2,10 @@
 
 @section('title')
 	<h1>
-		{{ $asset->getName() }}
+		{{ $asset->name }}
 	</h1>
 @endsection
 
 @section('content')
-	{{ $asset->getDescription() }}
+	{{ $asset->description }}
 @endsection
