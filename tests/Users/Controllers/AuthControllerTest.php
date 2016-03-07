@@ -11,6 +11,8 @@ class AuthControllerTest extends \TestCase
 
     public function test_register()
     {
+        \Mail::shouldReceive('send');
+
         $this->visit(route('auth.register'))
             ->submitForm('Register', [
                 'username' => 'Nice_username',

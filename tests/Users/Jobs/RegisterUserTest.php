@@ -14,6 +14,8 @@ class RegisterUserTest extends \TestCase
 
     public function test_register_job()
     {
+        \Mail::shouldReceive('send');
+        
         $userData = [
             'username' => 'Nice_username',
             'name' => 'Even nicer name',
