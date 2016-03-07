@@ -18,6 +18,8 @@ class RegisterUser extends Job
 
     private $password;
 
+    private $social;
+
     private $userRepo;
 
     /**
@@ -28,13 +30,14 @@ class RegisterUser extends Job
      * @param $password
      * @param $userRepo
      */
-    public function __construct($username, $name, $email, $password, UserRepositoryInterface $userRepo)
+    public function __construct($username, $name, $email, $password, $social = false, UserRepositoryInterface $userRepo)
     {
         $this->username = $username;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
         $this->userRepo = $userRepo;
+        $this->social = $social;
     }
 
     public function handle()
@@ -45,6 +48,7 @@ class RegisterUser extends Job
         $user->name = $this->name;
         $user->email = $this->email;
         $user->password = \Hash::make($this->password);
+        $user->social = $this->social;
 
         $user->save();
 

@@ -59,11 +59,11 @@ class CreateSocialUser extends Job
             '',
             $this->name,
             $this->email,
-            str_random(32)
+            str_random(32),
+            true
         ]));
 
         $user = $user->fill([
-            'social' => 1,
             'social_id' => $this->socialId,
             'social_name' => $this->socialProvider,
             'avatar' => $this->avatar
