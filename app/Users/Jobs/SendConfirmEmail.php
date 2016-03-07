@@ -28,7 +28,7 @@ class SendConfirmEmail extends Job
         $user = $this->userRepo->find($this->userId);
 
         // only send confirmation mails to non social unconfirmed accounts
-        if($user->social == 0 && $user->confirmed == 0) {
+        if($user->confirmed == 0) {
             \Mail::send('auth.emails.confirm', ['user' => $user], function ($m) use ($user) {
                 $m->from('info@parkitectnexus.com', 'ParkitectNexus');
 
