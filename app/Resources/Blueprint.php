@@ -39,7 +39,7 @@ class Blueprint extends Model implements ResourceInterface
         if (\File::exists($source)) {
             $remoteSource = 'blueprints/' . basename($source);
 
-            \Storage::disk()->put($remoteSource, file_get_contents($source));
+            \Storage::disk('blueprints')->put($remoteSource, file_get_contents($source));
 
             $source = $remoteSource;
         }
@@ -52,7 +52,7 @@ class Blueprint extends Model implements ResourceInterface
         /**
          * Load park from storage to local to parse
          */
-        $image = Image::make(\Image::make(\Storage::disk()->get($this->source))->resize(512, 512)->encode('jpg',
+        $image = Image::make(\Image::make(\Storage::disk('blueprints')->get($this->source))->resize(512, 512)->encode('jpg',
             100));
 
         $image->save();

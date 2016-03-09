@@ -48,6 +48,26 @@ return [
             'root' => storage_path('media'),
         ],
 
+        'blueprints' => [
+            'driver' => 'local',
+            'root' => storage_path('media/blueprint'),
+        ],
+
+        'parks' => [
+            'driver' => 'local',
+            'root' => storage_path('media/park'),
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('media/image'),
+        ],
+
+        'test' => [
+            'driver' => 'local',
+            'root' => storage_path('test'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

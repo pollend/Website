@@ -25,7 +25,7 @@ class Image extends Model
 
         $path = 'images/' . sha1(uniqid()) . '.' . $extension;
 
-        \Storage::disk()->put($path, $imageData);
+        \Storage::disk('images')->put($path, $imageData);
 
         $image->source = $path;
 
@@ -39,6 +39,6 @@ class Image extends Model
      */
     public function getRaw()
     {
-        return \Storage::disk()->get($this->source);
+        return \Storage::disk('images')->get($this->source);
     }
 }

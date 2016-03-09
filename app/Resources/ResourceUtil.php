@@ -139,11 +139,11 @@ class ResourceUtil
     public function makeExtractor(ResourceInterface $resource)
     {
         if ($resource instanceof Blueprint) {
-            return new BlueprintExtractor(StorageUtil::copyToTmp($resource->source));
+            return new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source));
         }
 
         if ($resource instanceof Park) {
-            return new ParkExtractor(StorageUtil::copyToTmp($resource->source));
+            return new ParkExtractor(StorageUtil::copyToTmp('parks', $resource->source));
         }
 
         // if this happens to be a mod, return null

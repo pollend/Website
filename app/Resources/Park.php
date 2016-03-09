@@ -41,7 +41,7 @@ class Park extends Model implements ResourceInterface
         if (\File::exists($source)) {
             $remoteSource = 'parks/' . basename($source);
 
-            \Storage::disk()->put($remoteSource, file_get_contents($source));
+            \Storage::disk('parks')->put($remoteSource, file_get_contents($source));
 
             $source = $remoteSource;
         }
@@ -57,7 +57,7 @@ class Park extends Model implements ResourceInterface
         /**
          * Load park from storage to local to parse
          */
-        $data = (new ParkExtractor(StorageUtil::copyToTmp($this->source)))->getData();
+        $data = (new ParkExtractor(StorageUtil::copyToTmp('parks', $this->source)))->getData();
 
         $image = Image::make(\Image::make(base64_decode($data['Header']['Screenshot']))->resize(512, 512)->encode('jpg',
             100));
