@@ -9,7 +9,7 @@ class Stat extends Model
 
     protected $table = 'stats';
     public $timestamps = false;
-    protected $fillable = array('name', 'title');
-    protected $visible = array('name', 'title');
+    protected $fillable = array('type', 'name', 'title');
+    protected $visible = array('type', 'name', 'title');
 
 }

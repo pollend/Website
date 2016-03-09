@@ -16,6 +16,7 @@ class CreateAssetsTable extends Migration {
 			$table->integer('resource_id')->unsigned();
 			$table->string('resource_type', 100);
 			$table->string('identifier', 10)->unique();
+			$table->string('type', 20);
 			$table->string('name', 100);
 			$table->string('slug', 100);
 			$table->text('description');

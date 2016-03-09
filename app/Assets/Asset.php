@@ -141,6 +141,7 @@ class Asset extends Model
 
     public function setNameAttribute($name)
     {
+        $this->attributes['name'] = $name;
         $this->slug = Str::slug($name);
     }
 }

@@ -13,13 +13,69 @@
 
 $factory->define(\PN\Users\User::class, function ($faker) {
     return [
-        'identifier' => str_random(10),
-        'username' => $faker->username,
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'avatar' => $faker->image,
-        'password' => str_random(10),
+        'identifier'     => str_random(10),
+        'username'       => $faker->username,
+        'name'           => $faker->name,
+        'email'          => $faker->email,
+        'avatar'         => $faker->image,
+        'password'       => Hash::make('password'),
         'remember_token' => str_random(10),
-        'social' => 1
+        'social'         => 0,
     ];
 });
+
+$factory->define(\PN\Assets\Asset::class, function ($faker) {
+    return [
+        'identifier' => str_random(10),
+        'name'       => $faker->name,
+    ];
+});
+
+$factory->define(\PN\Resources\Album::class, function ($faker) {
+    return [
+
+    ];
+});
+
+$factory->define(\PN\Resources\Mod::class, function ($faker) {
+    return [
+        'source' => $faker->url,
+    ];
+});
+
+$factory->define(\PN\Assets\Tag::class, function ($faker) {
+    return [
+        'type' => $faker->randomElement(['blueprint', 'park', 'mod']),
+        'tag' => $faker->name,
+        'slug' => $faker->slug,
+        'parkitect_type' => $faker->name,
+        'primary' => $faker->boolean
+    ];
+});
+
+$factory->define(\PN\Social\Comment::class, function ($faker) {
+    return [
+        'body' => $faker->text
+    ];
+});
+
+$factory->define(\PN\Social\Like::class, function ($faker) {
+    return [
+        'weight' => 1
+    ];
+});
+
+$factory->define(\PN\Tracking\Download::class, function ($faker) {
+    return [
+        'ip' => $faker->ipv4
+    ];
+});
+
+$factory->define(\PN\Tracking\View::class, function ($faker) {
+    return [
+        'ip' => $faker->ipv4
+    ];
+});
+
+
+
