@@ -1,0 +1,23 @@
+{
+  "name": "ParkitectNexus",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Luuk Holleman <luukholleman@gmail.com>"
+  ],
+  "license": "No license",
+  "homepage": "https://ParkitectNexus.com",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.6"
+  }
+}
