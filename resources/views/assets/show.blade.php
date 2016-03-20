@@ -160,21 +160,24 @@
         </table>
     </div>
 
-    <div class="row">
-        <div class="col-sm-12">
-            @foreach($asset->comments as $comment)
-                <hr>
-                <div class="row">
-                    <div class="col-sm-2">
+    <div id="comments">
+        @foreach($asset->comments as $comment)
+            <hr>
+            <div class="comment">
+                <div class="comment-header">
+                    <div class="comment-buttons">
+                    </div>
+                    <img src="{{ $comment->user->presenter()->avatarUrl }}">
+                    <a href="https://parkitectnexus.com/user/Topkek" title="Topkek">
                         {{ $comment->user->presenter()->displayName }}
-                        <br>
-                        {{ $comment->presenter()->timestamp }}
-                    </div>
-                    <div class="col-sm-10">
-                        {{ $comment->body }}
-                    </div>
+                    </a>
+                    <br>
+                    {{ $comment->presenter()->timestamp }}
                 </div>
-            @endforeach
-        </div>
+                <div class="comment-body" id="comment-07c047b074">
+                    {{ $comment->body }}
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.columns')
+@extends('layouts.wide')
 
 @section('content')
 	<div class="col-sm-12">

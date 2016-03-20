@@ -7,6 +7,10 @@ use PN\Foundation\Presenters\Presenter;
 
 class UserPresenter extends Presenter
 {
+    public function avatarUrl()
+    {
+        return '/media/avatars/'.$this->model->avatar;
+    }
     public function displayName()
     {
         $name = $this->model->name;

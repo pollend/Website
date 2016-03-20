@@ -21,6 +21,11 @@ class ResourceServiceProvider extends ServiceProvider
             'uses' => ResourceController::class.'@images'
         ]);
 
+        \Route::get('media/avatars/{filename}', [
+            'as' => 'media.avatars',
+            'uses' => ResourceController::class.'@avatars'
+        ]);
+
         \Route::get('resources/download/{identifier}', [
             'as' => 'resources.download',
             'uses' => ResourceController::class.'@download'

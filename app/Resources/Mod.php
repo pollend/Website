@@ -3,6 +3,7 @@ namespace PN\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PN\Foundation\Presenters\PresenterTrait;
 
 
 class Mod extends Model implements ResourceInterface
@@ -10,7 +11,7 @@ class Mod extends Model implements ResourceInterface
     protected $table = 'resource_mods';
     public $timestamps = true;
 
-    use SoftDeletes;
+    use SoftDeletes, PresenterTrait;
 
     protected $dates = ['deleted_at'];
     protected $fillable = array('image_id', 'source');

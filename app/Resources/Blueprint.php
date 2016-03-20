@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use PN\Assets\Repositories\TagRepositoryInterface;
+use PN\Foundation\Presenters\PresenterTrait;
 
 
 class Blueprint extends Model implements ResourceInterface
@@ -12,7 +13,7 @@ class Blueprint extends Model implements ResourceInterface
     protected $table = 'resource_blueprints';
     public $timestamps = true;
 
-    use SoftDeletes;
+    use SoftDeletes, PresenterTrait;
 
     protected $dates = ['deleted_at'];
     protected $fillable = array('image_id', 'source');

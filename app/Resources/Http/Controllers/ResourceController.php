@@ -13,6 +13,13 @@ class ResourceController extends Controller
         ]);
     }
 
+    public function avatars($filename)
+    {
+        return response(\Storage::disk('avatars')->get($filename), 200, [
+            'Content-type' => 'image/jpeg'
+        ]);
+    }
+
     public function download($identifier)
     {
 

@@ -9,9 +9,15 @@ class UserSeeder extends \Illuminate\Database\Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             try {
-                factory(\PN\Users\User::class)->create();
+                $user = factory(\PN\Users\User::class)->create();
+
+                $faker = \Faker\Factory::create();
+
+                $user->setAvatar(file_get_contents($faker->image));
+
+                $user->save();
             } catch (Exception $e) {
                 // skip exceptions caused by uniques
             }

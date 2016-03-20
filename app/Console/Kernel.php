@@ -5,6 +5,9 @@ namespace PN\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use PN\Foundation\Console\Inspire;
+use PN\Social\Console\Commands\RecalculateLikes;
+use PN\Tracking\Console\Commands\RecalculateDownloads;
+use PN\Tracking\Console\Commands\RecalculateViews;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,6 +18,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Inspire::class,
+        RecalculateDownloads::class,
+        RecalculateViews::class,
+        RecalculateLikes::class,
     ];
 
     /**

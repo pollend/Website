@@ -63,6 +63,11 @@ return [
             'root' => storage_path('media/images'),
         ],
 
+        'avatars' => [
+            'driver' => 'local',
+            'root' => storage_path('media/avatars'),
+        ],
+
         'test' => [
             'driver' => 'local',
             'root' => storage_path('test'),

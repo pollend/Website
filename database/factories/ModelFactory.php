@@ -17,7 +17,6 @@ $factory->define(\PN\Users\User::class, function ($faker) {
         'username'       => $faker->username,
         'name'           => $faker->name,
         'email'          => $faker->email,
-        'avatar'         => $faker->image,
         'password'       => Hash::make('password'),
         'remember_token' => str_random(10),
         'social'         => 0,

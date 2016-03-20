@@ -60,7 +60,7 @@
 				<div class="checkbox">
 					<input type="checkbox" checked disabled>
 					<label>
-						{{ $primaryTag->getTag() }}
+						{{ $primaryTag->tag }}
 					</label>
 				</div>
 			@endforeach
@@ -71,10 +71,10 @@
 			</label>
 			@foreach($secondaryTags as $index => $tag)
 				<div class="checkbox">
-					<input id="tag-{{ $tag->getSlug() }}" name="tags[{{ $tag->getSlug() }}]" type="checkbox"
-					       @if(Request::old('tags.'.$tag->getSlug(), 'off') == $tag->getSlug()) checked @endif>
-					<label for="tag-{{ $tag->getSlug() }}">
-						{{ $tag->getTag() }}
+					<input id="tag-{{ $tag->slug }}" name="tags[{{ $tag->slug }}]" type="checkbox"
+					       @if(Request::old('tags.'.$tag->slug, 'off') == $tag->slug) checked @endif>
+					<label for="tag-{{ $tag->slug }}">
+						{{ $tag->tag }}
 					</label>
 				</div>
 			@endforeach

@@ -131,4 +131,16 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->hasMany(\PN\Social\Notification::class);
     }
 
+    public function setAvatar($imageData)
+    {
+        $image = \Image::make($imageData);
+
+        $name = sha1(uniqid()) . '.jpg';
+
+        \Storage::disk('avatars')->put($name, $image->resize(500, 500, function($constraint){
+            $constraint->upsize();
+        })->encode('jpg'));
+
+        $this->avatar = $name;
+    }
 }
