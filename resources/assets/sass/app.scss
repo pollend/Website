@@ -2,8 +2,20 @@
 @import "bootstrap-overrides";
 @import "../libs/bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "topbar";
+@import "helpers";
+@import "asset";
 @import "background";
+@import "topbar";
+@import "content";
+@import "home";
+@import "list";
+@import "asset";
+@import "user";
+@import "social";
+@import "footer";
+@import "forum";
+@import "build-off";
+@import "stockroom";
 
 body {
   overflow-y: scroll;
@@ -20,4 +32,54 @@ h2, h3, h4 {
 
 #site {
   background-color: #ffffff;
+  box-shadow: 0 0 2px 0px rgba(0, 0, 0, .5);
+  border-radius: $border-radius-base;
+  overflow-x: hidden;
+
+  #sidebar {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-right: 1px solid $hr-border;
+
+    p {
+      margin: 0px;
+    }
+  }
+
+  #content {
+    border-left:  1px solid $hr-border;
+    margin-left: -1px;
+    padding-bottom: 15px;
+  }
 }
+
+#logo {
+  margin: 0;
+  position: absolute;
+  top: 3px;
+  z-index: 1000;
+
+  img {
+    height: 70px;
+  }
+}
+
+.icon-active {
+  color: $brand-info;
+}
+
+.icon-xl {
+  font-size: 50px !important;
+}
+
+.border-right {
+  border-right: 1px solid $hr-border;
+}
+
+a[name]:not([href]) {
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+

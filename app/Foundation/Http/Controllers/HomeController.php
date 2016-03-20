@@ -27,6 +27,9 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
-        return view('home.index');
+        $popular = $this->assetRepo->mostPopular(4);
+        $newest = $this->assetRepo->newest(4);
+
+        return view('home.index', compact('popular', 'newest'));
     }
 }

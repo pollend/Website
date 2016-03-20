@@ -1,0 +1,21 @@
+.build-off {
+  h2 a {
+    color: inherit;
+  }
+
+  .build-off-type-icon {
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    width: 160px;
+    height: 160px;
+  }
+
+  .build-off-info {
+    padding-left: 25px;
+  }
+
+  .build-off-time-remaining {
+    font-style: italic;
+  }
+}

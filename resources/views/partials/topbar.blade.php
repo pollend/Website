@@ -21,7 +21,7 @@
         <nav class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#" title="Home">Home</a>
+                    <a href="/" title="Home">Home</a>
                 </li>
                 <li>
                     <a href="#" title="Build-Off">

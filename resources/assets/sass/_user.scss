@@ -1,0 +1,55 @@
+.user-profile {
+  width: 100%;
+
+  .avatar {
+    float: left;
+    width: 110px;
+    display: inline-block;
+
+    img {
+      width: 100px;
+      height: 100px;
+      display: block;
+      margin-right: 10px;
+    }
+  }
+
+  .user-detail {
+    position: relative;
+    display: inline-block;
+    height: 100px;
+
+    h2 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .username {
+    }
+
+    .user-statistics {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 200;
+      left: 0px;
+      bottom: 0px;
+    }
+  }
+
+  .avatar:after, .user-detail:after, .user-profile:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+.user-flair {
+  font-size: 14px;
+  font-weight: 200;
+}

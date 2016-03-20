@@ -39,7 +39,7 @@ class Park extends Model implements ResourceInterface
     {
         // is source local? make it remote
         if (\File::exists($source)) {
-            $remoteSource = 'parks/' . basename($source);
+            $remoteSource = basename($source);
 
             \Storage::disk('parks')->put($remoteSource, file_get_contents($source));
 

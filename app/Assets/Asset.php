@@ -4,10 +4,16 @@ namespace PN\Assets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use PN\Assets\Stats\AssetStat;
+use PN\Assets\Stats\Stat;
 use PN\Assets\Stats\StatInterface;
+use PN\BuildOffs\Rank;
+use PN\Foundation\Presenters\PresenterTrait;
 use PN\Resources\Album;
 use PN\Resources\Image;
 use PN\Resources\ResourceInterface;
+use PN\Social\Comment;
+use PN\Tracking\View;
 use PN\Users\User;
 
 
@@ -16,7 +22,7 @@ class Asset extends Model
     protected $table = 'assets';
     public $timestamps = true;
 
-    use SoftDeletes;
+    use SoftDeletes, PresenterTrait;
 
     protected $dates = ['deleted_at'];
     protected $guarded = array('user_id');
@@ -65,7 +71,7 @@ class Asset extends Model
 
     public function tags()
     {
-        return $this->hasManyThrough(\PN\Assets\Tag::class, \PN\Assets\AssetTag::class);
+        return $this->belongsToMany(\PN\Assets\Tag::class, 'asset_tags');
     }
 
     public function dependencies()
@@ -80,7 +86,7 @@ class Asset extends Model
 
     public function image()
     {
-        return $this->hasOne(\PN\Resources\Image::class);
+        return $this->belongsTo(\PN\Resources\Image::class);
     }
 
     public function buildOff()
@@ -105,17 +111,22 @@ class Asset extends Model
 
     public function views()
     {
-        return $this->morphedByMany(\PN\Tracking\View::class, 'viewable');
+        return $this->morphedByMany(View::class, 'viewable');
     }
 
     public function stats()
     {
-        return $this->hasManyThrough(\PN\Assets\Stats\Stat::class, \PN\Assets\Stats\AssetStat::class);
+        return $this->hasMany(AssetStat::class);
     }
 
     public function rank()
     {
-        return $this->hasOne(\PN\BuildOffs\Rank::class);
+        return $this->hasOne(Rank::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function setImage(Image $image)
@@ -143,5 +154,22 @@ class Asset extends Model
     {
         $this->attributes['name'] = $name;
         $this->slug = Str::slug($name);
+    }
+
+    public function getStats()
+    {
+        $asset = $this;
+        return \Cache::remember('asset.stats', 1440, function() use ($asset) {
+            $stats = [];
+
+            foreach($asset->stats as $stat) {
+                $stats[$stat->stat->name] = [
+                    'title' => $stat->stat->title,
+                    'value' => $stat->value
+                ];
+            }
+
+            return $stats;
+        });
     }
 }

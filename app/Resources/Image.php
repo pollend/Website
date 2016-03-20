@@ -4,9 +4,12 @@ namespace PN\Resources;
 
 
 use Illuminate\Database\Eloquent\Model;
+use PN\Foundation\Presenters\PresenterTrait;
 
 class Image extends Model
 {
+    use PresenterTrait;
+
     protected $table = 'resource_images';
     public $timestamps = false;
     protected $fillable = array('source');
@@ -23,7 +26,7 @@ class Image extends Model
     {
         $image = new Image();
 
-        $path = 'images/' . sha1(uniqid()) . '.' . $extension;
+        $path = sha1(uniqid()) . '.' . $extension;
 
         \Storage::disk('images')->put($path, $imageData);
 

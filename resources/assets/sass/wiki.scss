@@ -1,0 +1,117 @@
+@import 'highlightjs';
+@import '../../../vendor/bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables';
+
+$sidebar-h-scale: 0.8;
+
+#wiki-title {
+  @media (min-width: $screen-md-min) {
+    margin-top: 60px;
+    margin-bottom: 10px;
+  }
+}
+#wiki-content {
+  @media (min-width: $screen-md-min) {
+    margin-left: 40px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  > ul:first-child {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    line-height: 20px;
+    > li > a {
+      font-weight: 900;
+      text-decoration: none;
+      &:before {
+        content: '\00B6';
+        margin-right: 10px;
+        color: $link-color;
+        opacity: .2;
+      }
+    }
+  }
+  a.title {
+    text-decoration: none;
+    position: relative;
+    h2 {
+      color: black;
+      @media (min-width: $screen-md-min) {
+        &:before {
+          content: '\00B6';
+          float: left;
+          margin-left: -40px;
+          padding-right: 8px;
+          width: 40px;
+          text-align: right;
+          color: $link-color;
+          opacity: .2;
+          font-size: 22px;
+          position: absolute;
+          bottom: 0;
+        }
+      }
+    }
+  }
+
+  h1 {
+    font-weight: 600;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    font-weight: 300;
+  }
+  
+  img {
+    max-width: 100%;
+    max-height: 500px;
+  }
+}
+
+a.btn.btn-link {
+  color: #8f8f8f;
+
+  &:hover {
+    color: lighten(#8f8f8f, 40%);
+  }
+}
+
+#sidebar {
+  h1 {
+    font-size: $font-size-h1 * $sidebar-h-scale;
+  }
+  h2 {
+    font-size: $font-size-h2 * $sidebar-h-scale;
+  }
+  h3 {
+    font-size: $font-size-h3 *$sidebar-h-scale;
+  }
+  h4 {
+    font-size: $font-size-h4 * $sidebar-h-scale;
+  }
+  h5 {
+    font-size: $font-size-h5 * $sidebar-h-scale;
+  }
+  h6 {
+    font-size: $font-size-h6 * $sidebar-h-scale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    padding-bottom: 5px;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+  }
+
+  a.title {
+    text-decoration: none;
+    color: #666666;
+    h2 {
+      font-weight: 300;
+    }
+  }
+}

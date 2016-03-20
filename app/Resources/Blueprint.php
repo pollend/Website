@@ -37,7 +37,7 @@ class Blueprint extends Model implements ResourceInterface
     {
         // is source local? make it remote
         if (\File::exists($source)) {
-            $remoteSource = 'blueprints/' . basename($source);
+            $remoteSource = basename($source);
 
             \Storage::disk('blueprints')->put($remoteSource, file_get_contents($source));
 

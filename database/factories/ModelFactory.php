@@ -28,6 +28,7 @@ $factory->define(\PN\Assets\Asset::class, function ($faker) {
     return [
         'identifier' => str_random(10),
         'name'       => $faker->name,
+        'description' => $faker->text
     ];
 });
 

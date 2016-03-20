@@ -6,6 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" media="screen" type="text/css" href="{{ elixir('css/app.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     @yield('css')
 

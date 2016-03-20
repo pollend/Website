@@ -50,17 +50,17 @@ return [
 
         'blueprints' => [
             'driver' => 'local',
-            'root' => storage_path('media/blueprint'),
+            'root' => storage_path('media/blueprints'),
         ],
 
         'parks' => [
             'driver' => 'local',
-            'root' => storage_path('media/park'),
+            'root' => storage_path('media/parks'),
         ],
 
         'images' => [
             'driver' => 'local',
-            'root' => storage_path('media/image'),
+            'root' => storage_path('media/images'),
         ],
 
         'test' => [
