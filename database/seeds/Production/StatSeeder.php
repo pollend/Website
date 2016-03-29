@@ -11,67 +11,67 @@ class StatSeeder extends BaseSeeder
     {
         $stats = [
             'blueprint' => [
-                'Ratings'       => [
-                    'rating_excitement' => 'Rating Excitement',
-                    'rating_intensity'  => 'Rating Intensity',
-                    'rating_nausea'     => 'Rating Nausea',
+                'Ratings' => [
+                    'RatingExcitement' => 'Rating Excitement',
+                    'RatingIntensity' => 'Rating Intensity',
+                    'RatingNausea' => 'Rating Nausea',
                 ],
-                'Drops'         => [
-                    'air_time'          => 'Air Time (sec)',
-                    'drops'             => 'Drops',
-                    'total_drop_height' => 'Total Drop Height (meter)',
-                    'biggest_drop'      => 'Biggest Drop (meter)',
+                'Drops' => [
+                    'AirTime' => 'Air Time (sec)',
+                    'Drops' => 'Drops',
+                    'TotalDropHeight' => 'Total Drop Height (meter)',
+                    'BiggestDrop' => 'Biggest Drop (meter)',
                 ],
-                'Speeds'        => [
-                    'average_speed' => 'Average Speed (km/h)',
-                    'max_speed'     => 'Max Speed (km/h)',
+                'Speeds' => [
+                    'AverageVelocity' => 'Average Speed (km/h)',
+                    'MaxVelocity' => 'Max Speed (km/h)',
                 ],
-                'G-Force'       => [
-                    'min_vert_g' => 'Minimum Vertical G',
-                    'max_vert_g' => 'Maximum Vertical G',
-                    'min_lat_g'  => 'Minimum Lat G',
-                    'max_lat_g'  => 'Maximum Lat G',
-                    'min_long_g' => 'Minimum Long G',
-                    'max_long_g' => 'Maximum Long G',
+                'G-Force' => [
+                    'MinVertG' => 'Minimum Vertical G',
+                    'MaxVertG' => 'Maximum Vertical G',
+                    'MinLatG' => 'Minimum Lat G',
+                    'MaxLatG' => 'Maximum Lat G',
+                    'MinLongG' => 'Minimum Long G',
+                    'MaxLongG' => 'Maximum Long G',
                 ],
-                'Ride'          => [
-                    'ride_length_time'     => 'Ride Time (seconds)',
-                    'ride_length_distance' => 'Ride Distance (meter)',
-                    'inversions'           => 'Inversions',
-                    'head_choppers'        => 'Head Choppers',
+                'Ride' => [
+                    'RideLengthTime' => 'Ride Time (seconds)',
+                    'RideLengthDistance' => 'Ride Distance (meter)',
+                    'Inversions' => 'Inversions',
+                    'HeadChoppers' => 'Head Choppers',
                 ],
                 'Miscellaneous' => [
-                    'entrance_fee'             => 'Entrance Fee',
-                    'train_count'              => 'Train Count',
-                    'train_length'             => 'Train Length',
-                    'train_total'              => 'Total Cars',
-                    'maximum_estimated_profit' => 'Max profit per hour (1$ entrance)',
+                    'EntranceFee' => 'Entrance Fee',
+                    'TrainCount' => 'Train Count',
+                    'TrainLength' => 'Train Length',
+                    'TrainTotal' => 'Total Cars',
+                    'MaximumEstimatedProfit' => 'Max profit per hour (1$ entrance)',
                 ],
             ],
-            'park'      => [
+            'park' => [
                 'Park info' => [
-                    "size_x"                    => 'Size Width',
-                    "size_y"                    => 'Size Height',
-                    "money"                     => 'Money',
-                    "park_entrance_fee"         => 'Entrance Fee',
-                    "rating_price_satisfaction" => 'Rating Price Satisfaction',
-                    "rating_cleanliness"        => 'Rating Cleanliness',
-                    "rating_happiness"          => 'Rating Happiness',
-                    "park_year"                 => 'Park year',
-                    "guest_count"               => 'Guest Count',
+                    "SizeX" => 'Size Width',
+                    "SizeY" => 'Size Height',
+                    "Money" => 'Money',
+                    "ParkEntranceFee" => 'Entrance Fee',
+                    "RatingPriceSatisfaction" => 'Rating Price Satisfaction',
+                    "RatingCleanliness" => 'Rating Cleanliness',
+                    "RatingHappiness" => 'Rating Happiness',
+                    "ParkYear" => 'Park year',
+                    "GuestCount" => 'Guest Count',
                 ],
             ],
-            'mod'       => [
+            'mod' => [
 
             ],
         ];
 
         foreach ($stats as $type => $categories) {
             foreach ($categories as $category => $stats) {
-                foreach($stats as $name => $title){
+                foreach ($stats as $name => $title) {
                     $stat = \PN\Assets\Stats\Stat::where('type', $type)->where('name', $name)->first();
 
-                    if($stat == null){
+                    if ($stat == null) {
                         $stat = new \PN\Assets\Stats\Stat();
                     }
 

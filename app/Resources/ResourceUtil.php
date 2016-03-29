@@ -150,6 +150,34 @@ class ResourceUtil
         return null;
     }
 
+    public function hasScenery($resource)
+    {
+        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
+
+        return count($data['Header']['DecoTypes']) > 0;
+    }
+
+    public function hasFlatRide($resource)
+    {
+        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
+
+        return count($data['Header']['FlatRideTypes']) > 0;
+    }
+
+    public function hasCoaster($resource)
+    {
+        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
+
+        return count($data['Header']['TrackedRideTypes']) > 0;
+    }
+
+    public function isCoaster($resource)
+    {
+        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
+
+        return (count($data['Header']['FlatRideTypes']) == 0 && count($data['Header']['TrackedRideTypes']) == 1);
+    }
+
     /**
      * @param $argument
      * @return string

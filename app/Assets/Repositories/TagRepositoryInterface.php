@@ -5,7 +5,11 @@ use PN\Foundation\Repositories\BaseRepositoryInterface;
 
 interface TagRepositoryInterface extends BaseRepositoryInterface
 {
-    public function findPrimary();
+    public function findPrimary($type);
 
-    public function findSecondary();
+    public function findSecondary($type);
+
+    public function findByPrimaryTags($tagTypes);
+
+    public function findByTagName($name);
 }

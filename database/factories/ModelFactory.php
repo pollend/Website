@@ -77,5 +77,28 @@ $factory->define(\PN\Tracking\View::class, function ($faker) {
     ];
 });
 
+$factory->define(\PN\Resources\Image::class, function($faker) {
+    return [
+        'source' => str_random(32).'.jpg'
+    ];
+});
+
+$factory->define(\PN\Resources\Blueprint::class, function($faker) {
+    $image = factory(\PN\Resources\Image::class)->create();
+
+    return [
+        'image_id' => $image->id,
+        'source' => str_random(32).'.png'
+    ];
+});
+
+$factory->define(\PN\Resources\Park::class, function($faker) {
+    $image = factory(\PN\Resources\Image::class)->create();
+
+    return [
+        'image_id' => $image->id,
+        'source' => str_random(32).'.txt'
+    ];
+});
 
 

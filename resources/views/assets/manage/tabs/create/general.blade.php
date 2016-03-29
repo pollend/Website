@@ -71,8 +71,7 @@
 			</label>
 			@foreach($secondaryTags as $index => $tag)
 				<div class="checkbox">
-					<input id="tag-{{ $tag->slug }}" name="tags[{{ $tag->slug }}]" type="checkbox"
-					       @if(Request::old('tags.'.$tag->slug, 'off') == $tag->slug) checked @endif>
+					<input id="tag-{{ $tag->slug }}" name="tags[{{ $tag->id }}]" type="checkbox" @if(Request::old('tags.'.$tag->id, 'off') == $tag->slug) checked @endif>
 					<label for="tag-{{ $tag->slug }}">
 						{{ $tag->tag }}
 					</label>

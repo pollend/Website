@@ -3,6 +3,7 @@ namespace PN\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use PN\Foundation\Presenters\PresenterTrait;
 
 
@@ -48,5 +49,10 @@ class Mod extends Model implements ResourceInterface
     public function getType()
     {
         return 'mod';
+    }
+
+    public function getPrimaryTags()
+    {
+        return new Collection();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class UserSeeder extends \Illuminate\Database\Seeder
+class UserSeeder extends BaseSeeder
 {
     /**
      * Run the database seeds.
@@ -9,15 +9,16 @@ class UserSeeder extends \Illuminate\Database\Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 500; $i++) {
+        $users = 500;
+        for ($i = 0; $i < $users; $i++) {
             try {
                 $user = factory(\PN\Users\User::class)->create();
 
-                $faker = \Faker\Factory::create();
-
-                $user->setAvatar(file_get_contents($faker->image));
+                $user->setAvatar(file_get_contents($this->getRandomFile(base_path('database/seeds/files/avatars'))));
 
                 $user->save();
+
+                echo "Created user $i/$users\n";
             } catch (Exception $e) {
                 // skip exceptions caused by uniques
             }

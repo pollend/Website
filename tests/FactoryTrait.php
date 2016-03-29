@@ -4,17 +4,14 @@ namespace Tests;
 
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use ParkitectNexus\Jobs\Resources\Blueprints\CreateResourceBlueprint;
-use ParkitectNexus\Jobs\Resources\Images\CreateResourceImage;
-use ParkitectNexus\Jobs\Resources\Parks\CreateResourcePark;
-use ParkitectNexus\Models\Album;
-use ParkitectNexus\Models\Asset;
-use ParkitectNexus\Models\Resource\Blueprint as ResourceBlueprint;
-use ParkitectNexus\Models\Resource\Image;
-use ParkitectNexus\Models\Resource\Park as ResourcePark;
-use ParkitectNexus\Models\Screenshot;
-use ParkitectNexus\Models\Stat\Blueprint;
-use ParkitectNexus\Models\Stat\Park;
+use PN\Assets\Asset;
+use PN\Assets\Stats\AssetStat;
+use PN\Assets\Stats\Stat;
+use PN\Resources\Album;
+use PN\Resources\Blueprint;
+use PN\Resources\Image;
+use PN\Resources\Jobs\CreateResource;
+use PN\Resources\Park;
 use PN\Users\User;
 
 trait FactoryTrait
@@ -57,14 +54,6 @@ trait FactoryTrait
         $asset = $this->createBaseAsset($quick);
 
         /**
-         * Bind stats
-         */
-        $blueprintStat = factory(Blueprint::class)->create();
-
-        $asset->stats_id = $blueprintStat->id;
-        $asset->stats_type = get_class($blueprintStat);
-
-        /**
          * Bind asset resource
          */
         $blueprintResource = $this->createResourceBlueprint($quick);
@@ -76,20 +65,14 @@ trait FactoryTrait
 
         $asset->save();
 
+        $this->createStats($asset);
+
         return $asset;
     }
 
     public function createPark($quick = true)
     {
         $asset = $this->createBaseAsset($quick);
-
-        /**
-         * Bind stats
-         */
-        $parkStat = factory(Park::class)->create();
-
-        $asset->stats_id = $parkStat->id;
-        $asset->stats_type = get_class($parkStat);
 
         /**
          * Bind asset resource
@@ -102,6 +85,8 @@ trait FactoryTrait
         $asset->type = 'park';
 
         $asset->save();
+
+        $this->createStats($asset);
 
         return $asset;
     }
@@ -116,6 +101,19 @@ trait FactoryTrait
         }
     }
 
+    public function createStats($asset)
+    {
+        $stats = Stat::where('type', $asset->type)->get();
+
+        foreach($stats as $stat) {
+            AssetStat::create([
+                'asset_id' => $asset->id,
+                'stat_id' => $stat->id,
+                'value' => rand(0, 100)
+            ]);
+        }
+    }
+
     private function createBaseAsset($quick = true)
     {
         $asset = factory(Asset::class)->make([
@@ -127,7 +125,7 @@ trait FactoryTrait
          */
         $image = $this->createResourceImage($quick);
 
-        $asset->resource_image_id = $image->id;
+        $asset->setImage($image);
 
         /**
          * Bind album
@@ -136,7 +134,7 @@ trait FactoryTrait
         for($i = 0; $i < 3; $i++) {
             $image = $this->createResourceImage($quick);
 
-            Album\Image::create([
+            Image::create([
                 'album_id' => $album->id,
                 'resource_image_id' => $image->id
             ]);
@@ -149,11 +147,15 @@ trait FactoryTrait
 
     public function createResourceImage($quick = true)
     {
-        if(!$quick) {
-            return $this->dispatch(app(CreateResourceImage::class, [app_path('../tests/files/image.jpg')]));
+        if($quick) {
+            return factory(Image::class)->create();
         }
 
-        return factory(Image::class)->create();
+        $image = Image::make(file_get_contents(base_path('tests/files/image.jpg')));
+
+        $image->save();
+
+        return $image;
     }
 
     /**
@@ -163,10 +165,9 @@ trait FactoryTrait
     public function createResourceBlueprint($quick)
     {
         if (!$quick) {
-            $blueprintResource = $this->dispatch(app(CreateResourceBlueprint::class,
-                [app_path('../tests/files/blueprint.png')]));
+            $blueprintResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/blueprint.png')]));
         } else {
-            $blueprintResource = factory(ResourceBlueprint::class)->create();
+            $blueprintResource = factory(Blueprint::class)->create();
         }
 
         return $blueprintResource;
@@ -187,9 +188,9 @@ trait FactoryTrait
     public function createResourcePark($quick)
     {
         if (!$quick) {
-            $parkResource = $this->dispatch(app(CreateResourcePark::class, [app_path('../tests/files/save.txt')]));
+            $parkResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/save.txt')]));
         } else {
-            $parkResource = factory(ResourcePark::class)->create();
+            $parkResource = factory(Park::class)->create();
         }
 
         return $parkResource;

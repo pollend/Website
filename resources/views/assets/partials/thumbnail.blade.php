@@ -1,6 +1,6 @@
 <div class="thumbnail">
     <a href="{{ $asset->presenter()->url }}" title="{{ $asset->name }}">
-        <img src="{{ $asset->image->presenter()->source }}" alt="{{ $asset->name }}">
+        <img src="{{ $asset->image->presenter()->source(263, 263) }}" alt="{{ $asset->name }}">
     </a>
     <ul class="list-inline pull-left">
         <li>

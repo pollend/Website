@@ -100,34 +100,9 @@
 @endsection
 
 @section('content')
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-            @foreach($asset->album->images as $key => $image)
-                <div class="item @if($key == 0) active @endif">
-                    <img src="{{ $image->presenter()->source }}"/>
-                </div>
-            @endforeach
-        </div>
+    @include('assets.partials.slider', ['asset' => $asset])
 
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-
-    <div class="row">
-    </div>
-    @foreach($asset->album->images as $key => $image)
-        <div class="col-sm-2">
-            <img data-target="#carousel-example-generic" data-slide-to="{{ $key }}" width="100%"
-                 src="{{ $image->presenter()->source }}"/>
-        </div>
-    @endforeach
+    <hr>
 
     <div class="row">
         <div class="col-sm-12">

@@ -76,6 +76,6 @@ class Park extends Model implements ResourceInterface
     {
         $tagRepo = app(TagRepositoryInterface::class);
 
-        return $tagRepo->findPrimary();
+        return $tagRepo->findPrimary($this->getType());
     }
 }

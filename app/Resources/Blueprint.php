@@ -18,6 +18,7 @@ class Blueprint extends Model implements ResourceInterface
     protected $dates = ['deleted_at'];
     protected $fillable = array('image_id', 'source');
     protected $visible = array('image_id', 'source');
+    private $data;
 
     public function image()
     {
@@ -68,20 +69,60 @@ class Blueprint extends Model implements ResourceInterface
 
     public function getPrimaryTags()
     {
-        $tagRepo = app(TagRepositoryInterface::class);
+        $this->data = \ResourceUtil::makeExtractor($this)->getData();
 
-        $data = \ResourceUtil::makeExtractor($this)->getData();
+        $types = new Collection([]);
 
-        $types = new Collection([$this->getType()]);
+        if($this->hasScenery()) {
+            $types->push('HasScenery');
+        }
 
-        foreach (\Config::get('backend.blueprint-types') as $tagType => $blueprintTypes) {
-            foreach ($blueprintTypes as $blueprintType) {
-                if ($blueprintType == $data['Header']['ContentType']) {
-                    $types->push($tagType);
-                }
-            }
+        if($this->hasFlatRides()) {
+            $types->push('HasFlatRide');
+        }
+
+        if($this->hasCoaster()) {
+            $types->push('HasCoaster');
+        }
+
+        if($this->isCoaster()) {
+            $types->push('RollerCoaster');
+            $types->push($this->getCoaster());
+        }
+
+        if($this->hasScenery() && !$this->hasFlatRides() && !$this->hasCoaster()) {
+            $types->push('HasOnlyScenery');
         }
 
         return $types;
+    }
+
+    private function hasScenery()
+    {
+        return count($this->data['Header']['DecoTypes']) > 0;
+    }
+
+    private function hasFlatRides()
+    {
+        return count($this->data['Header']['FlatRideTypes']) > 0;
+    }
+
+    private function hasCoaster()
+    {
+        return count($this->data['Header']['TrackedRideTypes']) > 0 || $this->data['Header']['ContentType'] != null;
+    }
+
+    public function isCoaster()
+    {
+        return count($this->data['Header']['TrackedRideTypes']) == 1 || $this->data['Header']['ContentType'] != null;
+    }
+
+    public function getCoaster()
+    {
+        if($this->data['Header']['ContentType'] != null) {
+            return $this->data['Header']['ContentType'];
+        }
+
+        return $this->data['Header']['TrackedRideTypes'][0];
     }
 }

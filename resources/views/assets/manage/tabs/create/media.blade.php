@@ -31,12 +31,12 @@
 							your album.</b>
 					</div>
 					PNG or JPEG, max 5MB
-					<input id="preview-image" name="thumbnail" type="file" accept="image/png,image/jpeg">
+					<input id="preview-image" name="image" type="file" accept="image/png,image/jpeg">
 
 					<div class="checkbox">
-						<input id="reset-thumbnail" name="reset-preview" type="checkbox"
+						<input id="reset-image" name="reset-preview" type="checkbox"
 						       @if(Request::old('reset-preview', 'off') == 'on') checked @endif>
-						<label for="reset-thumbnail">
+						<label for="reset-image">
 							Reset the
 							thumbnail to the original asset's one.
 						</label>

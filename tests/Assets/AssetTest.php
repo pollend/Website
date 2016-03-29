@@ -13,6 +13,6 @@ class AssetTest extends \TestCase
     {
         $asset = $this->createBlueprint();
 
-        $this->assertInternalType(typeOf(array()), $asset->getStats());
+        $this->assertInternalType('array', $asset->getStats());
     }
 }

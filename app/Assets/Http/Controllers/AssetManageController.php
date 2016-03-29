@@ -3,17 +3,20 @@
 namespace PN\Assets\Http\Controllers;
 
 
-use PN\Assets\Asset;
+use Illuminate\Support\Collection;
 use PN\Assets\Http\Requests\CreateRequest;
 use PN\Assets\Http\Requests\SelectFileRequest;
+use PN\Assets\Jobs\CreateAsset;
+use PN\Assets\Jobs\CreateStats;
+use PN\Assets\Jobs\SetAssetImage;
+use PN\Assets\Jobs\SetPrimaryTags;
+use PN\Assets\Jobs\SetYoutubeOnAsset;
+use PN\Assets\Jobs\Tags\AttachTagToAsset;
 use PN\Assets\Repositories\AssetRepositoryInterface;
 use PN\Assets\Repositories\TagRepositoryInterface;
-use PN\Assets\SessionExpired;
-use PN\Assets\Stats\Blueprint;
 use PN\BuildOffs\Repositories\BuildOffRepositoryInterface;
 use PN\Foundation\Http\Controllers\Controller;
-use PN\Resources\Album;
-use PN\Resources\Image;
+use PN\Resources\Jobs\SetAlbumImages;
 
 class AssetManageController extends Controller
 {
@@ -67,49 +70,77 @@ class AssetManageController extends Controller
 
         $mods = [];
         $buildOffs = $this->buildOffRepo->all();
-        $primaryTags = $this->tagRepo->findPrimary();
-        $secondaryTags = $this->tagRepo->findSecondary();
+        $primaryTags = $this->tagRepo->findByPrimaryTags($resource->getPrimaryTags()->toArray());
+        $secondaryTags = $this->tagRepo->findSecondary($resource->getType());
         $type = $resource->getType();
 
         if ($resource == null) {
             throw new SessionExpired();
         }
 
-        return \View::make('assets.manage.create', compact([
+        return \View::make('assets.manage.create', compact(
+            'name',
             'resource',
             'type',
             'buildOffs',
             'primaryTags',
             'secondaryTags',
             'mods'
-        ]));
+        ));
     }
 
     public function postCreate(CreateRequest $request)
     {
         $resource = \Session::get('resource');
-        $asset = new Asset();
-        $image = Image::make($resource->image->getRaw());
-        $album = new Album();
-
-        $image->save();
-        $album->save();
-        $resource->image->save();
         $resource->save();
 
-        $asset->setUser(\Auth::user());
-        $asset->name = \Request::get('name');
-        $asset->description = \Request::get('description');
+        $asset = $this->dispatch(app(CreateAsset::class, [
+            $resource,
+            \Auth::user(),
+            \Request::get('name'),
+            \Request::get('description')
+        ]));
 
-        // set relations
-        $asset->setResource($resource);
-        $asset->setImage($image);
-        $asset->setAlbum($album);
+        if(\Request::get('youtube', '') != '') {
+            $this->dispatch(app(SetYoutubeOnAsset::class, [$asset, \Request::get('youtube')]));
+        }
 
-        $asset->save();
+        if(\Request::hasFile('image')) {
+            $this->dispatch(app(SetAssetImage::class, [$asset, file_get_contents(\Request::file('image')->getRealPath())]));
+        }
+
+        if(\Request::hasFile('album')) {
+            $images = new Collection();
+
+            foreach(\Request::file('album') as $image) {
+                $images->push(file_get_contents($image->getRealPath()));
+            }
+
+            $this->dispatch(app(SetAlbumImages::class, [$asset->album, $images]));
+        }
+
+        $this->dispatch(app(CreateStats::class, [$asset]));
+
+        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+
+        foreach (\Request::get('tags', []) as $tagId => $state) {
+            $tag = $this->tagRepo->find($tagId);
+
+            $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
+        }
 
         \Session::remove('resource');
 
         return redirect(route('assets.show', [$asset->identifier, $asset->slug]));
+    }
+
+    public function getUpdate($identifier)
+    {
+
+    }
+
+    public function postUpdate($identifier)
+    {
+
     }
 }

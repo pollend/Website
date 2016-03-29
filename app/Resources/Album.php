@@ -3,6 +3,7 @@
 namespace PN\Resources;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Album extends Model
 {
@@ -13,5 +14,12 @@ class Album extends Model
     public function images()
     {
         return $this->belongsToMany(Image::class, 'resource_album_images', 'album_id', 'image_id');
+    }
+
+    public function setImages($images)
+    {
+        $images = new Collection($images);
+
+        $this->images()->sync($images->pluck('id')->toArray());
     }
 }
