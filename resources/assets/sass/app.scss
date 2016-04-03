@@ -76,7 +76,7 @@ h2, h3, h4 {
   border-right: 1px solid $hr-border;
 }
 
-a[name]:not([href]) {
+a:not([href]) {
   color: inherit;
   &:hover {
     text-decoration: none;

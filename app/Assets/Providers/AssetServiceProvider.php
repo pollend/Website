@@ -27,10 +27,15 @@ class AssetServiceProvider extends ServiceProvider
                 'postSelectFile' => 'assets.manage.selectfile',
                 'getCreate' => 'assets.manage.create',
             ]);
+            \Route::get('assets/{type}', [
+                'as' => 'assets.filter',
+                'uses' => AssetController::class.'@filter'
+            ]);
 
             \Route::controller('assets', AssetController::class, [
                 'getShow' => 'assets.show',
             ]);
+
         });
 
         $this->app->bind(AssetRepositoryInterface::class, AssetRepository::class);
