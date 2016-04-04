@@ -35,9 +35,8 @@ class AssetController extends Controller
 
     public function filter($type)
     {
-        $this->assetRepo->pushCriteria(new TypeCriteria($type));
-
-        $assets = $this->assetRepo->paginate();
+        $assets = $this->assetRepo->filter($type, \Request::input('name', ''), \Request::input('stats', []), \Request::input('tags', []), \Request::input('sort'));
+        $assets->appends(\Request::all());
 
         $filters = config('assetfilters.'.$type, []);
 

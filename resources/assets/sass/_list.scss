@@ -48,6 +48,30 @@
   .list-slider {
     margin-bottom: 13px;
   }
+
+  .tag-filter {
+    margin-bottom: 7px;
+
+    .btn-success {
+      border: 1px solid lighten($btn-success-border, 20%);
+      color: lighten($btn-success-color, 20%);
+    }
+
+    .btn-success.active {
+      border: 1px solid $btn-success-border;
+      color: $btn-success-color;
+    }
+
+    .btn-danger {
+      border: 1px solid lighten($btn-danger-border, 20%);
+      color: lighten($btn-danger-color, 20%);
+    }
+
+    .btn-danger.active {
+      border: 1px solid $btn-danger-border;
+      color: $btn-danger-color;
+    }
+  }
 }
 
 dl {

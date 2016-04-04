@@ -47,7 +47,7 @@
     </p>
     <hr>
     <div class="text-center">
-        {{ $assets->links() }}
+        {{ $assets->render() }}
     </div>
     <div class="row" id="list">
         @foreach($assets as $key => $asset)
@@ -57,6 +57,6 @@
         @endforeach
     </div>
     <div class="text-center">
-        {{ $assets->links() }}
+        {{ $assets->render() }}
     </div>
 @endsection

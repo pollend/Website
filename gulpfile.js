@@ -15,7 +15,7 @@ var elixirTypscript = require('elixir-typescript');
 elixir(function(mix) {
     mix.sass('app.scss');
 
-    mix.typescript('app.ts');
+    mix.scripts(['*.js'], 'public/js/app.js');
 
     mix.version([
         'css/app.css',
