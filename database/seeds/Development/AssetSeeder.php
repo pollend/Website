@@ -1,5 +1,7 @@
 <?php
 
+use PN\Assets\Jobs\SetPrimaryTags;
+
 class AssetSeeder extends BaseSeeder
 {
     /**
@@ -71,5 +73,7 @@ class AssetSeeder extends BaseSeeder
         foreach ($tags as $tag) {
             \PN\Assets\AssetTag::create(['asset_id' => $asset->id, 'tag_id' => $tag->id]);
         }
+
+        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
     }
 }
