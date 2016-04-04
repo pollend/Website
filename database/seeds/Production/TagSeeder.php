@@ -248,6 +248,34 @@ class TagSeeder extends BaseSeeder
                 'parkitect_type' => 'BobsledCoaster',
                 'primary'        => 1,
             ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Has Scenery',
+                'slug'           => 'has-scenery',
+                'parkitect_type' => 'HasScenery',
+                'primary'        => 1,
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Has Only Scenery',
+                'slug'           => 'has-only-scenery',
+                'parkitect_type' => 'HasOnlyScenery',
+                'primary'        => 1,
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Has Flat Rides',
+                'slug'           => 'has-flat-rides',
+                'parkitect_type' => 'HasFlatRides',
+                'primary'        => 1,
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Has Coaster',
+                'slug'           => 'has-coaster',
+                'parkitect_type' => 'HasCoaster',
+                'primary'        => 1,
+            ],
         ];
 
         foreach ($tags as $tag) {
