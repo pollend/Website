@@ -10,6 +10,7 @@ class CreateStatsTable extends Migration {
 		Schema::create('stats', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('type', 30);
+			$table->string('slug', 30);
 			$table->string('name', 100);
 			$table->string('title', 100)->nullable();
 		});

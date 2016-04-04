@@ -2,6 +2,8 @@
 
 abstract class BaseSeeder extends \Illuminate\Database\Seeder
 {
+    use \Illuminate\Foundation\Bus\DispatchesJobs;
+
     public function getRandom($model, $criteria = [], $count = 1)
     {
         if ($count == 1) {

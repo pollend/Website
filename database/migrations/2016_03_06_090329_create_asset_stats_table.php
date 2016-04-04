@@ -11,7 +11,7 @@ class CreateAssetStatsTable extends Migration {
 			$table->increments('id');
 			$table->integer('asset_id')->unsigned()->index();
 			$table->integer('stat_id')->unsigned();
-			$table->string('value', 20)->default('0');
+			$table->decimal('value');
 		});
 	}
 

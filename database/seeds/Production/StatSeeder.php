@@ -77,6 +77,7 @@ class StatSeeder extends BaseSeeder
 
                     $stat->fill([
                         'type' => $type,
+                        'slug' => \Illuminate\Support\Str::snake($name, '-'),
                         'name' => $name,
                         'title' => $title
                     ]);
