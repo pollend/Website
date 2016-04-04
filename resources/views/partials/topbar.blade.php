@@ -29,17 +29,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="Mods">
+                    <a href="/assets/mod" title="Mods">
                         Mods
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="Blueprints">
+                    <a href="/assets/blueprint" title="Blueprints">
                         Blueprints
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="Parks">
+                    <a href="/assets/park" title="Parks">
                         Parks
                     </a>
                 </li>
