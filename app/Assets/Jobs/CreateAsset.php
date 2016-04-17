@@ -6,16 +6,34 @@ namespace PN\Assets\Jobs;
 use PN\Assets\Asset;
 use PN\Jobs\Job;
 use PN\Resources\Album;
-use PN\Resources\Image;
+use PN\Media\Jobs\CreateImageFromRaw;
+use PN\Resources\ResourceInterface;
+use PN\Users\User;
 
+/**
+ * Class CreateAsset
+ * @package PN\Assets\Jobs
+ */
 class CreateAsset extends Job
 {
+    /**
+     * @var ResourceInterface
+     */
     private $resource;
 
+    /**
+     * @var User
+     */
     private $user;
 
+    /**
+     * @var string
+     */
     private $name;
 
+    /**
+     * @var string
+     */
     private $description;
 
     /**
@@ -25,7 +43,7 @@ class CreateAsset extends Job
      * @param $name
      * @param $description
      */
-    public function __construct($resource, $user, $name, $description)
+    public function __construct(ResourceInterface $resource, User $user, string $name, string $description)
     {
         $this->resource = $resource;
         $this->user = $user;
@@ -33,23 +51,25 @@ class CreateAsset extends Job
         $this->description = $description;
     }
 
-    public function handle()
+    /**
+     * @return Asset
+     */
+    public function handle() : Asset
     {
-        $album = Album::create();
-        $image = Image::make($this->resource->image->getRaw());
-        $image->save();
+        $image = $this->dispatch(new CreateImageFromRaw($this->resource->getImage()->getRaw()));
 
         $asset = new Asset();
         $asset->setResource($this->resource);
         $asset->setUser($this->user);
-        $asset->setAlbum($album);
         $asset->setImage($image);
 
-        $asset->type = \ResourceUtil::getTypeOf($this->resource);
+        $asset->type = $this->resource->getType();
         $asset->name = $this->name;
         $asset->description = $this->description;
 
         $asset->save();
+
+        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
 
         return $asset;
     }

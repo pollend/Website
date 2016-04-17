@@ -1,6 +1,6 @@
 <div class="thumbnail">
-    <a href="{{ $asset->presenter()->url }}" title="{{ $asset->name }}">
-        <img src="{{ $asset->image->presenter()->source(263, 263) }}" alt="{{ $asset->name }}">
+    <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">
+        <img src="{{ $asset->getImage()->getPresenter()->source(263, 263) }}" alt="{{ $asset->name }}">
     </a>
     <ul class="list-inline pull-left">
         <li>
@@ -18,7 +18,7 @@
     <div class="clearfix"></div>
     <hr>
     <div class="caption">
-        <a href="{{ $asset->presenter()->url }}" title="{{ $asset->name }}">
+        <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">
             {{ $asset->name }}
         </a>
         <br>

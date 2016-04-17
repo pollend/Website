@@ -2,6 +2,8 @@
 namespace PN\Users\Http\Controllers;
 
 use PN\Foundation\Http\Controllers\Controller;
+use PN\Users\Exceptions\UserNotConfirmed;
+use PN\Users\Exceptions\UserNotFound;
 use PN\Users\Http\Requests\LoginRequest;
 use PN\Users\Http\Requests\RegisterRequest;
 use PN\Users\Jobs\RegisterUser;
@@ -93,11 +95,9 @@ class AuthController extends Controller
                 return \Redirect::intended();
             }
 
-            throw new UserDoesNotExist();
-        } catch (UserDoesNotExist $e) {
-            Flash::error('The entered credentials do not match our records');
-
-            return \Redirect::back();
+            throw new UserNotFound();
+        } catch (UserNotFound $e) {
+            return \Redirect::back()->withErrors(["User not found"]);
         } catch (UserNotConfirmed $e) {
             Flash::error('Please check your email to confirm your account, <a href="' . route('auth.resend',
                     [\Input::get('email')]) . '">Resend mail</a>');

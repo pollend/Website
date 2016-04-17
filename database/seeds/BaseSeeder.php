@@ -1,5 +1,7 @@
 <?php
 
+use PN\Media\Jobs\CreateImageFromRaw;
+
 abstract class BaseSeeder extends \Illuminate\Database\Seeder
 {
     use \Illuminate\Foundation\Bus\DispatchesJobs;
@@ -25,9 +27,7 @@ abstract class BaseSeeder extends \Illuminate\Database\Seeder
     {
         Config::set('filesystems.disks.image.root', sys_get_temp_dir());
 
-        $image = \PN\Resources\Image::make(file_get_contents($this->getRandomFile(base_path('database/seeds/files/images'))));
-
-        $image->save();
+        $image = $this->dispatch(new CreateImageFromRaw(file_get_contents($this->getRandomFile(base_path('database/seeds/files/images')))));
 
         return $image;
     }

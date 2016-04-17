@@ -18,7 +18,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail text-center">
 						<span>Original thumbnail of asset</span>
-						<img src="{{ route('resource.image', [263, 263, $asset->resource->image->filename]) }}"/>
+						<img src="{{ route('resource.image', [263, 263, $asset->resource->getImage()->filename]) }}"/>
 					</div>
 				</div>
 				<div class="col-md-4">

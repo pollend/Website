@@ -16,6 +16,6 @@ class BuildOffServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BuildOffRepositoryInterface::class, BuildOffRepository::class);
+        $this->app->singleton(BuildOffRepositoryInterface::class, BuildOffRepository::class);
     }
 }

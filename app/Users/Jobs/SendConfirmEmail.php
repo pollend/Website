@@ -32,7 +32,7 @@ class SendConfirmEmail extends Job
             \Mail::send('auth.emails.confirm', ['user' => $user], function ($m) use ($user) {
                 $m->from('info@parkitectnexus.com', 'ParkitectNexus');
 
-                $m->to($user->email, $user->presenter()->displayName)->subject('Confirm your account on ParkitectNexus');
+                $m->to($user->email, $user->getPresenter()->displayName)->subject('Confirm your account on ParkitectNexus');
             });
         }
     }

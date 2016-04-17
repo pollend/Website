@@ -29,7 +29,11 @@ class AssetServiceProvider extends ServiceProvider
             ]);
             \Route::get('assets/{type}', [
                 'as' => 'assets.filter',
-                'uses' => AssetController::class.'@filter'
+                'uses' => AssetController::class . '@filterPage'
+            ]);
+            \Route::get('assets/{type}/filter', [
+                'as' => 'assets.filter.list',
+                'uses' => AssetController::class . '@filterAssets'
             ]);
 
             \Route::controller('assets', AssetController::class, [
@@ -38,7 +42,7 @@ class AssetServiceProvider extends ServiceProvider
 
         });
 
-        $this->app->bind(AssetRepositoryInterface::class, AssetRepository::class);
-        $this->app->bind(TagRepositoryInterface::class, TagRepository::class);
+        $this->app->singleton(AssetRepositoryInterface::class, AssetRepository::class);
+        $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
     }
 }

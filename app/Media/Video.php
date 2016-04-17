@@ -24,7 +24,7 @@ class Video extends Model
 
     public function image()
     {
-        return $this->belongsTo(\PN\Resources\Image::class);
+        return $this->belongsTo(\PN\Media\Image::class);
     }
 
 }

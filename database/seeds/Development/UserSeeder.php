@@ -9,7 +9,7 @@ class UserSeeder extends BaseSeeder
      */
     public function run()
     {
-        $users = 500;
+        $users = 200;
         for ($i = 0; $i < $users; $i++) {
             try {
                 $user = factory(\PN\Users\User::class)->create();

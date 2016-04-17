@@ -20,8 +20,6 @@ class RegisterUser extends Job
 
     private $social;
 
-    private $userRepo;
-
     /**
      * RegisterUser constructor.
      * @param $username
@@ -30,13 +28,12 @@ class RegisterUser extends Job
      * @param $password
      * @param $userRepo
      */
-    public function __construct($username, $name, $email, $password, $social = false, UserRepositoryInterface $userRepo)
+    public function __construct($username, $name, $email, $password, $social = false)
     {
         $this->username = $username;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->userRepo = $userRepo;
         $this->social = $social;
     }
 

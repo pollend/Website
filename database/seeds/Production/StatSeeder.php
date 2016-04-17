@@ -23,8 +23,8 @@ class StatSeeder extends BaseSeeder
                     'BiggestDrop' => 'Biggest Drop (meter)',
                 ],
                 'Speeds' => [
-                    'AverageVelocity' => 'Average Speed (km/h)',
-                    'MaxVelocity' => 'Max Speed (km/h)',
+                    'AverageSpeed' => 'Average Speed (km/h)',
+                    'MaxSpeed' => 'Max Speed (km/h)',
                 ],
                 'G-Force' => [
                     'MinVertG' => 'Minimum Vertical G',
@@ -69,10 +69,10 @@ class StatSeeder extends BaseSeeder
         foreach ($stats as $type => $categories) {
             foreach ($categories as $category => $stats) {
                 foreach ($stats as $name => $title) {
-                    $stat = \PN\Assets\Stats\Stat::where('type', $type)->where('name', $name)->first();
+                    $stat = \PN\Resources\Stats\Stat::where('type', $type)->where('name', $name)->first();
 
                     if ($stat == null) {
-                        $stat = new \PN\Assets\Stats\Stat();
+                        $stat = new \PN\Resources\Stats\Stat();
                     }
 
                     $stat->fill([

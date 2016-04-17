@@ -10,18 +10,18 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
 {
     public function findPrimary($type)
     {
-        return $this->findWhere([
-            'primary' => 1,
-            'type' => $type
-        ]);
+        return Tag::where('primary', 1)
+            ->where('type', $type)
+            ->orderBy('tag')
+            ->get();
     }
 
     public function findSecondary($type)
     {
-        return $this->findWhere([
-            'primary' => 0,
-            'type' => $type
-        ]);
+        return Tag::where('primary', 0)
+            ->where('type', $type)
+            ->orderBy('tag')
+            ->get();
     }
 
     /**
@@ -44,5 +44,15 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
         return $this->findWhere([
             'name' => $name
         ])->first();
+    }
+
+    public function findByIds($ids)
+    {
+        return $this->findWhereIn('id', $ids);
+    }
+
+    public function findBySlugs($slugs)
+    {
+        return $this->findWhereIn('slug', $slugs);
     }
 }

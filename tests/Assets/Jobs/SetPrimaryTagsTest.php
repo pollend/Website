@@ -16,6 +16,6 @@ class SetPrimaryTagsTest extends \TestCase
 
         $this->dispatch(app(SetPrimaryTags::class, [$asset]));
 
-        $this->assertNotEquals(0, $asset->tags()->count());
+        $this->assertNotEquals(0, $asset->getTags()->count());
     }
 }

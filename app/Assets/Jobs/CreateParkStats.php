@@ -3,33 +3,34 @@
 namespace PN\Assets\Jobs;
 
 
-use PN\Assets\Stats\AssetStat;
-use PN\Assets\Stats\Stat;
+use PN\Resources\Resource;
+use PN\Resources\Stats\ResourceStat;
+use PN\Resources\Stats\Stat;
 use PN\Jobs\Job;
 
 class CreateParkStats extends Job
 {
-    private $asset;
+    private $resource;
 
     /**
      * CreateBlueprintStats constructor.
-     * @param $asset
+     * @param $resource
      */
-    public function __construct($asset)
+    public function __construct(Resource $resource)
     {
-        $this->asset = $asset;
+        $this->resource = $resource;
     }
 
     public function handle()
     {
-        $parkStats = \ResourceUtil::makeExtractor($this->asset->resource)->getData()['Park']['ParkInfo'];
+        $parkStats = $this->resource->getExtractor()->getStats();
 
         foreach ($parkStats as $key => $value) {
             $stat = Stat::where('name', $key)->first();
 
             if($stat != null) {
-                AssetStat::create([
-                    'asset_id' => $this->asset->id,
+                ResourceStat::create([
+                    'resource_id' => $this->resource->id,
                     'stat_id' => $stat->id,
                     'value' => $value
                 ]);

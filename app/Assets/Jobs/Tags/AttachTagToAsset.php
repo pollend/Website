@@ -26,8 +26,14 @@ class AttachTagToAsset extends Job
 
     public function handle()
     {
-        if($this->asset->tags()->find($this->tag->id) == null) {
-            $this->asset->tags()->attach([$this->tag->id]);
+        $tag = $this->tag;
+
+        $tagExists = function($item) use ($tag) {
+            return $item->id == $tag->id;
+        };
+
+        if(count($this->asset->getTags()->filter($tagExists)) == 0) {
+            $this->asset->addTag($this->tag);
 
             event(new TagWasAttachedToAsset($this->asset, $this->tag));
         }

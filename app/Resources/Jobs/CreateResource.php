@@ -5,6 +5,7 @@ namespace PN\Resources\Jobs;
 
 use PN\Resources\Events\ResourceCreated;
 use PN\Jobs\Job;
+use PN\Resources\Resource;
 
 class CreateResource extends Job
 {
@@ -19,11 +20,11 @@ class CreateResource extends Job
         $this->resource = $resource;
     }
 
-    public function handle()
+    public function handle() : Resource
     {
         $resource = \ResourceUtil::make($this->resource);
 
-        $resource->save();
+        $this->dispatch(new StoreResource($resource));
 
         event(new ResourceCreated($resource));
 

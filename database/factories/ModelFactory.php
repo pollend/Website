@@ -31,18 +31,6 @@ $factory->define(\PN\Assets\Asset::class, function ($faker) {
     ];
 });
 
-$factory->define(\PN\Resources\Album::class, function ($faker) {
-    return [
-
-    ];
-});
-
-$factory->define(\PN\Resources\Mod::class, function ($faker) {
-    return [
-        'source' => $faker->url,
-    ];
-});
-
 $factory->define(\PN\Assets\Tag::class, function ($faker) {
     return [
         'type' => $faker->randomElement(['blueprint', 'park', 'mod']),
@@ -77,28 +65,17 @@ $factory->define(\PN\Tracking\View::class, function ($faker) {
     ];
 });
 
-$factory->define(\PN\Resources\Image::class, function($faker) {
+$factory->define(\PN\Media\Image::class, function($faker) {
     return [
         'source' => str_random(32).'.jpg'
     ];
 });
 
-$factory->define(\PN\Resources\Blueprint::class, function($faker) {
-    $image = factory(\PN\Resources\Image::class)->create();
+$factory->define(\PN\Resources\Resource::class, function($faker) {
+    $image = factory(\PN\Media\Image::class)->create();
 
     return [
         'image_id' => $image->id,
-        'source' => str_random(32).'.png'
     ];
 });
-
-$factory->define(\PN\Resources\Park::class, function($faker) {
-    $image = factory(\PN\Resources\Image::class)->create();
-
-    return [
-        'image_id' => $image->id,
-        'source' => str_random(32).'.txt'
-    ];
-});
-
 

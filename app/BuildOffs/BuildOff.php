@@ -32,14 +32,38 @@ class BuildOff extends Model
         'voting_start'
     );
 
-    public function tag()
+    private function tag()
     {
         return $this->belongsTo(\PN\Assets\Tag::class);
     }
 
-    public function ranks()
+    private function ranks()
     {
         return $this->hasMany(\PN\BuildOffs\Rank::class);
     }
 
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    public function setTag($tag)
+    {
+        return $this->tag_id = $tag->id;
+    }
+
+    public function getRanks()
+    {
+        return $this->ranks;
+    }
+
+    public function setRanks($ranks)
+    {
+        $this->ranks()->sync($ranks->lists('id'));
+    }
+
+    public function addRank($rank)
+    {
+        $rank->setBuildOff($this);
+    }
 }

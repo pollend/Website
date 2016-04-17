@@ -7,7 +7,7 @@ trait PresenterTrait
 {
     private $presenter;
 
-    public function presenter()
+    public function getPresenter() : Presenter
     {
         if ($this->presenter != null) {
             return $this->presenter;

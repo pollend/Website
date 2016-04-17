@@ -4,11 +4,24 @@
 namespace PN\Resources;
 
 
+use Illuminate\Support\Collection;
+use PN\Foundation\Presenters\Presenter;
+use PN\Resources\Extractors\ExtractorInterface;
+use PN\Resources\Validators\ValidatorInterface;
+
 interface ResourceInterface
 {
-    public function overwriteImageWithDefault();
+    public function getPresenter() : Presenter;
 
-    public function getType();
+    public function setSource($source);
 
-    public function getPrimaryTags();
+    public function setDefaultImage();
+
+    public function getPrimaryTags() : Collection;
+
+    public function getExtractor() : ExtractorInterface;
+
+    public function getValidator() : ValidatorInterface;
+
+    public function getStats() : array;
 }

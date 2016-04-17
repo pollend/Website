@@ -6,10 +6,12 @@ namespace PN\Resources\Providers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\ServiceProvider;
 use PN\Resources\Http\Controllers\ResourceController;
-use PN\Resources\Image;
-use PN\Resources\ImageObserver;
-use PN\Resources\Jobs\ResizeImage;
+use PN\Media\Image;
+use PN\Media\ImageObserver;
+use PN\Media\Jobs\ResizeImage;
 use PN\Resources\ResourceUtil;
+use PN\Resources\Stats\Repositories\StatRepository;
+use PN\Resources\Stats\Repositories\StatRepositoryInterface;
 
 class ResourceServiceProvider extends ServiceProvider
 {
@@ -43,5 +45,6 @@ class ResourceServiceProvider extends ServiceProvider
         ]);
 
         $this->app->bind('resources.resourceutil', ResourceUtil::class);
+        $this->app->singleton(StatRepositoryInterface::class, StatRepository::class);
     }
 }

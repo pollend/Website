@@ -14,13 +14,16 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('no action');
 		});
 		Schema::table('assets', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
+			$table->foreign('image_id')->references('id')->on('images')
 						->onDelete('restrict')
 						->onUpdate('no action');
 		});
-		Schema::table('assets', function(Blueprint $table) {
-			$table->foreign('album_id')->references('id')->on('albums')
-						->onDelete('restrict')
+		Schema::table('asset_images', function(Blueprint $table) {
+			$table->foreign('asset_id')->references('id')->on('assets')
+						->onDelete('cascade')
+						->onUpdate('no action');
+			$table->foreign('image_id')->references('id')->on('images')
+						->onDelete('cascade')
 						->onUpdate('no action');
 		});
 		Schema::table('assets', function(Blueprint $table) {
@@ -38,12 +41,12 @@ class CreateForeignKeys extends Migration {
 						->onDelete('cascade')
 						->onUpdate('no action');
 		});
-		Schema::table('asset_stats', function(Blueprint $table) {
-			$table->foreign('asset_id')->references('id')->on('assets')
+		Schema::table('resource_stats', function(Blueprint $table) {
+			$table->foreign('resource_id')->references('id')->on('resources')
 						->onDelete('cascade')
 						->onUpdate('no action');
 		});
-		Schema::table('asset_stats', function(Blueprint $table) {
+		Schema::table('resource_stats', function(Blueprint $table) {
 			$table->foreign('stat_id')->references('id')->on('stats')
 						->onDelete('cascade')
 						->onUpdate('no action');
@@ -93,30 +96,10 @@ class CreateForeignKeys extends Migration {
 						->onDelete('cascade')
 						->onUpdate('no action');
 		});
-		Schema::table('resource_album_images', function(Blueprint $table) {
-			$table->foreign('album_id')->references('id')->on('albums')
-						->onDelete('cascade')
-						->onUpdate('no action');
-		});
-		Schema::table('resource_album_images', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
-						->onDelete('cascade')
-						->onUpdate('no action');
-		});
-		Schema::table('resource_blueprints', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
+		Schema::table('resources', function(Blueprint $table) {
+			$table->foreign('image_id')->references('id')->on('images')
 						->onDelete('restrict')
 						->onUpdate('no action');
-		});
-		Schema::table('resource_mods', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
-		Schema::table('resource_parks', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
-						->onDelete('restrict')
-						->onUpdate('restrict');
 		});
 		Schema::table('screenshots', function(Blueprint $table) {
 			$table->foreign('user_id')->references('id')->on('users')
@@ -124,7 +107,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('no action');
 		});
 		Schema::table('screenshots', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
+			$table->foreign('image_id')->references('id')->on('images')
 						->onDelete('restrict')
 						->onUpdate('no action');
 		});
@@ -144,7 +127,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('no action');
 		});
 		Schema::table('videos', function(Blueprint $table) {
-			$table->foreign('image_id')->references('id')->on('resource_images')
+			$table->foreign('image_id')->references('id')->on('images')
 						->onDelete('restrict')
 						->onUpdate('no action');
 		});
@@ -204,10 +187,13 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('assets_image_id_foreign');
 		});
 		Schema::table('assets', function(Blueprint $table) {
-			$table->dropForeign('assets_album_id_foreign');
-		});
-		Schema::table('assets', function(Blueprint $table) {
 			$table->dropForeign('assets_buildoff_id_foreign');
+		});
+		Schema::table('asset_images', function(Blueprint $table) {
+			$table->dropForeign('asset_images_asset_id_foreign');
+		});
+		Schema::table('asset_images', function(Blueprint $table) {
+			$table->dropForeign('asset_images_image_id_foreign');
 		});
 		Schema::table('asset_dependencies', function(Blueprint $table) {
 			$table->dropForeign('asset_dependencies_asset_id_foreign');
@@ -215,11 +201,11 @@ class CreateForeignKeys extends Migration {
 		Schema::table('asset_dependencies', function(Blueprint $table) {
 			$table->dropForeign('asset_dependencies_dependency_id_foreign');
 		});
-		Schema::table('asset_stats', function(Blueprint $table) {
-			$table->dropForeign('asset_stats_asset_id_foreign');
+		Schema::table('resource_stats', function(Blueprint $table) {
+			$table->dropForeign('resource_stats_resource_id_foreign');
 		});
-		Schema::table('asset_stats', function(Blueprint $table) {
-			$table->dropForeign('asset_stats_stat_id_foreign');
+		Schema::table('resource_stats', function(Blueprint $table) {
+			$table->dropForeign('resource_stats_stat_id_foreign');
 		});
 		Schema::table('asset_tags', function(Blueprint $table) {
 			$table->dropForeign('asset_tags_asset_id_foreign');
@@ -248,20 +234,8 @@ class CreateForeignKeys extends Migration {
 		Schema::table('notifications', function(Blueprint $table) {
 			$table->dropForeign('notifications_user_id_foreign');
 		});
-		Schema::table('resource_album_images', function(Blueprint $table) {
-			$table->dropForeign('resource_album_images_album_id_foreign');
-		});
-		Schema::table('resource_album_images', function(Blueprint $table) {
-			$table->dropForeign('resource_album_images_image_id_foreign');
-		});
-		Schema::table('resource_blueprints', function(Blueprint $table) {
-			$table->dropForeign('resource_blueprints_image_id_foreign');
-		});
-		Schema::table('resource_mods', function(Blueprint $table) {
-			$table->dropForeign('resource_mods_image_id_foreign');
-		});
-		Schema::table('resource_parks', function(Blueprint $table) {
-			$table->dropForeign('resource_parks_image_id_foreign');
+		Schema::table('resources', function(Blueprint $table) {
+			$table->dropForeign('resources_image_id_foreign');
 		});
 		Schema::table('screenshots', function(Blueprint $table) {
 			$table->dropForeign('screenshots_user_id_foreign');

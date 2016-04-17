@@ -3,9 +3,14 @@
 namespace PN\Assets\Jobs;
 
 
+use PN\Assets\Asset;
 use PN\Jobs\Job;
-use PN\Resources\Image;
+use PN\Media\Image;
 
+/**
+ * Class SetAssetImage
+ * @package PN\Assets\Jobs
+ */
 class SetAssetImage extends Job
 {
     /**
@@ -14,27 +19,27 @@ class SetAssetImage extends Job
     private $asset;
 
     /**
-     * @var string
+     * @var Image
      */
-    private $imageRaw;
+    private $image;
 
     /**
      * SetAssetImage constructor.
      * @param $asset
-     * @param $imageRaw
+     * @param $image
      */
-    public function __construct($asset, $imageRaw)
+    public function __construct(Asset $asset, Image $image)
     {
         $this->asset = $asset;
-        $this->imageRaw = $imageRaw;
+        $this->image = $image;
     }
 
-    public function handle()
+    /**
+     * @return Asset
+     */
+    public function handle() : Asset
     {
-        $image = Image::make($this->imageRaw);
-        $image->save();
-
-        $this->asset->setImage($image);
+        $this->asset->setImage($this->image);
 
         $this->asset->save();
 

@@ -15,23 +15,23 @@
         <div class="user-detail">
             <div class="username">
                 <h2>
-                    <a href="{{ $asset->user->presenter()->url }}" title="{{ $asset->user->presenter()->displayName }}">
-                        {{ $asset->user->presenter()->displayName }}
+                    <a href="{{ $asset->getUser()->getPresenter()->url }}" title="{{ $asset->getUser()->getPresenter()->displayName }}">
+                        {{ $asset->getUser()->getPresenter()->displayName }}
                     </a>
                 </h2>
-                @if($asset->user->presenter()->hasFlair)
+                @if($asset->getUser()->getPresenter()->hasFlair)
                     <span class="label label-primary">
-                        {{ $asset->user->flair }}
+                        {{ $asset->getUser()->flair }}
                     </span>
                 @endif
             </div>
 
             <p class="user-statistics">
-                {{ $asset->user->presenter()->uploadCount }} Uploads
+                {{ $asset->getUser()->getPresenter()->uploadCount }} Uploads
                 <br>
-                {{ $asset->user->presenter()->postCount }} Posts
+                {{ $asset->getUser()->getPresenter()->postCount }} Posts
                 <br>
-                {{ $asset->user->presenter()->likeCount }} Likes
+                {{ $asset->getUser()->getPresenter()->likeCount }} Likes
             </p>
         </div>
 
@@ -72,8 +72,8 @@
     <hr>
 
     <div id="download-section" class="text-center">
-        @if($asset->presenter()->downloadable)
-            <a href="{{ $asset->presenter()->downloadUrl }}" class="btn btn-primary btn-block">
+        @if($asset->getPresenter()->downloadable)
+            <a href="{{ $asset->getPresenter()->downloadUrl }}" class="btn btn-primary btn-block">
                 Download
             </a>
         @endif
@@ -122,7 +122,7 @@
                     </th>
                 </tr>
             </thead>
-            @foreach($asset->getStats() as $stat)
+            @foreach($asset->getResource()->getStats() as $stat)
                 <tr>
                     <td>
                         {{ $stat['title'] }}
@@ -136,18 +136,18 @@
     </div>
 
     <div id="comments">
-        @foreach($asset->comments as $comment)
+        @foreach($asset->getComments() as $comment)
             <hr>
             <div class="comment">
                 <div class="comment-header">
                     <div class="comment-buttons">
                     </div>
-                    <img src="{{ $comment->user->presenter()->avatarUrl }}">
+                    <img src="{{ $comment->getUser()->getPresenter()->avatarUrl }}">
                     <a href="https://parkitectnexus.com/user/Topkek" title="Topkek">
-                        {{ $comment->user->presenter()->displayName }}
+                        {{ $comment->getUser()->getPresenter()->displayName }}
                     </a>
                     <br>
-                    {{ $comment->presenter()->timestamp }}
+                    {{ $comment->getPresenter()->timestamp }}
                 </div>
                 <div class="comment-body" id="comment-07c047b074">
                     {{ $comment->body }}

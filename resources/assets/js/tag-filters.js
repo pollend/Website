@@ -1,8 +1,12 @@
 $(document).ready(function(){
     function filter(){
-        $.get(window.location.href.split('?')[0]+'?'+$('#list-filters').find('form').serialize(), function(response){
-            $('#content').html($(response).find('#content').html());
+        var uri = window.location.href.split('?')[0]+'/filter?'+$('#list-filters').find('form').serialize();
+        var pushUri = window.location.href.split('?')[0]+'?'+$('#list-filters').find('form').serialize();
+        $.get(uri, function(response){
+            $('#content').html(response);
         });
+
+        history.pushState({}, '', pushUri);
     }
 
     $('#list-filters').find('input').each(function(key, input){
@@ -10,15 +14,12 @@ $(document).ready(function(){
     });
 
     $('#sliders').find('input').each(function(key, input){
-        console.log('test');
+        var s = new Slider(input);
 
-        var s = new Slider(input, {
-            formatter: function(value) {
-                return 'dgsdfg value: ' + value;
-            }
+        s.on('change', function () {
+            $(input).siblings('.filter-value').text(s.getValue());
+            filter();
         });
-
-        s.on('change', filter);
     });
 
     $('.tag-filter').each(function(key, tagFilter){

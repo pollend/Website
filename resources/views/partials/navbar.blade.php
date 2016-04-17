@@ -2,7 +2,24 @@
     @if(\Auth::check())
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                {{ \Auth::user()->presenter()->displayName }} <span class="caret"></span>
+                Upload <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ route('assets.manage.selectfile') }}">
+                        Blueprint
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('assets.manage.selectfile') }}">
+                        Park
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                {{ \Auth::user()->getPresenter()->displayName }} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 <li>

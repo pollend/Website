@@ -4,6 +4,7 @@ namespace PN\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use PN\Media\Image;
 
 class Album extends Model
 {

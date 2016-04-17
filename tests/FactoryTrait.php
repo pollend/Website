@@ -5,11 +5,12 @@ namespace Tests;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use PN\Assets\Asset;
-use PN\Assets\Stats\AssetStat;
-use PN\Assets\Stats\Stat;
+use PN\Resources\Stats\ResourceStat;
+use PN\Resources\Stats\Stat;
+use PN\Media\Jobs\CreateImageFromRaw;
 use PN\Resources\Album;
-use PN\Resources\Blueprint;
-use PN\Resources\Image;
+use PN\Resources\Resource;
+use PN\Media\Image;
 use PN\Resources\Jobs\CreateResource;
 use PN\Resources\Park;
 use PN\Users\User;
@@ -59,11 +60,16 @@ trait FactoryTrait
         $blueprintResource = $this->createResourceBlueprint($quick);
 
         $asset->resource_id = $blueprintResource->id;
-        $asset->resource_type = get_class($blueprintResource);
 
         $asset->type = 'blueprint';
 
         $asset->save();
+
+        for($i = 0; $i < 3; $i++) {
+            $image = $this->createResourceImage($quick);
+
+            $asset->addImage($image);
+        }
 
         $this->createStats($asset);
 
@@ -80,11 +86,16 @@ trait FactoryTrait
         $parkResource = $this->createResourcePark($quick);
 
         $asset->resource_id = $parkResource->id;
-        $asset->resource_type = get_class($parkResource);
 
         $asset->type = 'park';
 
         $asset->save();
+
+        for($i = 0; $i < 3; $i++) {
+            $image = $this->createResourceImage($quick);
+
+            $asset->addImage($image);
+        }
 
         $this->createStats($asset);
 
@@ -106,7 +117,7 @@ trait FactoryTrait
         $stats = Stat::where('type', $asset->type)->get();
 
         foreach($stats as $stat) {
-            AssetStat::create([
+            ResourceStat::create([
                 'asset_id' => $asset->id,
                 'stat_id' => $stat->id,
                 'value' => rand(0, 100)
@@ -127,21 +138,6 @@ trait FactoryTrait
 
         $asset->setImage($image);
 
-        /**
-         * Bind album
-         */
-        $album = factory(Album::class)->create();
-        for($i = 0; $i < 3; $i++) {
-            $image = $this->createResourceImage($quick);
-
-            Image::create([
-                'album_id' => $album->id,
-                'resource_image_id' => $image->id
-            ]);
-        }
-
-        $asset->album_id = $album->id;
-
         return $asset;
     }
 
@@ -151,7 +147,7 @@ trait FactoryTrait
             return factory(Image::class)->create();
         }
 
-        $image = Image::make(file_get_contents(base_path('tests/files/image.jpg')));
+        $image = $this->dispatch(new CreateImageFromRaw(file_get_contents(base_path('tests/files/image.jpg'))));
 
         $image->save();
 
@@ -167,7 +163,9 @@ trait FactoryTrait
         if (!$quick) {
             $blueprintResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/blueprint.png')]));
         } else {
-            $blueprintResource = factory(Blueprint::class)->create();
+            $blueprintResource = factory(Resource::class)->create([
+                'type' => 'blueprint'
+            ]);
         }
 
         return $blueprintResource;
@@ -190,7 +188,9 @@ trait FactoryTrait
         if (!$quick) {
             $parkResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/save.txt')]));
         } else {
-            $parkResource = factory(Park::class)->create();
+            $parkResource = factory(Resource::class)->create([
+                'type' => 'park'
+            ]);
         }
 
         return $parkResource;

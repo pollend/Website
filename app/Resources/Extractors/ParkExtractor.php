@@ -3,7 +3,9 @@
 namespace PN\Resources\Extractors;
 
 
+use Illuminate\Support\Collection;
 use PN\Resources\Exceptions\NotAValidPark;
+use PN\Resources\Extractors\Stats\ParkStatConverter;
 
 class ParkExtractor implements ExtractorInterface
 {
@@ -37,5 +39,12 @@ class ParkExtractor implements ExtractorInterface
             }
             return $json;
         });
+    }
+
+    public function getStats() : Collection
+    {
+        $parkConverter = new ParkStatConverter();
+
+        return $parkConverter->convert($this->getData());
     }
 }

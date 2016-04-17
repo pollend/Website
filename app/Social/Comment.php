@@ -19,8 +19,28 @@ class Comment extends Model
     protected $fillable = array('asset_id', 'user_id', 'body');
     protected $visible = array('asset_id', 'user_id', 'body');
 
-    public function user()
+    protected function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user_id = $user->id;
+    }
+
+    public function setAsset($asset)
+    {
+        $this->asset_id = $asset->id;
+    }
+
+    public function getAsset()
+    {
+        return $this->asset;
     }
 }

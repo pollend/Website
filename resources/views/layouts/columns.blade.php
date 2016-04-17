@@ -5,7 +5,7 @@
         @yield('sidebar')
     </div>
 
-    <div class="col-lg-9 col-sm-12" id="content">
+    <div class="col-lg-9 col-sm-12" id="main">
         <div class="row">
             <div class="col-sm-12" id="title">
                 @yield('title')
@@ -13,6 +13,8 @@
         </div>
         @include('partials.errors')
 
-        @yield('content')
+        <div id="content">
+            @yield('content')
+        </div>
     </div>
 @endsection

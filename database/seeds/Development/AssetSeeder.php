@@ -16,9 +16,9 @@ class AssetSeeder extends BaseSeeder
         $blueprints = 200;
 
         for ($i = 0; $i < $mods; $i++) {
-            $resource = factory(\PN\Resources\Mod::class)->create([
-                'image_id' => $this->createImage()->id,
-            ]);
+            $resource = ResourceUtil::make('https://github.com/ParkitectNexus/CoasterCam');
+
+            $resource->save();
 
             $this->createAsset($resource);
 
@@ -48,32 +48,27 @@ class AssetSeeder extends BaseSeeder
 
     private function createAsset($resource)
     {
-        $album = factory(\PN\Resources\Album::class)->create();
-
         $asset = factory(\PN\Assets\Asset::class)->create([
-            'type'          => $resource->getType(),
-            'user_id'       => $this->getRandom(\PN\Users\User::class)->id,
-            'album_id'      => $album->id,
-            'image_id'      => $this->createImage()->id,
-            'resource_id'   => $resource->id,
-            'resource_type' => get_class($resource),
+            'type' => $resource->getType(),
+            'user_id' => $this->getRandom(\PN\Users\User::class)->id,
+            'image_id' => $this->createImage()->id,
+            'resource_id' => $resource->id
         ]);
 
         $images = rand(0, 8);
 
-        for($i = 0; $i < $images; $i++) {
-            \PN\Resources\AlbumImage::create([
-                'album_id' => $album->id,
-                'image_id' => $this->createImage()->id
-            ]);
+        for ($i = 0; $i < $images; $i++) {
+            $asset->addImage($this->createImage());
         }
 
         $tags = $this->getRandom(\PN\Assets\Tag::class, ['primary' => 0, 'type' => $resource->getType()], rand(2, 5));
 
         foreach ($tags as $tag) {
-            \PN\Assets\AssetTag::create(['asset_id' => $asset->id, 'tag_id' => $tag->id]);
+            $asset->addTag($tag);
         }
 
         $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+
+        $this->dispatch(new \PN\Resources\Stats\Jobs\CreateStats($asset));
     }
 }

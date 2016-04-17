@@ -31,8 +31,14 @@ class DetachTagFromAsset extends Job
 
     public function handle()
     {
-        if($this->asset->tags()->find($this->tag->id) != null) {
-            $this->asset->tags()->detach([$this->tag->id]);
+        $tag = $this->tag;
+
+        $tagExists = function($item) use ($tag) {
+            return $item->id == $tag->id;
+        };
+
+        if(count($this->asset->getTags()->filter($tagExists)) > 0) {
+            $this->asset->removeTag($this->tag->id);
 
             event(new TagWasDetachedFromAsset($this->asset, $this->tag));
         }

@@ -13,30 +13,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ResourceUtil
 {
-    public function validate($resource)
-    {
-        if (\Request::hasFile($resource)) {
-            $path = $this->moveToTmp(\Request::file($resource));
-        } else {
-            $path = $resource;
-        }
-
-        try {
-            switch ($this->getTypeOf($resource)) {
-                case "mod":
-                    return true;
-                case "blueprint":
-                    return (new BlueprintValidator($path))->isValid();
-                case "park":
-                    return (new ParkValidator($path))->isValid();
-                default:
-                    return false;
-            }
-        } catch (InvalidResource $e) {
-            return false;
-        }
-    }
-
     /**
      * Moves file to tmp dir
      *
@@ -60,13 +36,11 @@ class ResourceUtil
      * Can be: github url, key in file upload, path to file
      *
      * @param $source
-     * @return Blueprint|Mod|Park
+     * @return Resource|Mod|Park
      * @throws InvalidResource
      */
     public function make($source)
     {
-        $this->validate($source);
-
         if (\Request::hasFile($source)) {
             $source = $this->moveToTmp(\Request::file($source));
         }
@@ -76,106 +50,16 @@ class ResourceUtil
             $source = $this->moveToTmp(new UploadedFile($source, basename($source)));
         }
 
-        switch ($this->getTypeOf($source)) {
-            case "blueprint":
-                $resource = new Blueprint();
-                break;
-            case "park":
-                $resource = new Park();
-                break;
-            case "mod":
-                $resource = new Mod();
-                break;
-        }
+        $resource = new Resource();
 
-        $resource->source = $source;
-        $resource->overwriteImageWithDefault();
+        $resource->setSource($source);
+        $resource->setDefaultImage();
+
+        if(!$resource->getValidator()->isValid()) {
+            throw new InvalidResource($resource);
+        }
 
         return $resource;
-    }
-
-    /**
-     * @param $resource
-     * @return string
-     * @throws InvalidResource
-     */
-    public function getTypeOf($resource)
-    {
-        if (\Request::hasFile($resource)) {
-            $resource = $this->moveToTmp(\Request::file($resource));
-        }
-
-        if (!is_object($resource) && preg_match('/http(s?):\/\/github.com\/([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+)(\/?)/',
-                $resource) == 1
-        ) {
-            return 'mod';
-        } else {
-            if ($resource instanceof \PN\Resources\Mod) {
-                return 'mod';
-            } else {
-                if (is_object($resource)) {
-                    switch (pathinfo($resource->source, PATHINFO_EXTENSION)) {
-                        case 'png':
-                            return 'blueprint';
-                        case 'txt':
-                            return 'park';
-                    }
-                } else {
-                    if (\File::exists($resource)) {
-                        switch (pathinfo($resource, PATHINFO_EXTENSION)) {
-                            case 'png':
-                                return 'blueprint';
-                            case 'txt':
-                                return 'park';
-                        }
-                    }
-                }
-            }
-        }
-
-        throw new InvalidResource($resource);
-    }
-
-    public function makeExtractor(ResourceInterface $resource)
-    {
-        if ($resource instanceof Blueprint) {
-            return new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source));
-        }
-
-        if ($resource instanceof Park) {
-            return new ParkExtractor(StorageUtil::copyToTmp('parks', $resource->source));
-        }
-
-        // if this happens to be a mod, return null
-        return null;
-    }
-
-    public function hasScenery($resource)
-    {
-        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
-
-        return count($data['Header']['DecoTypes']) > 0;
-    }
-
-    public function hasFlatRide($resource)
-    {
-        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
-
-        return count($data['Header']['FlatRideTypes']) > 0;
-    }
-
-    public function hasCoaster($resource)
-    {
-        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
-
-        return count($data['Header']['TrackedRideTypes']) > 0;
-    }
-
-    public function isCoaster($resource)
-    {
-        $data = (new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source)))->getData();
-
-        return (count($data['Header']['FlatRideTypes']) == 0 && count($data['Header']['TrackedRideTypes']) == 1);
     }
 
     /**

@@ -11,10 +11,8 @@ class CreateAssetsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned()->index();
 			$table->integer('image_id')->unsigned();
-			$table->integer('album_id')->unsigned();
 			$table->integer('buildoff_id')->unsigned()->nullable()->index();
 			$table->integer('resource_id')->unsigned();
-			$table->string('resource_type', 100);
 			$table->string('identifier', 10)->unique();
 			$table->string('type', 20);
 			$table->string('name', 100);

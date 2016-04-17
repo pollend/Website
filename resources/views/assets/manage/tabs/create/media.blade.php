@@ -18,7 +18,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail text-center">
 						<span>Original thumbnail of asset</span>
-						<img src="data:image/png;base64,{{ base64_encode($resource->image->getRaw()) }}" width="100%"/>
+						<img src="data:image/png;base64,{{ base64_encode($resource->getImage()->getRaw()) }}" width="100%"/>
 					</div>
 				</div>
 				<div class="col-md-4">

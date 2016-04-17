@@ -227,6 +227,10 @@ return [
          * Application Facades
          */
         'ResourceUtil'  => PN\Resources\Facades\ResourceUtil::class,
+        'AssetRepo'     => PN\Assets\Repositories\Facades\AssetRepositoryFacade::class,
+        'TagRepo'       => PN\Assets\Repositories\Facades\TagRepositoryFacade::class,
+        'BuildOffRepo'  => PN\BuildOffs\Repositories\Facades\BuildOffRepositoryFacade::class,
+        'StatRepo'      => PN\Resources\Stats\Repositories\Facades\StatRepositoryFacade::class,
     ],
 
 ];

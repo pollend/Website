@@ -3,7 +3,9 @@
 namespace PN\Resources\Extractors;
 
 
+use Illuminate\Support\Collection;
 use PN\Resources\Exceptions\NotAValidBlueprint;
+use PN\Resources\Extractors\Stats\BlueprintStatConverter;
 
 class BlueprintExtractor implements ExtractorInterface
 {
@@ -38,5 +40,12 @@ class BlueprintExtractor implements ExtractorInterface
 
             return $json;
         });
+    }
+
+    public function getStats() : Collection
+    {
+        $blupeStatConverter = new BlueprintStatConverter();
+
+        return $blupeStatConverter->convert($this->getData());
     }
 }

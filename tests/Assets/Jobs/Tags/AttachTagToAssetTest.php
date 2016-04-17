@@ -20,7 +20,7 @@ class AttachTagToAssetTest extends \TestCase
 
         $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
 
-        $this->assertNotNull($asset->tags()->find($tag->id));
+        $this->assertNotNull($asset->getTags()->find($tag->id));
     }
 
     public function test_tag_attach_fires_event()

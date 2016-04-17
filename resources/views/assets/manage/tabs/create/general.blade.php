@@ -30,7 +30,7 @@
 		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" placeholder="Name" name="name" class="form-control"
-			       value="{{ Request::old('name', $resource->presenter()->name) }}"/>
+			       value="{{ Request::old('name', $resource->getPresenter()->name) }}"/>
 		</div>
 
 		<div class="row">
