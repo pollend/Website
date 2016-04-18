@@ -6,6 +6,7 @@ namespace PN\Media\Jobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use PN\Jobs\Job;
+use PN\Media\Image;
 
 class ResizeImage extends Job implements ShouldQueue
 {
@@ -20,7 +21,7 @@ class ResizeImage extends Job implements ShouldQueue
      * ResizeImage constructor.
      * @param $image
      */
-    public function __construct($image)
+    public function __construct(Image $image)
     {
         $this->image = $image;
     }
@@ -40,6 +41,8 @@ class ResizeImage extends Job implements ShouldQueue
             });
 
             \Storage::disk('images')->put("{$width}x{$height}/{$this->image->source}", $resized->encode('jpg', 100)->__toString());
+
+            $resized->destroy();
         }
     }
 }
