@@ -38,7 +38,7 @@ class StoreResource extends Job
         $this->resource->save();
 
         if(!$exists) {
-            $this->dispatch(app(CreateStats::class, [$this->resource]));
+            $this->dispatch(new CreateStats($this->resource));
         }
 
         return $this->resource;
