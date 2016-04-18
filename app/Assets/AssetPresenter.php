@@ -4,6 +4,7 @@ namespace PN\Assets;
 
 
 use PN\Foundation\Presenters\Presenter;
+use PN\Social\MarkdownParser;
 
 class AssetPresenter extends Presenter
 {
@@ -19,6 +20,11 @@ class AssetPresenter extends Presenter
     public function downloadUrl()
     {
         return route('resources.download', [$this->model->identifier]);
+    }
+
+    public function description()
+    {
+        return MarkdownParser::parse($this->model->description);
     }
 
     public function imageUrl()
