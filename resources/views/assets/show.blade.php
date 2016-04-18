@@ -15,7 +15,8 @@
         <div class="user-detail">
             <div class="username">
                 <h2>
-                    <a href="{{ $asset->getUser()->getPresenter()->url }}" title="{{ $asset->getUser()->getPresenter()->displayName }}">
+                    <a href="{{ $asset->getUser()->getPresenter()->url }}"
+                       title="{{ $asset->getUser()->getPresenter()->displayName }}">
                         {{ $asset->getUser()->getPresenter()->displayName }}
                     </a>
                 </h2>
@@ -40,12 +41,14 @@
         <div class="row">
             <div class="col-xs-6 text-center border-right" title="Views">
                 <i class="fa fa-eye icon-xl"></i>
+
                 <p>
                     {{ $asset->views }}
                 </p>
             </div>
             <div class="col-xs-6 text-center" title="Downloads">
                 <i class="fa fa-download icon-xl"></i>
+
                 <p>
                     {{ $asset->downloads }}
                 </p>
@@ -63,6 +66,7 @@
             <b>
                 {{ $asset->likes }}
             </b>
+
             <p>
                 People like this
             </p>
@@ -106,51 +110,81 @@
 
     <div class="row">
         <div class="col-sm-12">
-            {{ $asset->description }}
+            {!! $asset->getPresenter()->description !!}
         </div>
     </div>
 
-    <div class="well">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
+    <?php
+    $stats = $asset->getResource()->getStats();
+    $i = 0;
+    ?>
+    <div class="row">
+        <div class="col-sm-4">
+            @foreach($asset->getResource()->getPresenter()->getStatGroups() as $groupName => $groupStats)
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            {{ $groupName }}
+                        </th>
+                        <th>
 
-                    </th>
-                    <th>
-                        Value
-                    </th>
-                </tr>
-            </thead>
-            @foreach($asset->getResource()->getStats() as $stat)
-                <tr>
-                    <td>
-                        {{ $stat['title'] }}
-                    </td>
-                    <td>
-                        {{ $stat['value'] }}
-                    </td>
-                </tr>
+                        </th>
+                    </tr>
+                    </thead>
+                    @foreach($groupStats as $groupStat)
+                        <tr>
+                            <td>
+                                {{ $stats[$groupStat]['title'] }}
+                            </td>
+                            <td>
+                                {{ $stats[$groupStat]['value'] }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+                @if((++$i) % 2 == 0)
+        </div>
+        <div class="col-sm-4">
+            @endif
             @endforeach
-        </table>
+        </div>
     </div>
 
     <div id="comments">
+        @if(Auth::check())
+            <form method="post" action="{{ route('comments.store') }}">
+                {{ csrf_field() }}
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                    <textarea class="" name="body">
+
+                    </textarea>
+                    </div>
+                </div>
+                <input type="submit" />
+            </form>
+        @endif
+
         @foreach($asset->getComments() as $comment)
             <hr>
             <div class="comment">
                 <div class="comment-header">
                     <div class="comment-buttons">
+
                     </div>
                     <img src="{{ $comment->getUser()->getPresenter()->avatarUrl }}">
-                    <a href="https://parkitectnexus.com/user/Topkek" title="Topkek">
+
+                    <a href="{{ $comment->getUser()->getPresenter()->url }}" title="{{ $comment->getUser()->username }}">
                         {{ $comment->getUser()->getPresenter()->displayName }}
                     </a>
                     <br>
                     {{ $comment->getPresenter()->timestamp }}
                 </div>
-                <div class="comment-body" id="comment-07c047b074">
-                    {{ $comment->body }}
+                <div class="comment-body">
+                    {!! $comment->getPresenter()->text !!}
                 </div>
             </div>
         @endforeach

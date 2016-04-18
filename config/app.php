@@ -171,6 +171,7 @@ return [
         PN\Resources\Providers\ResourceServiceProvider::class,
         PN\Users\Providers\AuthServiceProvider::class,
         PN\Users\Providers\UserServiceProvider::class,
+        PN\Social\Providers\CommentServiceProvider::class,
     ],
 
     /*

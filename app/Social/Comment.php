@@ -26,7 +26,9 @@ class Comment extends Model
 
     public function getUser()
     {
-        return $this->user;
+        return \Cache::remember('user.'.$this->user_id, 3600, function(){
+            return $this->user;
+        });
     }
 
     public function setUser($user)
