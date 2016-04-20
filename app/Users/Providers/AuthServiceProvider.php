@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use PN\Users\Events\UserRegistered;
 use PN\Users\Http\Controllers\AuthController;
 use PN\Users\Http\Controllers\SocialAuthController;
+use PN\Users\Listeners\ConfirmWhenInDev;
 use PN\Users\Listeners\EmailConfirm;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,7 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserRegistered::class => [
-            EmailConfirm::class
+            EmailConfirm::class,
+            ConfirmWhenInDev::class
         ]
     ];
 

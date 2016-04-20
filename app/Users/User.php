@@ -8,6 +8,10 @@ class User extends \Illuminate\Foundation\Auth\User
 {
     use PresenterTrait;
 
+    const USER = 0;
+    const MODERATOR = 1;
+    const ADMIN = 2;
+
     protected $table = 'users';
     public $timestamps = true;
     protected $guarded = array(
@@ -142,5 +146,10 @@ class User extends \Illuminate\Foundation\Auth\User
         })->encode('jpg'));
 
         $this->avatar = $name;
+    }
+
+    public function isAdmin()
+    {
+        return $this->level == self::ADMIN;
     }
 }

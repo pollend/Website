@@ -13,7 +13,7 @@ class EmailConfirm
 
     public function handle(UserRegistered $event)
     {
-        if($event->user->social == 0) {
+        if($event->user->social == 0 && !env('APP_DEBUG')) {
             $this->dispatch(app(SendConfirmEmail::class, [$event->user->id]));
         }
     }

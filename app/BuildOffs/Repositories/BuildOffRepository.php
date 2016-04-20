@@ -17,4 +17,48 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
     {
         return BuildOff::class;
     }
+
+    /**
+     * Adds the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function add($entity)
+    {
+        $entity->save();
+
+        \Cache::put('buildoffs.'.$entity->id, $entity, 3600);
+    }
+
+    /**
+     * Updates the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function edit($entity)
+    {
+        $entity->save();
+
+        \Cache::put('buildoffs.'.$entity->id, $entity, 3600);
+    }
+
+    /**
+     * Removes the entity from this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function remove($entity)
+    {
+        $entity->delete();
+
+        \Cache::forget('buildoffs.'.$entity->id);
+    }
+
+    public function descended()
+    {
+        return
+    }
 }

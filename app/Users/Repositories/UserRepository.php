@@ -51,4 +51,43 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    /**
+     * Adds the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function add($entity)
+    {
+        $entity->save();
+
+        \Cache::put('users.'.$entity->id, $entity, 3600);
+    }
+
+    /**
+     * Updates the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function edit($entity)
+    {
+        $entity->save();
+
+        \Cache::put('users.'.$entity->id, $entity, 3600);
+    }
+
+    /**
+     * Removes the entity from this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function remove($entity)
+    {
+        $entity->delete();
+
+        \Cache::forget('users.'.$entity->id);
+    }
 }

@@ -99,7 +99,7 @@ class SocialAuthController extends Controller
                     'social_id' => $userData->id
                 ]);
 
-                $user->save();
+                \UserRepo::add($user);
             }
 
             if ($user->username == '') {

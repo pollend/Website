@@ -129,7 +129,9 @@ class Asset extends Model
 
     public function getImage()
     {
-        return $this->image;
+        return \Cache::remember('images.'.$this->image_id, 3600, function() {
+            return $this->image;
+        });
     }
 
     public function setImage(Image $image)

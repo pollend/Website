@@ -67,7 +67,7 @@ class CreateAsset extends Job
         $asset->name = $this->name;
         $asset->description = $this->description;
 
-        $asset->save();
+        \AssetRepo::add($asset);
 
         $this->dispatch(app(SetPrimaryTags::class, [$asset]));
 

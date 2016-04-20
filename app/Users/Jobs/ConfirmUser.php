@@ -11,26 +11,23 @@ class ConfirmUser extends Job
 {
     private $userId;
 
-    private $userRepo;
-
     /**
      * ConfirmUser constructor.
      * @param $userId
      */
-    public function __construct($userId, UserRepositoryInterface $userRepo)
+    public function __construct($userId)
     {
         $this->userId = $userId;
-        $this->userRepo = $userRepo;
     }
 
     public function handle()
     {
-        $user = $this->userRepo->find($this->userId);
+        $user = \UserRepo::find($this->userId);
 
         $user->confirmed = 1;
 
-        $user->save();
-
+        \UserRepo::edit($user);
+        
         event(new UserConfirmed($user));
     }
 }

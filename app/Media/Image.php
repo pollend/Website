@@ -32,7 +32,7 @@ class Image extends Model
 
         $image->source = $path;
 
-        $image->save();
+        \ImageRepo::add($image);
 
         return $image;
     }

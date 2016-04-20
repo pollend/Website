@@ -41,4 +41,43 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
             return app($this->model())->orderBy('created_at', 'desc')->take($count)->get();
         });
     }
+
+    public function find($id, $columns = ['*'])
+    {
+        return \Cache::remember('assets.'.$id, 3600, function() use ($id, $columns){
+            return parent::find($id, $columns);
+        });
+    }
+
+    public function findByIdentifier(string $identifier)
+    {
+        $id = \Cache::remember('assets.'.$identifier, 3600, function() use($identifier){
+            $asset = parent::findByIdentifier($identifier);
+
+            return $asset->id;
+        });
+
+        return $this->find($id);
+    }
+
+    public function add($entity)
+    {
+        $entity->save();
+
+        \Cache::put('assets.'.$entity->id, $entity, 3600);
+    }
+
+    public function edit($entity)
+    {
+        $entity->save();
+
+        \Cache::put('assets.'.$entity->id, $entity, 3600);
+    }
+
+    public function remove($entity)
+    {
+        $entity->delete();
+
+        \Cache::forget('assets.'.$entity->id);
+    }
 }

@@ -3,6 +3,7 @@
 namespace PN\Assets\Repositories;
 
 
+use PN\Assets\Asset;
 use PN\Assets\Tag;
 use PN\Foundation\Repositories\BaseRepository;
 
@@ -54,5 +55,39 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
     public function findBySlugs($slugs)
     {
         return $this->findWhereIn('slug', $slugs);
+    }
+
+    public function add($entity)
+    {
+        $entity->save();
+
+        \Cache::put('tags.'.$entity->id, $entity, 3600);
+    }
+
+    public function edit($entity)
+    {
+        $entity->save();
+
+        \Cache::put('tags.'.$entity->id, $entity, 3600);
+    }
+
+    public function remove($entity)
+    {
+        $entity->delete();
+
+        \Cache::forget('tags.'.$entity->id);
+    }
+
+    /**
+     * Find tags for given asset
+     *
+     * @param Asset $asset
+     * @return mixed
+     */
+    public function forAsset(Asset $asset)
+    {
+        return \Cache::remember('tags.assets.'.$asset->id, 3600, function() use ($asset) {
+            return $asset->getTags();
+        });
     }
 }
