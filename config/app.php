@@ -174,6 +174,7 @@ return [
         PN\Social\Providers\CommentServiceProvider::class,
         PN\Media\Providers\ImageServiceProvider::class,
         PN\Resources\Providers\ResourceServiceProvider::class,
+        PN\Pages\Providers\PageServiceProvider::class,
     ],
 
     /*
@@ -238,6 +239,7 @@ return [
         'CommentRepo'   => PN\Social\Repositories\Facades\CommentRepositoryFacade::class,
         'ResourceRepo'  => PN\Resources\Repositories\Facades\ResourceRepositoryFacade::class,
         'ImageRepo'     => PN\Media\Repositories\Facades\ImageRepositoryFacade::class,
+        'PageRepo'      => PN\Pages\Repositories\Facades\PageRepositoryFacade::class,
     ],
 
 ];
