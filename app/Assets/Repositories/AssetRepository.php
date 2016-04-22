@@ -3,15 +3,8 @@
 namespace PN\Assets\Repositories;
 
 
-use Illuminate\Support\Collection;
 use PN\Assets\Asset;
-use PN\Assets\Repositories\Criteria\NameCriteria;
-use PN\Assets\Repositories\Criteria\NoBuildOffCriteria;
-use PN\Assets\Repositories\Criteria\SortCriteria;
-use PN\Assets\Repositories\Criteria\StatCriteria;
-use PN\Assets\Repositories\Criteria\TypeCriteria;
-use PN\Assets\Repositories\Criteria\WithoutTagCriteria;
-use PN\Assets\Repositories\Criteria\WithTagCriteria;
+use PN\BuildOffs\BuildOff;
 use PN\Foundation\Repositories\BaseRepository;
 
 class AssetRepository extends BaseRepository implements AssetRepositoryInterface
@@ -79,5 +72,16 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
         $entity->delete();
 
         \Cache::forget('assets.'.$entity->id);
+    }
+
+    /**
+     * Gets assets that participated in a build-off
+     *
+     * @param BuildOff $buildOff
+     * @return mixed
+     */
+    public function forBuildOff(BuildOff $buildOff)
+    {
+        return Asset::where('buildoff_id', $buildOff->id)->get();
     }
 }

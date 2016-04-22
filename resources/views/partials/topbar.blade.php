@@ -24,7 +24,7 @@
                     <a href="/" title="Home">Home</a>
                 </li>
                 <li>
-                    <a href="#" title="Build-Off">
+                    <a href="/build-offs" title="Build-Off">
                         Build-offs
                     </a>
                 </li>

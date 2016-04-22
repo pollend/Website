@@ -240,6 +240,7 @@ return [
         'ResourceRepo'  => PN\Resources\Repositories\Facades\ResourceRepositoryFacade::class,
         'ImageRepo'     => PN\Media\Repositories\Facades\ImageRepositoryFacade::class,
         'PageRepo'      => PN\Pages\Repositories\Facades\PageRepositoryFacade::class,
+        'RankRepo'      => PN\BuildOffs\Repositories\Facades\RankRepositoryFacade::class,
     ],
 
 ];
