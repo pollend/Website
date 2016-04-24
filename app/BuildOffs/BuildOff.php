@@ -4,6 +4,7 @@ namespace PN\BuildOffs;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use PN\BuildOffs\Exceptions\BuildOffHasNoWinnerException;
 use PN\Foundation\Presenters\PresenterTrait;
 
 class BuildOff extends Model
@@ -89,7 +90,13 @@ class BuildOff extends Model
 
     public function getWinner()
     {
-        return $this->getRanks()->first();
+        $winner = $this->getRanks()->first();
+
+        if($winner) {
+            return $winner;
+        }
+
+        throw new BuildOffHasNoWinnerException($this->id);
     }
 
     public function wasPreviouslyRanked()
