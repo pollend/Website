@@ -37,4 +37,9 @@ class BuildOffPresenter extends Presenter
     {
         return (new Carbon($this->model->voting_start))->diffForHumans();
     }
+
+    public function getThumbnailPath()
+    {
+        return "/img/buildoffs/" . $this->model->thumbnail;
+    }
 }
