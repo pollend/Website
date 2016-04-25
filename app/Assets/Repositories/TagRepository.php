@@ -43,7 +43,7 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
     public function findByTagName($name)
     {
         return $this->findWhere([
-            'name' => $name
+            'parkitect_type' => $name
         ])->first();
     }
 
