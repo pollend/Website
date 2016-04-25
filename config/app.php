@@ -172,6 +172,9 @@ return [
         PN\Users\Providers\AuthServiceProvider::class,
         PN\Users\Providers\UserServiceProvider::class,
         PN\Social\Providers\CommentServiceProvider::class,
+        PN\Media\Providers\ImageServiceProvider::class,
+        PN\Resources\Providers\ResourceServiceProvider::class,
+        PN\Pages\Providers\PageServiceProvider::class,
     ],
 
     /*
@@ -232,6 +235,12 @@ return [
         'TagRepo'       => PN\Assets\Repositories\Facades\TagRepositoryFacade::class,
         'BuildOffRepo'  => PN\BuildOffs\Repositories\Facades\BuildOffRepositoryFacade::class,
         'StatRepo'      => PN\Resources\Stats\Repositories\Facades\StatRepositoryFacade::class,
+        'UserRepo'      => PN\Users\Repositories\Facades\UserRepositoryFacade::class,
+        'CommentRepo'   => PN\Social\Repositories\Facades\CommentRepositoryFacade::class,
+        'ResourceRepo'  => PN\Resources\Repositories\Facades\ResourceRepositoryFacade::class,
+        'ImageRepo'     => PN\Media\Repositories\Facades\ImageRepositoryFacade::class,
+        'PageRepo'      => PN\Pages\Repositories\Facades\PageRepositoryFacade::class,
+        'RankRepo'      => PN\BuildOffs\Repositories\Facades\RankRepositoryFacade::class,
     ],
 
 ];

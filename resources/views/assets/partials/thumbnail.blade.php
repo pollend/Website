@@ -2,20 +2,22 @@
     <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">
         <img src="{{ $asset->getImage()->getPresenter()->source(263, 263) }}" alt="{{ $asset->name }}">
     </a>
-    <ul class="list-inline pull-left">
-        <li>
-            <i class="fa fa-heart"></i> {{ $asset->likes }}
-        </li>
-    </ul>
-    <ul class="list-inline pull-right">
-        <li>
-            <i class="fa fa-download"></i> {{ $asset->downloads }}
-        </li>
-        <li>
-            <i class="fa fa-eye"></i> {{ $asset->views }}
-        </li>
-    </ul>
-    <div class="clearfix"></div>
+    @if(!isset($showStats) || $showStats)
+        <ul class="list-inline pull-left">
+            <li>
+                <i class="fa fa-heart"></i> {{ $asset->likes }}
+            </li>
+        </ul>
+        <ul class="list-inline pull-right">
+            <li>
+                <i class="fa fa-download"></i> {{ $asset->downloads }}
+            </li>
+            <li>
+                <i class="fa fa-eye"></i> {{ $asset->views }}
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    @endif
     <hr>
     <div class="caption">
         <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">

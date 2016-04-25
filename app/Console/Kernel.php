@@ -4,6 +4,7 @@ namespace PN\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use PN\BuildOffs\Console\RankBuildOffs;
 use PN\Foundation\Console\Inspire;
 use PN\Social\Console\Commands\RecalculateLikes;
 use PN\Tracking\Console\Commands\RecalculateDownloads;
@@ -17,10 +18,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Inspire::class,
         RecalculateDownloads::class,
         RecalculateViews::class,
         RecalculateLikes::class,
+        RankBuildOffs::class,
     ];
 
     /**
@@ -31,7 +32,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('buildoffs:rank')->hourly();
+        $schedule->command('downloads:recalculate')->everyMinute();
+        $schedule->command('views:recalculate')->everyMinute();
+        $schedule->command('likes:recalculate')->everyMinute();
     }
 }

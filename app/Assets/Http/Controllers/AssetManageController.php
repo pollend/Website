@@ -66,7 +66,8 @@ class AssetManageController extends Controller
     public function postCreate(CreateRequest $request)
     {
         $resource = $this->dispatch(new StoreResource(\Session::get('resource')));
-        $resource->save();
+
+        \ResourceRepo::add($resource);
 
         $asset = $this->dispatch(new CreateAsset(
             $resource,

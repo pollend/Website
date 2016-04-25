@@ -17,4 +17,37 @@ class RankRepository extends BaseRepository implements RankRepositoryInterface
     {
         return Rank::class;
     }
+
+    /**
+     * Adds the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function add($entity)
+    {
+        $entity->save();
+    }
+
+    /**
+     * Updates the entity to this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function edit($entity)
+    {
+        $entity->save();
+    }
+
+    /**
+     * Removes the entity from this repository
+     *
+     * @param $entity
+     * @return mixed
+     */
+    public function remove($entity)
+    {
+        $entity->delete();
+    }
 }

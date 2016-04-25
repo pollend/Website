@@ -5,7 +5,7 @@ namespace PN\Http\Controllers\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use PN\Http\Controllers\Controller;
-use PN\User;
+use PN\Users\User;
 use Validator;
 
 class AuthController extends Controller
@@ -63,10 +63,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        \UserRepo::add($user);
     }
 }

@@ -41,7 +41,7 @@ class SetAssetImage extends Job
     {
         $this->asset->setImage($this->image);
 
-        $this->asset->save();
+        \AssetRepo::add($this->asset);
 
         return $this->asset;
     }

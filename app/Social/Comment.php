@@ -4,6 +4,7 @@ namespace PN\Social;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PN\Assets\Asset;
 use PN\Foundation\Presenters\PresenterTrait;
 use PN\Users\User;
 
@@ -22,6 +23,11 @@ class Comment extends Model
     protected function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected function asset()
+    {
+        return $this->belongsTo(Asset::class);
     }
 
     public function getUser()

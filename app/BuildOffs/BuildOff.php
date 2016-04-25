@@ -2,10 +2,14 @@
 
 namespace PN\BuildOffs;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use PN\BuildOffs\Exceptions\BuildOffHasNoWinnerException;
+use PN\Foundation\Presenters\PresenterTrait;
 
 class BuildOff extends Model
 {
+    use PresenterTrait;
 
     protected $table = 'buildoffs';
     public $timestamps = true;
@@ -32,14 +36,14 @@ class BuildOff extends Model
         'voting_start'
     );
 
-    private function tag()
+    public function tag()
     {
         return $this->belongsTo(\PN\Assets\Tag::class);
     }
 
-    private function ranks()
+    public function ranks()
     {
-        return $this->hasMany(\PN\BuildOffs\Rank::class);
+        return $this->hasMany(\PN\BuildOffs\Rank::class, 'buildoff_id');
     }
 
     public function getTag()
@@ -65,5 +69,38 @@ class BuildOff extends Model
     public function addRank($rank)
     {
         $rank->setBuildOff($this);
+    }
+
+    public function isOpen()
+    {
+        $start = new Carbon($this->start);
+        $end = new Carbon($this->end);
+        $now = new Carbon();
+
+        return $now->gt($start) && $now->lt($end);
+    }
+
+    public function canVote()
+    {
+        $start = new Carbon($this->voting_start);
+        $now = new Carbon();
+
+        return $now->gt($start);
+    }
+
+    public function getWinner()
+    {
+        $winner = $this->getRanks()->first();
+
+        if($winner) {
+            return $winner;
+        }
+
+        throw new BuildOffHasNoWinnerException($this->id);
+    }
+
+    public function wasPreviouslyRanked()
+    {
+        return $this->getRanks()->count() > 0;
     }
 }

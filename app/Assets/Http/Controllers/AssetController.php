@@ -30,9 +30,11 @@ class AssetController extends Controller
     public function getShow($identifier, $slug)
     {
         $asset = $this->assetRepo->findByIdentifier($identifier);
+        $comments = \CommentRepo::forAsset($asset);
 
         return view('assets.show', compact(
-            'asset'
+            'asset',
+            'comments'
         ));
     }
 

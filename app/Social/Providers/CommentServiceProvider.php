@@ -2,12 +2,25 @@
 
 namespace PN\Social\Providers;
 
-
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use PN\Providers\AuthServiceProvider;
+use PN\Social\Comment;
 use PN\Social\Http\Controllers\CommentController;
+use PN\Social\Policies\CommentPolicy;
+use PN\Social\Repositories\CommentRepository;
+use PN\Social\Repositories\CommentRepositoryInterface;
 
-class CommentServiceProvider extends ServiceProvider
+class CommentServiceProvider extends AuthServiceProvider
 {
+    protected $policies = [
+        Comment::class => CommentPolicy::class,
+    ];
+
+    public function boot(GateContract $gate)
+    {
+        $this->registerPolicies($gate);
+    }
+
     /**
      * Register the service provider.
      *
@@ -15,6 +28,10 @@ class CommentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::resource('comments', CommentController::class);
+        \Route::group(['middleware' => ['web']], function () {
+            \Route::resource('comments', CommentController::class);
+        });
+
+        $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
     }
 }

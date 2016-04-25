@@ -156,25 +156,37 @@
             <form method="post" action="{{ route('comments.store') }}">
                 {{ csrf_field() }}
 
+                <input type="hidden" name="asset_id" value="{{ $asset->id }}" />
+
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                    <textarea class="" name="body">
-
-                    </textarea>
+                    <textarea class="" name="body"></textarea>
                     </div>
                 </div>
-                <input type="submit" />
+                <input type="submit" value="Post comment"/>
             </form>
         @endif
 
-        @foreach($asset->getComments() as $comment)
+        @foreach($comments as $comment)
             <hr>
             <div class="comment">
                 <div class="comment-header">
-                    <div class="comment-buttons">
+                    @can('update', $comment)
+                        <div class="comment-buttons">
+                            <a href="{{ route('comments.edit', [$comment->id]) }}" class="btn btn-primary">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <form method="post" action="{{ route('comments.destroy', [$comment->id]) }}">
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
 
-                    </div>
+                                <button class="btn btn-primary">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    @endcan
                     <img src="{{ $comment->getUser()->getPresenter()->avatarUrl }}">
 
                     <a href="{{ $comment->getUser()->getPresenter()->url }}" title="{{ $comment->getUser()->username }}">

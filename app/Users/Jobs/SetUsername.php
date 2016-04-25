@@ -33,7 +33,7 @@ class SetUsername extends Job
 
         $user->username = $this->username;
 
-        $user->save();
+        \UserRepo::edit($user);
 
         event(new UsernameSet($user));
 

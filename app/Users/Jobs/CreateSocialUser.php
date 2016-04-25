@@ -69,7 +69,7 @@ class CreateSocialUser extends Job
             'avatar' => $this->avatar
         ]);
 
-        $user->save();
+        \UserRepo::add($user);
 
         $this->dispatch(app(ConfirmUser::class, [$user->id]));
 
