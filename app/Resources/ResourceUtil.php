@@ -41,13 +41,13 @@ class ResourceUtil
      */
     public function make($source)
     {
-        if (\Request::hasFile($source)) {
-            $source = $this->moveToTmp(\Request::file($source));
-        }
-
         // little hack, but it works :)
         if (\File::exists($source)) {
             $source = $this->moveToTmp(new UploadedFile($source, basename($source)));
+        }
+
+        if (\Request::hasFile($source)) {
+            $source = $this->moveToTmp(\Request::file($source));
         }
 
         $resource = new Resource();
