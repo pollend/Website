@@ -86,6 +86,8 @@ class AssetFilter
     {
         $asset = new Asset();
 
+        $asset = $asset->where('buildoff_id', null);
+
         $asset = $this->appendQuery($asset, new TypeFilter(), $this->type);
         $asset = $this->appendQuery($asset, new NameLikeFilter(), $this->name);
         $asset = $this->appendQuery($asset, new WithTagFilter(), $this->withTags);
