@@ -6,28 +6,27 @@ namespace PN\Users\Jobs;
 use PN\Jobs\Job;
 use PN\Users\Events\UserConfirmed;
 use PN\Users\Repositories\UserRepositoryInterface;
+use PN\Users\User;
 
 class ConfirmUser extends Job
 {
-    private $userId;
+    private $user;
 
     /**
      * ConfirmUser constructor.
-     * @param $userId
+     * @param $user
      */
-    public function __construct($userId)
+    public function __construct(User $user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
     }
 
     public function handle()
     {
-        $user = \UserRepo::find($this->userId);
+        $this->user->confirmed = 1;
 
-        $user->confirmed = 1;
-
-        \UserRepo::edit($user);
+        \UserRepo::edit($this->user);
         
-        event(new UserConfirmed($user));
+        event(new UserConfirmed($this->user));
     }
 }
