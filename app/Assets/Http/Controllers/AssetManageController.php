@@ -27,11 +27,7 @@ class AssetManageController extends Controller
 
     public function postSelectFile(SelectFileRequest $request)
     {
-        try {
-            $resource = \ResourceUtil::make('resource');
-        } catch (\Exception $e) {
-            return \Redirect::back()->withErrors($e);
-        }
+        $resource = \ResourceUtil::make('resource');
 
         \Session::set('resource', $resource);
 
