@@ -5,6 +5,7 @@ namespace PN\Media;
 
 use Illuminate\Database\Eloquent\Model;
 use PN\Foundation\Presenters\PresenterTrait;
+use PN\Media\Exceptions\ImageDoesNotExistInStorage;
 
 class Image extends Model
 {
@@ -39,11 +40,15 @@ class Image extends Model
 
     /**
      * Returns the binary image data of this image
-     *
      * @return string
+     * @throws ImageDoesNotExistInStorage
      */
     public function getRaw()
     {
+        if(!\Storage::disk('images')->exists($this->source)) {
+            throw new ImageDoesNotExistInStorage($this->source);
+        }
+        
         return \Storage::disk('images')->get($this->source);
     }
 }
