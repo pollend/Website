@@ -18,7 +18,9 @@ class BlueprintExtractor implements ExtractorInterface
 
     public function getData()
     {
-        return \Cache::remember('resource.extract.blueprint.' . $this->path, 10, function () {
+        $md5 = hash_file('md5', $this->path);
+
+        return \Cache::remember('resource.extract.blueprint.' . $md5, 10, function () {
             $arguments = escapeshellarg(app_path('../bin/ParkitectNexus.AssetTools.exe')) . " blueprint " .
                 "--input " . \ResourceUtil::escapeArgument($this->path);
 
