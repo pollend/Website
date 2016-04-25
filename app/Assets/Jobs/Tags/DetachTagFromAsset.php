@@ -3,7 +3,9 @@
 namespace PN\Assets\Jobs\Tags;
 
 
+use PN\Assets\Asset;
 use PN\Assets\Events\TagWasDetachedFromAsset;
+use PN\Assets\Tag;
 use PN\Jobs\Job;
 
 class DetachTagFromAsset extends Job
@@ -23,7 +25,7 @@ class DetachTagFromAsset extends Job
      * @param $asset
      * @param $tag
      */
-    public function __construct($asset, $tag)
+    public function __construct(Asset $asset, Tag $tag)
     {
         $this->asset = $asset;
         $this->tag = $tag;
@@ -31,16 +33,8 @@ class DetachTagFromAsset extends Job
 
     public function handle()
     {
-        $tag = $this->tag;
+        $this->asset->removeTag($this->tag);
 
-        $tagExists = function($item) use ($tag) {
-            return $item->id == $tag->id;
-        };
-
-        if(count($this->asset->getTags()->filter($tagExists)) > 0) {
-            $this->asset->removeTag($this->tag->id);
-
-            event(new TagWasDetachedFromAsset($this->asset, $this->tag));
-        }
+        event(new TagWasDetachedFromAsset($this->asset, $this->tag));
     }
 }

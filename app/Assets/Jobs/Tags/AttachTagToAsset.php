@@ -3,6 +3,7 @@
 namespace PN\Assets\Jobs\Tags;
 
 
+use Illuminate\Database\QueryException;
 use PN\Assets\Events\TagWasAttachedToAsset;
 use PN\Assets\Events\TagWasDetachedFromAsset;
 use PN\Jobs\Job;
@@ -26,16 +27,12 @@ class AttachTagToAsset extends Job
 
     public function handle()
     {
-        $tag = $this->tag;
-
-        $tagExists = function($item) use ($tag) {
-            return $item->id == $tag->id;
-        };
-
-        if(count($this->asset->getTags()->filter($tagExists)) == 0) {
+        try {
             $this->asset->addTag($this->tag);
 
             event(new TagWasAttachedToAsset($this->asset, $this->tag));
+        } catch (QueryException $e) {
+            // ignore, can't add one tag twice
         }
     }
 }

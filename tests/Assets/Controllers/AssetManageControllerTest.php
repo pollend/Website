@@ -41,7 +41,7 @@ class AssetManageControllerTest extends \TestCase
     {
         $this->login();
 
-        $tags = app(TagRepositoryInterface::class)->findSecondary('park');
+        $tags = \TagRepo::findSecondary('park');
 
         $this->withSession(['resource' => \ResourceUtil::make(base_path('tests/files/park.txt'))])
             ->visit(route('assets.manage.create'))

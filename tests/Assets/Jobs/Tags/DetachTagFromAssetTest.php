@@ -15,7 +15,7 @@ class DetachTagFromAssetTest extends \TestCase
 
     public function test_tag_detaches_from_asset()
     {
-        $asset = $this->createAsset(true);
+        $asset = $this->createAsset(false);
 
         $tag = factory(Tag::class)->create();
 
@@ -25,6 +25,9 @@ class DetachTagFromAssetTest extends \TestCase
 
         $this->dispatch(app(DetachTagFromAsset::class, [$asset, $tag]));
 
+        // refresh from db
+        $asset = \AssetRepo::find($asset->id);
+
         $this->assertNull($asset->getTags()->find($tag->id));
     }
 
@@ -32,11 +35,11 @@ class DetachTagFromAssetTest extends \TestCase
     {
         $this->expectsEvents(TagWasDetachedFromAsset::class);
 
-        $asset = $this->createAsset(true);
+        $asset = $this->createAsset(false);
 
         $tag = factory(Tag::class)->create();
 
-        $asset->addTag($tag);
-        $asset->removeTag($tag);
+        $this->dispatch(new AttachTagToAsset($asset, $tag));
+        $this->dispatch(new DetachTagFromAsset($asset, $tag));
     }
 }

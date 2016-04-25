@@ -112,13 +112,13 @@ trait FactoryTrait
         }
     }
 
-    public function createStats($asset)
+    public function createStats($resource)
     {
-        $stats = Stat::where('type', $asset->type)->get();
+        $stats = Stat::where('type', $resource->type)->get();
 
         foreach($stats as $stat) {
             ResourceStat::create([
-                'asset_id' => $asset->id,
+                'resource_id' => $resource->id,
                 'stat_id' => $stat->id,
                 'value' => rand(0, 100)
             ]);
@@ -186,7 +186,7 @@ trait FactoryTrait
     public function createResourcePark($quick)
     {
         if (!$quick) {
-            $parkResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/save.txt')]));
+            $parkResource = $this->dispatch(app(CreateResource::class, [base_path('tests/files/park.txt')]));
         } else {
             $parkResource = factory(Resource::class)->create([
                 'type' => 'park'

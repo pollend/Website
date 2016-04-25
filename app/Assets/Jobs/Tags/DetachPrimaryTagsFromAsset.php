@@ -3,7 +3,7 @@
 namespace PN\Assets\Jobs\Tags;
 
 
-use PN\Assets\Repositories\TagRepositoryInterface;
+use PN\Assets\Asset;
 use PN\Jobs\Job;
 
 class DetachPrimaryTagsFromAsset extends Job
@@ -14,25 +14,17 @@ class DetachPrimaryTagsFromAsset extends Job
     private $asset;
 
     /**
-     * @var TagRepositoryInterface
-     */
-    private $tagRepository;
-
-    /**
      * DetachPrimaryTagsFromAsset constructor.
      * @param $asset
-     * @param $tagRepository TagRepositoryInterface
      */
-    public function __construct($asset, TagRepositoryInterface $tagRepository)
+    public function __construct(Asset $asset)
     {
         $this->asset = $asset;
-        $this->tagRepository = $tagRepository;
     }
-
 
     public function handle()
     {
-        $tags = $this->tagRepository->findPrimary($this->asset->type);
+        $tags = \TagRepo::findPrimary($this->asset->type);
 
         foreach($tags as $tag) {
             $this->dispatch(app(DetachTagFromAsset::class, [$this->asset, $tag]));

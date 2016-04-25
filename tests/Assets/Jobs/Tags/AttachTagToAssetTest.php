@@ -14,20 +14,20 @@ class AttachTagToAssetTest extends \TestCase
 
     public function test_tag_attaches_to_asset()
     {
-        $asset = $this->createAsset(true);
+        $asset = $this->createAsset(false);
 
         $tag = factory(Tag::class)->create();
 
         $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
 
-        $this->assertNotNull($asset->getTags()->find($tag->id));
+        $this->assertTrue($asset->getTags()->contains('id', $tag->id));
     }
 
     public function test_tag_attach_fires_event()
     {
         $this->expectsEvents(TagWasAttachedToAsset::class);
 
-        $asset = $this->createAsset(true);
+        $asset = $this->createAsset(false);
 
         $tag = factory(Tag::class)->create();
 
@@ -36,7 +36,7 @@ class AttachTagToAssetTest extends \TestCase
 
     public function test_tag_cant_be_attached_twice()
     {
-        $asset = $this->createAsset(true);
+        $asset = $this->createAsset(false);
 
         $tag = factory(Tag::class)->create();
 

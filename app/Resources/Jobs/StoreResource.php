@@ -36,10 +36,11 @@ class StoreResource extends Job
         $exists = $this->resource->id != null;
 
         if(!$exists) {
-            \ResourceRepo::add($exists);
+            \ResourceRepo::add($this->resource);
+            
             $this->dispatch(new CreateStats($this->resource));
         } else {
-            \ResourceRepo::edit($exists);
+            \ResourceRepo::edit($this->resource);
         }
 
         return $this->resource;

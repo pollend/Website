@@ -11,8 +11,8 @@ class AssetTest extends \TestCase
 
     public function test_get_stats()
     {
-        $asset = $this->createBlueprint();
+        $asset = $this->createBlueprint(false);
 
-        $this->assertInternalType('array', $asset->getStats());
+        $this->assertInternalType('array', $asset->getResource()->getStats());
     }
 }
