@@ -20,9 +20,9 @@ class CreateAssetsTable extends Migration {
 			$table->text('description');
 			$table->string('youtube', 100);
 			$table->float('hot_score');
-			$table->integer('likes')->unsigned()->index()->default('0');
-			$table->integer('views')->unsigned()->index()->default('0');
-			$table->integer('downloads')->unsigned()->index()->default('0');
+			$table->integer('like_count')->unsigned()->index()->default('0');
+			$table->integer('view_count')->unsigned()->index()->default('0');
+			$table->integer('download_count')->unsigned()->index()->default('0');
 			$table->timestamps();
 			$table->softDeletes();
 		});

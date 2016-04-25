@@ -43,14 +43,14 @@
                 <i class="fa fa-eye icon-xl"></i>
 
                 <p>
-                    {{ $asset->views }}
+                    {{ $asset->view_count }}
                 </p>
             </div>
             <div class="col-xs-6 text-center" title="Downloads">
                 <i class="fa fa-download icon-xl"></i>
 
                 <p>
-                    {{ $asset->downloads }}
+                    {{ $asset->download_count }}
                 </p>
             </div>
         </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="col-xs-6 text-center" title="Downloads">
             <b>
-                {{ $asset->likes }}
+                {{ $asset->like_count }}
             </b>
 
             <p>

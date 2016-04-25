@@ -5,15 +5,15 @@
     @if(!isset($showStats) || $showStats)
         <ul class="list-inline pull-left">
             <li>
-                <i class="fa fa-heart"></i> {{ $asset->likes }}
+                <i class="fa fa-heart"></i> {{ $asset->like_count }}
             </li>
         </ul>
         <ul class="list-inline pull-right">
             <li>
-                <i class="fa fa-download"></i> {{ $asset->downloads }}
+                <i class="fa fa-download"></i> {{ $asset->download_count }}
             </li>
             <li>
-                <i class="fa fa-eye"></i> {{ $asset->views }}
+                <i class="fa fa-eye"></i> {{ $asset->view_count }}
             </li>
         </ul>
         <div class="clearfix"></div>
