@@ -11,6 +11,7 @@ class CreateAssetTagsTable extends Migration {
 			$table->increments('id');
 			$table->integer('asset_id')->unsigned()->index();
 			$table->integer('tag_id')->unsigned()->index();
+			$table->unique(['asset_id', 'tag_id']);
 		});
 	}
 

@@ -11,6 +11,7 @@ class CreateAssetDependenciesTable extends Migration {
 			$table->increments('id');
 			$table->integer('asset_id')->unsigned()->index();
 			$table->integer('dependency_id')->unsigned();
+			$table->unique(['asset_id', 'dependency_id']);
 		});
 	}
 

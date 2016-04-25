@@ -1,6 +1,8 @@
 <?php
 
 
+use PN\Users\Jobs\RegisterUser;
+
 class AdminUserSeeder extends BaseSeeder
 {
     /**
@@ -10,6 +12,10 @@ class AdminUserSeeder extends BaseSeeder
      */
     public function run()
     {
-        $this->dispatch(new \PN\Users\Jobs\RegisterUser('Admin', 'Administrator', 'admin@parkitectnexus.com', 'parkitect123', true));
+        try {
+            $this->dispatch(new RegisterUser('Admin', 'Administrator', 'admin@parkitectnexus.com', 'parkitect123', true));
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
