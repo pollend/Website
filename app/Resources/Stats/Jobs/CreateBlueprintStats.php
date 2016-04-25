@@ -1,6 +1,6 @@
 <?php
 
-namespace PN\Assets\Jobs;
+namespace PN\Resources\Stats\Jobs;
 
 
 use PN\Resources\Resource;
@@ -8,8 +8,15 @@ use PN\Resources\Stats\ResourceStat;
 use PN\Resources\Stats\Stat;
 use PN\Jobs\Job;
 
-class CreateParkStats extends Job
+/**
+ * Class CreateBlueprintStats
+ * @package PN\Assets\Jobs
+ */
+class CreateBlueprintStats extends Job
 {
+    /**
+     * @var \PN\Resources\Resource
+     */
     private $resource;
 
     /**
@@ -21,14 +28,21 @@ class CreateParkStats extends Job
         $this->resource = $resource;
     }
 
+    /**
+     * @return null
+     */
     public function handle()
     {
-        $parkStats = $this->resource->getExtractor()->getStats();
+        if (!$this->resource->getStrategy()->isCoaster()) {
+            return null;
+        }
 
-        foreach ($parkStats as $key => $value) {
+        $blueprintStats = $this->resource->getExtractor()->getStats();
+
+        foreach ($blueprintStats as $key => $value) {
             $stat = Stat::where('name', $key)->first();
 
-            if($stat != null) {
+            if ($stat != null) {
                 ResourceStat::create([
                     'resource_id' => $this->resource->id,
                     'stat_id' => $stat->id,
