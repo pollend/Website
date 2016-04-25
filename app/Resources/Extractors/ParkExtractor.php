@@ -47,4 +47,9 @@ class ParkExtractor implements ExtractorInterface
 
         return $parkConverter->convert($this->getData());
     }
+
+    public function getName() : string
+    {
+        return $this->getData()['Header']['Name'];
+    }
 }

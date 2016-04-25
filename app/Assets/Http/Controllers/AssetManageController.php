@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use PN\Assets\Http\Requests\CreateRequest;
 use PN\Assets\Http\Requests\SelectFileRequest;
 use PN\Assets\Jobs\CreateAsset;
+use PN\Assets\Jobs\ParticipateInBuildOff;
 use PN\Media\Jobs\AddImageToAsset;
 use PN\Resources\Jobs\StoreResource;
 use PN\Resources\Stats\Jobs\CreateStats;
@@ -43,6 +44,7 @@ class AssetManageController extends Controller
         $primaryTags = \TagRepo::findByPrimaryTags($resource->getPrimaryTags()->toArray());
         $secondaryTags = \TagRepo::findSecondary($resource->getType());
         $type = $resource->getType();
+        $name = $resource->getExtractor()->getName();
 
         if ($resource == null) {
             throw new SessionExpired();
@@ -55,7 +57,8 @@ class AssetManageController extends Controller
             'buildOffs',
             'primaryTags',
             'secondaryTags',
-            'mods'
+            'mods',
+            'name'
         ));
     }
 
@@ -96,6 +99,12 @@ class AssetManageController extends Controller
             $tag = \TagRepo::find($tagId);
 
             $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
+        }
+
+        if(\Request::get('buildoff_id')) {
+            $buildOff = \BuildOffRepo::find(\Request::get('buildoff_id'));
+
+            $this->dispatch(new ParticipateInBuildOff($asset, $buildOff));
         }
 
         \Session::remove('resource');

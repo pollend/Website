@@ -12,4 +12,6 @@ interface ExtractorInterface
     public function getData();
 
     public function getStats() : Collection;
+
+    public function getName() : string;
 }

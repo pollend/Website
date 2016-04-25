@@ -48,4 +48,9 @@ class BlueprintExtractor implements ExtractorInterface
 
         return $blupeStatConverter->convert($this->getData());
     }
+
+    public function getName() : string
+    {
+        return $this->getData()['Header']['Name'];
+    }
 }
