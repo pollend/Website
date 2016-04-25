@@ -9,20 +9,20 @@ use PN\Resources\Resource;
 
 class CreateResource extends Job
 {
-    private $resource;
+    private $source;
 
     /**
      * CreateResource constructor.
-     * @param $resource
+     * @param $source
      */
-    public function __construct($resource)
+    public function __construct($source)
     {
-        $this->resource = $resource;
+        $this->source = $source;
     }
 
     public function handle() : Resource
     {
-        $resource = \ResourceUtil::make($this->resource);
+        $resource = \ResourceUtil::make($this->source);
 
         $this->dispatch(new StoreResource($resource));
 
