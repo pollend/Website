@@ -79,3 +79,14 @@ $factory->define(\PN\Resources\Resource::class, function($faker) {
     ];
 });
 
+$factory->define(\PN\BuildOffs\BuildOff::class, function($faker) {
+    return [
+        'name' => $faker->name,
+        'short_description' => $faker->text,
+        'description' => $faker->text,
+        'start' => $faker->date,
+        'end' => $faker->date,
+        'voting_start' => $faker->date,
+    ];
+});
+

@@ -4,6 +4,7 @@ namespace PN\BuildOffs;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use PN\Assets\Asset;
 use PN\BuildOffs\Exceptions\BuildOffHasNoWinnerException;
 use PN\Foundation\Presenters\PresenterTrait;
 
@@ -102,5 +103,29 @@ class BuildOff extends Model
     public function wasPreviouslyRanked()
     {
         return $this->getRanks()->count() > 0;
+    }
+
+    /**
+     * Checks if given asset may participate in this buildoff
+     * @param Asset $asset
+     * @return bool
+     */
+    public function eligible(Asset $asset)
+    {
+        if(!empty($this->type_requirement) && $asset->type != $this->type_requirement) {
+            return false;
+        }
+
+        if($this->tag_id != null) {
+            foreach ($asset->getTags() as $tag) {
+                if($tag->id == $this->tag_id) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return true;
     }
 }
