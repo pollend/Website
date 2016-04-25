@@ -94,7 +94,7 @@ class Asset extends Model
 
     protected function buildOff()
     {
-        return $this->belongsTo(\PN\BuildOffs\BuildOff::class);
+        return $this->belongsTo(\PN\BuildOffs\BuildOff::class, 'buildoff_id');
     }
 
     protected function images()
