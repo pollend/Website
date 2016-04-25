@@ -21,7 +21,9 @@ class ResourceServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Image::observe(new ImageObserver());
+        if(env('APP_ENV') != 'testing') {
+            Image::observe(new ImageObserver());
+        }
     }
 
     /**
