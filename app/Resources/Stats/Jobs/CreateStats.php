@@ -4,8 +4,8 @@ namespace PN\Resources\Stats\Jobs;
 
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use PN\Assets\Jobs\CreateBlueprintStats;
-use PN\Assets\Jobs\CreateParkStats;
+use PN\Resources\Stats\Jobs\CreateBlueprintStats;
+use PN\Resources\Stats\Jobs\CreateParkStats;
 use PN\Jobs\Job;
 use PN\Resources\Resource;
 
@@ -13,7 +13,7 @@ use PN\Resources\Resource;
  * Class CreateStats
  * @package PN\Resources\Stats\Jobs
  */
-class CreateStats extends Job implements ShouldQueue
+class CreateStats extends Job
 {
     /**
      * @var \PN\Resources\Resource
