@@ -41,6 +41,13 @@ $app->singleton(
     PN\Exceptions\Handler::class
 );
 
+$app->configureMonologUsing(function($monolog) {
+    $monolog->pushHandler(new \Monolog\Handler\SlackHandler(env('SLACK_TOKEN'), "#logs", "Website", true, null, \Monolog\Logger::INFO, false, false, true));
+
+    // Log emergency to general for more visibility
+    $monolog->pushHandler(new \Monolog\Handler\SlackHandler(env('SLACK_TOKEN'), "#general", "Website", true, null, \Monolog\Logger::EMERGENCY, false, false, true));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
