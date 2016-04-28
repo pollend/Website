@@ -17,7 +17,28 @@
             <input type="submit" value="Delete screenshot" class="btn btn-warning btn-block">
         </form>
         <div class="user-profile v-margin">
-            TODO USER PROFILE
+            <div class="avatar">
+                <img src="{{ $screenshot->getUser()->getPresenter()->url() }}">
+            </div>
+            <div class="user-detail">
+                <div class="username">
+                    <h2>
+                        <a href="{{ $screenshot->getUser()->getPresenter()->url() }}" title="{{ $screenshot->getUser()->getPresenter()->displayName() }}">
+                            {{ $screenshot->getUser()->getPresenter()->displayName() }}
+                        </a>
+                    </h2>
+                    <span class="user-flair">
+                    {{ $screenshot->getUser()->rank }}
+                    </span>
+                </div>
+                <p class="user-statistics">
+                    {{ $screenshot->getUser()->asset_count }} Uploads
+                    <br>
+                    {{ $screenshot->getUser()->post_count }}  Posts
+                    <br>
+                    {{ $screenshot->getUser()->like_count }}  Likes
+                </p>
+            </div>
         </div>
         <br>
         <input type="text" class="form-control" value="{{ url($screenshot->getImage()->getPresenter()->source()) }}" readonly>

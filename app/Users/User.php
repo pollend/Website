@@ -135,6 +135,21 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->hasMany(\PN\Social\Notification::class);
     }
 
+    public function getAssets()
+    {
+        return $this->assets;
+    }
+
+    public function getScreenshots()
+    {
+        return $this->screenshots;
+    }
+
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
     public function setAvatar($imageData)
     {
         $image = \Image::make($imageData);
@@ -151,5 +166,28 @@ class User extends \Illuminate\Foundation\Auth\User
     public function isAdmin()
     {
         return $this->level == self::ADMIN;
+    }
+
+    public function getLikeCountAttribute()
+    {
+        return \LikeRepo::likeCountForUser($this);
+    }
+
+    public function getAssetCountAttribute()
+    {
+        // TODO count on database level instead of php
+
+        return \Cache::remember(sprintf('user.%s.assetcount', $this->id), 60, function(){
+            return $this->getAssets()->count();
+        });
+    }
+
+    public function getPostCountAttribute()
+    {
+        // TODO count on database level instead of php
+
+        return \Cache::remember(sprintf('user.%s.postcount', $this->id), 60, function(){
+            return $this->getPosts()->count();
+        });
     }
 }
