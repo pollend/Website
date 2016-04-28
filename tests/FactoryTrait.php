@@ -41,7 +41,10 @@ trait FactoryTrait
 
     public function createUser($attributes = [])
     {
-        $user = factory(User::class)->create(array_merge($attributes, ['password' => \Hash::make(array_get($attributes, 'password', '123456'))]));
+        $user = factory(User::class)->create(array_merge($attributes, [
+            'password' => \Hash::make(array_get($attributes, 'password', '123456')),
+            'api_key' => '123456'
+        ]));
 
         return $user;
     }
