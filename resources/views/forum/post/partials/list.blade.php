@@ -29,7 +29,7 @@
         <p class="text-muted">
             Registered
             <br>
-            {{ $post->user->created_at }}
+            {{ $post->user->getPresenter()->registrationDate }}
         </p>
         {{--<hr class="visible-xs">--}}
     </div>

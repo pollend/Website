@@ -64,4 +64,9 @@ class UserPresenter extends Presenter
             return $count;
         });
     }
+
+    public function registrationDate()
+    {
+        return date('F jS Y', strtotime($this->model->created_at));
+    }
 }
