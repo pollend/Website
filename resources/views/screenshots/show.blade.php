@@ -58,5 +58,7 @@
         Random screenshot
     </a>
 
+    <hr>
+
     <img src="{{ $screenshot->getImage()->getPresenter()->source() }}" />
 @endsection
