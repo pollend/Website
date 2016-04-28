@@ -4,6 +4,7 @@ namespace PN\BuildOffs\Repositories;
 use Illuminate\Database\Eloquent\Collection;
 use PN\BuildOffs\BuildOff;
 use PN\Foundation\Repositories\BaseRepositoryInterface;
+use PN\Resources\Resource;
 
 interface BuildOffRepositoryInterface extends BaseRepositoryInterface
 {
@@ -28,4 +29,11 @@ interface BuildOffRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function getAssetsSorted(BuildOff $buildOff);
+
+    /**
+     * Get buildoffs where this asset can participate in
+     * @param Resource $resource
+     * @return mixed
+     */
+    public function getEligibleForResource(Resource $resource);
 }

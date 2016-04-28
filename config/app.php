@@ -175,6 +175,9 @@ return [
         PN\Media\Providers\ImageServiceProvider::class,
         PN\Resources\Providers\ResourceServiceProvider::class,
         PN\Pages\Providers\PageServiceProvider::class,
+        PN\Forum\Providers\ForumRouteServiceProvider::class,
+        PN\Forum\Providers\ForumServiceProvider::class,
+        PN\Forum\Providers\ForumFrontendServiceProvider::class,
     ],
 
     /*
