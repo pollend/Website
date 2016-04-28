@@ -11,7 +11,7 @@
             @endif
         </p>
         <p>
-            <img class="avatar" src="{{ $post->user->avatarUrl }}">
+            <img class="avatar" src="{{ $post->user->getPresenter()->avatarUrl }}">
         </p>
         <p>
             <span>
