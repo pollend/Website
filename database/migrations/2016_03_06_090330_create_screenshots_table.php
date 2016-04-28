@@ -13,6 +13,7 @@ class CreateScreenshotsTable extends Migration {
 			$table->integer('image_id')->unsigned();
 			$table->string('identifier', 10)->unique();
 			$table->string('title', 100);
+			$table->integer('like_count', 100);
 			$table->timestamps();
 			$table->softDeletes();
 		});
