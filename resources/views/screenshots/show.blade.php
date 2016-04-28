@@ -18,7 +18,7 @@
         </form>
         <div class="user-profile v-margin">
             <div class="avatar">
-                <img src="{{ $screenshot->getUser()->getPresenter()->url() }}">
+                <img src="{{ $screenshot->getUser()->getPresenter()->avatarUrl() }}">
             </div>
             <div class="user-detail">
                 <div class="username">
