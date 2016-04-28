@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="Parks">
+                    <a href="/screenshots" title="Parks">
                         Screenshots
                     </a>
                 </li>
