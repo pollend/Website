@@ -90,4 +90,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         \Cache::forget('users.'.$entity->id);
     }
+
+    public function findByApiKey(string $apiKey) : User
+    {
+        return User::where('api_key', $apiKey)->first();
+    }
 }
