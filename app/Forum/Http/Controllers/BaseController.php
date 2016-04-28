@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use PN\Forum\Dispatcher;
 use PN\Forum\ReceiverContract;
-use PN\Forum;
+use PN\Forum\Forum;
 
 abstract class BaseController extends Controller implements ReceiverContract
 {

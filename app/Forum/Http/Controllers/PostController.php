@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use PN\Forum\Events\UserCreatingPost;
 use PN\Forum\Events\UserEditingPost;
 use PN\Forum\Events\UserViewingPost;
-use PN\Forum;
+use PN\Forum\Forum;
 
 class PostController extends BaseController
 {

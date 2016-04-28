@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use PN\Forum\Events\UserViewingCategory;
 use PN\Forum\Events\UserViewingIndex;
-use PN\Forum;
+use PN\Forum\Forum;
 
 class CategoryController extends BaseController
 {
