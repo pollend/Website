@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e52f45677e47adb97189dedb9def62a",
-    "content-hash": "ff928a5d38541921fc41c3c82dcf4d40",
+    "hash": "4cf03ca97037bbb02af67aba0e51c05e",
+    "content-hash": "c65966e9031ee508c7a32df2604f2f84",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -277,6 +277,54 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "edvinaskrucas/notification",
+            "version": "5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edvinaskrucas/notification.git",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edvinaskrucas/notification/zipball/04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": "^5.5|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Krucas\\Notification": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edvinas Kručas",
+                    "email": "edv.krucas@gmail.com"
+                }
+            ],
+            "description": "Package for Laravel for helping to manage flash / instant notifications / messages.",
+            "keywords": [
+                "flash",
+                "instant",
+                "laravel",
+                "messages",
+                "notifications"
+            ],
+            "time": "2016-01-19 14:26:18"
         },
         {
             "name": "guzzle/guzzle",

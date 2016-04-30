@@ -190,4 +190,29 @@ class User extends \Illuminate\Foundation\Auth\User
             return $this->getPosts()->count();
         });
     }
+
+    public function hasTwitter()
+    {
+        return $this->twitter != '';
+    }
+
+    public function hasSteam()
+    {
+        return $this->steam != '';
+    }
+
+    public function hasTwitch()
+    {
+        return $this->twitch != '';
+    }
+
+    public function hasPaypal()
+    {
+        return $this->paypal != '';
+    }
+
+    public function hasBitcoin()
+    {
+        return $this->bitcoin != '';
+    }
 }

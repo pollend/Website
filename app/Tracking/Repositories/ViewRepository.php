@@ -1,18 +1,17 @@
 <?php
 
 
-namespace PN\Social\Repositories;
+namespace PN\Tracking\Repositories;
 
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use PN\Foundation\Repositories\BaseRepository;
-use PN\Social\Like;
+use PN\Tracking\View;
 use PN\Users\User;
 
-class LikeRepository extends BaseRepository implements LikeRepositoryInterface
+class ViewRepository extends BaseRepository implements ViewRepositoryInterface
 {
-
     /**
      * Specify Model class name
      *
@@ -20,7 +19,7 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
      */
     public function model()
     {
-        return Like::class;
+        return View::class;
     }
 
     /**
@@ -32,8 +31,6 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
     public function add($entity)
     {
         $entity->save();
-
-        return $entity;
     }
 
     /**
@@ -45,8 +42,6 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
     public function edit($entity)
     {
         $entity->save();
-
-        return $entity;
     }
 
     /**
@@ -61,33 +56,7 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
     }
 
     /**
-     * Returns the like count for this user
-     *
-     * @param User $user
-     * @return mixed
-     */
-    public function likeCountForUser(User $user)
-    {
-        // TODO make this not so crappy
-        return \Cache::remember(sprintf("user.%s.likecount", $user->id), 60, function() use ($user) {
-            $likes = 0;
-
-            foreach ($user->getAssets() as $asset) {
-                $likes += $asset->like_count;
-            }
-
-            foreach ($user->getScreenshots() as $screenshot) {
-                $likes += $screenshot->like_count;
-            }
-            
-            // TODO include posts
-
-            return $likes;
-        });
-    }
-
-    /**
-     * Gets likes for given user, can be filtered by type (model) and limited by total
+     * Gets views for given user, can be filtered by type (model) and limited by total
      *
      * @param User $user
      * @param null $type
@@ -97,22 +66,22 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
      */
     public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 15)
     {
-        $likes = Like::whereIn('id', function($query) use ($user, $type) {
+        $views = View::whereIn('id', function($query) use ($user, $type) {
             $query->select(\DB::raw('MAX(id)'))
-                ->from('likes')
+                ->from('views')
                 ->where('user_id', $user->id);
 
             if($type != null) {
-                $query->where('likeable_type', $type);
+                $query->where('viewable_type', $type);
             }
 
-            $query->groupBy('likeable_type', 'likeable_id');
+            $query->groupBy('viewable_type', 'viewable_id');
         })->orderBy('created_at', 'desc');
 
         if($paginate) {
-            return $likes->paginate($perPage);
+            return $views->paginate($perPage);
         }
 
-        return $likes->get();
+        return $views->get();
     }
 }

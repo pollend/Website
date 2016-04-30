@@ -156,6 +156,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Krucas\Notification\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,6 +178,7 @@ return [
         PN\Pages\Providers\PageServiceProvider::class,
         PN\Media\Providers\ScreenshotServiceProvider::class,
         PN\Social\Providers\LikeServiceProvider::class,
+        PN\Tracking\Providers\TrackingServiceProvider::class,
     ],
 
     /*
@@ -228,6 +230,7 @@ return [
          */
         'Image'         => Intervention\Image\Facades\Image::class,
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
+        'Notification' => Krucas\Notification\Facades\Notification::class,
 
         /**
          * Application Facades
@@ -245,6 +248,8 @@ return [
         'RankRepo'      => PN\BuildOffs\Repositories\Facades\RankRepositoryFacade::class,
         'ScreenshotRepo'=> PN\Media\Repositories\Facades\ScreenshotRepositoryFacade::class,
         'LikeRepo'      => PN\Social\Repositories\Facades\LikeRepositoryFacade::class,
+        'DownloadRepo'  => PN\Tracking\Repositories\Facades\DownloadRepositoryFacade::class,
+        'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
     ],
 
 ];

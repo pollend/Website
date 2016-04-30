@@ -24,7 +24,7 @@ class UserPresenter extends Presenter
 
     public function url()
     {
-        return route('users.profile', [$this->model->identifier]);
+        return route('users.show', [$this->model->username]);
     }
 
     public function hasFlair()
@@ -63,5 +63,60 @@ class UserPresenter extends Presenter
 
             return $count;
         });
+    }
+
+    public function settingsUrl()
+    {
+        return route('users.settings');
+    }
+
+    public function uploadsUrl()
+    {
+        return route('users.uploads', [$this->model->username]);
+    }
+
+    public function downloadsUrl()
+    {
+        return route('users.downloads', [$this->model->username]);
+    }
+
+    public function viewsUrl()
+    {
+        return route('users.views', [$this->model->username]);
+    }
+
+    public function likesUrl()
+    {
+        return route('users.likes', [$this->model->username]);
+    }
+
+    public function registrationDate()
+    {
+        return date('d F Y', strtotime($this->model->created_at));
+    }
+
+    public function twitterUrl()
+    {
+        return sprintf('https://twitter.com/%s', $this->model->twitter);
+    }
+
+    public function twitchUrl()
+    {
+        return sprintf('https://twitch.tv/%s', $this->model->twitch);
+    }
+
+    public function steamUrl()
+    {
+        return sprintf('https://steamcommunity.com/%s', $this->model->steam);
+    }
+
+    public function paypalUrl()
+    {
+        return sprintf('https://paypal.me/%s', $this->model->paypal);
+    }
+
+    public function bitcoinUrl()
+    {
+        return sprintf('bitcoin:%s', $this->model->bitcoin);
     }
 }

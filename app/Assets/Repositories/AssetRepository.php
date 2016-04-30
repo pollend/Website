@@ -3,9 +3,12 @@
 namespace PN\Assets\Repositories;
 
 
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
 use PN\Assets\Asset;
 use PN\BuildOffs\BuildOff;
 use PN\Foundation\Repositories\BaseRepository;
+use PN\Users\User;
 
 class AssetRepository extends BaseRepository implements AssetRepositoryInterface
 {
@@ -83,5 +86,24 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
     public function forBuildOff(BuildOff $buildOff)
     {
         return Asset::where('buildoff_id', $buildOff->id)->get();
+    }
+
+    /**
+     * Gets assets uploaded by given users, can paginate
+     *
+     * @param User $user
+     * @param bool $paginated
+     * @param int $perPage
+     * @return Collection|Paginator
+     */
+    public function forUser(User $user, $paginated = false, $perPage = 15)
+    {
+        $assets = Asset::where('user_id', $user->id)->orderBy('created_at', 'desc');
+
+        if($paginated) {
+            return $assets->paginate($perPage);
+        }
+
+        return $assets->get();
     }
 }

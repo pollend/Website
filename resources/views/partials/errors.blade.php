@@ -7,3 +7,6 @@
         <a href="#" class="close">&times;</a>
     </div>
 @endif
+
+{!! \Notification::showAll() !!}
+

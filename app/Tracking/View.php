@@ -22,4 +22,24 @@ class View extends Model
         return $this->belongsTo(\PN\Users\User::class);
     }
 
+    public function getViewable()
+    {
+        return $this->viewable;
+    }
+
+    public function setViewable($viewable)
+    {
+        $this->viewable_id = $viewable->id;
+        $this->viewable_type = get_class($viewable);
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user_id = $user->id;
+    }
 }

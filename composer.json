@@ -13,7 +13,8 @@
         "laravel/socialite": "^2.0",
         "barryvdh/laravel-debugbar": "^2.2",
         "predis/predis": "^1.0",
-        "league/commonmark": "0.13"
+        "league/commonmark": "0.13",
+        "edvinaskrucas/notification": "^5.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
