@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="Forum">
+                    <a href="/forum" title="Forum">
                         Forum
                     </a>
                 </li>

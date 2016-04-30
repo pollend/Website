@@ -1,4 +1,4 @@
-<?php
+as<?php
 
 
 use PN\Users\Jobs\RegisterUser;

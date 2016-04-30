@@ -131,51 +131,6 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('no action');
 		});
-		Schema::table('forum_categories', function(Blueprint $table) {
-			$table->foreign('category_id')->references('id')->on('forum_categories')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('threads', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('threads', function(Blueprint $table) {
-			$table->foreign('category_id')->references('id')->on('forum_categories')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->foreign('thread_id')->references('id')->on('threads')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->foreign('post_id')->references('id')->on('forum_posts')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_thread_reads', function(Blueprint $table) {
-			$table->foreign('thread_id')->references('id')->on('threads')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_thread_reads', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
-		Schema::table('forum_attachments', function(Blueprint $table) {
-			$table->foreign('post_id')->references('id')->on('forum_posts')
-						->onDelete('restrict')
-						->onUpdate('no action');
-		});
 	}
 
 	public function down()
@@ -254,33 +209,6 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('videos', function(Blueprint $table) {
 			$table->dropForeign('videos_image_id_foreign');
-		});
-		Schema::table('forum_categories', function(Blueprint $table) {
-			$table->dropForeign('forum_categories_category_id_foreign');
-		});
-		Schema::table('threads', function(Blueprint $table) {
-			$table->dropForeign('threads_user_id_foreign');
-		});
-		Schema::table('threads', function(Blueprint $table) {
-			$table->dropForeign('threads_category_id_foreign');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->dropForeign('forum_posts_thread_id_foreign');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->dropForeign('forum_posts_user_id_foreign');
-		});
-		Schema::table('forum_posts', function(Blueprint $table) {
-			$table->dropForeign('forum_posts_post_id_foreign');
-		});
-		Schema::table('forum_thread_reads', function(Blueprint $table) {
-			$table->dropForeign('forum_thread_reads_thread_id_foreign');
-		});
-		Schema::table('forum_thread_reads', function(Blueprint $table) {
-			$table->dropForeign('forum_thread_reads_user_id_foreign');
-		});
-		Schema::table('forum_attachments', function(Blueprint $table) {
-			$table->dropForeign('forum_attachments_post_id_foreign');
 		});
 	}
 }

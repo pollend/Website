@@ -179,6 +179,9 @@ return [
         PN\Media\Providers\ScreenshotServiceProvider::class,
         PN\Social\Providers\LikeServiceProvider::class,
         PN\Tracking\Providers\TrackingServiceProvider::class,
+        PN\Forum\Providers\ForumRouteServiceProvider::class,
+        PN\Forum\Providers\ForumServiceProvider::class,
+        PN\Forum\Providers\ForumFrontendServiceProvider::class,
     ],
 
     /*

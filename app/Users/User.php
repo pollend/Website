@@ -168,6 +168,11 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->level == self::ADMIN;
     }
 
+    public function isModerator()
+    {
+        return $this->level == self::MODERATOR || $this->isAdmin();
+    }
+
     public function getLikeCountAttribute()
     {
         return \LikeRepo::likeCountForUser($this);

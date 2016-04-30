@@ -7,8 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use PN\Assets\AssetFilter;
 use PN\Assets\Repositories\AssetRepositoryInterface;
-use PN\Assets\Repositories\Criteria\TypeCriteria;
-use PN\Assets\Tag;
 use PN\Foundation\Http\Controllers\Controller;
 
 class AssetController extends Controller

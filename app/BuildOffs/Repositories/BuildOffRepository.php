@@ -4,8 +4,10 @@ namespace PN\BuildOffs\Repositories;
 
 
 use Illuminate\Database\Eloquent\Collection;
+use PN\Assets\Asset;
 use PN\BuildOffs\BuildOff;
 use PN\Foundation\Repositories\BaseRepository;
+use PN\Resources\Resource;
 
 class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInterface
 {
@@ -84,5 +86,15 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
         $assets = \AssetRepo::forBuildOff($buildOff);
 
         return $assets->sortByDesc('likes');
+    }
+
+    /**
+     * Get buildoffs where this asset can participate in
+     * @param Resource $resource
+     * @return mixed
+     */
+    public function getEligibleForResource(Resource $resource)
+    {
+        $resource->getPrimaryTags();
     }
 }
