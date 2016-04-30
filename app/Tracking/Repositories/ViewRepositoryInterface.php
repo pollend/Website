@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PN\Social\Repositories;
+namespace PN\Tracking\Repositories;
 
 
 use Illuminate\Contracts\Pagination\Paginator;
@@ -9,18 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 use PN\Foundation\Repositories\BaseRepositoryInterface;
 use PN\Users\User;
 
-interface LikeRepositoryInterface extends BaseRepositoryInterface
+/**
+ * Interface ViewRepositoryInterface
+ * @package PN\Tracking\Repositories
+ */
+interface ViewRepositoryInterface extends BaseRepositoryInterface
 {
     /**
-     * Returns the like count for this user
-     *
-     * @param User $user
-     * @return mixed
-     */
-    public function likeCountForUser(User $user);
-
-    /**
-     * Gets likes for given user, can be filtered by type (model) and limited by total
+     * Gets views for given user, can be filtered by type (model) and limited by total
      *
      * @param User $user
      * @param null $type

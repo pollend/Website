@@ -22,4 +22,25 @@ class Like extends Model
         return $this->belongsTo(\PN\Users\User::class);
     }
 
+    public function getLikeable()
+    {
+        return $this->likeable;
+    }
+
+    public function setLikeable($likeable)
+    {
+        $this->likeable_id = $likeable->id;
+        $this->likeable_type = get_class($likeable);
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user_id = $user->id;
+    }
+
 }

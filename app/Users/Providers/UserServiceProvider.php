@@ -5,7 +5,7 @@ namespace PN\Users\Providers;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PN\Users\Events\UserRegistered;
-use PN\Users\Http\Controllers\UserController;
+use PN\Users\Http\Controllers\UserProfileController;
 use PN\Users\Jobs\SendConfirmEmail;
 use PN\Users\Listeners\EmailConfirm;
 use PN\Users\Repositories\UserRepository;
@@ -40,9 +40,31 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::get('users/{identifier}', [
-            'as' => 'users.profile',
-            'uses' => UserController::class.'@profile'
+        $router = $this->app['router'];
+
+        $router->get('users/{username}', [
+            'as' => 'users.show',
+            'uses' => UserProfileController::class.'@show'
+        ]);
+
+        $router->get('users/uploads/{username}', [
+            'as' => 'users.uploads',
+            'uses' => UserProfileController::class.'@uploads'
+        ]);
+
+        $router->get('users/downloads/{username}', [
+            'as' => 'users.downloads',
+            'uses' => UserProfileController::class.'@downloads'
+        ]);
+
+        $router->get('users/views/{username}', [
+            'as' => 'users.views',
+            'uses' => UserProfileController::class.'@views'
+        ]);
+
+        $router->get('users/likes/{username}', [
+            'as' => 'users.likes',
+            'uses' => UserProfileController::class.'@likes'
         ]);
 
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);

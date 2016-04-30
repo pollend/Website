@@ -177,6 +177,7 @@ return [
         PN\Pages\Providers\PageServiceProvider::class,
         PN\Media\Providers\ScreenshotServiceProvider::class,
         PN\Social\Providers\LikeServiceProvider::class,
+        PN\Tracking\Providers\TrackingServiceProvider::class,
     ],
 
     /*
@@ -245,6 +246,8 @@ return [
         'RankRepo'      => PN\BuildOffs\Repositories\Facades\RankRepositoryFacade::class,
         'ScreenshotRepo'=> PN\Media\Repositories\Facades\ScreenshotRepositoryFacade::class,
         'LikeRepo'      => PN\Social\Repositories\Facades\LikeRepositoryFacade::class,
+        'DownloadRepo'  => PN\Tracking\Repositories\Facades\DownloadRepositoryFacade::class,
+        'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
     ],
 
 ];

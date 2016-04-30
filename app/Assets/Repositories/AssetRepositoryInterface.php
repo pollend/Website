@@ -5,6 +5,7 @@ namespace PN\Assets\Repositories;
 
 use PN\BuildOffs\BuildOff;
 use PN\Foundation\Repositories\BaseRepositoryInterface;
+use PN\Users\User;
 
 interface AssetRepositoryInterface extends BaseRepositoryInterface
 {
@@ -17,4 +18,14 @@ interface AssetRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function forBuildOff(BuildOff $buildOff);
+
+    /**
+     * Gets assets uploaded by given users, can paginate
+     *
+     * @param User $user
+     * @param bool $paginated
+     * @param int $perPage
+     * @return mixed
+     */
+    public function forUser(User $user, $paginated = false, $perPage = 15);
 }
