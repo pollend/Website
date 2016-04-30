@@ -31,6 +31,10 @@ class AssetServiceProvider extends ServiceProvider
                 'as' => 'assets.filter',
                 'uses' => AssetController::class . '@filterPage'
             ]);
+            \Route::get('assets/download/{identifier}', [
+                'as' => 'assets.download',
+                'uses' => AssetController::class . '@download'
+            ]);
             \Route::get('assets/{type}/filter', [
                 'as' => 'assets.filter.list',
                 'uses' => AssetController::class . '@filterAssets'

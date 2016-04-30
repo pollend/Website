@@ -12,14 +12,15 @@ class AssetPresenter extends Presenter
     {
         return route('assets.show', [$this->model->identifier, $this->model->slug]);
     }
-    public function downloadable()
-    {
-        return $this->model->type != 'mod';
-    }
 
     public function downloadUrl()
     {
-        return route('resources.download', [$this->model->identifier]);
+        return route('assets.download', [$this->model->identifier]);
+    }
+
+    public function installUrl()
+    {
+        return sprintf("parkitectnexus://install/%s", $this->model->identifier);
     }
 
     public function description()
@@ -30,5 +31,15 @@ class AssetPresenter extends Presenter
     public function imageUrl()
     {
 
+    }
+
+    public function canBeDownloaded()
+    {
+        return in_array($this->model->type, ['park', 'blueprint']);
+    }
+
+    public function canBeInstalled()
+    {
+        return in_array($this->model->type, ['park', 'blueprint', 'mod']);
     }
 }

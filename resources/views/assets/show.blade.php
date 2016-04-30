@@ -76,19 +76,21 @@
     <hr>
 
     <div id="download-section" class="text-center">
-        @if($asset->getPresenter()->downloadable)
-            <a href="{{ $asset->getPresenter()->downloadUrl }}" class="btn btn-primary btn-block">
+        @if($asset->getPresenter()->canBeDownloaded())
+            <a href="{{ $asset->getPresenter()->downloadUrl() }}" class="btn btn-primary btn-block">
                 Download
             </a>
         @endif
 
-        <a href="#" class="btn btn-primary btn-block">
-            Install with ParkitectNexus Client
-        </a>
+        @if($asset->getPresenter()->canBeInstalled())
+            <a href="{{ $asset->getPresenter()->installUrl() }}" class="btn btn-primary btn-block">
+                Install with ParkitectNexus Client
+            </a>
 
-        <a href="#">
-            Download client
-        </a>
+            <a href="#">
+                Download client
+            </a>
+        @endif
     </div>
 
     <h2>

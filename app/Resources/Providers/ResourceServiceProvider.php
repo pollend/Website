@@ -43,11 +43,6 @@ class ResourceServiceProvider extends ServiceProvider
             'uses' => ResourceController::class.'@avatars'
         ]);
 
-        \Route::get('resources/download/{identifier}', [
-            'as' => 'resources.download',
-            'uses' => ResourceController::class.'@download'
-        ]);
-
         $this->app->bind('resources.resourceutil', ResourceUtil::class);
         $this->app->singleton(StatRepositoryInterface::class, StatRepository::class);
         $this->app->singleton(ResourceRepositoryInterface::class, ResourceRepository::class);

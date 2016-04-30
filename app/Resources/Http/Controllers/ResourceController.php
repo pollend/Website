@@ -19,9 +19,4 @@ class ResourceController extends Controller
             'Content-type' => 'image/jpeg'
         ]);
     }
-
-    public function download($identifier)
-    {
-
-    }
 }

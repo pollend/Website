@@ -6,8 +6,10 @@ namespace PN\Assets\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use PN\Assets\AssetFilter;
+use PN\Assets\Exceptions\AssetCantBeDownloadedException;
 use PN\Assets\Repositories\AssetRepositoryInterface;
 use PN\Foundation\Http\Controllers\Controller;
+use PN\Foundation\StorageUtil;
 
 class AssetController extends Controller
 {
@@ -126,6 +128,38 @@ class AssetController extends Controller
             'assets',
             'type'
         ));
+    }
 
+    public function download($identifier)
+    {
+        $asset = \AssetRepo::findByIdentifier($identifier);
+
+        $extension = pathinfo($asset->getResource()->source, PATHINFO_EXTENSION);
+
+        if ($asset->type == 'blueprint') {
+            $tempPath = StorageUtil::copyToTmp('blueprints', $asset->getResource()->source);
+
+            $arguments = escapeshellarg(base_path('bin/ParkitectNexus.AssetTools.exe')) . " blueprint-convert " .
+                "--input " . \ResourceUtil::escapeArgument($tempPath) . " " .
+                "--background " . \ResourceUtil::escapeArgument(base_path('bin/blueprint_bg.png')) . " " .
+                "--logo " . \ResourceUtil::escapeArgument(base_path('bin/logo.png')) . " " .
+                "--font " . \ResourceUtil::escapeArgument(base_path('bin/Roboto-Regular.ttf')) . " " .
+                "--draw-text " .
+                \ResourceUtil::escapeArgument("175,450,#ffffffff,12 {$asset->name}") . " " .
+                \ResourceUtil::escapeArgument("175,465,#ffffffff,12 By {$asset->getUser()->getPresenter()->displayName()}") . " " .
+                \ResourceUtil::escapeArgument("175,480,#ffffffff,12 Downloaded from ParkitectNexus.com");
+            
+            $result = shell_exec("PATH=\$PATH:/usr/local/bin; mono $arguments 2>&1");
+
+            return response(base64_decode($result))
+                ->header('Content-Type', 'image/png')
+                ->header('Content-Disposition', "attachment; filename=\"{$asset->slug}.$extension\"");
+        } else if($asset->type == 'park') {
+            $tempPath = StorageUtil::copyToTmp('parks', $asset->getResource()->source);
+
+            return \Response::download($tempPath, $asset->slug . '.' . $extension);
+        } else {
+            throw new AssetCantBeDownloadedException(sprintf("Asset identifier: %s", $identifier));
+        }
     }
 }
