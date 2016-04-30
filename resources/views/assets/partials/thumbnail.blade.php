@@ -25,6 +25,8 @@
         </a>
         <br>
         By:
-        <a href="https://parkitectnexus.com/user/TheDeeGee" title="TheDeeGee">TheDeeGee</a>
+        <a href="{{ $asset->getUser()->getPresenter()->url() }}" title="{{ $asset->getUser()->getPresenter()->displayName() }}">
+            {{ $asset->getUser()->getPresenter()->displayName() }}
+        </a>
     </div>
 </div>
