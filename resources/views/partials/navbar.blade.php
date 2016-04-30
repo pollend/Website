@@ -23,12 +23,12 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#">
+                    <a href="{{ \Auth::user()->getPresenter()->url() }}">
                         Profile
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ \Auth::user()->getPresenter()->settingsUrl() }}">
                         Settings
                     </a>
                 </li>

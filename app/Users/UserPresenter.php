@@ -65,6 +65,11 @@ class UserPresenter extends Presenter
         });
     }
 
+    public function settingsUrl()
+    {
+        return route('users.settings');
+    }
+
     public function uploadsUrl()
     {
         return route('users.uploads', [$this->model->username]);

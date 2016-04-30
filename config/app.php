@@ -156,6 +156,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Krucas\Notification\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,6 +230,7 @@ return [
          */
         'Image'         => Intervention\Image\Facades\Image::class,
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
+        'Notification' => Krucas\Notification\Facades\Notification::class,
 
         /**
          * Application Facades
