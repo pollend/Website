@@ -28,17 +28,17 @@
 
 <div class="row slider-thumbnails">
     <div class="col-sm-2">
-        <img data-target="#carousel-example-generic" data-slide-to="0" width="100%" src="{{ $asset->getImage()->getPresenter()->source }}"/>
+        <img data-target="#carousel-example-generic" data-slide-to="0" width="100%" src="{{ $asset->getImage()->getPresenter()->source(116, 66) }}"/>
     </div>
     @foreach($asset->images as $key => $image)
         <div class="col-sm-2">
-            <img data-target="#carousel-example-generic" data-slide-to="{{ $key + 1 }}" width="100%" src="{{ $image->getPresenter()->source }}"/>
+            <img data-target="#carousel-example-generic" data-slide-to="{{ $key + 1 }}" width="100%" src="{{ $image->getPresenter()->source(116, 66) }}"/>
         </div>
     @endforeach
 
     @if($asset->type != 'mod')
         <div class="col-sm-2">
-            <img data-target="#carousel-example-generic" data-slide-to="{{ count($asset->images) + 1 }}" width="100%" src="{{ $asset->resource->getImage()->getPresenter()->source }}"/>
+            <img data-target="#carousel-example-generic" data-slide-to="{{ count($asset->images) + 1 }}" width="100%" src="{{ $asset->resource->getImage()->getPresenter()->source(116, 66) }}"/>
         </div>
     @endif
 </div>
