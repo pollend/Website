@@ -13,14 +13,12 @@ var like = new Vue({
             }
         },
         like: function() {
-            console.log('like');
             this.liked = true;
             this.likes++;
 
             this.$http.post('/api/likes/like/' + this.type + '/' + this.id);
         },
         unlike: function() {
-            console.log('unlike');
             this.liked = false;
             this.likes--;
 
