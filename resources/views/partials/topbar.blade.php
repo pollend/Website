@@ -1,3 +1,4 @@
+@inject('versionService', 'PN\Foundation\VersionService')
 <div id="top-bar" class="hidden-xs hidden-sm">
     <div class="container">
         <h1 id="logo">
@@ -5,6 +6,15 @@
                 <img src="/img/logo.png">
             </a>
         </h1>
+
+        <div class="version-box">
+            <p>
+                Current version
+                <span class="version">
+                    {{ $versionService->getCurrentVersion() }}
+                </span>
+            </p>
+        </div>
     </div>
 </div>
 <header class="navbar navbar-default">
