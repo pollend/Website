@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <form method="POST" action="{{ route('auth.login') }}">
+    <form class="login-form" method="POST" action="{{ route('auth.login') }}">
         {!! csrf_field() !!}
 
         <div class="form-group">
@@ -20,14 +20,14 @@
             <input type="password" placeholder="Minimum of 6 characters" class="form-control" name="password"/>
         </div>
 
-        <div class="checkbox">
+        <div class="form-group">
             <input type="checkbox" name="remember" id="remember">
             <label for="remember">
                 Remember Me
             </label>
         </div>
 
-        <div class="row">
+        <div class="row login-options">
             <div class="col-lg-3">
                 <button type="submit" class="btn btn-primary">Login</button>
                 <a href="{{ route('auth.forgotpassword') }}" title="Forgot password">Forgot password?</a>

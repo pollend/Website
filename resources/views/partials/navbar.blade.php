@@ -48,7 +48,7 @@
             <ul class="dropdown-menu">
                 <li>
                     <a href="{{ route('auth.login') }}">
-                        Password
+                        Username/password
                     </a>
                 </li>
                 <li>
