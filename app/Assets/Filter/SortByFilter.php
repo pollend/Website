@@ -20,19 +20,19 @@ class SortByFilter implements FilterInterface
     public function appendQuery($model) : Builder
     {
         if ($this->sort == 'best') {
-            return $model->orderBy('likes', 'desc');
+            return $model->orderBy('like_count', 'desc');
         }
         if ($this->sort == 'hot_score') {
             return $model->orderBy('hot_score', 'desc');
         }
         if ($this->sort == 'downloads') {
-            return $model->orderBy('downloads', 'desc');
+            return $model->orderBy('download_count', 'desc');
         }
         if ($this->sort == 'views') {
-            return $model->orderBy('views', 'desc');
+            return $model->orderBy('view_count', 'desc');
         }
         if ($this->sort == 'newest') {
-            return $model->orderBy('created_at', 'desc');
+            return $model->orderBy('id', 'desc');
         }
     }
 }
