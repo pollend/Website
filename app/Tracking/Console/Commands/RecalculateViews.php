@@ -27,7 +27,7 @@ class RecalculateViews extends Command
         foreach($views as $views) {
             $viewable = app($views->viewable_type)->find($views->viewable_id);
 
-            $viewable->views = $views->views;
+            $viewable->view_count = $views->views;
 
             $viewable->save();
         }
