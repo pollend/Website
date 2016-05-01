@@ -167,6 +167,7 @@ return [
         PN\Providers\RouteServiceProvider::class,
 
         PN\Assets\Providers\AssetServiceProvider::class,
+        PN\Assets\Providers\AssetEventServiceProvider::class,
         PN\BuildOffs\Providers\BuildOffServiceProvider::class,
         PN\Foundation\Providers\FoundationServiceProvider::class,
         PN\Resources\Providers\ResourceServiceProvider::class,

@@ -3,6 +3,7 @@
 namespace PN\Tracking;
 
 use Illuminate\Database\Eloquent\Model;
+use PN\Users\User;
 
 class View extends Model
 {

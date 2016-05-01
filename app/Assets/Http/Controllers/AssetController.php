@@ -6,7 +6,9 @@ namespace PN\Assets\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use PN\Assets\AssetFilter;
+use PN\Assets\Events\UserDownloadedAsset;
 use PN\Assets\Exceptions\AssetCantBeDownloadedException;
+use PN\Assets\Events\UserViewingAsset;
 use PN\Assets\Repositories\AssetRepositoryInterface;
 use PN\Foundation\Http\Controllers\Controller;
 use PN\Foundation\StorageUtil;
@@ -31,6 +33,8 @@ class AssetController extends Controller
     {
         $asset = $this->assetRepo->findByIdentifier($identifier);
         $comments = \CommentRepo::forAsset($asset);
+        
+        event(new UserViewingAsset($asset, \Auth::user()));
 
         return view('assets.show', compact(
             'asset',
@@ -134,6 +138,8 @@ class AssetController extends Controller
     {
         $asset = \AssetRepo::findByIdentifier($identifier);
 
+        event(new UserDownloadedAsset($asset, \Auth::user()));
+
         $extension = pathinfo($asset->getResource()->source, PATHINFO_EXTENSION);
 
         if ($asset->type == 'blueprint') {
@@ -148,13 +154,13 @@ class AssetController extends Controller
                 \ResourceUtil::escapeArgument("175,450,#ffffffff,12 {$asset->name}") . " " .
                 \ResourceUtil::escapeArgument("175,465,#ffffffff,12 By {$asset->getUser()->getPresenter()->displayName()}") . " " .
                 \ResourceUtil::escapeArgument("175,480,#ffffffff,12 Downloaded from ParkitectNexus.com");
-            
+
             $result = shell_exec("PATH=\$PATH:/usr/local/bin; mono $arguments 2>&1");
 
             return response(base64_decode($result))
                 ->header('Content-Type', 'image/png')
                 ->header('Content-Disposition', "attachment; filename=\"{$asset->slug}.$extension\"");
-        } else if($asset->type == 'park') {
+        } else if ($asset->type == 'park') {
             $tempPath = StorageUtil::copyToTmp('parks', $asset->getResource()->source);
 
             return \Response::download($tempPath, $asset->slug . '.' . $extension);
