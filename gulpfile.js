@@ -1,6 +1,5 @@
 var elixir = require('laravel-elixir');
 
-var elixirTypscript = require('elixir-typescript');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
