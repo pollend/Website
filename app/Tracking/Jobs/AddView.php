@@ -4,6 +4,7 @@ namespace PN\Tracking\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\SerializesModels;
 use PN\Jobs\Job;
 use PN\Tracking\View;
 use PN\Users\User;
@@ -14,6 +15,8 @@ use PN\Users\User;
  */
 class AddView extends Job implements ShouldQueue
 {
+    use SerializesModels;
+    
     /**
      * @var User|null
      */

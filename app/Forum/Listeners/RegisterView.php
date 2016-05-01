@@ -3,8 +3,9 @@
 namespace PN\Forum\Listeners;
 
 
-use ParkitectNexus\Repositories\ForumPostRepositoryInterface;
-use ParkitectNexus\Repositories\ViewRepositoryInterface;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use PN\Forum\Events\UserViewingThread;
+use PN\Tracking\Jobs\AddView;
 
 /**
  * Class RegisterView
@@ -12,13 +13,10 @@ use ParkitectNexus\Repositories\ViewRepositoryInterface;
  */
 class RegisterView
 {
-    public function handle($event)
+    use DispatchesJobs;
+
+    public function handle(UserViewingThread $event)
     {
-//        $this->viewRepository->create([
-//            'viewable_type' => get_class($event->thread),
-//            'viewable_id' => $event->thread->id,
-//            'user_id' => object_get(\Auth::user(), 'id', null),
-//            'ip' => \Request::ip()
-//        ]);
+        $this->dispatch(new AddView(\Auth::user(), $event->thread));
     }
 }
