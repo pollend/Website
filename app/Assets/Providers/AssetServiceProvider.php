@@ -21,29 +21,29 @@ class AssetServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::group(['middleware' => ['web']], function () {
-            \Route::controller('assets/manage', AssetManageController::class, [
+        $router = $this->app['router'];
+
+        $router->group(['middleware' => ['web']], function () use ($router) {
+            $router->controller('assets/manage', AssetManageController::class, [
                 'getSelectFile' => 'assets.manage.selectfile',
                 'postSelectFile' => 'assets.manage.selectfile',
                 'getCreate' => 'assets.manage.create',
             ]);
-            \Route::get('assets/{type}', [
+            $router->get('assets/{type}', [
                 'as' => 'assets.filter',
                 'uses' => AssetController::class . '@filterPage'
             ]);
-            \Route::get('assets/download/{identifier}', [
+            $router->get('assets/download/{identifier}', [
                 'as' => 'assets.download',
                 'uses' => AssetController::class . '@download'
             ]);
-            \Route::get('assets/{type}/filter', [
+            $router->get('assets/{type}/filter', [
                 'as' => 'assets.filter.list',
                 'uses' => AssetController::class . '@filterAssets'
             ]);
-
-            \Route::controller('assets', AssetController::class, [
+            $router->controller('assets', AssetController::class, [
                 'getShow' => 'assets.show',
             ]);
-
         });
 
         $this->app->singleton(AssetRepositoryInterface::class, AssetRepository::class);

@@ -28,4 +28,12 @@ interface AssetRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function forUser(User $user, $paginated = false, $perPage = 15);
+
+    /**
+     * Counts the total assets of given type
+     *
+     * @param $type
+     * @return mixed
+     */
+    public function countByType($type);
 }

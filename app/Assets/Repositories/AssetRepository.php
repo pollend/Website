@@ -106,4 +106,15 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
 
         return $assets->get();
     }
+
+    /**
+     * Counts the total assets of given type
+     * 
+     * @param $type
+     * @return mixed
+     */
+    public function countByType($type)
+    {
+        return Asset::where('type', $type)->count();
+    }
 }
