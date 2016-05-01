@@ -13,5 +13,6 @@ class ProductionSeeder extends BaseSeeder
         $this->call(AdminUserSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(StatSeeder::class);
+        $this->call(PageSeeder::class);
     }
 }
