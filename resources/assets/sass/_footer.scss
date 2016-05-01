@@ -27,18 +27,4 @@ $footer-color: #c0c0c0;
   @media (min-width: $screen-md-min) {
     margin-bottom: 150px;
   }
-
-  @media (max-width: $screen-xs-max) {
-    background-color: white;
-    footer {
-      color: darken($footer-color, 30%);
-      a {
-        color: inherit;
-
-        &:hover {
-          color: darken($footer-color, 50%);
-        }
-      }
-    }
-  }
 }
