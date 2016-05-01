@@ -33,7 +33,9 @@ class ResizeImage extends Job implements ShouldQueue
             $height = $size[1];
             $aspect = $size[2];
 
-            $resized = \Image::make($this->image->getRaw())->resize($width, $height, function($constraint) use ($aspect) {
+            $method = $width == $height ? 'fit' : 'resize';
+
+            $resized = \Image::make($this->image->getRaw())->$method($width, $height, function($constraint) use ($aspect) {
                 if($aspect) {
                     $constraint->aspectRatio();
                 }

@@ -2,6 +2,7 @@
 
 return [
     'sizes' => [
+        [116, 66, true],
         [263, 263, false],
         [405, 405, false],
         [1280, 720, true],

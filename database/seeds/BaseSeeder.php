@@ -27,7 +27,7 @@ abstract class BaseSeeder extends \Illuminate\Database\Seeder
     {
         Config::set('filesystems.disks.image.root', sys_get_temp_dir());
 
-        $image = $this->dispatch(new CreateImageFromRaw(file_get_contents($this->getRandomFile(base_path('database/seeds/files/images')))));
+        $image = \PN\Media\Image::createFromData(file_get_contents($this->getRandomFile(base_path('database/seeds/files/images'))));
 
         return $image;
     }
