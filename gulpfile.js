@@ -19,5 +19,10 @@ elixir(function(mix) {
     mix.version([
         'css/app.css',
         'js/app.js'
-    ])
+    ]);
+    
+    mix.copy(
+        'resources/assets/libs/bootstrap-sass/assets/fonts',
+        'public/build/fonts'
+    );
 });
