@@ -54,12 +54,23 @@
         @endif
 
         @if(Auth::user())
-            <span class="text-muted" ng-controller="LikeButtonController" ng-init="vm.init('post', '{{ $post->id }}');" ng-cloak>
-                <span ng-click="vm.toggle()">
-                    <i ng-if="liked" class="fa fa-heart"></i>
-                    <i ng-if="!liked" class="fa fa-heart-o"></i>
+            <span class="text-muted like"
+                  likes="{{ $post->likes }}"
+                  type="post"
+                  id="{{ $post->id }}"
+                  @if(\Auth::check())liked="{{ var_export(\Auth::user()->liked($post), true) }}"@endif>
+
+                <span>
+                    <i class="fa" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" v-on:click="toggleLike"></i>
                 </span>
-                @{{ likes }} <span ng-if="likes > 0">people like this</span>
+                @{{ likes }} <span v-if="likes > 0">
+                        <span v-if="likes == 1">
+                            Person like this
+                        </span>
+                        <span v-if="likes != 1">
+                            People like this
+                        </span>
+                </span>
                  |
             </span>
         @endif

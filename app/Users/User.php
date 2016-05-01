@@ -2,6 +2,7 @@
 
 namespace PN\Users;
 
+use Illuminate\Database\Eloquent\Model;
 use PN\Foundation\Presenters\PresenterTrait;
 
 class User extends \Illuminate\Foundation\Auth\User
@@ -219,5 +220,10 @@ class User extends \Illuminate\Foundation\Auth\User
     public function hasBitcoin()
     {
         return $this->bitcoin != '';
+    }
+
+    public function liked(Model $likeable)
+    {
+        return \LikeRepo::findByUserAndLikeable($this, $likeable) != null;
     }
 }

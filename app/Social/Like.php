@@ -3,6 +3,7 @@
 namespace PN\Social;
 
 use Illuminate\Database\Eloquent\Model;
+use PN\Users\User;
 
 class Like extends Model
 {

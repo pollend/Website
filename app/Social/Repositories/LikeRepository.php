@@ -6,6 +6,7 @@ namespace PN\Social\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use PN\Foundation\Repositories\BaseRepository;
 use PN\Social\Like;
 use PN\Users\User;
@@ -114,5 +115,20 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
         }
 
         return $likes->get();
+    }
+
+    /**
+     * Finds like for user and likeable
+     *
+     * @param User $user
+     * @param Model $likeable
+     * @return mixed
+     */
+    public function findByUserAndLikeable(User $user, Model $likeable)
+    {
+        return Like::where('user_id', $user->id)
+            ->where('likeable_id', $likeable->id)
+            ->where('likeable_type', get_class($likeable))
+            ->first();
     }
 }

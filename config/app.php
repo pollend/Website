@@ -239,6 +239,8 @@ return [
          * Application Facades
          */
         'ResourceUtil'  => PN\Resources\Facades\ResourceUtil::class,
+        'ModelResolver' => PN\Foundation\ModelTypeResolver::class,
+        'RepoResolver'  => PN\Foundation\RepositoryResolver::class,
         'AssetRepo'     => PN\Assets\Repositories\Facades\AssetRepositoryFacade::class,
         'TagRepo'       => PN\Assets\Repositories\Facades\TagRepositoryFacade::class,
         'BuildOffRepo'  => PN\BuildOffs\Repositories\Facades\BuildOffRepositoryFacade::class,

@@ -6,6 +6,7 @@ namespace PN\Social\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use PN\Foundation\Repositories\BaseRepositoryInterface;
 use PN\Users\User;
 
@@ -29,4 +30,13 @@ interface LikeRepositoryInterface extends BaseRepositoryInterface
      * @return Collection|Paginator
      */
     public function recentForUser(User $user, $type = null, $paginate = true, $perPage = 15);
+
+    /**
+     * Finds like for user and likeable
+     * 
+     * @param User $user
+     * @param Model $likeable
+     * @return mixed
+     */
+    public function findByUserAndLikeable(User $user, Model $likeable);
 }

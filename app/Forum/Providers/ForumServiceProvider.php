@@ -9,6 +9,8 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use PN\Forum\Http\Middleware\ForumAPIAuth;
 use PN\Forum\Post;
+use PN\Forum\Repositories\PostRepository;
+use PN\Forum\Repositories\PostRepositoryInterface;
 use PN\Forum\Thread;
 use PN\Forum\PostObserver;
 use PN\Forum\ThreadObserver;
@@ -22,6 +24,7 @@ class ForumServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(PostRepositoryInterface::class, PostRepository::class);
     }
 
     /**
