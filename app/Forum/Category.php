@@ -137,16 +137,6 @@ class Category extends BaseModel
     }
 
     /**
-     * Attribute: Latest active thread.
-     *
-     * @return Thread
-     */
-    public function getThreadViewsAttribute()
-    {
-        return $this->threads()->sum('views');
-    }
-
-    /**
      * Attribute: New threads enabled.
      *
      * @return bool

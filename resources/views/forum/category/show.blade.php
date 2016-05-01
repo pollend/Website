@@ -44,9 +44,6 @@
                 <div class="col-md-1 hidden-xs hidden-small hidden-medium">
                     {{ trans_choice('forum/posts.post', 2) }}
                 </div>
-                <div class="col-md-1 hidden-xs hidden-small hidden-medium">
-                    {{ trans_choice('forum/threads.views', 2) }}
-                </div>
                 <div class="col-md-3 hidden-xs hidden-small hidden-medium">
                     {{ trans('forum/threads.newest') }}
                 </div>

@@ -1,6 +1,6 @@
 {{--<div class="well well-sm">--}}
 	<div class="row">
-		<div class="col-xs-7 col-md-3">
+		<div class="col-xs-7 col-md-4">
 			<h2>
 				@if($category->threadsEnabled)
 					<a href="{{ $category->route }}">{{ $category->title }}</a>
@@ -18,11 +18,6 @@
 		<div class="col-md-1 hidden-xs hidden-small hidden-medium">
 			@if($category->threadsEnabled)
 				{{ $category->postCount }}
-			@endif
-		</div>
-		<div class="col-md-1 hidden-xs hidden-small hidden-medium">
-			@if($category->threadsEnabled)
-				{{ $category->threadViews }}
 			@endif
 		</div>
 		<div class="col-md-3 hidden-xs hidden-small hidden-medium">

@@ -28,7 +28,7 @@
         {{ $thread->replyCount }}
     </div>
     <div class="col-xs-2 col-sm-1 col-md-1 text-right">
-        {{ $thread->views }}
+        {{ $thread->view_count }}
     </div>
     <div class="col-xs-4 col-sm-3 col-md-2 text-right">
         {{ $thread->lastPost->userName }}

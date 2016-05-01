@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xs-7 col-md-3">
+	<div class="col-xs-7 col-md-4">
 		<p>
 			<a href="{{ $category->route }}">{{ $category->title }}</a>
 			<br>
@@ -10,9 +10,6 @@
 	</div>
 	<div class="col-md-1 hidden-xs hidden-small hidden-medium">
 		{{ $category->postCount }}
-	</div>
-	<div class="col-md-1 hidden-xs hidden-small hidden-medium">
-			{{ $category->thread_views }}
 	</div>
 	<div class="col-md-3 hidden-xs hidden-small hidden-medium">
 		@if ($category->newestThread)
