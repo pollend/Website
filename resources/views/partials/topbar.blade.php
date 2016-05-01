@@ -15,6 +15,16 @@
                 </span>
             </p>
         </div>
+        <div class="social-box">
+            <p>
+                Join us on Twitter &amp; Facebook!
+                <span class="networks">
+                <a href="https://twitter.com/ParkitectNexus"><i class="fa fa-twitter"></i> @ParkitectNexus</a>
+                |
+                <a href="https://facebook.com/ParkitectNexus"><i class="fa fa-facebook"></i> ParkitectNexus</a>
+                </span>
+            </p>
+        </div>
     </div>
 </div>
 <header class="navbar navbar-default">

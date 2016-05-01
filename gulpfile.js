@@ -20,7 +20,7 @@ elixir(function(mix) {
         'css/app.css',
         'js/app.js'
     ]);
-    
+
     mix.copy(
         'resources/assets/libs/bootstrap-sass/assets/fonts',
         'public/build/fonts'
