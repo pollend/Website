@@ -48,23 +48,50 @@
                         Build-offs
                     </a>
                 </li>
-                <li>
+                <li class="dropdown visible-sm-block">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Browse <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/assets/mod" title="Mods">
+                                Mods
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/assets/blueprint" title="Blueprints">
+                                Blueprints
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/assets/park" title="Parks">
+                                Parks
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/screenshots" title="Screenshots">
+                                Screenshots
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hidden-sm">
                     <a href="/assets/mod" title="Mods">
                         Mods
                     </a>
                 </li>
-                <li>
+                <li class="hidden-sm">
                     <a href="/assets/blueprint" title="Blueprints">
                         Blueprints
                     </a>
                 </li>
-                <li>
+                <li class="hidden-sm">
                     <a href="/assets/park" title="Parks">
                         Parks
                     </a>
                 </li>
-                <li>
-                    <a href="/screenshots" title="Parks">
+                <li class="hidden-sm">
+                    <a href="/screenshots" title="Screenshots">
                         Screenshots
                     </a>
                 </li>
