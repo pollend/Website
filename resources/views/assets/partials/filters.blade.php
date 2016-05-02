@@ -10,7 +10,7 @@
         <input type="hidden" name="range" value="{{ request('range') }}"/>
 
         @if(count($filters['base']) > 0)
-            <div class="panel panel-default">
+            <div class="panel panel-default filter-group">
                 <div class="panel-heading" data-toggle="collapse" data-target="#options-filter" aria-expanded="false"
                      aria-controls="options-filter">
                     <h3 class="panel-title">
@@ -28,7 +28,7 @@
             </div>
         @endif
         @if(count($filters['advanced']) > 0)
-            <div class="panel panel-default">
+            <div class="panel panel-default filter-group">
                 <div class="panel-heading" data-toggle="collapse" data-target="#options-filter" aria-expanded="false"
                      aria-controls="options-filter">
                     <h3 class="panel-title">
@@ -47,7 +47,7 @@
         @endif
 
         @if(count($tags) > 0)
-            <div class="panel panel-default">
+            <div class="panel panel-default filter-group">
                 <div class="panel-heading" data-toggle="collapse" data-target="#options-tags" aria-expanded="false"
                      aria-controls="options-tags">
                     <h3 class="panel-title">

@@ -1,4 +1,9 @@
 #list-filters {
+  .filter-group {
+    .panel-heading {
+      cursor: pointer;
+    }
+  }
   .slider.slider-horizontal {
     width: 100%;
   }
