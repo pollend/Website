@@ -3,8 +3,10 @@
 namespace PN\Forum\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PN\Forum\Events\UserCreatedPost;
 use PN\Forum\Events\UserCreatingPost;
 use PN\Forum\Events\UserEditingPost;
+use PN\Forum\Events\UserUpdatedPost;
 use PN\Forum\Events\UserViewingPost;
 use PN\Forum\Forum;
 
@@ -76,6 +78,8 @@ class PostController extends BaseController
 
         $post->thread->touch();
 
+        event(new UserCreatedPost($post));
+
         Forum::alert('success', 'general.reply_added');
 
         return redirect($post->url);
@@ -125,6 +129,8 @@ class PostController extends BaseController
         $post = $this->api('post.update', $postID)->parameters($request->only('content'))->patch();
 
         Forum::alert('success', 'posts.updated');
+
+        event(new UserUpdatedPost($post));
 
         return redirect($post->url);
     }
