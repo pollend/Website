@@ -96,10 +96,16 @@ dl {
 }
 
 #list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .item {
+    display: flex;
+  }
+
   .thumbnail {
     padding: 0px;
     margin-bottom: 30px;
-
     &.screenshot {
       img {
         margin-bottom: 5px;
@@ -117,10 +123,9 @@ dl {
     }
 
     img {
+      display: inline;
       width: 100%;
-      border-radius: $thumbnail-border-radius;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
+      border-radius: $thumbnail-border-radius $thumbnail-border-radius 0 0;
     }
 
     hr {

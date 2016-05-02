@@ -93,7 +93,7 @@
 
     <div class="row" id="list">
         @foreach($popular as $asset)
-            <div class="col-xs-6 col-md-3">
+            <div class="col-xs-6 col-md-3 item">
                 @include('assets.partials.thumbnail', ['asset' => $asset])
             </div>
         @endforeach
@@ -104,7 +104,7 @@
     </h2>
     <div class="row" id="list">
         @foreach($newest as $asset)
-            <div class="col-xs-6 col-md-3">
+            <div class="col-xs-6 col-md-3 item">
                 @include('assets.partials.thumbnail', ['asset' => $asset])
             </div>
         @endforeach
