@@ -38,7 +38,7 @@
             </button>
             <a class="navbar-brand visible-xs visible-sm" href="{{ route('home.index') }}" title="ParkitectNexus">ParkitectNexus</a>
         </div>
-        <nav class="navbar-collapse collapse">
+        <nav class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/" title="Home">Home</a>
