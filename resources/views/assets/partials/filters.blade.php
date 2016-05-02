@@ -11,14 +11,14 @@
 
         @if(count($filters['base']) > 0)
             <div class="panel panel-default filter-group">
-                <div class="panel-heading" data-toggle="collapse" data-target="#options-filter" aria-expanded="false"
-                     aria-controls="options-filter">
+                <div class="panel-heading" data-toggle="collapse" data-target="#options-filter-basic" aria-expanded="false"
+                     aria-controls="options-filter-basic">
                     <h3 class="panel-title">
                         <i class="glyphicon glyphicon-filter"></i>
                         Filters
                     </h3>
                 </div>
-                <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter">
+                <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter-basic">
                     <div id="sliders">
                         @foreach($filters['base'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
@@ -29,14 +29,14 @@
         @endif
         @if(count($filters['advanced']) > 0)
             <div class="panel panel-default filter-group">
-                <div class="panel-heading" data-toggle="collapse" data-target="#options-filter" aria-expanded="false"
-                     aria-controls="options-filter">
+                <div class="panel-heading" data-toggle="collapse" data-target="#options-filter-advanced" aria-expanded="false"
+                     aria-controls="options-filter-advanced">
                     <h3 class="panel-title">
                         <i class="glyphicon glyphicon-filter"></i>
                         Advanced Filters
                     </h3>
                 </div>
-                <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter">
+                <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter-advanced">
                     <div id="sliders">
                         @foreach($filters['advanced'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
