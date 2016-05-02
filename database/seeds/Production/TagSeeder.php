@@ -201,6 +201,13 @@ class TagSeeder extends BaseSeeder
             ],
             [
                 'type'           => 'mod',
+                'tag'            => 'Coaster Train',
+                'slug'           => 'coastertrain',
+                'parkitect_type' => 'CoasterTrain',
+                'primary'        => 0,
+            ],
+            [
+                'type'           => 'mod',
                 'tag'            => 'UI',
                 'slug'           => 'ui',
                 'parkitect_type' => 'UI',
