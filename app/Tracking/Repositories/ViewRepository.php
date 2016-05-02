@@ -64,7 +64,7 @@ class ViewRepository extends BaseRepository implements ViewRepositoryInterface
      * @param int $perPage
      * @return Collection|Paginator
      */
-    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 15)
+    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 12)
     {
         $views = View::whereIn('id', function($query) use ($user, $type) {
             $query->select(\DB::raw('MAX(id)'))

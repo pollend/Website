@@ -64,7 +64,7 @@ class DownloadRepository extends BaseRepository implements DownloadRepositoryInt
      * @param int $perPage
      * @return Collection|Paginator
      */
-    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 15)
+    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 12)
     {
         $downloads = Download::whereIn('id', function($query) use ($user, $type) {
             $query->select(\DB::raw('MAX(id)'))

@@ -96,7 +96,7 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
      * @param int $perPage
      * @return Collection|Paginator
      */
-    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 15)
+    public function recentForUser(User $user, $type = null, $paginate = false, $perPage = 12)
     {
         $likes = Like::whereIn('id', function($query) use ($user, $type) {
             $query->select(\DB::raw('MAX(id)'))

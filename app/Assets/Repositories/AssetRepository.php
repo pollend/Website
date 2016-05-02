@@ -96,7 +96,7 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
      * @param int $perPage
      * @return Collection|Paginator
      */
-    public function forUser(User $user, $paginated = false, $perPage = 15)
+    public function forUser(User $user, $paginated = false, $perPage = 12)
     {
         $assets = Asset::where('user_id', $user->id)->orderBy('created_at', 'desc');
 

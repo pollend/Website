@@ -24,5 +24,5 @@ interface ViewRepositoryInterface extends BaseRepositoryInterface
      * @param int $perPage
      * @return Collection|Paginator
      */
-    public function recentForUser(User $user, $type = null, $paginate = true, $perPage = 15);
+    public function recentForUser(User $user, $type = null, $paginate = true, $perPage = 12);
 }
