@@ -4,6 +4,7 @@ namespace PN\Social\Http\Controllers;
 
 
 use PN\Http\Controllers\Controller;
+use PN\Social\Events\UserCommentedOnAsset;
 use PN\Social\Http\Requests\CreateCommentRequest;
 use PN\Social\Http\Requests\UpdateCommentRequest;
 use PN\Social\Jobs\CreateComment;
@@ -17,6 +18,8 @@ class CommentController extends Controller
         $asset = \AssetRepo::find(request('asset_id'));
 
         $this->dispatch(new CreateComment(\Auth::user(), $asset, request('body')));
+
+        event(new UserCommentedOnAsset(\Auth::user(), $asset));
 
         return back();
     }

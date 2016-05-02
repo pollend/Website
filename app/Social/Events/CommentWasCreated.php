@@ -11,7 +11,7 @@ use PN\Social\Comment;
  * Class CommentWasCreated
  * @package PN\Social\Events
  */
-class CommentWasCreated extends Event
+class CommentWasCreated extends Event implements CommentCreateUpdateInterface
 {
     /**
      * @var Comment
@@ -25,5 +25,10 @@ class CommentWasCreated extends Event
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
+    }
+
+    public function getComment() : Comment
+    {
+        return $this->comment;
     }
 }

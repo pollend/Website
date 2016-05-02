@@ -17,10 +17,14 @@ class AssetDependenciesSeeder extends BaseSeeder
             $asset = $this->getRandom(\PN\Assets\Asset::class, ['type' => 'mod']);
             $dependency = $this->getRandom(\PN\Assets\Asset::class);
 
-            \PN\Assets\Dependency::create([
-                'asset_id'      => $asset->id,
-                'dependency_id' => $dependency->id,
-            ]);
+            try {
+                \PN\Assets\Dependency::create([
+                    'asset_id'      => $asset->id,
+                    'dependency_id' => $dependency->id,
+                ]);
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     }
 }

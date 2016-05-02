@@ -6,10 +6,13 @@ use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use PN\Forum\Events\UserCreatedPost;
+use PN\Forum\Events\UserUpdatedPost;
 use PN\Forum\Events\UserViewingThread;
 use PN\Forum\Forum;
 use PN\Forum\Listeners\MarkThreadAsRead;
 use PN\Forum\Listeners\RegisterView;
+use PN\Social\Listeners\ScanPostForMentionsListener;
 
 class ForumFrontendServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,12 @@ class ForumFrontendServiceProvider extends ServiceProvider
             MarkThreadAsRead::class,
             RegisterView::class
         ],
+        UserCreatedPost::class => [
+            ScanPostForMentionsListener::class
+        ],
+        UserUpdatedPost::class => [
+            ScanPostForMentionsListener::class
+        ]
     ];
 
     /**

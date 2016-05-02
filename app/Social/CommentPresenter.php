@@ -16,4 +16,12 @@ class CommentPresenter extends Presenter
     {
         return MarkdownParser::parse($this->model->body);
     }
+
+    public function url()
+    {
+        // comments don't have a dedicated url, return the asset one instead
+        $asset = $this->model->getAsset();
+
+        return $asset->getPresenter()->url();
+    }
 }

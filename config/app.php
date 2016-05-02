@@ -183,6 +183,8 @@ return [
         PN\Forum\Providers\ForumRouteServiceProvider::class,
         PN\Forum\Providers\ForumServiceProvider::class,
         PN\Forum\Providers\ForumFrontendServiceProvider::class,
+        PN\Social\Providers\NotificationServiceProvider::class,
+        PN\Social\Providers\CommentEventServiceProvider::class,
     ],
 
     /*
@@ -256,6 +258,8 @@ return [
         'LikeRepo'      => PN\Social\Repositories\Facades\LikeRepositoryFacade::class,
         'DownloadRepo'  => PN\Tracking\Repositories\Facades\DownloadRepositoryFacade::class,
         'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
+        'PostRepo'      => PN\Forum\Repositories\Facades\PostRepositoryFacade::class,
+        'NotificationRepo' => PN\Social\Repositories\Facades\NotificationRepositoryFacade::class,
     ],
 
 ];
