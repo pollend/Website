@@ -43,16 +43,16 @@
                 <li>
                     <a href="/" title="Home">Home</a>
                 </li>
-                <li>
-                    <a href="/build-offs" title="Build-Off">
-                        Build-offs
-                    </a>
-                </li>
                 <li class="dropdown visible-sm-block">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Browse <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="/build-offs" title="Build-Off">
+                                Build-offs
+                            </a>
+                        </li>
                         <li>
                             <a href="/assets/mod" title="Mods">
                                 Mods
@@ -74,6 +74,11 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="hidden-sm">
+                    <a href="/build-offs" title="Build-Off">
+                        Build-offs
+                    </a>
                 </li>
                 <li class="hidden-sm">
                     <a href="/assets/mod" title="Mods">
