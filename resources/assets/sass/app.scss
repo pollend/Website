@@ -34,6 +34,7 @@ h2, h3, h4 {
   background-color: #ffffff;
   box-shadow: 0 0 2px 0px rgba(0, 0, 0, .5);
   overflow-x: hidden;
+  padding-bottom: 12px;
 
   @media (min-width: $screen-sm-min) {
     border-radius: $border-radius-base;
