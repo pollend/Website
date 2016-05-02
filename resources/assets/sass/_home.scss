@@ -1,5 +1,17 @@
 $carousel-height: 350px;
 
+.home-asset-types {
+  .asset-type {
+    a.symbol {
+      color: $text-color;
+      &:hover {
+        color: darken($text-color, 10%);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 #reddit-feeds {
   .reddit {
     padding: 0;
