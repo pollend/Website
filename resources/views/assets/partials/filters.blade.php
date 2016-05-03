@@ -19,7 +19,7 @@
                     </h3>
                 </div>
                 <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter-basic">
-                    <div id="sliders">
+                    <div class="sliders">
                         @foreach($filters['base'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
                         @endforeach
@@ -37,7 +37,7 @@
                     </h3>
                 </div>
                 <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter-advanced">
-                    <div id="sliders">
+                    <div class="sliders">
                         @foreach($filters['advanced'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
                         @endforeach

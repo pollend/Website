@@ -13,7 +13,7 @@ $(document).ready(function(){
         $(input).on('change slide', filter);
     });
 
-    $('#sliders').find('input').each(function(key, input){
+    $('.sliders').find('input').each(function(key, input){
         var s = new Slider(input);
 
         s.on('change', function () {
