@@ -96,10 +96,6 @@ class AssetFilter
         $asset = $this->appendQuery($asset, new SortByFilter(), $this->sort);
         $asset = $this->appendQuery($asset, new StatFilter(), $this->stats);
 
-        if ($this->name != null) {
-
-        }
-
         return $asset;
     }
 
@@ -120,6 +116,6 @@ class AssetFilter
 
     public function filterPaginated() : Paginator
     {
-        return $this->buildQuery()->paginate();
+        return $this->buildQuery()->paginate(12);
     }
 }
