@@ -18,7 +18,7 @@
                         Filters
                     </h3>
                 </div>
-                <div class="panel-body{{ request('stats') == null ? ' collapse' : '' }}" id="options-filter-basic">
+                <div class="panel-body {{ request('stats') != null || count($filters['advanced']) > 0 ? '' : 'collapse' }}" id="options-filter-basic">
                     <div class="sliders">
                         @foreach($filters['base'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
