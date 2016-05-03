@@ -10,10 +10,10 @@ use PN\Assets\Repositories\AssetRepository;
 use PN\Assets\Repositories\AssetRepositoryInterface;
 use PN\Assets\Repositories\TagRepository;
 use PN\Assets\Repositories\TagRepositoryInterface;
+use PN\Foundation\Providers\CompileHelperTrait;
 
 class AssetServiceProvider extends ServiceProvider
 {
-
     /**
      * Register the service provider.
      *
@@ -48,5 +48,13 @@ class AssetServiceProvider extends ServiceProvider
 
         $this->app->singleton(AssetRepositoryInterface::class, AssetRepository::class);
         $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Assets/Providers')));
+
+        return $files;
     }
 }

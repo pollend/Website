@@ -9,6 +9,7 @@ use PN\BuildOffs\Repositories\BuildOffRepository;
 use PN\BuildOffs\Repositories\BuildOffRepositoryInterface;
 use PN\BuildOffs\Repositories\RankRepository;
 use PN\BuildOffs\Repositories\RankRepositoryInterface;
+use PN\Foundation\Providers\CompileHelperTrait;
 
 class BuildOffServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,13 @@ class BuildOffServiceProvider extends ServiceProvider
 
         $this->app->singleton(BuildOffRepositoryInterface::class, BuildOffRepository::class);
         $this->app->singleton(RankRepositoryInterface::class, RankRepository::class);
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('BuildOffs/Providers')));
+
+        return $files;
     }
 }

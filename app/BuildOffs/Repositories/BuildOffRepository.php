@@ -62,7 +62,7 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
 
     public function descended()
     {
-        return \PN\BuildOffs\BuildOff::orderBy('end', 'desc')->get();
+        return BuildOff::orderBy('end', 'desc')->get();
     }
 
     /**

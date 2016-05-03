@@ -5,6 +5,7 @@ namespace PN\Resources\Providers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\ServiceProvider;
+use PN\Foundation\Providers\CompileHelperTrait;
 use PN\Resources\Http\Controllers\ResourceController;
 use PN\Media\Image;
 use PN\Media\ImageObserver;
@@ -46,5 +47,13 @@ class ResourceServiceProvider extends ServiceProvider
         $this->app->bind('resources.resourceutil', ResourceUtil::class);
         $this->app->singleton(StatRepositoryInterface::class, StatRepository::class);
         $this->app->singleton(ResourceRepositoryInterface::class, ResourceRepository::class);
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Resources/Providers')));
+
+        return $files;
     }
 }

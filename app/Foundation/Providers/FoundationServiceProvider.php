@@ -23,4 +23,12 @@ class FoundationServiceProvider extends ServiceProvider
             ]);
         });
     }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Foundation/Providers')));
+
+        return $files;
+    }
 }

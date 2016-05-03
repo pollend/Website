@@ -6,6 +6,7 @@ namespace PN\Tracking\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
+use PN\Foundation\Providers\CompileHelperTrait;
 use PN\Foundation\Repositories\BaseRepository;
 use PN\Tracking\Download;
 use PN\Users\User;
@@ -83,6 +84,14 @@ class DownloadRepository extends BaseRepository implements DownloadRepositoryInt
         }
 
         return $downloads->get();
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Tracking/Providers')));
+
+        return $files;
     }
 
 }

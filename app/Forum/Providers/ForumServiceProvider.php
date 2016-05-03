@@ -14,6 +14,7 @@ use PN\Forum\Repositories\PostRepositoryInterface;
 use PN\Forum\Thread;
 use PN\Forum\PostObserver;
 use PN\Forum\ThreadObserver;
+use PN\Foundation\Providers\CompileHelperTrait;
 
 class ForumServiceProvider extends ServiceProvider
 {
@@ -82,5 +83,13 @@ class ForumServiceProvider extends ServiceProvider
     public function registerMiddleware(Router $router)
     {
         $router->middleware('forum.api.auth', ForumAPIAuth::class);
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Forum/Providers')));
+
+        return $files;
     }
 }

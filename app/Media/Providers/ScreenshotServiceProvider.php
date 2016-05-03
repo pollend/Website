@@ -5,6 +5,7 @@ namespace PN\Media\Providers;
 
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+use PN\Foundation\Providers\CompileHelperTrait;
 use PN\Media\Http\Controllers\Api\ApiScreenshotController;
 use PN\Media\Http\Controllers\ScreenshotController;
 use PN\Media\Policies\ScreenshotPolicy;
@@ -76,5 +77,13 @@ class ScreenshotServiceProvider extends AuthServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
+    }
+
+    public static function compiles() {
+        $files = [];
+
+        $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Media/Providers')));
+
+        return $files;
     }
 }

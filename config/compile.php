@@ -29,7 +29,18 @@ return [
     */
 
     'providers' => [
-        //
+        \PN\Assets\Providers\AssetServiceProvider::class,
+        \PN\BuildOffs\Providers\BuildOffServiceProvider::class,
+        \PN\Forum\Providers\ForumServiceProvider::class,
+        \PN\Media\Providers\ImageServiceProvider::class,
+        \PN\Media\Providers\ScreenshotServiceProvider::class,
+        \PN\Pages\Providers\PageServiceProvider::class,
+        \PN\Resources\Providers\ResourceServiceProvider::class,
+        \PN\Social\Providers\CommentServiceProvider::class,
+        \PN\Social\Providers\LikeServiceProvider::class,
+        \PN\Social\Providers\NotificationServiceProvider::class,
+        \PN\Tracking\Providers\TrackingServiceProvider::class,
+        \PN\Users\Providers\UserServiceProvider::class,
     ],
 
 ];
