@@ -4,6 +4,7 @@ namespace PN\Assets\Providers;
 
 
 use Illuminate\Support\ServiceProvider;
+use PN\Assets\Http\Controllers\Api\ApiAssetController;
 use PN\Assets\Http\Controllers\AssetController;
 use PN\Assets\Http\Controllers\AssetManageController;
 use PN\Assets\Repositories\AssetRepository;
@@ -44,6 +45,8 @@ class AssetServiceProvider extends ServiceProvider
             $router->controller('assets', AssetController::class, [
                 'getShow' => 'assets.show',
             ]);
+
+            $router->resource('api/assets', ApiAssetController::class);
         });
 
         $this->app->singleton(AssetRepositoryInterface::class, AssetRepository::class);
