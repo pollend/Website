@@ -11,12 +11,13 @@ class UserPresenter extends Presenter
     {
         return '/media/avatars/'.$this->model->avatar;
     }
+
     public function displayName()
     {
-        $name = $this->model->name;
+        $name = $this->model->username;
 
         if ($name == '') {
-            return $this->model->username;
+            return $this->model->name;
         }
 
         return $name;
