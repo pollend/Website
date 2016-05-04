@@ -1,13 +1,13 @@
 <?php
 
 
-namespace PN\Resources\Repositories;
+namespace PN\Client\Repositories;
 
 
+use PN\Client\ClientLog;
 use PN\Foundation\Repositories\BaseRepository;
-use PN\Resources\Resource;
 
-class ResourceRepository extends BaseRepository implements ResourceRepositoryInterface
+class ClientRepository extends BaseRepository implements ClientRepositoryInterface
 {
     /**
      * Specify Model class name
@@ -16,7 +16,7 @@ class ResourceRepository extends BaseRepository implements ResourceRepositoryInt
      */
     public function model()
     {
-        return Resource::class;
+        return ClientLog::class;
     }
 
     /**
@@ -28,8 +28,6 @@ class ResourceRepository extends BaseRepository implements ResourceRepositoryInt
     public function add($entity)
     {
         $entity->save();
-
-        \Cache::put('resources.'.$entity->id, $entity, 3600);
     }
 
     /**
@@ -41,8 +39,6 @@ class ResourceRepository extends BaseRepository implements ResourceRepositoryInt
     public function edit($entity)
     {
         $entity->save();
-
-        \Cache::put('resources.'.$entity->id, $entity, 3600);
     }
 
     /**
@@ -54,21 +50,5 @@ class ResourceRepository extends BaseRepository implements ResourceRepositoryInt
     public function remove($entity)
     {
         $entity->delete();
-
-        \Cache::forget('resources.'.$entity->id);
-    }
-
-    /**
-     * Finds the last created resource mod by username and repo
-     *
-     * @param $username
-     * @param $repo
-     * @return mixed
-     */
-    public function findMod($username, $repo)
-    {
-        return Resource::where('source', sprintf('https://github.com/%s/%s', $username, $repo))
-            ->orderBy('id', 'desc')
-            ->first();
     }
 }

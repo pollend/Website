@@ -157,6 +157,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -186,6 +187,7 @@ return [
         PN\Forum\Providers\ForumFrontendServiceProvider::class,
         PN\Social\Providers\NotificationServiceProvider::class,
         PN\Social\Providers\CommentEventServiceProvider::class,
+        PN\Client\Providers\ClientLogServiceProvider::class,
     ],
 
     /*
@@ -237,7 +239,8 @@ return [
          */
         'Image'         => Intervention\Image\Facades\Image::class,
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
-        'Notification' => Krucas\Notification\Facades\Notification::class,
+        'Notification'  => Krucas\Notification\Facades\Notification::class,
+        'Agent'         => Jenssegers\Agent\Facades\Agent::class,
 
         /**
          * Application Facades
@@ -261,6 +264,7 @@ return [
         'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
         'PostRepo'      => PN\Forum\Repositories\Facades\PostRepositoryFacade::class,
         'NotificationRepo' => PN\Social\Repositories\Facades\NotificationRepositoryFacade::class,
+        'ClientRepo'    => PN\Client\Repositories\Facades\ClientRepositoryFacade::class,
     ],
 
 ];

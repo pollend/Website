@@ -106,7 +106,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="ParkitectNexus Client">
+                    <a href="/download-client" title="ParkitectNexus Client">
                         Client
                     </a>
                 </li>
