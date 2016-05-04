@@ -25,7 +25,7 @@ class RecalculateLikes extends Command
         $likes = \DB::select('select sum(weight) as likes, likeable_id, likeable_type from likes group by likeable_type, likeable_id');
 
         foreach($likes as $like) {
-            $likeable = app($like->likeable_type)->find($like->likeable_id);
+            $likeable = app($like->likeable_type)->withTrashed()->find($like->likeable_id);
 
             $likeable->like_count = $like->likes;
 

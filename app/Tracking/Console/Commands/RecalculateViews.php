@@ -25,7 +25,7 @@ class RecalculateViews extends Command
         $views = \DB::select('select count(id) as views, viewable_id, viewable_type from (select *, date(created_at) as d from views group by ip, d, viewable_type, viewable_id) as tmp group by viewable_type, viewable_id');
 
         foreach($views as $views) {
-            $viewable = app($views->viewable_type)->find($views->viewable_id);
+            $viewable = app($views->viewable_type)->withTrashed()->find($views->viewable_id);
 
             $viewable->view_count = $views->views;
 
