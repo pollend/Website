@@ -84,11 +84,11 @@ class AssetController extends Controller
 
     private function getMaxAge() : Carbon
     {
-        if(\Request::has('age')) {
-            if(\Request::input('age') == 'week') {
+        if(\Request::has('range')) {
+            if(\Request::input('range') == 'week') {
                 return Carbon::now()->subWeek();
             }
-            if(\Request::input('age') == 'month') {
+            if(\Request::input('range') == 'month') {
                 return Carbon::now()->subMonth();
             }
         }
