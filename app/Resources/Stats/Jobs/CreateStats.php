@@ -13,7 +13,7 @@ use PN\Resources\Resource;
  * Class CreateStats
  * @package PN\Resources\Stats\Jobs
  */
-class CreateStats extends Job
+class CreateStats extends Job implements ShouldQueue
 {
     /**
      * @var \PN\Resources\Resource
