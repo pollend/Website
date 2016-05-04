@@ -168,6 +168,7 @@ return [
 
         PN\Assets\Providers\AssetServiceProvider::class,
         PN\Assets\Providers\AssetEventServiceProvider::class,
+        PN\Assets\Providers\AssetPolicyProvider::class,
         PN\BuildOffs\Providers\BuildOffServiceProvider::class,
         PN\Foundation\Providers\FoundationServiceProvider::class,
         PN\Resources\Providers\ResourceServiceProvider::class,

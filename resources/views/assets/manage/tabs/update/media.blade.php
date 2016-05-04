@@ -8,7 +8,7 @@
 			</label>
 
 			<input id="youtube" class="form-control" name="youtube" type="text" placeholder="Youtube"
-			       value="{{ Request::old('youtube', $asset->youtube) }}">
+			       value="{{ old('youtube', $asset->youtube) }}">
 		</div>
 
 		<div class="form-group">
@@ -18,13 +18,13 @@
 				<div class="col-md-4">
 					<div class="thumbnail text-center">
 						<span>Original thumbnail of asset</span>
-						<img src="{{ route('resource.image', [263, 263, $asset->resource->getImage()->filename]) }}"/>
+						<img src="{{ $asset->getResource()->getImage()->getPresenter()->source(263, 263) }}"/>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail text-center">
 						Current thumbnail
-						<img src="{{ route('resource.image', [263, 263, $asset->thumbnail->filename]) }}"/>
+						<img src="{{ $asset->getImage()->getPresenter()->source(263, 263) }}"/>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -37,11 +37,11 @@
 							your album.</b>
 					</div>
 					PNG or JPEG, max 5MB
-					<input id="preview-image" name="thumbnail" type="file" accept="image/png,image/jpeg">
+					<input id="preview-image" name="image" type="file" accept="image/png,image/jpeg">
 
 					<div class="checkbox">
-						<input id="reset-thumbnail" name="reset-preview" type="checkbox"
-						       @if(Request::old('reset-preview', 'off') == 'on') checked @endif>
+						<input id="reset-thumbnail" name="reset-image" type="checkbox"
+						       @if(old('reset-image', 'off') == 'on') checked @endif>
 						<label for="reset-thumbnail">
 							Reset the
 							thumbnail to the original asset's one.
@@ -74,18 +74,18 @@
 				</div>
 			</div>
 			<div class="row">
-				@foreach($asset->album->images as $image)
+				@foreach($asset->getImages() as $image)
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail text-center">
 							<label for="image-{{ $image->id }}">
-								<img src="{{ route('resource.image', [263, 263, $image->filename]) }}"
+								<img src="{{ $image->getPresenter()->source(263, 263) }}"
 								     width="100%">
 								<br>
 
 								<div class="text-center">
 
 									<div class="checkbox">
-										<input type="checkbox" name="deletes[{{ $image->id }}]" value="on"
+										<input type="checkbox" name="deletes[]" value="{{ $image->id }}"
 										       id="image-{{ $image->id }}">
 										<label for="image-{{ $image->id }}">
 											Delete this image

@@ -13,7 +13,6 @@
 			</p>
 
 			<div id="dependencies-box">
-				@if($asset->isDependency($mods[0])) {{ $mode->name }} @endif
 				<select id="dependencies" ng-controller="DependencySelectController" multiple="multiple" name="dependencies[]">
 					@foreach($mods as $mod)
 						<option value="{{ $mod->identifier }}") @if($asset->isDependency($mod)) selected @endif>{{ $mod->name }}</option>

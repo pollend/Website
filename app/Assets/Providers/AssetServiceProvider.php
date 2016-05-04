@@ -29,6 +29,7 @@ class AssetServiceProvider extends ServiceProvider
                 'getSelectFile' => 'assets.manage.selectfile',
                 'postSelectFile' => 'assets.manage.selectfile',
                 'getCreate' => 'assets.manage.create',
+                'getUpdate' => 'assets.manage.update',
             ]);
             $router->get('assets/{type}', [
                 'as' => 'assets.filter',

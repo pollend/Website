@@ -36,4 +36,12 @@ interface AssetRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function countByType($type);
+
+    /**
+     * Finds assets by type
+     *
+     * @param $type
+     * @return mixed
+     */
+    public function findByType($type);
 }

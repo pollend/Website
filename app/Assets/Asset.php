@@ -79,7 +79,7 @@ class Asset extends Model
 
     protected function dependencies()
     {
-        return $this->hasManyThrough(\PN\Assets\Asset::class, \PN\Assets\AssetDependency::class);
+        return $this->belongsToMany(\PN\Assets\Asset::class, 'asset_dependencies', 'asset_id', 'dependency_id', 'id');
     }
 
     protected function user()
@@ -190,6 +190,17 @@ class Asset extends Model
         return $this->tags;
     }
 
+    public function setTags($tags)
+    {
+        $ids = [];
+
+        foreach ($tags as $tag) {
+            $ids[] = $tag->id;
+        }
+
+        $this->tags()->sync($ids);
+    }
+
     public function addTag(Tag $tag)
     {
         $this->tags()->attach($tag->id);
@@ -223,6 +234,19 @@ class Asset extends Model
     public function addComment($comment)
     {
         $comment->setAsset($this);
+    }
+
+    public function isDependency($dependency)
+    {
+        $dependencies = $this->dependencies;
+
+        foreach ($dependencies as $dep) {
+            if($dependency->id == $dep->id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function addDependency($dependency)

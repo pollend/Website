@@ -26,6 +26,6 @@ class SetYoutubeOnAsset extends Job
     {
         $this->asset->youtube = $this->youtube;
 
-        \AssetRepo::add($this->asset);
+        \AssetRepo::edit($this->asset);
     }
 }
