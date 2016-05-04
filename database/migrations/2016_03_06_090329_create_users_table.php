@@ -12,10 +12,10 @@ class CreateUsersTable extends Migration {
 			$table->string('identifier', 10)->unique();
 			$table->integer('level')->default(0);
 			$table->string('name', 100)->nullable();
-			$table->string('username', 100)->unique();
+			$table->string('username', 100)->nullable();
 			$table->string('email', 100);
 			$table->string('password', 150);
-			$table->string('password_token', 100);
+			$table->string('password_token', 100)->nullable();
 			$table->string('remember_token', 100)->nullable();
 			$table->string('confirm_token', 100)->nullable();
 			$table->boolean('confirmed');

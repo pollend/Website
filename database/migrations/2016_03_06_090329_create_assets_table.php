@@ -18,7 +18,7 @@ class CreateAssetsTable extends Migration {
 			$table->string('name', 100);
 			$table->string('slug', 100);
 			$table->text('description');
-			$table->string('youtube', 100);
+			$table->string('youtube', 100)->nullable();
 			$table->float('hot_score');
 			$table->integer('like_count')->unsigned()->index()->default('0');
 			$table->integer('view_count')->unsigned()->index()->default('0');
