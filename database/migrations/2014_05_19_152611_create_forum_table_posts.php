@@ -18,6 +18,7 @@ class CreateForumTablePosts extends Migration
             $table->integer('parent_thread')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('content');
+            $table->integer('like_count')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
