@@ -6,6 +6,7 @@ namespace PN\Social\Repositories;
 
 use PN\Foundation\Repositories\BaseRepository;
 use PN\Social\Notification;
+use PN\Users\User;
 
 class NotificationRepository extends BaseRepository implements NotificationRepositoryInterface
 {
@@ -50,5 +51,15 @@ class NotificationRepository extends BaseRepository implements NotificationRepos
     public function remove($entity)
     {
         $entity->delete();
+    }
+
+    /**
+     * Returns all unread notifications
+     *
+     * @return mixed
+     */
+    public function unread(User $user)
+    {
+        return Notification::where('user_id', $user->id)->where('read', 0)->orderBy('id', 'desc')->get();
     }
 }

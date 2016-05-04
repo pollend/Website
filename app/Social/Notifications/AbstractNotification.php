@@ -38,5 +38,15 @@ abstract class AbstractNotification
      *
      * @return string
      */
-    public abstract function getUrl() : string;
+    public abstract function getFinalUrl() : string;
+
+    /**
+     * Returns the url that redirects to getFinalUrl
+     *
+     * @return string
+     */
+    public function getUrl() : string {
+        return route('notifications.redirect', [\Crypt::encrypt($this->notification->id)]);
+    }
+
 }

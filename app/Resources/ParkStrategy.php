@@ -62,18 +62,14 @@ class ParkStrategy extends ResourceStrategy implements ResourceInterface
     {
         $resource = $this->resource;
 
-        return \Cache::remember('resource.extractor.'.$this->resource->id, 3600, function() use ($resource){
-            return new ParkExtractor(StorageUtil::copyToTmp('parks', $this->resource->source));
-        });
+        return new ParkExtractor(StorageUtil::copyToTmp('parks', $this->resource->source));
     }
 
     public function getValidator() : ValidatorInterface
     {
         $resource = $this->resource;
 
-        return \Cache::remember('resource.validator.'.$this->resource->id, 3600, function() use ($resource){
-            return new ParkValidator(StorageUtil::copyToTmp('parks', $this->resource->source));
-        });
+        return new ParkValidator(StorageUtil::copyToTmp('parks', $this->resource->source));
     }
 
     public function getStats() : array

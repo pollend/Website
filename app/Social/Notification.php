@@ -27,4 +27,9 @@ class Notification extends Model
     {
         $this->user_id = $user->id;
     }
+
+    public function getNotification()
+    {
+        return app($this->type, [$this]);
+    }
 }

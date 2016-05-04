@@ -93,28 +93,28 @@ class BlueprintStrategy extends ResourceStrategy implements ResourceInterface
     {
         $this->retrieveData();
 
-        return count($this->data['Header']['DecoTypes']) > 0;
+        return isset($this->data['Header']['DecoTypes']) && count($this->data['Header']['DecoTypes']) > 0;
     }
 
     private function hasFlatRides()
     {
         $this->retrieveData();
 
-        return count($this->data['Header']['FlatRideTypes']) > 0;
+        return isset($this->data['Header']['FlatRideTypes']) && count($this->data['Header']['FlatRideTypes']) > 0;
     }
 
     private function hasCoaster()
     {
         $this->retrieveData();
 
-        return count($this->data['Header']['TrackedRideTypes']) > 0 || $this->data['Header']['ContentType'] != null;
+        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) > 0) || $this->data['Header']['ContentType'] != null;
     }
 
     public function isCoaster()
     {
         $this->retrieveData();
 
-        return count($this->data['Header']['TrackedRideTypes']) == 1 || $this->data['Header']['ContentType'] != null;
+        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) == 1) || $this->data['Header']['ContentType'] != null;
     }
 
     public function getCoaster()
@@ -132,17 +132,14 @@ class BlueprintStrategy extends ResourceStrategy implements ResourceInterface
     {
         $resource = $this->resource;
 
-        return \Cache::remember('resource.extractor.'.$this->resource->id, 3600, function() use ($resource){
-            return new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source));
-        });
+        return new BlueprintExtractor(StorageUtil::copyToTmp('blueprints', $resource->source));
     }
 
     public function getValidator() : ValidatorInterface
     {
         $resource = $this->resource;
-        return \Cache::remember('resource.validator.'.$this->resource->id, 3600, function() use ($resource){
-            return new BlueprintValidator(StorageUtil::copyToTmp('blueprints', $resource->source));
-        });
+
+        return new BlueprintValidator(StorageUtil::copyToTmp('blueprints', $resource->source));
     }
 
     public function getStats() : array

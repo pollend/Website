@@ -17,9 +17,9 @@ class CommentController extends Controller
     {
         $asset = \AssetRepo::find(request('asset_id'));
 
-        $this->dispatch(new CreateComment(\Auth::user(), $asset, request('body')));
+        $comment = $this->dispatch(new CreateComment(\Auth::user(), $asset, request('body')));
 
-        event(new UserCommentedOnAsset(\Auth::user(), $asset));
+        event(new UserCommentedOnAsset(\Auth::user(), $comment));
 
         return back();
     }

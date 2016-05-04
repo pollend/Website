@@ -28,7 +28,7 @@ class CommentOnAssetNotification extends AbstractNotification
      *
      * @return string
      */
-    public function getUrl() : string
+    public function getFinalUrl() : string
     {
         $context = json_decode($this->notification->context);
 

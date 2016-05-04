@@ -23,7 +23,7 @@ class NotifyUserOfCommentListener
     public function handle(UserCommentedOnAsset $event)
     {
         $type = CommentOnAssetNotification::class;
-        $context = json_encode(['asset_id' => $event->asset->id]);
+        $context = json_encode(['comment_id' => $event->comment->id]);
 
         $this->dispatch(new NotifyUser($event->user, $type, $context));
     }

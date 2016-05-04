@@ -15,6 +15,7 @@ class CommentMentionNotification extends AbstractNotification
     {
         $context = json_decode($this->notification->context);
 
+
         $comment = \CommentRepo::find($context->comment_id);
         $user = $comment->getUser();
 
@@ -26,7 +27,7 @@ class CommentMentionNotification extends AbstractNotification
      *
      * @return string
      */
-    public function getUrl() : string
+    public function getFinalUrl() : string
     {
         $context = json_decode($this->notification->context);
 
