@@ -18,7 +18,7 @@ class CreateImageFromRaw extends Job
      * @param $imageData
      * @param $extension
      */
-    public function __construct($imageData, $extension = null)
+    public function __construct($imageData, $extension = 'jpg')
     {
         $this->imageData = $imageData;
         $this->extension = $extension;
