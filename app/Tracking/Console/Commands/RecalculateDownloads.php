@@ -27,9 +27,11 @@ class RecalculateDownloads extends Command
         foreach($downloads as $download) {
             $downloadable = app($download->downloadable_type)->withTrashed()->find($download->downloadable_id);
 
-            $downloadable->download_count = $download->downloads;
+            if($downloadable != null) {
+                $downloadable->download_count = $download->downloads;
 
-            $downloadable->save();
+                $downloadable->save();
+            }
         }
     }
 }
