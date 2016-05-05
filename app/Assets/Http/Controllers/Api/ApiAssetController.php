@@ -6,6 +6,7 @@ namespace PN\Assets\Http\Controllers\Api;
 
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
+use League\Fractal\Serializer\ArraySerializer;
 use PN\Assets\Transformers\AssetTransformer;
 use PN\Foundation\Http\Controllers\Controller;
 
@@ -19,7 +20,7 @@ class ApiAssetController extends Controller
 
         $resource = new Item($asset, new AssetTransformer());
 
-        $fractal->parseIncludes(request('include'));
+        $fractal->parseIncludes(request('include', []));
 
         return $fractal->createData($resource)->toJson();
     }
