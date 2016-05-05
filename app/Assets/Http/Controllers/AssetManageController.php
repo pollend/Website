@@ -25,6 +25,11 @@ use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class AssetManageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getSelectFile()
     {
         return view('assets/manage/select-file');
