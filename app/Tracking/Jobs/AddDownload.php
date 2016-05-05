@@ -49,8 +49,6 @@ class AddDownload extends Job
         $download->setDownloadable($this->downloadable);
         $download->ip = \Request::ip();
 
-        \Log::info(sprintf('Download! %s', $this->downloadable->name));
-
         \DownloadRepo::add($download);
     }
 }
