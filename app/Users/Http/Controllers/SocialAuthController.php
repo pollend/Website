@@ -113,7 +113,7 @@ class SocialAuthController extends Controller
             }
         }
 
-        return redirect(route('home.index'));
+        return \Redirect::intended(route('home.index'));
     }
 
     /**
