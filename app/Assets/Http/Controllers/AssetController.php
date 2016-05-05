@@ -125,7 +125,7 @@ class AssetController extends Controller
             ->withoutTags($this->getOffTags())
             ->withStats($this->getStats())
             ->withMaxAge($this->getMaxAge())
-            ->sortBy(\Request::input('sort'));
+            ->sortBy(request('sort', 'hot_score'));
 
         $assets = $assetFilter->filterPaginated();
 
