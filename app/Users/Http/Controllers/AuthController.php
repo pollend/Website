@@ -108,6 +108,10 @@ class AuthController extends Controller
         try {
             $user = \UserRepo::findByConfirmToken($token);
 
+            if($user->social == 1) {
+                abort(401);
+            }
+
             $this->dispatch(new ConfirmUser($user));
 
             \Auth::login($user, true);
