@@ -17,7 +17,7 @@ $(document).ready(function(){
     }
 
     $('#list-filters').find('input').each(function(key, input){
-        $(input).on('change slide', filter);
+        $(input).on('change keyup slide', filter);
     });
 
     $('.sliders').find('input').each(function(key, input){
