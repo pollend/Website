@@ -234,4 +234,13 @@ class AssetManageController extends Controller
 
         return redirect(route('assets.show', [$asset->identifier, $asset->slug]));
     }
+
+    public function deleteDelete($identifier)
+    {
+        $asset = \AssetRepo::findByIdentifier($identifier);
+
+        $asset->delete();
+
+        return redirect(\Auth::user()->getPresenter()->url());
+    }
 }

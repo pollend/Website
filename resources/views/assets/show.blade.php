@@ -16,6 +16,14 @@
             Update
         </a>
     @endcan
+    @can('delete', $asset)
+        <form method="post" action="{{ route('assets.manage.delete', [$asset->identifier]) }}">
+            {{ csrf_field() }}
+            {{ method_field('delete') }}
+
+            <input type="submit" onclick="return confirm('Are you sure?')" class="btn btn-primary btn-block" value="Delete" />
+        </form>
+    @endcan
     @include('users.partials.profile', ['user' => $asset->getUser()])
     <hr>
 
