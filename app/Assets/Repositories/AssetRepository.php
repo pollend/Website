@@ -45,17 +45,6 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
         });
     }
 
-    public function findByIdentifier(string $identifier)
-    {
-        $id = \Cache::remember('assets.'.$identifier, 3600, function() use($identifier){
-            $asset = parent::findByIdentifier($identifier);
-
-            return $asset->id;
-        });
-
-        return $this->find($id);
-    }
-
     public function add($entity)
     {
         $entity->save();
