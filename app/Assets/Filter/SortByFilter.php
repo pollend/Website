@@ -34,5 +34,7 @@ class SortByFilter implements FilterInterface
         if ($this->sort == 'newest') {
             return $model->orderBy('id', 'desc');
         }
+
+        return $model->orderBy('hot_score', 'desc');
     }
 }
