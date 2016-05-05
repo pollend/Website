@@ -29,6 +29,7 @@ class RecalculateDownloads extends Command
 
             if($downloadable != null) {
                 $downloadable->download_count = $download->downloads;
+                $downloadable->timestamps = false;
 
                 $downloadable->save();
             }

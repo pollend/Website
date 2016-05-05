@@ -28,6 +28,7 @@ class RecalculateLikes extends Command
             $likeable = app($like->likeable_type)->withTrashed()->find($like->likeable_id);
 
             $likeable->like_count = $like->likes;
+            $likeable->timestamps = false;
 
             $likeable->save();
         }

@@ -29,6 +29,7 @@ class RecalculateViews extends Command
 
             if($viewable != null) {
                 $viewable->view_count = $views->views;
+                $viewable->timestamps = false;
 
                 $viewable->save();
             }
