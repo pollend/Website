@@ -130,8 +130,8 @@ class AssetManageController extends Controller
             $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
         }
 
-        if(\Request::get('buildoff_id')) {
-            $buildOff = \BuildOffRepo::find(\Request::get('buildoff_id'));
+        if(request('buildoff', 0) != 0) {
+            $buildOff = \BuildOffRepo::find(request('buildoff'));
 
             $this->dispatch(new ParticipateInBuildOff($asset, $buildOff));
         }
