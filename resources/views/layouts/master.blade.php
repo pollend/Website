@@ -22,6 +22,19 @@
 @section('body')
     @include('partials.topbar')
 
+    <div class="container v-margin">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- PN Top -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2512015227578629"
+             data-ad-slot="3315984023"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container" id="site">
         <div class="row">
             @yield('fullcontent')
