@@ -62,9 +62,11 @@ class AssetManageController extends Controller
     {
         if($id != null){
             $resource = \Cache::get('resources.'.$id);
-        } else {
-            $resource = \Session::get('resource');
+
+            \Session::put('resource', $resource);
         }
+
+        $resource = \Session::get('resource');
 
         $mods = \AssetRepo::findByType('mod');
         $buildOffs = \BuildOffRepo::getEligibleForResource($resource);
