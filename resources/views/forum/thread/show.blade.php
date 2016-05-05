@@ -1,5 +1,9 @@
 @extends ('forum.master')
 
+@section('pagetitle')
+	{{ $thread->title }} - ParkitectNexus
+@endsection
+
 @section('title')
 	<h1>
 		@if ($thread->trashed())

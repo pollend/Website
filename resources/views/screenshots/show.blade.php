@@ -1,5 +1,9 @@
 @extends('layouts.columns')
 
+@section('pagetitle')
+    {{ $screenshot->name }} - ParkitectNexus
+@endsection
+
 @section('title')
     <h1>
         {{ $screenshot->title }}

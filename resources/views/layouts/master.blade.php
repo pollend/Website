@@ -4,6 +4,11 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
+    <title>@yield('pagetitle', 'ParkitectNexus - Share your mods, blueprints and parks')</title>
+
+    <meta name="description" content="Here you will find mods, coasters and parks created by players for Parkitect.  We already have 68 mods, 785 blueprints and 113 parks ready for download!"/>
+
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" media="screen" type="text/css" href="{{ elixir('css/app.css') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">

@@ -1,5 +1,9 @@
 @extends('layouts.columns')
 
+@section('pagetitle')
+    {{ $asset->name }} - ParkitectNexus
+@endsection
+
 @section('title')
     <h1>
         {{ $asset->name }}
@@ -73,7 +77,7 @@
                 Install with ParkitectNexus Client
             </a>
 
-            <a href="#">
+            <a href="{{ route('client.download') }}">
                 Download client
             </a>
         @endif

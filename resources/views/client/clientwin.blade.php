@@ -1,7 +1,7 @@
 @extends('client.base')
 
 @section('download')
-    <a href="{{ route('client.downloadwin') }}#installation-guide" class="btn btn-primary btn-block btn-lg" title="Download ParkitectNexus Client">
+    <a href="{{ route('client.downloadwin') }}" class="btn btn-primary btn-block btn-lg" title="Download ParkitectNexus Client">
         Download ParkitectNexus Client
     </a>
     <br>

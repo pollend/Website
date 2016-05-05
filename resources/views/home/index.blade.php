@@ -14,13 +14,13 @@
                 We already have <b>{{ $assetCount->getModCount() }} mods</b>,
                 <b>{{ $assetCount->getBlueprintCount() }} blueprints</b> and
                 <b>{{ $assetCount->getParkCount() }} parks</b> ready for download!
-                It's even easier with the <a href="{{ route('pages.show', ['client']) }}">ParkitectNexus Client</a>
+                It's even easier with the <a href="{{ route('client.download') }}">ParkitectNexus Client</a>
             </p>
         </div>
         <div class="col-md-5 hidden-xs hidden-sm">
-            <button href="{{ route('pages.show', ['client']) }}" class="btn btn-primary btn-lg btn-block">
+            <a href="{{ route('client.download') }}" class="btn btn-primary btn-lg btn-block">
                 Download the ParkitectNexus Client
-            </button>
+            </a>
         </div>
     </div>
 
