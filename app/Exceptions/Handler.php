@@ -33,11 +33,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        if(env('APP_ENV') == 'production')
-        {
-            if ($this->shouldReport($e)) {
-                $this->log->error($e, ['url' => \Request::url()]);
-            }
+        // don't log robots or non prod env
+        if(\Agent::isRobot() || env('APP_ENV') != 'production') {
+            return;
+        }
+
+        if ($this->shouldReport($e)) {
+            $this->log->error($e, ['url' => \Request::url()]);
         }
     }
 
