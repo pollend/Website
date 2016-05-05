@@ -107,19 +107,23 @@ class BlueprintStrategy extends ResourceStrategy implements ResourceInterface
     {
         $this->retrieveData();
 
-        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) > 0);
+        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) > 0) || $this->data['Header']['ContentType'] != null;
     }
 
     public function isCoaster()
     {
         $this->retrieveData();
 
-        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) == 1);
+        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) == 1) || $this->data['Header']['ContentType'] != null;
     }
 
     public function getCoaster()
     {
         $this->retrieveData();
+
+        if($this->data['Header']['ContentType'] != null) {
+            return $this->data['Header']['ContentType'];
+        }
 
         return $this->data['Header']['TrackedRideTypes'][0];
     }

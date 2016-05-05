@@ -13,7 +13,7 @@ class BlueprintStatConverter implements DataToStatConverterInterface
     public function convert(array $data) : Collection
     {
         if ($data != null) {
-            $converted = array_only($data['Coaster']['Stats'], [
+            $converted = array_only($data['Coaster']['Statistics'], [
                 'RatingExcitement',
                 'RatingIntensity',
                 'RatingNausea',
