@@ -19,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserRegistered::class => [
-            EmailConfirm::class,
+//            EmailConfirm::class,
             ConfirmWhenInDev::class
         ]
     ];

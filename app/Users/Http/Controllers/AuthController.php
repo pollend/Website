@@ -42,14 +42,16 @@ class AuthController extends Controller
      */
     public function postRegister(RegisterRequest $register)
     {
-        $this->dispatch(app(RegisterUser::class, array_values(\Request::only([
+        $user = $this->dispatch(app(RegisterUser::class, array_values(\Request::only([
             'username',
             'name',
             'email',
             'password'
         ]))));
 
-        return redirect(route('auth.login'));
+        \Auth::login($user);
+
+        return redirect(route('home.index'));
     }
 
     /**
