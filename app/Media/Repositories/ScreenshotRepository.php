@@ -54,6 +54,14 @@ class ScreenshotRepository extends BaseRepository implements ScreenshotRepositor
         $entity->delete();
     }
 
+    /**
+     * Returns all screenies in descending order
+     */
+    public function descended($paginated = false, $perPage = 12)
+    {
+        return Screenshot::orderBy('id', 'desc')->paginate($perPage);
+    }
+
     public function random()
     {
         return Screenshot::orderBy(\DB::raw('RAND()'))->first();

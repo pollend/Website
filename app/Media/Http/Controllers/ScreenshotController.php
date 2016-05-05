@@ -10,7 +10,7 @@ class ScreenshotController extends Controller
 {
     public function index()
     {
-        $screenshots = \ScreenshotRepo::paginate(12);
+        $screenshots = \ScreenshotRepo::descended(true);
 
         return view('screenshots.index', compact(
             'screenshots'
