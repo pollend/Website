@@ -21,6 +21,11 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
+                    <a href="{{ route('assets.manage.selectmod') }}">
+                        Mod
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('assets.manage.selectfile') }}">
                         Blueprint
                     </a>

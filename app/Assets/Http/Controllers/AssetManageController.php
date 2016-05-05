@@ -39,6 +39,20 @@ class AssetManageController extends Controller
         return redirect(route('assets.manage.create'));
     }
 
+    public function getSelectMod()
+    {
+        return view('assets/manage/select-mod');
+    }
+
+    public function postSelectMod(SelectFileRequest $request)
+    {
+        $resource = \ResourceUtil::make(request('resource'));
+
+        \Session::set('resource', $resource);
+
+        return redirect(route('assets.manage.create'));
+    }
+
     public function getCreate()
     {
         $resource = \Session::get('resource');

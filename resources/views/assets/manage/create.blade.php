@@ -6,8 +6,6 @@
 
 			{{ csrf_field() }}
 
-			{{ $resource->getPresenter()->imageUrl }}
-
 			<h1>
 				Create new {{ $type }}
 			</h1>

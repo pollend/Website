@@ -26,8 +26,8 @@ class AssetServiceProvider extends ServiceProvider
 
         $router->group(['middleware' => ['web']], function () use ($router) {
             $router->controller('assets/manage', AssetManageController::class, [
+                'getSelectMod' => 'assets.manage.selectmod',
                 'getSelectFile' => 'assets.manage.selectfile',
-                'postSelectFile' => 'assets.manage.selectfile',
                 'getCreate' => 'assets.manage.create',
                 'getUpdate' => 'assets.manage.update',
             ]);
