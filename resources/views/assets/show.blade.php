@@ -75,7 +75,7 @@
         @endif
 
         @if($asset->getPresenter()->canBeInstalled())
-            <a href="{{ $asset->getPresenter()->installUrl() }}" class="btn btn-primary btn-block">
+            <a href="{{ $asset->getPresenter()->installUrl() }}" class="btn btn-primary btn-block" onclick="registerDownload('asset', '{{ $asset->id }}');">
                 Install with ParkitectNexus Client
             </a>
 
