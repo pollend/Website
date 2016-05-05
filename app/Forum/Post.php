@@ -4,6 +4,7 @@ namespace PN\Forum;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use PN\Forum\Traits\HasAuthor;
+use PN\Users\User;
 
 class Post extends BaseModel
 {
@@ -47,6 +48,21 @@ class Post extends BaseModel
     public function parent()
     {
         return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function getThread()
+    {
+        return $this->thread;
     }
 
     /**
