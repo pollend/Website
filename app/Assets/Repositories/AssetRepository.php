@@ -25,7 +25,7 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
     public function mostPopular($count)
     {
         return \Cache::remember('assets.mostpopular', 10, function () use ($count) {
-            $assets = app($this->model())->orderBy('hot_score', 'desc')->take($count * 4)->get();
+            $assets = app($this->model())->where('buildoff_id')->orderBy('hot_score', 'desc')->take($count * 4)->get();
 
             return $assets->random($count);
         });
@@ -34,7 +34,7 @@ class AssetRepository extends BaseRepository implements AssetRepositoryInterface
     public function newest($count)
     {
         return \Cache::remember('assets.newest', 10, function () use ($count) {
-            return app($this->model())->orderBy('created_at', 'desc')->take($count)->get();
+            return app($this->model())->where('buildoff_id')->orderBy('created_at', 'desc')->take($count)->get();
         });
     }
 
