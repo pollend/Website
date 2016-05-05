@@ -58,7 +58,7 @@ class AssetManageController extends Controller
         $resource = \Session::get('resource');
 
         $mods = \AssetRepo::findByType('mod');
-        $buildOffs = \BuildOffRepo::all();
+        $buildOffs = \BuildOffRepo::getEligibleForResource($resource);
         $primaryTags = \TagRepo::findByPrimaryTags($resource->getPrimaryTags()->toArray());
         $secondaryTags = \TagRepo::findSecondary($resource->getType());
         $type = $resource->getType();

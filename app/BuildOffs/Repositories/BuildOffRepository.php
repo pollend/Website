@@ -95,6 +95,14 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
      */
     public function getEligibleForResource(Resource $resource)
     {
-        $resource->getPrimaryTags();
+        $tags = \TagRepo::findByPrimaryTags($resource->getPrimaryTags()->toArray());
+
+        $buildOffs = new BuildOff();
+
+        if(count($tags) > 0) {
+            $buildOffs = $buildOffs->whereIn('tag_id', $tags->lists('id')->toArray());
+        }
+
+        return $buildOffs->where('type_requirement', $resource->type)->get();
     }
 }
