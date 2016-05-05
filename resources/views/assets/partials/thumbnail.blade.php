@@ -21,7 +21,7 @@
     @endif
     <div class="caption">
         <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">
-            {{ $asset->name }}
+            {{ \Illuminate\Support\Str::limit($asset->name, 25) }}
         </a>
         <br>
         By:
