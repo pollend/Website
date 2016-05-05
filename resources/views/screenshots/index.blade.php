@@ -20,11 +20,11 @@
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail screenshot">
                     <a href="{{ $screenshot->getPresenter()->url }}" title="{{ $screenshot->title }}">
-                        <img src="{{ $screenshot->getImage()->getPresenter()->source() }}" alt="{{ $screenshot->title }}">
+                        <img src="{{ $screenshot->getImage()->getPresenter()->source(263, 263) }}" alt="{{ $screenshot->title }}">
                     </a>
                     <div class="caption">
                         <a href="{{ $screenshot->getPresenter()->url }}" title="{{ $screenshot->title }}">
-                            {{ $screenshot->title }}
+                            {{ \Illuminate\Support\Str::limit($screenshot->title, 30) }}
                         </a>
                         <br>
                         Shot by:
