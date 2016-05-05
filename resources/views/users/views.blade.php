@@ -14,9 +14,11 @@
     </div>
     <div class="row" id="list">
         @foreach($views as $key => $view)
-            <div class="col-xs-6 col-sm-4">
-                @include('assets.partials.thumbnail', ['asset' => $view->getViewable()])
-            </div>
+            @if($view->getViewable() != null)
+                <div class="col-xs-6 col-sm-4">
+                    @include('assets.partials.thumbnail', ['asset' => $view->getViewable()])
+                </div>
+            @endif
         @endforeach
     </div>
     <div class="text-center">

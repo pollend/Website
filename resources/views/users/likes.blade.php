@@ -14,9 +14,11 @@
     </div>
     <div class="row" id="list">
         @foreach($likes as $key => $like)
-            <div class="col-xs-6 col-sm-4">
-                @include('assets.partials.thumbnail', ['asset' => $like->getLikeable()])
-            </div>
+            @if($like->getLikeable() != null)
+                <div class="col-xs-6 col-sm-4">
+                    @include('assets.partials.thumbnail', ['asset' => $like->getLikeable()])
+                </div>
+            @endif
         @endforeach
     </div>
     <div class="text-center">

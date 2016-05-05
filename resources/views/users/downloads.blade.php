@@ -14,9 +14,11 @@
     </div>
     <div class="row" id="list">
         @foreach($downloads as $key => $download)
-            <div class="col-xs-6 col-sm-4">
-                @include('assets.partials.thumbnail', ['asset' => $download->getDownloadable()])
-            </div>
+            @if($download->getDownloadable() != null)
+                <div class="col-xs-6 col-sm-4">
+                    @include('assets.partials.thumbnail', ['asset' => $download->getDownloadable()])
+                </div>
+            @endif
         @endforeach
     </div>
     <div class="text-center">
