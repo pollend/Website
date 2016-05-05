@@ -43,8 +43,10 @@ class AssetServiceProvider extends ServiceProvider
                 'as' => 'assets.filter.list',
                 'uses' => AssetController::class . '@filterAssets'
             ]);
-            $router->controller('assets', AssetController::class, [
-                'getShow' => 'assets.show',
+
+            $router->get('assets/{identifier}/{slug}', [
+                'uses' => AssetController::class . '@getShow',
+                'as' => 'assets.show'
             ]);
 
             $router->resource('api/assets', ApiAssetController::class);
@@ -54,7 +56,8 @@ class AssetServiceProvider extends ServiceProvider
         $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
     }
 
-    public static function compiles() {
+    public static function compiles()
+    {
         $files = [];
 
         $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Assets/Providers')));
