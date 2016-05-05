@@ -53,9 +53,13 @@ class AssetManageController extends Controller
         return redirect(route('assets.manage.create'));
     }
 
-    public function getCreate()
+    public function getCreate($id = null)
     {
-        $resource = \Session::get('resource');
+        if($id != null){
+            $resource = \Cache::get('resources.'.$id);
+        } else {
+            $resource = \Session::get('resource');
+        }
 
         $mods = \AssetRepo::findByType('mod');
         $buildOffs = \BuildOffRepo::getEligibleForResource($resource);
