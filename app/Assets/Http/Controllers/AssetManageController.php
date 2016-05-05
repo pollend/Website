@@ -239,6 +239,8 @@ class AssetManageController extends Controller
     {
         $asset = \AssetRepo::findByIdentifier($identifier);
 
+        abort_if(\Gate::denies('delete', $asset), 401);
+
         $asset->delete();
 
         return redirect(\Auth::user()->getPresenter()->url());
