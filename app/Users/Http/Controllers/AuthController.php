@@ -6,7 +6,14 @@ use PN\Users\Exceptions\UserNotConfirmed;
 use PN\Users\Exceptions\UserNotFound;
 use PN\Users\Http\Requests\LoginRequest;
 use PN\Users\Http\Requests\RegisterRequest;
+use PN\Users\Http\Requests\RequestNewPasswordRequest;
+use PN\Users\Http\Requests\SetNewPasswordRequest;
+use PN\Users\Jobs\ChangePassword;
+use PN\Users\Jobs\ConfirmUser;
+use PN\Users\Jobs\GenerateNewPasswordToken;
 use PN\Users\Jobs\RegisterUser;
+use PN\Users\Jobs\SendConfirmEmail;
+use PN\Users\Jobs\SendNewPasswordRequestEmail;
 use PN\Users\Repositories\UserRepositoryInterface;
 
 /**
@@ -15,19 +22,6 @@ use PN\Users\Repositories\UserRepositoryInterface;
  */
 class AuthController extends Controller
 {
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepo;
-
-    /**
-     * @param UserRepositoryInterface $userRepository
-     */
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepo = $userRepository;
-    }
-
     /**
      * @return \Illuminate\Contracts\View\View
      */
@@ -42,16 +36,14 @@ class AuthController extends Controller
      */
     public function postRegister(RegisterRequest $register)
     {
-        $user = $this->dispatch(app(RegisterUser::class, array_values(\Request::only([
+        $this->dispatch(app(RegisterUser::class, array_values(\Request::only([
             'username',
             'name',
             'email',
             'password'
         ]))));
-
-        \Auth::login($user);
-
-        return redirect(route('home.index'));
+        
+        return redirect(route('auth.login'));
     }
 
     /**
@@ -61,13 +53,13 @@ class AuthController extends Controller
      */
     public function getResend($email)
     {
-        $user = $this->userRepo->findByEmail($email);
+        $user = \UserRepo::findByEmail($email);
 
         if ($user->confirmed == 0) {
-            $this->dispatch(app(SendEmailConfirmEmail::class, [$user->id]));
+            $this->dispatch(new SendConfirmEmail($user));
         }
 
-        Flash::info('Mail resent!');
+        \Notification::info('Mail resent!');
 
         return \Redirect::route('auth.login');
     }
@@ -77,7 +69,7 @@ class AuthController extends Controller
      */
     public function getLogin()
     {
-        return \View::make('auth.login');
+        return view('auth.login');
     }
 
     /**
@@ -87,10 +79,10 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $login)
     {
         try {
-            $valid = $this->userRepo->validateCredentials(\Request::get('email'), \Request::get('password'));
+            $valid = \UserRepo::validateCredentials(request('email'), request('password'));
 
             if ($valid) {
-                $user = $this->userRepo->findByEmail(\Request::get('email'));
+                $user = \UserRepo::findByEmail(\Request::get('email'));
 
                 \Auth::login($user, \Request::get('remember', false));
 
@@ -101,8 +93,7 @@ class AuthController extends Controller
         } catch (UserNotFound $e) {
             return \Redirect::back()->withErrors(["User not found"]);
         } catch (UserNotConfirmed $e) {
-            Flash::error('Please check your email to confirm your account, <a href="' . route('auth.resend',
-                    [\Input::get('email')]) . '">Resend mail</a>');
+            \Notification::error('Please check your email to confirm your account, <a href="' . route('auth.resend', [request('email')]) . '">Resend mail</a>');
 
             return \Redirect::back();
         }
@@ -115,17 +106,17 @@ class AuthController extends Controller
     public function getConfirm($token)
     {
         try {
-            $user = $this->userRepo->findByConfirmToken($token);
+            $user = \UserRepo::findByConfirmToken($token);
 
-            $user = $this->dispatch(app(ConfirmUser::class, [$user->id]));
+            $this->dispatch(new ConfirmUser($user));
 
             \Auth::login($user, true);
 
             return \Redirect::intended('/');
-        } catch (UserDoesNotExist $e) {
-            Flash::error('User does not exist');
+        } catch (UserNotFound $e) {
+            \Notification::error('User does not exist');
 
-            return \Redirect::route('auth.register');
+            return redirect(route('auth.register'));
         }
     }
 
@@ -134,7 +125,7 @@ class AuthController extends Controller
      */
     public function getForgotPassword()
     {
-        return \View::make('auth.request-password');
+        return view('auth.request-password');
     }
 
     /**
@@ -144,16 +135,16 @@ class AuthController extends Controller
     public function postForgotPassword(RequestNewPasswordRequest $newPasswordRequest)
     {
         try {
-            $user = $this->userRepo->findByEmail(\Input::get('email'));
+            $user = \UserRepo::findByEmail(request('email'));
 
-            $this->dispatch(app(GenerateNewPasswordToken::class, [$user->id]));
+            $this->dispatch(new GenerateNewPasswordToken($user));
 
-            $this->dispatch(app(SendNewPasswordRequestEmail::class, [$user->id]));
-        } catch (UserDoesNotExist $e) {
+            $this->dispatch(new SendNewPasswordRequestEmail($user));
+        } catch (UserNotFound $e) {
 
         }
 
-        Flash::info('A link to reset your password has been sent to ' . \Input::get('email'));
+        \Notification::info('A link to reset your password has been sent to ' . request('email'));
 
         return \Redirect::back();
     }
@@ -164,7 +155,7 @@ class AuthController extends Controller
      */
     public function getSetNewPassword($token)
     {
-        return \View::make('auth.set-password', ['token' => $token]);
+        return view('auth.set-password', compact('token'));
     }
 
     /**
@@ -175,21 +166,17 @@ class AuthController extends Controller
     public function postSetNewPassword($token, SetNewPasswordRequest $newPassword)
     {
         try {
-            $user = $this->userRepo->findByEmail(\Input::get('email'));
+            $user = \UserRepo::findByEmail(request('email'));
 
             if ($user->password_token == $token) {
-                $this->dispatch(app(SetPassword::class, [$user->id, \Input::get('password')]));
+                $this->dispatch(new ChangePassword($user, request('password')));
             }
 
             \Auth::login($user, true);
 
             return \Redirect::intended();
-        } catch (UserDoesNotExist $e) {
-            Flash::error('The entered credentials do not match our records');
-
-            return \Redirect::back();
-        } catch (TokenExpired $e) {
-            Flash::error('Password token was already used');
+        } catch (UserNotFound $e) {
+            \Notification::error('The entered credentials do not match our records');
 
             return \Redirect::back();
         }

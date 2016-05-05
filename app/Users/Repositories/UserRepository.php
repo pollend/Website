@@ -112,4 +112,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return User::where('username', $username)->first();
     }
+
+    /**
+     * Finds user by token
+     *
+     * @param $token
+     * @return mixed
+     */
+    public function findByConfirmToken($token)
+    {
+        return User::where('confirm_token', $token)->first();
+    }
 }

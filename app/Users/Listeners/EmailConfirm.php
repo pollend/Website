@@ -13,9 +13,9 @@ class EmailConfirm
 
     public function handle(UserRegistered $event)
     {
-        if($event->user->social == 0 && !env('APP_DEBUG')) {
+        if($event->user->social == 0) {
             \Notification::info('Check your email to confirm your account');
-            $this->dispatch(app(SendConfirmEmail::class, [$event->user->id]));
+            $this->dispatch(new SendConfirmEmail($event->user));
         }
     }
 }

@@ -19,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserRegistered::class => [
-//            EmailConfirm::class,
+            EmailConfirm::class,
             ConfirmWhenInDev::class
         ]
     ];
@@ -50,6 +50,8 @@ class AuthServiceProvider extends ServiceProvider
                 'postRegister' => 'auth.register',
                 'getForgotPassword' => 'auth.forgotpassword',
                 'postForgotPassword' => 'auth.forgotpassword',
+                'getSetNewPassword' => 'auth.newpassword',
+                'postSetNewPassword' => 'auth.newpassword',
                 'getLogout' => 'auth.logout',
                 'getConfirm' => 'auth.confirm',
             ]);

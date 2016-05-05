@@ -47,6 +47,10 @@ class RegisterUser extends Job
         $user->password = \Hash::make($this->password);
         $user->social = $this->social;
 
+        if($this->social == 0) {
+            $user->confirm_token = str_random(16);
+        }
+
         \UserRepo::add($user);
 
         event(new UserRegistered($user));

@@ -1,4 +1,4 @@
-@extends('layout.wide')
+@extends('layouts.wide')
 
 @section('content')
     <h1>
@@ -11,7 +11,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Email</label>
             <input type="email" placeholder="Email" class="form-control" name="email"
-                   value="{{ Input::old('email') }}"/>
+                   value="{{ old('email') }}"/>
         </div>
 
         <div class="form-group">

@@ -5,28 +5,21 @@ namespace PN\Users\Jobs;
 
 use PN\Jobs\Job;
 use PN\Users\Repositories\UserRepositoryInterface;
+use PN\Users\User;
 
 class SendConfirmEmail extends Job
 {
-    private $userId;
+    private $user;
 
-    private $userRepo;
-
-    /**
-     * SendConfirmEmail constructor.
-     * @param $userId
-     * @param $userRepo
-     */
-    public function __construct($userId, UserRepositoryInterface $userRepo)
+    public function __construct(User $user)
     {
-        $this->userId = $userId;
-        $this->userRepo = $userRepo;
+        $this->user = $user;
     }
 
     public function handle()
     {
-        $user = $this->userRepo->find($this->userId);
-
+        $user = $this->user;
+        
         // only send confirmation mails to non social unconfirmed accounts
         if($user->confirmed == 0) {
             \Mail::send('auth.emails.confirm', ['user' => $user], function ($m) use ($user) {

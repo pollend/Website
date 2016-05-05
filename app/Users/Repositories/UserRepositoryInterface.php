@@ -20,4 +20,12 @@ interface UserRepositoryInterface
      * @return User
      */
     public function findByUsername(string $username) : User;
+
+    /**
+     * Finds user by token
+     * 
+     * @param $token
+     * @return mixed
+     */
+    public function findByConfirmToken($token);
 }
