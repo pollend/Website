@@ -51,6 +51,8 @@ class CreateScreenshot extends Job
         $screenshot->setImage($this->image);
         $screenshot->title = $this->title;
 
-        return \ScreenshotRepo::add($screenshot);
+        \ScreenshotRepo::add($screenshot);
+
+        return $screenshot;
     }
 }

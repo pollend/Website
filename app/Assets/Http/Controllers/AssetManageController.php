@@ -142,6 +142,7 @@ class AssetManageController extends Controller
             $asset->addDependency($dependency);
         }
 
+        \Log::info(sprintf('Asset create! %s, ', $asset->name, $asset->getPresenter()->url()));
 
         \Session::remove('resource');
 
