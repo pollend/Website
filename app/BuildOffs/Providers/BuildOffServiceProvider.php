@@ -22,21 +22,24 @@ class BuildOffServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
 
-        $router->get('build-offs', [
-            'uses' => BuildOffController::class.'@index',
-            'as' => 'buildoffs.index'
-        ]);
+        $router->group(['middleware' => 'web'], function () use ($router) {
+            $router->get('build-offs', [
+                'uses' => BuildOffController::class . '@index',
+                'as' => 'buildoffs.index'
+            ]);
 
-        $router->get('build-offs/{id}/{slug}', [
-            'uses' => BuildOffController::class.'@show',
-            'as' => 'buildoffs.show'
-        ]);
-
+            $router->get('build-offs/{id}/{slug}', [
+                'uses' => BuildOffController::class . '@show',
+                'as' => 'buildoffs.show'
+            ]);
+        });
+        
         $this->app->singleton(BuildOffRepositoryInterface::class, BuildOffRepository::class);
         $this->app->singleton(RankRepositoryInterface::class, RankRepository::class);
     }
 
-    public static function compiles() {
+    public static function compiles()
+    {
         $files = [];
 
         $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('BuildOffs/Providers')));
