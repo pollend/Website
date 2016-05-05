@@ -147,19 +147,27 @@
 
     <div id="comments">
         @if(Auth::check())
-            <form method="post" action="{{ route('comments.store') }}">
-                {{ csrf_field() }}
+            <div class="row">
+                <div class="col-xs-12">
+                    <form method="post" class="form-horizontal" action="{{ route('comments.store') }}">
+                        {{ csrf_field() }}
 
-                <input type="hidden" name="asset_id" value="{{ $asset->id }}" />
+                        <input type="hidden" name="asset_id" value="{{ $asset->id }}"/>
 
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                    <textarea class="" name="body"></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="comment" class="col-sm-2 control-label">Comment</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment" class="form-control" name="body"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <input type="submit" class="btn btn-primary" value="Post comment"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <input type="submit" value="Post comment"/>
-            </form>
+            </div>
         @endif
 
         @foreach($comments as $comment)
