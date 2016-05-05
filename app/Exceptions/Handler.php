@@ -35,7 +35,9 @@ class Handler extends ExceptionHandler
     {
         if(env('APP_ENV') == 'production')
         {
-            parent::report($e);
+            if ($this->shouldReport($e)) {
+                $this->log->error($e, ['url' => \Request::url()]);
+            }
         }
     }
 
