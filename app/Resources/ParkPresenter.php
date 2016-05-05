@@ -14,6 +14,22 @@ class ParkPresenter extends Presenter implements ResourcePresenterInterface
 
     public function getStatGroups()
     {
-        return [];
+        return [
+            'Rating' => [
+                'RatingPriceSatisfaction',
+                'RatingCleanliness',
+                'RatingHappiness',
+            ],
+            'Stats' => [
+                'GuestCount',
+                'ParkYear',
+            ],
+            'Park' => [
+                'SizeX',
+                'SizeY',
+                'Money',
+                'ParkEntranceFee',
+            ]
+        ];
     }
 }
