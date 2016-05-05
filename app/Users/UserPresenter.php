@@ -9,6 +9,17 @@ class UserPresenter extends Presenter
 {
     public function avatarUrl()
     {
+        if(strpos($this->model->avatar, 'http') === 0) {
+            return $this->model->avatar;
+        }
+
+        if($this->model->avatar == '') {
+            $link = 'https://www.gravatar.com/avatar/' . md5($this->model->email) . '?s=128&d=';
+            $link .= urlencode('https://parkitectnexus.com/img/avatar-default.png');
+
+            return $link;
+        }
+
         return '/media/avatars/'.$this->model->avatar;
     }
 
