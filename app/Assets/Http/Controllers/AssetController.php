@@ -102,6 +102,10 @@ class AssetController extends Controller
 
         $tags = \TagRepo::findPrimary($type);
 
+        if(count($tags) == 0) {
+            $tags = \TagRepo::findSecondary($type);
+        }
+
         $assetList = $this->filterAssets($type)->render();
 
         return view('assets.filter', compact(
