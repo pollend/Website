@@ -14,6 +14,6 @@ class ImagePresenter extends Presenter
             $height = config('images.default_size')[1];
         }
 
-        return "/media/images/{$width}x{$height}/" . $this->model->source;
+        return \URL::asset("/media/images/{$width}x{$height}/" . $this->model->source);
     }
 }
