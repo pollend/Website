@@ -69,9 +69,9 @@ class CreateSocialUser extends Job
             'avatar' => $this->avatar
         ]);
 
-        \UserRepo::add($user);
+        $user = \UserRepo::add($user);
 
-        $this->dispatch(app(ConfirmUser::class, [$user->id]));
+        $this->dispatch(new ConfirmUser($user));
 
 //        $this->dispatch(app(SetDefaultRole::class, [$user->id]));
 
