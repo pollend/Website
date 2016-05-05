@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::group(['middleware' => ['web']], function(){
+        \Route::group(['middleware' => ['web']], function () {
             \Route::controller('auth', AuthController::class, [
                 'getLogin' => 'auth.login',
                 'postLogin' => 'auth.login',
@@ -65,6 +65,10 @@ class AuthServiceProvider extends ServiceProvider
                 'getGithubCallback' => 'socialauth.github.callback',
                 'getSetUsername' => 'socialauth.setusername',
                 'postSetUsername' => 'socialauth.setusername',
+            ]);
+
+            \Route::get('social-auth/google/callback', [
+                'uses' => SocialAuthController::class . '@getGoogleCallback'
             ]);
         });
 //        \Route::get('/auth/login', [
