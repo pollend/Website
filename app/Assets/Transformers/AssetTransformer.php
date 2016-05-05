@@ -30,8 +30,7 @@ class AssetTransformer extends TransformerAbstract
             'type' => $asset->type,
             'identifier' => $asset->identifier,
             'name' => $asset->name,
-            'description' => $asset->description,
-            'image' => $asset->getImage()->source
+            'description' => $asset->description
         ];
     }
 
