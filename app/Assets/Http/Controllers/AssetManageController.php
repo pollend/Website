@@ -63,7 +63,7 @@ class AssetManageController extends Controller
         if($id != null){
             $resource = \Cache::get('resources.'.$id);
 
-            \Session::put('resource', $resource);
+            \Session::set('resource', $resource);
         }
 
         $resource = \Session::get('resource');
