@@ -1,10 +1,17 @@
 $(document).ready(function(){
+    var to;
+
     function filter(){
+        clearTimeout(to);
+
         var uri = window.location.href.split('?')[0]+'/filter?'+$('#list-filters').find('form').serialize();
         var pushUri = window.location.href.split('?')[0]+'?'+$('#list-filters').find('form').serialize();
-        $.get(uri, function(response){
-            $('#content').html(response);
-        });
+
+        to = setTimeout(function(){
+            $.get(uri, function(response){
+                $('#content').html(response);
+            });
+        }, 250);
 
         history.pushState({}, '', pushUri);
     }
