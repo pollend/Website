@@ -14,7 +14,7 @@ use PN\Resources\Resource;
  * Class CreateStats
  * @package PN\Resources\Stats\Jobs
  */
-class CreateStats
+class CreateStats extends Job
 {
     /**
      * @var \PN\Resources\Resource
