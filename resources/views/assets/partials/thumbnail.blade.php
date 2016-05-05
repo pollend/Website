@@ -17,8 +17,8 @@
             </li>
         </ul>
         <div class="clearfix"></div>
+        <hr>
     @endif
-    <hr>
     <div class="caption">
         <a href="{{ $asset->getPresenter()->url }}" title="{{ $asset->name }}">
             {{ $asset->name }}
