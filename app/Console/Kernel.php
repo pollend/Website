@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use PN\BuildOffs\Console\RankBuildOffs;
 use PN\Foundation\Console\Inspire;
+use PN\Social\Console\Commands\RecalculateHotScore;
 use PN\Social\Console\Commands\RecalculateLikes;
 use PN\Tracking\Console\Commands\RecalculateDownloads;
 use PN\Tracking\Console\Commands\RecalculateViews;
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         RecalculateDownloads::class,
         RecalculateViews::class,
         RecalculateLikes::class,
+        RecalculateHotScore::class,
         RankBuildOffs::class,
     ];
 
@@ -36,5 +38,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('downloads:recalculate')->everyMinute();
         $schedule->command('views:recalculate')->everyMinute();
         $schedule->command('likes:recalculate')->everyMinute();
+        $schedule->command('score:recalculate')->everyMinute();
     }
 }
