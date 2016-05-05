@@ -36,6 +36,6 @@ class PostMentionNotification extends AbstractNotification
 
         $post = \PostRepo::find($context->post_id);
 
-        return $post->getPresenter()->url();
+        return $post->url;
     }
 }
