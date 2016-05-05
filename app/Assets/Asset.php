@@ -236,6 +236,11 @@ class Asset extends Model
         $comment->setAsset($this);
     }
 
+    public function getDependencies()
+    {
+        return $this->dependencies;
+    }
+
     public function isDependency($dependency)
     {
         $dependencies = $this->dependencies;

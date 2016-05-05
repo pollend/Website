@@ -7,6 +7,7 @@ namespace PN\Assets\Transformers;
 use League\Fractal\TransformerAbstract;
 use PN\Assets\Asset;
 use PN\Media\Transformers\ImageTransformer;
+use PN\Resources\Transformers\ResourceTransformer;
 use PN\Users\Transformers\UserTransformer;
 
 class AssetTransformer extends TransformerAbstract
@@ -18,12 +19,15 @@ class AssetTransformer extends TransformerAbstract
      */
     protected $availableIncludes = [
         'user',
-        'image'
+        'image',
+        'resource',
+        'dependencies'
     ];
 
     public function transform(Asset $asset)
     {
         return [
+            'type' => $asset->type,
             'identifier' => $asset->identifier,
             'name' => $asset->name,
             'description' => $asset->description,
@@ -43,5 +47,19 @@ class AssetTransformer extends TransformerAbstract
         $image = $asset->getImage();
 
         return $this->item($image, new ImageTransformer());
+    }
+
+    public function includeResource(Asset $asset)
+    {
+        $resource = $asset->getResource();
+
+        return $this->item($resource, new ResourceTransformer());
+    }
+
+    public function includeDependencies(Asset $asset)
+    {
+        $dependencies = $asset->getDependencies();
+
+        return $this->collection($dependencies, new AssetTransformer());
     }
 }

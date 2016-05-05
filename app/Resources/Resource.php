@@ -99,6 +99,11 @@ class Resource extends Model implements ResourceInterface
         return $this->hasOne(\PN\Assets\Asset::class);
     }
 
+    public function getAsset()
+    {
+        return $this->asset;
+    }
+
     public function getImage()
     {
         return $this->image;
