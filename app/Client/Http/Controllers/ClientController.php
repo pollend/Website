@@ -92,7 +92,7 @@ class ClientController extends Controller
         $mod = \ResourceRepo::findMod($username, $repo);
 
         if ($mod != null) {
-            return redirect($mod->getAsset()->url());
+            return redirect($mod->getAsset()->getPresenter()->url());
         }
 
         abort(404);
