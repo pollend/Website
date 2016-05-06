@@ -50,6 +50,35 @@ class ResourceUtil
             $source = $this->moveToTmp(\Request::file($source));
         }
 
+        // todo, delete this quick hack to support .park
+        if(ends_with($source, '.park')) {
+            $gz = gzopen($source, 'rb');
+
+            if (!$gz) {
+                throw new \UnexpectedValueException(
+                    'Could not open gzip file'
+                );
+            }
+
+            $newSource = str_replace('.park', '.txt', $source);
+
+            $dest = fopen($newSource, 'wb');
+
+            if (!$dest) {
+                gzclose($gz);
+                throw new \UnexpectedValueException(
+                    'Could not open destination file'
+                );
+            }
+
+            stream_copy_to_stream($gz, $dest);
+
+            gzclose($gz);
+            fclose($dest);
+
+            $source = $newSource;
+        }
+
         $resource = new Resource();
 
         $resource->setSource($source);
