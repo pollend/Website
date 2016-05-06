@@ -108,7 +108,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      * @param string $username
      * @return User
      */
-    public function findByUsername(string $username) : User
+    public function findByUsername(string $username)
     {
         return User::where('username', $username)->first();
     }

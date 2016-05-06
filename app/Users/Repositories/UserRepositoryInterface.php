@@ -19,7 +19,7 @@ interface UserRepositoryInterface
      * @param string $username
      * @return User
      */
-    public function findByUsername(string $username) : User;
+    public function findByUsername(string $username);
 
     /**
      * Finds user by token

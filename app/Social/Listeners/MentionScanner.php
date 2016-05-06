@@ -19,7 +19,9 @@ class MentionScanner
             try {
                 $user = \UserRepo::findByUsername($username);
 
-                $users->push($user);
+                if($user != null) {
+                    $users->push($user);
+                }
             } catch (\Exception $e) {
                 //ignore
             }

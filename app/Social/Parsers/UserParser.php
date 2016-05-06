@@ -35,17 +35,15 @@ class UserParser extends AbstractInlineParser
         // Parse the handle
         $username = $cursor->match('/[a-zA-Z0-9-]+/');
         if (!empty($username)) {
-            try{
-                // check if users exists
-                $user = \UserRepo::findByUsername($username);
+            // check if users exists
+            $user = \UserRepo::findByUsername($username);
 
+            if($user != null) {
                 $profileUrl = $user->getPresenter()->url();
 
                 $inlineContext->getContainer()->appendChild(new Link($profileUrl, '@' . $user->username));
 
                 return true;
-            } catch (\Exception $e) {
-                // user didn't exist
             }
         }
 
