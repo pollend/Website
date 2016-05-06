@@ -17,7 +17,8 @@
         "edvinaskrucas/notification": "^5.1",
         "doctrine/dbal": "^2.5",
         "league/fractal": "^0.13.0",
-        "jenssegers/agent": "^2.3"
+        "jenssegers/agent": "^2.3",
+        "mastergalen/adsense-ads": "^0.1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

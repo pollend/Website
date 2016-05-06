@@ -2,6 +2,12 @@
 
 @section('sidebar')
     @include('assets.partials.filters', ['filters' => $filters, 'tags' => $tags])
+
+    <hr>
+
+    <div class="v-margin">
+        {!! Ads::show('sidebar') !!}
+    </div>
 @endsection
 
 @section('title')

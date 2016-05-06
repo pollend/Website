@@ -158,6 +158,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Mastergalen\AdsenseAds\AdsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -241,6 +242,7 @@ return [
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
         'Notification'  => Krucas\Notification\Facades\Notification::class,
         'Agent'         => Jenssegers\Agent\Facades\Agent::class,
+        'Ads'           => Mastergalen\AdsenseAds\AdsFacade::class,
 
         /**
          * Application Facades

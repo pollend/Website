@@ -76,12 +76,20 @@
             </li>
         @endforeach
     </ul>
+
+    <hr>
+
+    <div class="v-margin">
+        {!! Ads::show('sidebar') !!}
+    </div>
 @endsection
 
 @section('content')
     @include('assets.partials.slider', ['asset' => $asset])
 
-    <hr>
+    <div class="v-margin">
+        {!! Ads::show('content') !!}
+    </div>
 
     <div class="row">
         <div class="col-sm-12">

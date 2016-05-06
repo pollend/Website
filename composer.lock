@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dfbfbe5fbbe367aeb10b1ce65f81754",
-    "content-hash": "536faca091d1ceca264ed67e1fac903f",
+    "hash": "4c22eb0dbcb9c3e216ae18a8bba7a941",
+    "content-hash": "c06a7e45869c3ba9c2af1a18a95cb653",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1714,6 +1714,48 @@
                 "twitter"
             ],
             "time": "2015-10-23 04:02:07"
+        },
+        {
+            "name": "mastergalen/adsense-ads",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mastergalen/Adsense-Ads.git",
+                "reference": "f35b2602930c15ca67d56f6114e3b4899ccbffcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mastergalen/Adsense-Ads/zipball/f35b2602930c15ca67d56f6114e3b4899ccbffcf",
+                "reference": "f35b2602930c15ca67d56f6114e3b4899ccbffcf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/view": "5.0.*|5.1.*|5.2.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mastergalen\\AdsenseAds\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Galen Han",
+                    "email": "Mastergalen@users.noreply.github.com"
+                }
+            ],
+            "description": "Display Adsense ads in your application.",
+            "keywords": [
+                "ads",
+                "adsense",
+                "laravel"
+            ],
+            "time": "2016-01-03 19:08:02"
         },
         {
             "name": "maximebf/debugbar",
