@@ -46,9 +46,11 @@
     @endif
     <hr>
 
-    @foreach($assets as  $i => $asset)
-        <div class="col-sm-4 col-md-3">
-            @include('assets.partials.thumbnail', ['asset', $asset, 'showStats' => !$buildOff->isOpen()])
-        </div>
-    @endforeach
+    <div class="row" id="list">
+        @foreach($assets as  $i => $asset)
+            <div class="col-sm-4 col-md-3">
+                @include('assets.partials.thumbnail', ['asset', $asset, 'showStats' => !$buildOff->isOpen()])
+            </div>
+        @endforeach
+    </div>
 @endsection
