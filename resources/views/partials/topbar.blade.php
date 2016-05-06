@@ -1,4 +1,6 @@
 @inject('versionService', 'PN\Foundation\VersionService')
+@inject('discordService', 'PN\Social\DiscordService')
+
 <div id="top-bar" class="hidden-xs hidden-sm">
     <div class="container">
         <h1 id="logo">
@@ -22,6 +24,17 @@
                 <a href="https://twitter.com/ParkitectNexus"><i class="fa fa-twitter"></i> @ParkitectNexus</a>
                 |
                 <a href="https://facebook.com/ParkitectNexus"><i class="fa fa-facebook"></i> ParkitectNexus</a>
+                </span>
+            </p>
+        </div>
+        <div class="discord-box">
+            <p>
+                Join the ParkitectNexus Discord chat!
+                <span class="members">
+                    {{ $discordService->getMemberCount() }} members online.
+                    <a href="{{ $discordService->getUrl() }}">
+                        <i class="fa fa-chain"></i>
+                    </a>
                 </span>
             </p>
         </div>
