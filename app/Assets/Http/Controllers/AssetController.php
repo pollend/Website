@@ -32,6 +32,9 @@ class AssetController extends Controller
     public function getShow($identifier, $slug)
     {
         $asset = $this->assetRepo->findByIdentifier($identifier);
+
+        abort_if($asset == null, 404);
+
         $comments = \CommentRepo::forAsset($asset);
         
         event(new UserViewingAsset($asset, \Auth::user()));
