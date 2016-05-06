@@ -9,6 +9,7 @@ use PN\Assets\Http\Requests\CreateRequest;
 use PN\Assets\Http\Requests\SelectFileRequest;
 use PN\Assets\Jobs\CreateAsset;
 use PN\Assets\Jobs\ParticipateInBuildOff;
+use PN\Assets\Jobs\ResetDependencies;
 use PN\Assets\Jobs\ResetThumbnail;
 use PN\Assets\Jobs\Tags\ResetSecondaryTags;
 use PN\Assets\Jobs\UpdateAsset;
@@ -226,6 +227,7 @@ class AssetManageController extends Controller
             $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
         }
 
+        $this->dispatch(new ResetDependencies($asset));
         foreach (request('dependencies', []) as $depencyId) {
             $dependency = \AssetRepo::findByIdentifier($depencyId);
 

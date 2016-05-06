@@ -12,13 +12,19 @@
 				Specify your mod dependencies, the client will download these mods first and add them as compiler references.
 			</p>
 
-			<div id="dependencies-box">
-				<select id="dependencies" ng-controller="ParkitectNexus.Stockroom.DependencyController" multiple="multiple" name="dependencies[]">
-					@foreach($mods as $mod)
-						<option value="{{ $mod->identifier }}")>{{ $mod->name }}</option>
-					@endforeach
-				</select>
-			</div>
+			@if($resource->type == 'mod')
+				<div id="dependencies-box">
+					<select id="dependencies" multiple="multiple" name="dependencies[]">
+						@foreach($mods as $mod)
+							<option value="{{ $mod->identifier }}")>{{ $mod->name }}</option>
+						@endforeach
+					</select>
+				</div>
+			@else
+				<p>
+					Not available for {{ $resource->type }}
+				</p>
+			@endif
 		</div>
 	</div>
 </div>
