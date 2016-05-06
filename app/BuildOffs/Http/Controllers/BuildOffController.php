@@ -30,6 +30,8 @@ class BuildOffController extends Controller
             // get assets in rank order
             $assets = $buildOff->getRanks()->map(function($item){
                 return $item->getAsset();
+            })->filter(function($item){
+                return $item != null;
             });
         }
 
