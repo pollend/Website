@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \PN\Model::class => \PN\Policies\ModelPolicy::class,
+        
     ];
 
     /**
@@ -24,8 +24,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
+        $gate->before(function ($user, $ability) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+        });
+
         $this->registerPolicies($gate);
 
-        //
+
     }
 }
