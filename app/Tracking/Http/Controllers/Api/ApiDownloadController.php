@@ -15,11 +15,7 @@ class ApiDownloadController extends Controller
 
         $repo = RepositoryResolver::resolve($model);
 
-        try {
-            $downloadable = $repo->findByIdentifier($id);
-        } catch (\Exception $e) {
-            $downloadable = $repo->find($id);
-        }
+        $downloadable = $repo->find($id);
 
         $this->dispatch(new AddDownload(\Auth::user(), $downloadable));
     }
