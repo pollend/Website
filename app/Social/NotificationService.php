@@ -18,7 +18,16 @@ class NotificationService
             try{
                 $notification = app($notificationModel->type, [$notificationModel]);
 
-                $notifications->push($notification);
+                try {
+                    // todo, check somewhere else that this notification can be rendered
+                    $notification->getFinalUrl();
+                    $notification->getText();
+
+                    $notifications->push($notification);
+                } catch (\Exception $e) {
+                    // ignore, hotfix
+                }
+
             } catch (\Exception $e) {
                 // Don't let the error block because of an bugged notification, just send a log
                 \Log::error($e);
