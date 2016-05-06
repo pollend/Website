@@ -1,12 +1,11 @@
 <div class="col-sm-3 col-md-2">
-    <a href="https://parkitectnexus.com/build-off/7/monthly-log-flume-edition">
+    <a href="{{ route('buildoffs.show', [$buildOff->id, $buildOff->getPresenter()->getSlug()]) }}">
         <img class="build-off-type-icon" src="{{ $buildOff->getPresenter()->getThumbnailPath() }}">
     </a>
 </div>
 <div class="col-sm-6 col-md-8">
     <div class="row">
         <div class="col-xs-12 build-off-info">
-
             <h2>
                 <a href="{{ route('buildoffs.show', [$buildOff->id, $buildOff->getPresenter()->getSlug()]) }}">
                     {{ $buildOff->name }}

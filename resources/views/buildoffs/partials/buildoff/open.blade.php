@@ -1,5 +1,5 @@
 <div class="col-sm-3 col-md-2">
-    <a href="https://parkitectnexus.com/build-off/7/monthly-log-flume-edition">
+    <a href="{{ route('buildoffs.show', [$buildOff->id, $buildOff->getPresenter()->getSlug()]) }}">
         <img class="build-off-type-icon" src="{{ $buildOff->getPresenter()->getThumbnailPath() }}">
     </a>
 </div>
