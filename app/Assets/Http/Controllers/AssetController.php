@@ -121,6 +121,11 @@ class AssetController extends Controller
 
     public function filterAssets($type)
     {
+        // todo hotfix
+        if(!\Request::has('sort')){
+            \Request::replace(array_merge(\Request::all(), ['sort' => 'hot_score']));
+        }
+
         $assetFilter = (new AssetFilter())
             ->withType($type)
             ->withNameLike(\Request::input('name', ''))
