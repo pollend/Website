@@ -159,6 +159,7 @@ return [
         Krucas\Notification\NotificationServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Mastergalen\AdsenseAds\AdsServiceProvider::class,
+        Ikkentim\WikiClone\WikiCloneServiceProvider::class,
 
         /*
          * Application Service Providers...

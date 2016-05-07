@@ -18,7 +18,8 @@
         "doctrine/dbal": "^2.5",
         "league/fractal": "^0.13.0",
         "jenssegers/agent": "^2.3",
-        "mastergalen/adsense-ads": "^0.1.2"
+        "mastergalen/adsense-ads": "^0.1.2",
+        "ikkentim/wikiclone": "^0.4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

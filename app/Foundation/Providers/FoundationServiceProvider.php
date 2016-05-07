@@ -16,15 +16,21 @@ class FoundationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::group(['middleware' => ['web']], function(){
-            \Route::get('', [
+        $router = $this->app['router'];
+
+        $router->group(['middleware' => ['web']], function () use ($router) {
+            $router->get('', [
                 'as' => 'home.index',
                 'uses' => HomeController::class . '@getIndex'
             ]);
         });
+
+        $router->post('modding-wiki/', '\Ikkentim\WikiClone\Http\Controllers\WebhookController@trigger');
+        $router->get('modding-wiki/{page?}', '\Ikkentim\WikiClone\Http\Controllers\DocumentationController@index');
     }
 
-    public static function compiles() {
+    public static function compiles()
+    {
         $files = [];
 
         $files = array_merge($files, CompileHelperTrait::filesInFolder(app_path('Foundation/Providers')));
