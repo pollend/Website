@@ -30,16 +30,6 @@
 @endsection
 
 @section('content')
-    <h1 id="wiki-title">
-        {{ $title }}
-        <small>
-            <a class="btn btn-link"
-               href="{{ \Ikkentim\WikiClone\GitHubUrls::getWikiEditURL(config('wikiclone.repository'), $fileName) }}">
-                <i class="fa fa-github"></i> Edit this page on GitHub
-            </a>
-        </small>
-    </h1>
-    <hr>
     <div id="wiki-content">
         {!! $content !!}
     </div>
@@ -50,8 +40,4 @@
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-@endpush
-
-@push('css')
-    <link rel="stylesheet" href="{{ elixir('css/wiki.css') }}"/>
 @endpush

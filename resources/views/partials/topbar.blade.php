@@ -123,6 +123,11 @@
                         Client
                     </a>
                 </li>
+                <li>
+                    <a href="/modding-wiki" title="ParkitectNexus Modding Wiki">
+                        Modding Wiki
+                    </a>
+                </li>
             </ul>
             @include('partials/navbar')
         </nav>
