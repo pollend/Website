@@ -48,7 +48,7 @@ class UserPresenter extends Presenter
     {
         $user = $this->model;
 
-        return \Cache::remember('users.uploadcount', rand(10, 30), function() use ($user){
+        return \Cache::remember(sprintf('users.%s.uploadcount', $this->model->id), rand(10, 30), function() use ($user){
             return $user->assets()->count();
         });
     }
@@ -57,7 +57,7 @@ class UserPresenter extends Presenter
     {
         $user = $this->model;
 
-        return \Cache::remember('users.postcount', rand(10, 30), function() use ($user){
+        return \Cache::remember(sprintf('users.%s.postcount', $this->model->id), rand(10, 30), function() use ($user){
             return $user->posts()->count();
         });
     }
@@ -66,7 +66,7 @@ class UserPresenter extends Presenter
     {
         $user = $this->model;
 
-        return \Cache::remember('users.likeCount', rand(10, 30), function() use ($user){
+        return \Cache::remember(sprintf('users.%s.likecount', $this->model->id), rand(10, 30), function() use ($user){
             $count = 0;
 
             foreach($user->assets as $asset) {
