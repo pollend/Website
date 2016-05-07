@@ -3,15 +3,11 @@
 namespace PN\Media\Jobs;
 
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\SerializesModels;
 use PN\Jobs\Job;
 use PN\Media\Image;
 
-class ResizeImage extends Job implements ShouldQueue
+class ResizeImage extends Job
 {
-    use SerializesModels;
-
     /**
      * @var \PN\Media\Image
      */
