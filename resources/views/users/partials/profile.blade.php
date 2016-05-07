@@ -5,12 +5,10 @@
 
     <div class="user-detail">
         <div class="username">
-            <h2>
-                <a href="{{ $user->getPresenter()->url() }}"
-                   title="{{ $user->getPresenter()->displayName() }}">
-                    {{ $user->getPresenter()->displayName() }}
-                </a>
-            </h2>
+            <a href="{{ $user->getPresenter()->url() }}"
+               title="{{ $user->getPresenter()->displayName() }}">
+                {{ $user->getPresenter()->displayName() }}
+            </a>
             @if($user->getPresenter()->hasFlair())
                 <span class="label label-primary">
                         {{ $user->flair }}
