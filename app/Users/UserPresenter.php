@@ -69,8 +69,8 @@ class UserPresenter extends Presenter
         return \Cache::remember(sprintf('users.%s.likecount', $this->model->id), rand(10, 30), function() use ($user){
             $count = 0;
 
-            foreach($user->assets as $asset) {
-                $count += $asset->likes;
+            foreach($user->getAssets() as $asset) {
+                $count += $asset->like_count;
             }
 
             return $count;
