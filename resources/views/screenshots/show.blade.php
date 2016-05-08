@@ -11,16 +11,20 @@
 @endsection
 
 @section('sidebar')
-    <a href="{{ $screenshot->getPresenter()->editUrl() }}" class="btn btn-info btn-block" title="Update {{ $screenshot->title }}">
-        Update screenshot
-    </a>
-    <br>
-    <form method="post" action="{{ $screenshot->getPresenter()->deleteUrl() }}" onsubmit="confirmDelete(this, 'Modular Parking Garage Pieces'); return false;">
-        {{ csrf_field() }}
-        {{ method_field('delete') }}
+    @can('update', $screenshot)
+        <a href="{{ $screenshot->getPresenter()->editUrl() }}" class="btn btn-info btn-block" title="Update {{ $screenshot->title }}">
+            Update screenshot
+        </a>
+    @endcan
+    @can('delete', $screenshot)
+        <br>
+        <form method="post" action="{{ $screenshot->getPresenter()->deleteUrl() }}" onsubmit="confirmDelete(this, 'Modular Parking Garage Pieces'); return false;">
+            {{ csrf_field() }}
+            {{ method_field('delete') }}
 
-        <input type="submit" value="Delete screenshot" class="btn btn-warning btn-block">
-    </form>
+            <input type="submit" value="Delete screenshot" class="btn btn-warning btn-block">
+        </form>
+    @endcan
     @include('users.partials.profile', ['user' => $screenshot->getUser()])
     <hr>
     <div class="row like"
