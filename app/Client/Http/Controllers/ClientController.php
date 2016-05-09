@@ -47,8 +47,6 @@ class ClientController extends Controller
         } else {
             $this->dispatch(new RegisterLog(\Request::getClientIp(), 'download', ''));
 
-            \Log::info('Client download!');
-
             return \Response::download(storage_path('client/zips/parkitectnexus-client-' . getenv('WIN_CLIENT_VERSION') . '.rar'),
                 'parkitectnexus-client.rar');
         }
