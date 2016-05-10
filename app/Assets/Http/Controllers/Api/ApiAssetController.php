@@ -22,6 +22,6 @@ class ApiAssetController extends Controller
 
         $fractal->parseIncludes(request('include', []));
 
-        return $fractal->createData($resource)->toJson();
+        return \Response::json($fractal->createData($resource)->toArray());
     }
 }
