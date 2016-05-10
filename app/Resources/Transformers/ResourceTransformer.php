@@ -11,9 +11,16 @@ class ResourceTransformer extends TransformerAbstract
 {
     public function transform(Resource $resource)
     {
-        return [
+        $data = [
             'source' => $resource->source,
             'url' => $resource->getAsset()->getPresenter()->downloadUrl()
         ];
+
+        if($resource->getPresenter()->isReleasable()) {
+            $data['version'] = $resource->getPresenter()->getVersion();
+            $data['release_date'] = $resource->getPresenter()->getReleaseDate();
+        }
+
+        return $data;
     }
 }

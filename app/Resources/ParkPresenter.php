@@ -32,4 +32,19 @@ class ParkPresenter extends Presenter implements ResourcePresenterInterface
             ]
         ];
     }
+
+    public function isReleasable()
+    {
+        return false;
+    }
+
+    public function getVersion()
+    {
+        return null;
+    }
+
+    public function getReleaseDate()
+    {
+        return null;
+    }
 }

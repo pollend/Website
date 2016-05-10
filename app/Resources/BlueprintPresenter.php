@@ -5,7 +5,7 @@ namespace PN\Resources;
 
 use PN\Foundation\Presenters\Presenter;
 
-class BlueprintPresenter extends Presenter
+class BlueprintPresenter extends Presenter implements ResourcePresenterInterface
 {
     public function imageUrl()
     {
@@ -50,5 +50,20 @@ class BlueprintPresenter extends Presenter
                 "TrainTotal"
             ]
         ];
+    }
+
+    public function isReleasable()
+    {
+        return false;
+    }
+
+    public function getVersion()
+    {
+        return null;
+    }
+
+    public function getReleaseDate()
+    {
+        return null;
     }
 }
