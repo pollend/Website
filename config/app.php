@@ -268,6 +268,7 @@ return [
         'PostRepo'      => PN\Forum\Repositories\Facades\PostRepositoryFacade::class,
         'NotificationRepo' => PN\Social\Repositories\Facades\NotificationRepositoryFacade::class,
         'ClientRepo'    => PN\Client\Repositories\Facades\ClientRepositoryFacade::class,
+        'OptionRepo'    => PN\Foundation\Repositories\Facades\OptionRepositoryFacade::class,
     ],
 
 ];

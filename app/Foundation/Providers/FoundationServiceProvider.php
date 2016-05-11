@@ -5,6 +5,8 @@ namespace PN\Foundation\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use PN\Foundation\Http\Controllers\HomeController;
+use PN\Foundation\Repositories\OptionRepository;
+use PN\Foundation\Repositories\OptionRepositoryInterface;
 
 class FoundationServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class FoundationServiceProvider extends ServiceProvider
 
         $router->post('modding-wiki/', '\Ikkentim\WikiClone\Http\Controllers\WebhookController@trigger');
         $router->get('modding-wiki/{page?}', '\Ikkentim\WikiClone\Http\Controllers\DocumentationController@index');
+
+        $this->app->singleton(OptionRepositoryInterface::class, OptionRepository::class);
     }
 
     public static function compiles()

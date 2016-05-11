@@ -24,4 +24,13 @@ class ApiAssetController extends Controller
 
         return \Response::json($fractal->createData($resource)->toArray());
     }
+
+    public function required()
+    {
+        $optionRepo = \OptionRepo::find('required_assets');
+
+        $ids = explode(',', $optionRepo->value);
+
+        return \Response::json(['data' => $ids]);
+    }
 }

@@ -51,6 +51,7 @@ class AssetServiceProvider extends ServiceProvider
                 'as' => 'assets.show'
             ]);
 
+            $router->get('api/assets/required', ApiAssetController::class . '@required');
             $router->resource('api/assets', ApiAssetController::class);
         });
 
