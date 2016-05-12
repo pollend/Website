@@ -31,7 +31,7 @@ class BlueprintExtractor implements ExtractorInterface
             }
 
             if ($result == null || $errorCode != 0) {
-                throw new NotAValidBlueprint($this->path);
+                throw new NotAValidBlueprint(sprintf('Error: %s, path: ', $errorCode, $this->path));
             }
 
             $json = json_decode($result, true);
