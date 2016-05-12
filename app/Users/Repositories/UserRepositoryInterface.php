@@ -22,6 +22,14 @@ interface UserRepositoryInterface
     public function findByUsername(string $username);
 
     /**
+     * Finds user by steam id
+     *
+     * @param string $steamId
+     * @return User
+     */
+    public function findBySteamId(string $steamId);
+
+    /**
      * Finds user by token
      * 
      * @param $token

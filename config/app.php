@@ -160,6 +160,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         Mastergalen\AdsenseAds\AdsServiceProvider::class,
         Ikkentim\WikiClone\WikiCloneServiceProvider::class,
+        Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -123,4 +123,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return User::where('confirm_token', $token)->first();
     }
+
+    /**
+     * Finds user by steam id
+     *
+     * @param string $steamId
+     * @return User
+     */
+    public function findBySteamId(string $steamId)
+    {
+        return $this->findByField('steam_id', $steamId)->first();
+    }
 }

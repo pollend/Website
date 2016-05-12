@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2febdbb2e30ef60de7d1cdd7a11be9f7",
-    "content-hash": "5351d5bd083de8ca10fd89e141b56627",
+    "hash": "cec614c59e7708e0d26ce7f11a25120e",
+    "content-hash": "947faeab5e1b819b146ad6c9cd9753fb",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1144,6 +1144,48 @@
                 "watermark"
             ],
             "time": "2016-04-26 14:08:40"
+        },
+        {
+            "name": "invisnik/laravel-steam-auth",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/invisnik/laravel-steam-auth.git",
+                "reference": "d75eda53996495db831eda1b7ea78326128544ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/invisnik/laravel-steam-auth/zipball/d75eda53996495db831eda1b7ea78326128544ab",
+                "reference": "d75eda53996495db831eda1b7ea78326128544ab",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Invisnik\\LaravelSteamAuth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Brytkov",
+                    "email": "invis.nik@gmail.com"
+                }
+            ],
+            "description": "Laravel Steam Auth",
+            "keywords": [
+                "auth",
+                "laravel",
+                "steam"
+            ],
+            "time": "2015-08-19 12:25:26"
         },
         {
             "name": "jakub-onderka/php-console-color",

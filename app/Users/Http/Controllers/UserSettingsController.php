@@ -49,7 +49,7 @@ class UserSettingsController extends Controller
             // TODO change email
         }
 
-        $this->dispatch(new SetSocialMedia($user, request('twitter'), request('twitch'), request('steam')));
+        $this->dispatch(new SetSocialMedia($user, request('twitter'), request('twitch')));
         $this->dispatch(new SetPaymentMethods($user, request('paypal'), request('bitcoin')));
         $this->dispatch(new SetEmailSettings($user, request('notification_rate'), request('recap_rate')));
 

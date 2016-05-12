@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use PN\Users\Events\UserRegistered;
 use PN\Users\Http\Controllers\AuthController;
 use PN\Users\Http\Controllers\SocialAuthController;
+use PN\Users\Http\Controllers\SteamController;
 use PN\Users\Listeners\ConfirmWhenInDev;
 use PN\Users\Listeners\EmailConfirm;
 
@@ -60,56 +61,14 @@ class AuthServiceProvider extends ServiceProvider
                 'getGoogle' => 'socialauth.google',
                 'getFacebook' => 'socialauth.facebook',
                 'getGithub' => 'socialauth.github',
+                'getSteam' => 'socialauth.steam',
                 'getGoogleCallback' => 'socialauth.google.callback',
                 'getFacebookCallback' => 'socialauth.facebook.callback',
                 'getGithubCallback' => 'socialauth.github.callback',
+                'getSteamCallback' => 'socialauth.steam.callback',
                 'getSetUsername' => 'socialauth.setusername',
                 'postSetUsername' => 'socialauth.setusername',
             ]);
-
-            \Route::get('social-auth/google/callback', [
-                'uses' => SocialAuthController::class . '@getGoogleCallback'
-            ]);
         });
-//        \Route::get('/auth/login', [
-//            'as' => 'auth.login',
-//            'uses' => '\PN\Users\Http\Controllers\AuthController@getLogin'
-//        ]);
-//        \Route::post('/auth/login', [
-//            'as' => 'auth.login',
-//            'uses' => '\PN\Users\Http\Controllers\AuthController@postLogin'
-//        ]);
-//
-//        \Route::get('/auth/logout', [
-//            'as' => 'auth.logout',
-//            'uses' => '\PN\Users\Http\Controllers\AuthController@getLogout'
-//        ]);
-//        \Route::get('/auth/set-username/{identifier}',
-//            ['as' => 'auth.setusername', 'uses' => '\PN\Users\Http\Controllers\AuthController@setUsername']);
-//        \Route::post('/auth/store-username/{identifier}',
-//            ['as' => 'auth.storeusername', 'uses' => '\PN\Users\Http\Controllers\AuthController@storeUsername']);
-//
-//        \Route::get('/auth/register', ['as' => 'auth.register', 'uses' => '\PN\Users\Http\Controllers\AuthController@getRegister']);
-//        \Route::post('/auth/register', '\PN\Users\Http\Controllers\AuthController@postRegister');
-//        \Route::get('/auth/confirm/{token}',
-//            ['as' => 'auth.confirm', 'uses' => '\PN\Users\Http\Controllers\AuthController@confirm']);
-//        \Route::get('/auth/resend/{email}',
-//            ['as' => 'auth.resend', 'uses' => '\PN\Users\Http\Controllers\AuthController@resend']);
-//
-//        \Route::get('/auth/request-password',
-//            [
-//                'as' => 'auth.requestpassword',
-//                'uses' => '\PN\Users\Http\Controllers\AuthController@getRequestNewPassword'
-//            ]);
-//        \Route::post('/auth/request-password',
-//            [
-//                'as' => 'auth.requestpassword',
-//                'uses' => '\PN\Users\Http\Controllers\AuthController@postRequestNewPassword'
-//            ]);
-//
-//        \Route::get('/auth/new-password/{token}',
-//            ['as' => 'auth.newpassword', 'uses' => '\PN\Users\Http\Controllers\AuthController@getSetNewPassword']);
-//        \Route::post('/auth/new-password/{token}',
-//            ['as' => 'auth.newpassword', 'uses' => '\PN\Users\Http\Controllers\AuthController@postSetNewPassword']);
     }
 }

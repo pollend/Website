@@ -42,6 +42,13 @@
                 {{ \Auth::user()->getPresenter()->displayName }} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                @if(!\Auth::user()->getPresenter()->hasSteam())
+                    <li>
+                        <a href="{{ route('socialauth.steam') }}">
+                            <i class="fa fa-steam"></i> Link your steam
+                        </a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{ \Auth::user()->getPresenter()->url() }}">
                         Profile
@@ -68,28 +75,33 @@
             <ul class="dropdown-menu">
                 <li>
                     <a href="{{ route('auth.login') }}">
-                        Username/password
+                        <i class="fa fa-user"></i> Username/password
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('socialauth.steam') }}">
+                        <i class="fa fa-steam"></i> Steam
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('socialauth.google') }}">
-                        Google
+                        <i class="fa fa-google"></i> Google
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('socialauth.facebook') }}">
-                        Facebook
+                        <i class="fa fa-facebook"></i> Facebook
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('socialauth.github') }}">
-                        GitHub
+                        <i class="fa fa-github"></i> GitHub
                     </a>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li>
                     <a href="{{ route('auth.register') }}">
-                        Register
+                        <i class="fa fa-key"></i> Register
                     </a>
                 </li>
             </ul>

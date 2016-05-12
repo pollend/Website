@@ -81,17 +81,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                Steam
-            </label>
-
-            <div class="input-group">
-                <div class="input-group-addon">https://steamcommunity.com/</div>
-                <input type="text" name="steam" placeholder="Steam user id (eg. 76561198016349396)" class="form-control" value="{{ old('steam', $user->steam) }}">
-            </div>
-        </div>
-
         <h2>
             Donations
         </h2>

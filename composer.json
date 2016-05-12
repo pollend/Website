@@ -20,7 +20,8 @@
         "jenssegers/agent": "^2.3",
         "mastergalen/adsense-ads": "^0.1.2",
         "ikkentim/wikiclone": "^0.4.0",
-        "knplabs/github-api": "^1.6"
+        "knplabs/github-api": "^1.6",
+        "invisnik/laravel-steam-auth": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

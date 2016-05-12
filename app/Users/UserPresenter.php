@@ -107,6 +107,11 @@ class UserPresenter extends Presenter
         return date('d F Y', strtotime($this->model->created_at));
     }
 
+    public function hasSteam()
+    {
+        return $this->model->steam_id != null;
+    }
+
     public function twitterUrl()
     {
         return sprintf('https://twitter.com/%s', $this->model->twitter);
@@ -119,7 +124,7 @@ class UserPresenter extends Presenter
 
     public function steamUrl()
     {
-        return sprintf('https://steamcommunity.com/%s', $this->model->steam);
+        return sprintf('https://steamcommunity.com/profiles/%s', $this->model->steam_id);
     }
 
     public function paypalUrl()

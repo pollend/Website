@@ -3,11 +3,15 @@
 namespace PN\Users\Http\Controllers;
 
 
+use Auth;
 use Illuminate\Support\Str;
+use Invisnik\LaravelSteamAuth\SteamAuth;
 use PN\Foundation\Http\Controllers\Controller;
+use PN\Users\Exceptions\SteamAuthFailedException;
 use PN\Users\Exceptions\UserNotFound;
 use PN\Users\Http\Requests\SetUsernameRequest;
 use PN\Users\Jobs\CreateSocialUser;
+use PN\Users\Jobs\SetSteamIdOnUser;
 use PN\Users\Jobs\SetUsername;
 use PN\Users\Repositories\UserRepositoryInterface;
 
@@ -49,6 +53,17 @@ class SocialAuthController extends Controller
     public function getFacebook(\Request $request)
     {
         return \Socialite::with('facebook')->redirect();
+    }
+
+    public function getSteam()
+    {
+        $steam = app(SteamAuth::class);
+
+        if ($steam->validate()) {
+            return $this->getSteamCallback($steam);
+        }
+
+        return $steam->redirect();
     }
 
     /**
@@ -114,6 +129,54 @@ class SocialAuthController extends Controller
         }
 
         return \Redirect::intended(route('home.index'));
+    }
+
+    public function getSteamCallback($steam)
+    {
+        $info = $steam->getUserInfo();
+
+        if (!is_null($info)) {
+            // steam provides no emails, generate one based on id
+            $email = $info->getSteamID64() . '@steam.com';
+
+            // try to find someone who is already linked with steam, if they do we need to log them in without doing anything
+            $user = $this->userRepo->findBySteamId($info->getSteamID64());
+
+            // couldnt find it
+            if ($user == null) {
+                // if someone is already logged in, this is a call to link steam to an existing account
+                if(\Auth::check()) {
+                    $user = \Auth::user();
+
+                    $this->dispatch(new SetSteamIdOnUser($user, $info->getSteamID64()));
+
+                    \Notification::info('Steam was successfully linked to your account');
+                } else {
+                    // this is a call to create a new user with steam
+                    $user = $this->dispatch(new CreateSocialUser(
+                        $info->getName(),
+                        $email,
+                        $info->getProfilePictureFull(),
+                        $info->getSteamID64(),
+                        'steam'
+                    ));
+
+                    $this->dispatch(new SetSteamIdOnUser($user, $info->getSteamID64()));
+
+                    if ($user->username == '') {
+                        return redirect(route('socialauth.setusername', [\Crypt::encrypt($user->identifier)]));
+                    }
+                }
+            } else {
+                // user was found, just log the user in
+                \Auth::login($user);
+            }
+
+            return redirect($user->getPresenter()->url());
+        }
+
+        // should never come here but an exception anyways
+        throw new SteamAuthFailedException();
     }
 
     /**
