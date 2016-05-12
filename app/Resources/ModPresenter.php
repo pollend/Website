@@ -51,7 +51,7 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
         } catch (\Exception $e) {
             \Log::error($e);
 
-            return 'v0.0.0';
+            return null;
         }
     }
 
@@ -62,7 +62,7 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
         } catch (\Exception $e) {
             \Log::error($e);
 
-            return date('Y-m-d H:i:s', 0);
+            return null;
         }
     }
 }
