@@ -4,6 +4,7 @@ php:
   - 7.0
 
 before_script:
+  - sudo apt-get install -y mono-complete
   - cp .env.travis .env
   - mysql -e 'create database parkitectnexus_test;'
   - composer self-update
