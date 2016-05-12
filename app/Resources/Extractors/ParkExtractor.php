@@ -31,7 +31,7 @@ class ParkExtractor implements ExtractorInterface
             }
 
             if ($result == null || $errorCode != 0) {
-                throw new NotAValidPark(sprintf('Error: %s, path: ', $errorCode, $this->path));
+                throw new NotAValidPark(sprintf('Error: %s, path: ', $result, $this->path));
             }
 
             $json = json_decode($result, true);
