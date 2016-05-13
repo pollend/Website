@@ -17,7 +17,7 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
         return [];
     }
 
-    private function getLatestRelease()
+    private function getLatestTag()
     {
         return \Cache::remember(sprintf('resources.%s.version', $this->model->id), 10, function () {
             $client = new Client(new CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')));
@@ -30,12 +30,14 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
             $user = array_pop($parts);
 
             try {
-                $release = $client->api('repo')->tags()->latest($user, $repo);
-            } catch (RuntimeException $e) {
+                $tags = $client->api('repo')->tags($user, $repo);
+
+                $tag = array_shift($tags);
+            } catch (\Exception $e) {
                 return [];
             }
 
-            return $release;
+            return $tag;
         });
     }
 
@@ -47,7 +49,7 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
     public function getVersion()
     {
         try {
-            return $this->getLatestRelease()['tag_name'];
+            return $this->getLatestTag()['name'];
         } catch (\Exception $e) {
             \Log::error($e);
 
@@ -55,10 +57,10 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
         }
     }
 
-    public function getReleaseDate()
+    public function getZipBallUrl()
     {
         try {
-            return date('Y-m-d H:i:s', strtotime($this->getLatestRelease()['published_at']));
+            return $this->getLatestTag()['zipball_url'];
         } catch (\Exception $e) {
             \Log::error($e);
 

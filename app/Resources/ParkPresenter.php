@@ -43,7 +43,7 @@ class ParkPresenter extends Presenter implements ResourcePresenterInterface
         return null;
     }
 
-    public function getReleaseDate()
+    public function getZipBallUrl()
     {
         return null;
     }

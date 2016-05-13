@@ -62,7 +62,7 @@ class BlueprintPresenter extends Presenter implements ResourcePresenterInterface
         return null;
     }
 
-    public function getReleaseDate()
+    public function getZipBallUrl()
     {
         return null;
     }

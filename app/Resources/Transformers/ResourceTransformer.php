@@ -18,7 +18,7 @@ class ResourceTransformer extends TransformerAbstract
 
         if($resource->getPresenter()->isReleasable()) {
             $data['version'] = $resource->getPresenter()->getVersion();
-            $data['release_date'] = $resource->getPresenter()->getReleaseDate();
+            $data['zipball'] = $resource->getPresenter()->getZipBallUrl();
         }
 
         return $data;

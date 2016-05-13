@@ -12,5 +12,5 @@ interface ResourcePresenterInterface
 
     public function getVersion();
 
-    public function getReleaseDate();
+    public function getZipBallUrl();
 }
