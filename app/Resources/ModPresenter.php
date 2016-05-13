@@ -30,7 +30,7 @@ class ModPresenter extends Presenter implements ResourcePresenterInterface
             $user = array_pop($parts);
 
             try {
-                $release = $client->api('repo')->releases()->latest($user, $repo);
+                $release = $client->api('repo')->tags()->latest($user, $repo);
             } catch (RuntimeException $e) {
                 return [];
             }

@@ -161,6 +161,7 @@ return [
         Mastergalen\AdsenseAds\AdsServiceProvider::class,
         Ikkentim\WikiClone\WikiCloneServiceProvider::class,
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -245,6 +246,7 @@ return [
         'Notification'  => Krucas\Notification\Facades\Notification::class,
         'Agent'         => Jenssegers\Agent\Facades\Agent::class,
         'Ads'           => Mastergalen\AdsenseAds\AdsFacade::class,
+        'Goutte'        => Weidner\Goutte\GoutteFacade::class,
 
         /**
          * Application Facades

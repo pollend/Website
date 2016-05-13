@@ -8,6 +8,7 @@ use PN\BuildOffs\Console\RankBuildOffs;
 use PN\Foundation\Console\Inspire;
 use PN\Social\Console\Commands\RecalculateHotScore;
 use PN\Social\Console\Commands\RecalculateLikes;
+use PN\Steam\Console\ScrapeWorkshop;
 use PN\Tracking\Console\Commands\RecalculateDownloads;
 use PN\Tracking\Console\Commands\RecalculateViews;
 
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
         RecalculateLikes::class,
         RecalculateHotScore::class,
         RankBuildOffs::class,
+        ScrapeWorkshop::class,
     ];
 
     /**
