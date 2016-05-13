@@ -90,4 +90,9 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
             return $asset->getTags();
         });
     }
+
+    public function findByCategory($category)
+    {
+        return $this->findWhere(['category' => $category]);
+    }
 }

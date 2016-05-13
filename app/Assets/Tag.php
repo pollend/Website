@@ -9,8 +9,8 @@ class Tag extends Model
 
     protected $table = 'tags';
     public $timestamps = false;
-    protected $fillable = array('type', 'tag', 'slug', 'parkitect_type', 'primary');
-    protected $visible = array('type', 'tag', 'slug', 'parkitect_type', 'primary');
+    protected $fillable = array('type', 'tag', 'slug', 'parkitect_type', 'primary', 'category');
+    protected $visible = array('type', 'tag', 'slug', 'parkitect_type', 'primary', 'category');
 
     private function assets()
     {

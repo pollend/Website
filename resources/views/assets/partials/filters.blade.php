@@ -18,7 +18,7 @@
                         Filters
                     </h3>
                 </div>
-                <div class="panel-body {{ request('stats') != null || count($filters['advanced']) > 0 ? '' : 'collapse' }}" id="options-filter-basic">
+                <div class="panel-body collapse {{ request('stats') != null || count($filters['advanced']) > 0 ? 'in' : '' }}" id="options-filter-basic">
                     <div class="sliders">
                         @foreach($filters['base'] as $name => $filter)
                             @include('assets.partials.filter', ['filter' => $filter])
@@ -42,6 +42,39 @@
                             @include('assets.partials.filter', ['filter' => $filter])
                         @endforeach
                     </div>
+                </div>
+            </div>
+        @endif
+
+        @if(isset($contentTypeTags) && count($contentTypeTags) > 0)
+            <div class="panel panel-default filter-group">
+                <div class="panel-heading" data-toggle="collapse" data-target="#options-blueprint" aria-expanded="true" aria-controls="options-primary-tags">
+                    <h3 class="panel-title">
+                        <i class="glyphicon glyphicon-tag"></i>
+                        Blueprint
+                    </h3>
+                </div>
+                <div class="panel-body collapse in" id="options-blueprint" aria-expanded="true">
+                    @foreach($contentTypeTags as $tag)
+                        @include('assets.partials.tag-filter', ['tag' => $tag])
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
+        @if(isset($coasterTypeTags) && count($coasterTypeTags) > 0)
+            <div class="panel panel-default filter-group">
+                <div class="panel-heading" data-toggle="collapse" data-target="#options-coaster-types" aria-expanded="false"
+                     aria-controls="options-primary-tags">
+                    <h3 class="panel-title">
+                        <i class="glyphicon glyphicon-tag"></i>
+                        Coaster Types
+                    </h3>
+                </div>
+                <div class="panel-body{{ request('tags') == null ? ' collapse' : '' }}" id="options-coaster-types">
+                    @foreach($coasterTypeTags as $tag)
+                        @include('assets.partials.tag-filter', ['tag' => $tag])
+                    @endforeach
                 </div>
             </div>
         @endif

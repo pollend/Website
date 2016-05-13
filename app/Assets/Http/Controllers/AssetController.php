@@ -103,10 +103,14 @@ class AssetController extends Controller
     {
         $filters = config('assetfilters.' . $type, []);
 
-        $tags = \TagRepo::findPrimary($type);
+        $tags = \TagRepo::findByCategory($type);
 
-        if(count($tags) == 0) {
-            $tags = \TagRepo::findSecondary($type);
+        if($type == 'blueprint') {
+            $contentTypeTags = \TagRepo::findByCategory('content-types');
+            $coasterTypeTags = \TagRepo::findByCategory('coaster-types');
+        } else {
+            $contentTypeTags = [];
+            $coasterTypeTags = [];
         }
 
         $assetList = $this->filterAssets($type)->render();
@@ -115,6 +119,8 @@ class AssetController extends Controller
             'assetList',
             'filters',
             'tags',
+            'contentTypeTags',
+            'coasterTypeTags',
             'type'
         ));
     }

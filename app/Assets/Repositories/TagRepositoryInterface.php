@@ -18,6 +18,8 @@ interface TagRepositoryInterface extends BaseRepositoryInterface
 
     public function findSecondary($type);
 
+    public function findByCategory($category);
+
     public function findByPrimaryTags($tagTypes);
 
     public function findByTagName($name);

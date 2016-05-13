@@ -16,13 +16,15 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'transport',
                 'parkitect_type' => 'Transport',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
-                'tag'            => 'Rollercoaster',
+                'tag'            => 'Only Coaster',
                 'slug'           => 'rollercoaster',
                 'parkitect_type' => 'Rollercoaster',
                 'primary'        => 1,
+                'category'       => 'content-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -30,6 +32,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'log-flume',
                 'parkitect_type' => 'LogFlume',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -37,6 +40,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'mini-coaster',
                 'parkitect_type' => 'MiniCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -44,6 +48,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'miniature-railway',
                 'parkitect_type' => 'MiniatureRailway',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -51,6 +56,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'steel-coaster',
                 'parkitect_type' => 'SteelCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -58,6 +64,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'suspended-coaster',
                 'parkitect_type' => 'SuspendedCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -65,6 +72,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'suspended-monorail',
                 'parkitect_type' => 'SuspendedMonorail',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -72,6 +80,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'wild-mouse',
                 'parkitect_type' => 'WildMouse',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -79,6 +88,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'wing-coaster',
                 'parkitect_type' => 'WingCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -86,6 +96,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'wooden-coaster',
                 'parkitect_type' => 'WoodenCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -93,6 +104,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'gentle-coaster',
                 'parkitect_type' => 'GentleCoaster',
                 'primary'        => 1,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'blueprint',
@@ -100,6 +112,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'intense-coaster',
                 'parkitect_type' => 'IntenseCoaster',
                 'primary'        => 0,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'blueprint',
@@ -107,6 +120,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'compact-coaster',
                 'parkitect_type' => 'CompactCoaster',
                 'primary'        => 0,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'blueprint',
@@ -114,6 +128,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'large-coaster',
                 'parkitect_type' => 'LargeCoaster',
                 'primary'        => 0,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'blueprint',
@@ -121,6 +136,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'replica-coaster',
                 'parkitect_type' => 'ReplicaCoaster',
                 'primary'        => 0,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'park',
@@ -128,6 +144,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'small-park',
                 'parkitect_type' => 'SmallPark',
                 'primary'        => 0,
+                'category'       => 'park',
             ],
             [
                 'type'           => 'park',
@@ -135,6 +152,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'large-park',
                 'parkitect_type' => 'LargePark',
                 'primary'        => 0,
+                'category'       => 'park',
             ],
             [
                 'type'           => 'park',
@@ -142,6 +160,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'scenario',
                 'parkitect_type' => 'Scenario',
                 'primary'        => 0,
+                'category'       => 'park',
             ],
             [
                 'type'           => 'park',
@@ -149,6 +168,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'filled-park',
                 'parkitect_type' => 'FilledPark',
                 'primary'        => 0,
+                'category'       => 'park',
             ],
             [
                 'type'           => 'park',
@@ -156,6 +176,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'replica-park',
                 'parkitect_type' => 'ReplicaPark',
                 'primary'        => 0,
+                'category'       => 'park',
             ],
             [
                 'type'           => 'blueprint',
@@ -163,6 +184,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'water',
                 'parkitect_type' => 'Water',
                 'primary'        => 1,
+                'category'       => 'blueprint',
             ],
             [
                 'type'           => 'mod',
@@ -170,6 +192,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'camera',
                 'parkitect_type' => 'Camera',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -177,6 +200,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'shop',
                 'parkitect_type' => 'Shop',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -184,6 +208,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'scenery',
                 'parkitect_type' => 'Scenery',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -191,6 +216,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'attraction',
                 'parkitect_type' => 'Attraction',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -198,6 +224,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'rollercoaster',
                 'parkitect_type' => 'RollercoasterMod',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -205,6 +232,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'coastertrain',
                 'parkitect_type' => 'CoasterTrain',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -212,6 +240,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'ui',
                 'parkitect_type' => 'UI',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -219,6 +248,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'cheats',
                 'parkitect_type' => 'Cheats',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'mod',
@@ -226,6 +256,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'gameplay',
                 'parkitect_type' => 'Gameplay',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'blueprint',
@@ -233,6 +264,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'modded',
                 'parkitect_type' => 'Modded',
                 'primary'        => 0,
+                'category'       => 'mod',
             ],
             [
                 'type'           => 'blueprint',
@@ -240,6 +272,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'vertical-dropcoaster',
                 'parkitect_type' => 'VerticalDropCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -247,6 +280,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'alpine-coaster',
                 'parkitect_type' => 'AlpineCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -254,6 +288,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'bobsled-coaster',
                 'parkitect_type' => 'BobsledCoaster',
                 'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -261,6 +296,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'has-scenery',
                 'parkitect_type' => 'HasScenery',
                 'primary'        => 1,
+                'category'       => 'content-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -268,13 +304,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'has-only-scenery',
                 'parkitect_type' => 'HasOnlyScenery',
                 'primary'        => 1,
-            ],
-            [
-                'type'           => 'blueprint',
-                'tag'            => 'Has Flat Rides',
-                'slug'           => 'has-flat-rides',
-                'parkitect_type' => 'HasFlatRides',
-                'primary'        => 1,
+                'category'       => 'content-types',
             ],
             [
                 'type'           => 'blueprint',
@@ -282,11 +312,108 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'has-coaster',
                 'parkitect_type' => 'HasCoaster',
                 'primary'        => 1,
+                'category'       => 'content-types',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Food Court',
+                'slug'           => 'food-court',
+                'parkitect_type' => 'FoodCourt',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Food Court',
+                'slug'           => 'food-court',
+                'parkitect_type' => 'FoodCourt',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Building',
+                'slug'           => 'building',
+                'parkitect_type' => 'Building',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Mainstreet',
+                'slug'           => 'mainstreet',
+                'parkitect_type' => 'Mainstreet',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Plaza',
+                'slug'           => 'plaza',
+                'parkitect_type' => 'Plaza',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Station',
+                'slug'           => 'station',
+                'parkitect_type' => 'Station',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Decoration',
+                'slug'           => 'decoration',
+                'parkitect_type' => 'Decoration',
+                'primary'        => 0,
+                'category'       => 'blueprint',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Giga Coaster',
+                'slug'           => 'giga-coaster',
+                'parkitect_type' => 'GigaCoaster',
+                'primary'        => 1,
+                'category'       => 'coaster-types',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Inverted Coaster',
+                'slug'           => 'inverted-coaster',
+                'parkitect_type' => 'InvertedCoaster',
+                'primary'        => 1,
+                'category'       => 'coaster-types',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Ghost Mansion Ride',
+                'slug'           => 'ghost-mansion-ride',
+                'parkitect_type' => 'GhostMansionRide',
+                'primary'        => 1,
+                'category'       => 'coaster-types',
+            ],
+            [
+                'type'           => 'blueprint',
+                'tag'            => 'Monorail',
+                'slug'           => 'monorail',
+                'parkitect_type' => 'Monorail',
+                'primary'        => 1,
+                'category'       => 'coaster-types',
             ],
         ];
 
         foreach ($tags as $tag) {
-            factory(\PN\Assets\Tag::class)->create($tag);
+            $existingTag = \PN\Assets\Tag::where('type', $tag['type'])->where('slug', $tag['slug'])->first();
+
+            if($existingTag != null) {
+                $existingTag->fill($tag);
+
+                $existingTag->save();
+            } else {
+                factory(\PN\Assets\Tag::class)->create($tag);
+            }
         }
     }
 }
