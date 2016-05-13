@@ -4,8 +4,14 @@ $(document).ready(function(){
     function filter(){
         clearTimeout(to);
 
-        var uri = window.location.href.split('?')[0]+'/filter?'+$('#list-filters').find('form').serialize();
-        var pushUri = window.location.href.split('?')[0]+'?'+$('#list-filters').find('form').serialize();
+        var serialized = "";
+
+        $('#list-filters').find('form input').each(function(key, input){
+            serialized = serialized + ($(input).attr('name') + '=' + $(input).val()) + '&';
+        });
+
+        var uri = window.location.href.split('?')[0]+'/filter?'+serialized;
+        var pushUri = window.location.href.split('?')[0]+'?'+serialized;
 
         to = setTimeout(function(){
             $.get(uri, function(response){
