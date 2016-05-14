@@ -21,7 +21,7 @@
         "mastergalen/adsense-ads": "^0.1.2",
         "ikkentim/wikiclone": "^0.4.0",
         "knplabs/github-api": "^1.6",
-        "invisnik/laravel-steam-auth": "^2.0",
+        "invisnik/laravel-steam-auth": "dev-master",
         "weidner/goutte": "@dev"
     },
     "require-dev": {
@@ -31,6 +31,12 @@
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ParkitectNexus/laravel-steam-auth.git"
+        }
+    ],
     "autoload": {
         "classmap": [
             "database"
