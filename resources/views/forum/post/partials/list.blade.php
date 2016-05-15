@@ -53,27 +53,27 @@
             {!! \PN\Social\MarkdownParser::parse($post->content) !!}
         @endif
 
-        @if(Auth::user())
-            <span class="text-muted like"
-                  likes="{{ $post->likes }}"
-                  type="post"
-                  id="{{ $post->id }}"
-                  @if(\Auth::check())liked="{{ var_export(\Auth::user()->liked($post), true) }}"@endif>
+        {{--@if(Auth::user())--}}
+            {{--<span class="text-muted like"--}}
+                  {{--likes="{{ $post->likes }}"--}}
+                  {{--type="post"--}}
+                  {{--id="{{ $post->id }}"--}}
+                  {{--@if(\Auth::check())liked="{{ var_export(\Auth::user()->liked($post), true) }}"@endif>--}}
 
-                <span>
-                    <i class="fa" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" v-on:click="toggleLike"></i>
-                </span>
-                @{{ likes }} <span v-if="likes > 0">
-                        <span v-if="likes == 1">
-                            Person like this
-                        </span>
-                        <span v-if="likes != 1">
-                            People like this
-                        </span>
-                </span>
-                 |
-            </span>
-        @endif
+                {{--<span>--}}
+                    {{--<i class="fa" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" v-on:click="toggleLike"></i>--}}
+                {{--</span>--}}
+                {{--@{{ likes }} <span v-if="likes > 0">--}}
+                        {{--<span v-if="likes == 1">--}}
+                            {{--Person like this--}}
+                        {{--</span>--}}
+                        {{--<span v-if="likes != 1">--}}
+                            {{--People like this--}}
+                        {{--</span>--}}
+                {{--</span>--}}
+                 {{--|--}}
+            {{--</span>--}}
+        {{--@endif--}}
         <span class="text-muted">
             {{ trans('forum/general.posted') }} {{ $post->posted }}
             @if ($post->hasBeenUpdated())
