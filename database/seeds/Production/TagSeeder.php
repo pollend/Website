@@ -264,7 +264,7 @@ class TagSeeder extends BaseSeeder
                 'slug'           => 'modded',
                 'parkitect_type' => 'HasMods',
                 'primary'        => 1,
-                'category'       => 'coaster-types',
+                'category'       => 'content-types',
             ],
             [
                 'type'           => 'blueprint',
