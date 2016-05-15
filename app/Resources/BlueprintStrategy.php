@@ -77,6 +77,10 @@ class BlueprintStrategy extends ResourceStrategy implements ResourceInterface
             $types->push('HasCoaster');
         }
 
+        if($this->hasMods()) {
+            $types->push('HasMods');
+        }
+
         if($this->isCoaster()) {
             $types->push('RollerCoaster');
             $types->push($this->getCoaster());
@@ -100,30 +104,33 @@ class BlueprintStrategy extends ResourceStrategy implements ResourceInterface
     {
         $this->retrieveData();
 
-        return isset($this->data['Header']['FlatRideTypes']) && count($this->data['Header']['FlatRideTypes']) > 0;
+        return count($this->data['Header']['FlatRideTypes']) > 0;
     }
 
     private function hasCoaster()
     {
         $this->retrieveData();
 
-        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) > 0) || $this->data['Header']['ContentType'] != null;
+        return count($this->data['Header']['TrackedRideTypes']) > 0;
+    }
+
+    private function hasMods()
+    {
+        $this->retrieveData();
+
+        return count($this->data['Header']['ActiveMods']) > 0;
     }
 
     public function isCoaster()
     {
         $this->retrieveData();
 
-        return (isset($this->data['Header']['TrackedRideTypes']) && count($this->data['Header']['TrackedRideTypes']) == 1) || $this->data['Header']['ContentType'] != null;
+        return count($this->data['Header']['TrackedRideTypes']) == 1 && count($this->data['Header']['FlatRideTypes']) == 0;
     }
 
     public function getCoaster()
     {
         $this->retrieveData();
-
-        if($this->data['Header']['ContentType'] != null) {
-            return $this->data['Header']['ContentType'];
-        }
 
         return $this->data['Header']['TrackedRideTypes'][0];
     }

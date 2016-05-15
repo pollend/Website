@@ -4,6 +4,7 @@ namespace PN\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use PN\Assets\Console\ResetAllPrimaryTags;
 use PN\BuildOffs\Console\RankBuildOffs;
 use PN\Foundation\Console\Inspire;
 use PN\Social\Console\Commands\RecalculateHotScore;
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
         RecalculateHotScore::class,
         RankBuildOffs::class,
         ScrapeWorkshop::class,
+        ResetAllPrimaryTags::class
     ];
 
     /**
