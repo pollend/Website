@@ -62,7 +62,7 @@
             </like>
             <script type="text/html" id="like-template">
                 <span>
-                    <i class="fa" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" v-on:click="toggleLike"></i>
+                    <i class="fa" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }"  @if(\Auth::check()) v-on:click="toggleLike" @endif></i>
                 </span>
                 @{{ likes }} <span v-if="likes > 0">
                     <span v-if="likes == 1">

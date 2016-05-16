@@ -15,7 +15,7 @@
              liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
                 @endif>
             <div class="col-xs-6 text-center" title="Views">
-                <i class="fa icon-xl" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" v-on:click="toggleLike"></i>
+                <i class="fa icon-xl" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i>
             </div>
             <div class="col-xs-6 text-center" title="Downloads">
                 @if($asset->getBuildOff() != null)
