@@ -11,10 +11,10 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface BaseRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param int $id
+     * @param $id
      * @return object
      */
-    public function findByIdentifier(string $id);
+    public function findByIdentifier($id);
 
     /**
      * Adds the entity to this repository
