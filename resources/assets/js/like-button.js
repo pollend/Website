@@ -1,7 +1,5 @@
-var like = new Vue({
-    el: '.like',
-    data: {
-    },
+Vue.component('like', {
+    template: '#like-template',
     props: ['likes', 'liked', 'type', 'id'],
     methods: {
         toggleLike: function()
@@ -28,4 +26,8 @@ var like = new Vue({
             return (this.liked == 'true' || this.liked === true);
         }
     }
+});
+
+new Vue({
+    el: '#site'
 });

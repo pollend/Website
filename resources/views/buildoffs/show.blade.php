@@ -49,7 +49,7 @@
     <div class="row" id="list">
         @foreach($assets as  $i => $asset)
             <div class="col-sm-4 col-md-3">
-                @include('assets.partials.thumbnail', ['asset', $asset, 'showStats' => !$buildOff->isOpen()])
+                @include('assets.partials.thumbnail', ['asset', $asset, 'showLikes' => !$buildOff->isOpen()])
             </div>
         @endforeach
     </div>
