@@ -72,6 +72,14 @@ class BuildOff extends Model
         $rank->setBuildOff($this);
     }
 
+    public function toStart()
+    {
+        $start = new Carbon($this->start);
+        $now = new Carbon();
+
+        return $now->lt($start);
+    }
+
     public function isOpen()
     {
         $start = new Carbon($this->start);
@@ -84,9 +92,10 @@ class BuildOff extends Model
     public function canVote()
     {
         $start = new Carbon($this->voting_start);
+        $end = new Carbon($this->end);
         $now = new Carbon();
 
-        return $now->gt($start);
+        return $now->gt($start) && $now->lt($end);
     }
 
     public function getWinner()
