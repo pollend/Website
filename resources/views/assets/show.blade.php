@@ -66,16 +66,25 @@
         @endif
     </div>
 
-    <h2>
-        Tags
-    </h2>
-    <ul>
-        @foreach($asset->tags as $tag)
-            <li>
-                {{ $tag->tag }}
-            </li>
-        @endforeach
-    </ul>
+    @if($asset->type == 'mod')
+        <h3>
+            GitHub
+        </h3>
+        <a href="{{ $asset->getResource()->source }}" target="_blank">View this mod on GitHub</a>
+    @endif
+
+    @if(count($asset->getTags()) > 0)
+        <h3>
+            Tags
+        </h3>
+        <ul>
+            @foreach($asset->getTags() as $tag)
+                <li>
+                    {{ $tag->tag }}
+                </li>
+            @endforeach
+        </ul>
+    @endif
 
     <hr>
 
