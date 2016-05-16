@@ -111,10 +111,11 @@ class SocialAuthController extends Controller
             } else {
                 $user->fill([
                     'social_name' => $driver,
-                    'social_id' => $userData->id
+                    'social_id' => $userData->id,
+                    'avatar' => $userData->avatar
                 ]);
 
-                \UserRepo::add($user);
+                \UserRepo::edit($user);
             }
 
             if ($user->username == '') {
@@ -171,6 +172,10 @@ class SocialAuthController extends Controller
                 // user was found, just log the user in
                 \Auth::login($user);
             }
+
+            $user->avatar = $info->getProfilePictureFull();
+
+            \UserRepo::edit($user);
 
             return redirect($user->getPresenter()->url());
         }
