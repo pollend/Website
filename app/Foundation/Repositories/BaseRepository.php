@@ -25,6 +25,10 @@ abstract class BaseRepository extends \Prettus\Repository\Eloquent\BaseRepositor
             }
         } catch (\Exception $e) {
             $record = $this->find($id);
+
+            if($record->identifier != $id) {
+                $record = null;
+            }
         }
 
         return $record;
