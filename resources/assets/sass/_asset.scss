@@ -24,8 +24,22 @@
     cursor: pointer;
     border: 1px solid $gray-light;
     border-radius: $border-radius-small;
-    width: 116px;
     margin: 7px;
+
+    @media screen and (min-width: $screen-sm) {
+      width: 116px;
+      height: 66px;
+    }
+
+    @media screen and (max-width: $screen-xs-max) {
+      width: calc(33% - 20px);
+      height: 28%;
+    }
+
+    @media screen and (max-width: $screen-xs) {
+      width: calc(50% - 20px);
+      height: 28%;
+    }
   }
 
   margin-bottom: -15px;
