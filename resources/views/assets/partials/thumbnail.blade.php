@@ -12,7 +12,7 @@
                   @endif>
             </like>
             <script type="text/html" id="like-template">
-                <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @if(!isset($showLikes) || $showLikes) {{ $asset->like_count }} @endif
+                <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @if(!isset($showLikes) || $showLikes) @{{ likes }} @endif
             </script>
         </li>
     </ul>
