@@ -16,7 +16,7 @@
         @foreach($likes as $key => $like)
             @if($like->getLikeable() != null)
                 <div class="col-xs-6 col-sm-4">
-                    @include('assets.partials.thumbnail', ['asset' => $like->getLikeable()])
+                    @include('assets.partials.thumbnail', ['asset' => $like->getLikeable(), 'showLikes' => !$like->getLikeable()->inBuildOff()])
                 </div>
             @endif
         @endforeach

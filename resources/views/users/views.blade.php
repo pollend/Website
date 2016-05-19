@@ -16,7 +16,7 @@
         @foreach($views as $key => $view)
             @if($view->getViewable() != null)
                 <div class="col-xs-6 col-sm-4">
-                    @include('assets.partials.thumbnail', ['asset' => $view->getViewable()])
+                    @include('assets.partials.thumbnail', ['asset' => $view->getViewable(), 'showLikes' => !$view->getViewable()->inBuildOff()])
                 </div>
             @endif
         @endforeach

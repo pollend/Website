@@ -226,6 +226,11 @@ class Asset extends Model
         $this->buildoff_id = $buildOff->id;
     }
 
+    public function inBuildOff()
+    {
+        return $this->buildoff_id != null;
+    }
+
     public function getComments()
     {
         return $this->comments;

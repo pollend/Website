@@ -16,7 +16,7 @@
         @foreach($downloads as $key => $download)
             @if($download->getDownloadable() != null)
                 <div class="col-xs-6 col-sm-4">
-                    @include('assets.partials.thumbnail', ['asset' => $download->getDownloadable()])
+                    @include('assets.partials.thumbnail', ['asset' => $download->getDownloadable(), 'showLikes' => !$download->getDownloadable()->inBuildOff()])
                 </div>
             @endif
         @endforeach
