@@ -103,6 +103,8 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
             $buildOffs = $buildOffs->whereIn('tag_id', $tags->lists('id')->toArray());
         }
 
-        return $buildOffs->where('type_requirement', $resource->type)->get();
+        return $buildOffs->where('start', '<=', date('Y-m-d H:i:s'))
+            ->where('end', '>=', date('Y-m-d H:i:s'))
+            ->where('type_requirement', $resource->type)->get();
     }
 }
