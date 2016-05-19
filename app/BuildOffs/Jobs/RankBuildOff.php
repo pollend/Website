@@ -45,7 +45,7 @@ class RankBuildOff extends Job
             
             $rank->setBuildOff($this->buildOff);
             $rank->setAsset($asset);
-            $rank->score = $asset->likes;
+            $rank->score = $asset->like_count;
             $rank->rank = $place++;
 
             \RankRepo::add($rank);

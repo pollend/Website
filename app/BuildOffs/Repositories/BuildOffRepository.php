@@ -72,7 +72,7 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
      */
     public function overdue()
     {
-        return BuildOff::where('end', '<', date('Y-m-d'))->get();
+        return BuildOff::where('end', '<=', date('Y-m-d H:i:s'))->get();
     }
 
     /**
@@ -85,7 +85,7 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
     {
         $assets = \AssetRepo::forBuildOff($buildOff);
 
-        return $assets->sortByDesc('likes');
+        return $assets->sortByDesc('like_count', 'downloads');
     }
 
     /**
