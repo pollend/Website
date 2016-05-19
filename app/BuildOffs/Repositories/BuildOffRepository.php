@@ -85,7 +85,9 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
     {
         $assets = \AssetRepo::forBuildOff($buildOff);
 
-        return $assets->sortByDesc('like_count', 'downloads');
+        return $assets->sortByDesc(function($asset) {
+            return $asset->like_count * 1000000 + $asset->download_count;
+        });
     }
 
     /**
