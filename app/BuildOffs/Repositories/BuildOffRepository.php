@@ -102,11 +102,14 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
         $buildOffs = new BuildOff();
 
         if(count($tags) > 0) {
-            $buildOffs = $buildOffs->whereIn('tag_id', $tags->lists('id')->toArray());
+            $buildOffs = $buildOffs->where(function($query) use ($tags) {
+                $query->whereIn('tag_id', $tags->lists('id')->toArray())->orWhereNull('tag_id');
+            });
         }
 
-        return $buildOffs->where('start', '<=', date('Y-m-d H:i:s'))
+        return $buildOffs->where('type_requirement', $resource->type)
+            ->where('start', '<=', date('Y-m-d H:i:s'))
             ->where('end', '>=', date('Y-m-d H:i:s'))
-            ->where('type_requirement', $resource->type)->get();
+            ->get();
     }
 }
