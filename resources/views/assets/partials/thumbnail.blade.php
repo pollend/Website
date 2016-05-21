@@ -4,7 +4,7 @@
     </a>
     <ul class="list-inline pull-left">
         <li>
-            <like @if(!isset($showLikes) || $showLikes) likes="{{ $asset->like_count }}"@endif
+            <like @if($asset->canBeLiked()) likes="{{ $asset->like_count }}" @endif
                   type="asset"
                   id="{{ $asset->id }}"
                   @if(\Auth::check())
@@ -12,7 +12,7 @@
                   @endif>
             </like>
             <script type="text/html" id="like-template">
-                <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @if(!isset($showLikes) || $showLikes) @{{ likes }} @endif
+                <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @{{ likes }}
             </script>
         </li>
     </ul>

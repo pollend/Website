@@ -4,21 +4,27 @@
           id="{{ $asset->id }}"
           @if(\Auth::check())
           liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
-          @endif>
+            @endif>
     </like>
     <script type="text/html" id="like-template">
+        @if($asset->canBeLiked())
         <div class="row like"
-             likes="{{ $asset->like_count }}"
+             @if($asset->canBeLiked()) likes="{{ $asset->like_count }}" @endif
              type="asset"
              id="{{ $asset->id }}"
              @if(\Auth::check())
              liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
                 @endif>
             <div class="col-xs-6 text-center" title="Views">
-                <i class="fa icon-xl" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i>
+                @if($asset->canBeLiked())
+                    <i class="fa icon-xl fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }"
+                       @if(\Auth::check()) v-on:click="toggleLike" @endif></i>
+                @else
+                    <i class="fa icon-xl fa fa-heart fa-heart-o"></i>
+                @endif
             </div>
             <div class="col-xs-6 text-center" title="Downloads">
-                @if($asset->getBuildOff() != null)
+                @if($asset->inBuildOff())
                     <p>
                         <span v-if="liked">
                             You like this
@@ -42,6 +48,11 @@
                 @endif
             </div>
         </div>
+        @else
+            <p class="text-muted">
+                This {{ $asset->type }} is participating in a build-off, voting starts {{ $asset->getBuildOff()->getPresenter()->getFuzzyVotingStart() }}
+            </p>
+        @endif
     </script>
 @else
     <div class="row">
