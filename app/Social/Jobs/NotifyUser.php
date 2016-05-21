@@ -14,7 +14,7 @@ use PN\Users\User;
  * Class NotifyUser
  * @package PN\Social\Jobs
  */
-class NotifyUser extends Job implements ShouldQueue
+class NotifyUser extends Job
 {
     use SerializesModels;
 

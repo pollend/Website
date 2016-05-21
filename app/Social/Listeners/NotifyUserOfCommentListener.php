@@ -25,6 +25,6 @@ class NotifyUserOfCommentListener
         $type = CommentOnAssetNotification::class;
         $context = json_encode(['comment_id' => $event->comment->id]);
 
-        $this->dispatch(new NotifyUser($event->user, $type, $context));
+        $this->dispatch(new NotifyUser($event->comment->getAsset()->getUser(), $type, $context));
     }
 }
