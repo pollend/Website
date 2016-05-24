@@ -162,6 +162,7 @@ return [
         Ikkentim\WikiClone\WikiCloneServiceProvider::class,
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Application Service Providers...

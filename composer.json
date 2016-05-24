@@ -22,7 +22,10 @@
         "ikkentim/wikiclone": "^0.4.0",
         "knplabs/github-api": "^1.6",
         "invisnik/laravel-steam-auth": "dev-master",
-        "weidner/goutte": "@dev"
+        "weidner/goutte": "@dev",
+        "maknz/slack": "^1.7",
+        "spatie/laravel-backup": "^3.7",
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
