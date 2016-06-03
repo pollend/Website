@@ -158,7 +158,7 @@ class SocialAuthController extends Controller
                         $info->getName(),
                         $email,
                         $info->getProfilePictureFull(),
-                        $info->getSteamID64(),
+                        '', // don't copy steam username, let them choose themselves
                         'steam'
                     ));
 
