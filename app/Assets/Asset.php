@@ -237,7 +237,16 @@ class Asset extends Model
             return true;
         }
 
-        return $this->getBuildOff()->canVote();
+        return $this->getBuildOff()->canVote() || !$this->getBuildOff()->isOpen();
+    }
+
+    public function showLikes()
+    {
+        if(!$this->inBuildOff()) {
+            return true;
+        }
+
+        return !$this->getBuildOff()->isOpen();
     }
 
     public function getComments()

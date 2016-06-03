@@ -4,16 +4,18 @@
     </a>
     <ul class="list-inline pull-left">
         <li>
-            <like @if($asset->canBeLiked()) likes="{{ $asset->like_count }}" @endif
-                  type="asset"
-                  id="{{ $asset->id }}"
-                  @if(\Auth::check())
-                  liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
-                  @endif>
-            </like>
-            <script type="text/html" id="like-template">
-                <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @{{ likes }}
-            </script>
+            @if($asset->canBeLiked())
+                <like @if($asset->showLikes()) likes="{{ $asset->like_count }}" @endif
+                      type="asset"
+                      id="{{ $asset->id }}"
+                      @if(\Auth::check())
+                      liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
+                      @endif>
+                </like>
+                <script type="text/html" id="like-template">
+                    <i class="fa fa-heart" v-bind:class="{ 'fa-heart': isLiked(), 'fa-heart-o': !isLiked() }" @if(\Auth::check()) v-on:click="toggleLike" @endif></i> @{{ likes }}
+                </script>
+            @endif
         </li>
     </ul>
     <ul class="list-inline pull-right">

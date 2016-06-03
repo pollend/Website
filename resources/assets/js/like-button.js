@@ -4,10 +4,6 @@ Vue.component('like', {
     methods: {
         toggleLike: function()
         {
-            if(this.likes == null) {
-                return;
-            }
-
             if(this.isLiked()) {
                 this.unlike()
             } else {
@@ -16,18 +12,24 @@ Vue.component('like', {
         },
         like: function() {
             this.liked = true;
-            this.likes++;
+
+            if(this.likes != null) {
+                this.likes++;
+            }
 
             this.$http.post('/api/likes/like/' + this.type + '/' + this.id);
         },
         unlike: function() {
             this.liked = false;
-            this.likes--;
 
+            if(this.likes != null) {
+                this.likes--;
+            }
+            
             this.$http.delete('/api/likes/unlike/' + this.type + '/' + this.id);
         },
         isLiked: function(){
-            return this.likes != null && (this.liked == 'true' || this.liked === true);
+            return (this.liked == 'true' || this.liked === true);
         }
     }
 });
