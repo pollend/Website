@@ -1,7 +1,7 @@
 @inject('versionService', 'PN\Foundation\VersionService')
 @inject('discordService', 'PN\Social\DiscordService')
 
-<div id="top-bar" class="hidden-xs hidden-sm">
+<div id="top-bar">
     <header class="navbar navbar-default">
         {{--<div class="container">--}}
             <div class="navbar-header">
