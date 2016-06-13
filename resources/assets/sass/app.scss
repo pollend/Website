@@ -3,10 +3,10 @@
 @import "../libs/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "helpers";
+@import "cards";
 @import "asset";
 @import "background";
 @import "topbar";
-@import "content";
 @import "home";
 @import "list";
 @import "asset";
@@ -31,8 +31,6 @@ h2, h3, h4 {
 }
 
 #site {
-  background-color: #ffffff;
-  box-shadow: 0 0 2px 0px rgba(0, 0, 0, .5);
   overflow-x: hidden;
   padding-bottom: 12px;
 
@@ -43,7 +41,7 @@ h2, h3, h4 {
   #sidebar {
     padding-top: 10px;
     padding-bottom: 15px;
-    border-right: 1px solid $hr-border;
+    border-right: 1px solid rgba(0,0,0,0.2);
 
     p {
       margin: 0px;
@@ -51,22 +49,21 @@ h2, h3, h4 {
   }
 
   #main {
-    border-left:  1px solid $hr-border;
+    border-left: 1px solid $hr-border;
     margin-left: -1px;
     padding-bottom: 15px;
+    border-left: 1px solid rgba(0,0,0,0.2);
   }
-
-
 }
 
 #logo {
   margin: 0;
-  position: absolute;
-  top: 3px;
+  //position: absolute;
+  //top: -5px;
   z-index: 1000;
 
   img {
-    height: 70px;
+    height: 65px;
   }
 }
 
@@ -89,3 +86,12 @@ a:not([href]) {
   }
 }
 
+.blue {
+  color: $brand-info;
+  text-transform: uppercase;
+}
+
+.warning {
+  color: $brand-warning;
+  text-transform: uppercase;
+}

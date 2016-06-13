@@ -1,19 +1,26 @@
 // Define before loading vars so the bootstrap uses this in calculations
 $brand-primary: #3592DB;
+$brand-info: #42afe3;
+$brand-success: #97cd76;
+$brand-warning: #fce473;
+$brand-danger: #ed6c63;
+$font-family-sans-serif:  Helvetica, Arial, sans-serif;
 $font-size-base: 15px;
 $text-color: #5a5a5a;
+
+$hr-border: rgba(0,0,0,0.2);
 
 // Load original vars so we may use them
 @import "../libs/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 
 $navbar-border-radius: 0px;
-$navbar-default-bg: darken($gray-lighter, 10%);
-$navbar-default-border: darken($gray-lighter, 15%);
-$navbar-default-link-hover-bg: darken($gray-lighter, 20%);
-$navbar-default-link-active-bg: darken($gray-lighter, 20%);
+$navbar-default-bg: #141414;
+$navbar-default-border: #141414;
+$navbar-default-link-hover-bg: #141414;
+$navbar-default-link-active-bg: #ffffff;
 $navbar-default-brand-color: $gray-dark;
-$navbar-default-link-color: $gray;
-$navbar-default-link-hover-color: $gray-dark;
+$navbar-default-link-color: #eeeeee;
+$navbar-default-link-hover-color: #ffffff;
 
 //$navbar-padding-vertical: 10px;
 $navbar-padding-horizontal: 0px;
@@ -30,23 +37,23 @@ $btn-default-bg:                 #e7e7e7;
 $btn-default-border:             #ccc;
 
 $btn-primary-color:              $brand-primary;
-$btn-primary-bg:                 #fff;
+$btn-primary-bg:                 #eee;
 $btn-primary-border:             darken($brand-primary, 5%);
 
 $btn-success-color:              $brand-success;
-$btn-success-bg:                 #fff;
+$btn-success-bg:                 #eee;
 $btn-success-border:             darken($brand-success, 5%);
 
 $btn-info-color:                 $brand-info;
-$btn-info-bg:                    #fff;
+$btn-info-bg:                    #eee;
 $btn-info-border:                darken($brand-info, 5%);
 
 $btn-warning-color:              $brand-warning;
-$btn-warning-bg:                 #fff;
+$btn-warning-bg:                 #eee;
 $btn-warning-border:             darken($brand-warning, 5%);
 
 $btn-danger-color:               $brand-danger;
-$btn-danger-bg:                  #fff;
+$btn-danger-bg:                  #eee;
 $btn-danger-border:              darken($brand-danger, 5%);
 
 $btn-link-disabled-color:        $gray-light;

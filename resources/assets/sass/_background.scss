@@ -8,12 +8,7 @@ html {
 $op: 0.04;
 
 body {
-  background-color: $brand-primary;
-  background-image: linear-gradient(rgba(255, 255, 255, $op) 2px, transparent 2px),
-  linear-gradient(90deg, rgba(255, 255, 255, $op) 2px, transparent 2px);
-  background-size: 40px 40px, 40px 40px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-  background-attachment: fixed;
+  background-color: #eeeeee;
   height: auto;
   min-height: 100%;
 }

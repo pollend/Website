@@ -6,11 +6,11 @@
     </div>
 
     <div class="col-lg-9 col-sm-12" id="main">
-        <div class="row">
-            <div class="col-sm-12" id="title">
-                @yield('title')
-            </div>
-        </div>
+        {{--<div class="row">--}}
+            {{--<div class="col-sm-12" id="title">--}}
+                {{--@yield('title')--}}
+            {{--</div>--}}
+        {{--</div>--}}
         @include('partials.errors')
 
         <div id="content">

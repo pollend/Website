@@ -114,7 +114,7 @@
         <div class="row">
             <div class="col-sm-4">
                 @foreach($asset->getResource()->getPresenter()->getStatGroups() as $groupName => $groupStats)
-                    <table class="table table-striped">
+                    <table class="table table-striped well">
                         <thead>
                         <tr>
                             <th>
