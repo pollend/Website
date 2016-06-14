@@ -11,7 +11,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home.index') }}" title="ParkitectNexus"><span class="blue">Parkitect</span><span class="warning">Nexus</span></a>
+                <a class="navbar-brand" href="{{ route('home.index') }}" title="ParkitectNexus" id="logo">
+                    <img src="/img/logo-min.png" />
+                </a>
             </div>
             <nav class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">

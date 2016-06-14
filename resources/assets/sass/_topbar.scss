@@ -10,12 +10,16 @@
 
   #logo {
     margin: 0;
-    position: absolute;
-    top: 3px;
+    position: relative;
+    float: left;
     z-index: 1000;
+    width: 200px;
+    padding-left: 15px;
 
     img {
-      height: 70px;
+      position: absolute;
+      top: 5px;
+      height: 60px;
     }
   }
 

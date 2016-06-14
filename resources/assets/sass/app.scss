@@ -20,6 +20,7 @@
 body {
   overflow-y: scroll;
   padding-bottom: 40px;
+  font-weight: 200 !important;
 }
 
 h1 {
@@ -87,11 +88,13 @@ a:not([href]) {
 }
 
 .blue {
-  color: $brand-info;
+  color: #1e6aa6;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
 .warning {
-  color: $brand-warning;
+  color: #ffaa21;
+  font-weight: 400;
   text-transform: uppercase;
 }
