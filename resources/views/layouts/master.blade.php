@@ -9,6 +9,7 @@
 
     <meta name="description" content="Here you will find mods, coasters and parks created by players for Parkitect.  We already have 68 mods, 785 blueprints and 113 parks ready for download!"/>
 
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" media="screen" type="text/css" href="{{ elixir('css/app.css') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
