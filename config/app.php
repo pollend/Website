@@ -163,6 +163,7 @@ return [
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...

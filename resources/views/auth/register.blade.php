@@ -39,6 +39,13 @@
             <input type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation"/>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Are you a human?</label>
+            {!! app('captcha')->display() !!}
+        </div>
+
+        <br>
+
         <div class="row">
             <div class="col-lg-3">
                 <button type="submit" class="btn btn-primary">Register</button>

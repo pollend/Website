@@ -25,7 +25,8 @@
         "weidner/goutte": "@dev",
         "maknz/slack": "^1.7",
         "spatie/laravel-backup": "^3.7",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "anhskohbo/no-captcha": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

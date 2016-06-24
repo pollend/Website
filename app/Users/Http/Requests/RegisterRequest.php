@@ -25,7 +25,8 @@ class RegisterRequest extends Request
             'username' => 'required|unique:users,username|alpha_dash',
             'name' => 'required',
             'email' => 'email|required|unique:users,email',
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }
