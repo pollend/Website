@@ -26,8 +26,15 @@ class AssetTransformer extends TransformerAbstract
 
     public function transform(Asset $asset)
     {
+        $type = $asset->type;
+
+        // quick hack for client
+        if(ends_with($asset->getResource()->source, 'scenario')) {
+            $type = 'scenario';
+        }
+
         return [
-            'type' => $asset->type,
+            'type' => $type,
             'identifier' => $asset->identifier,
             'name' => $asset->name,
             'description' => $asset->description
