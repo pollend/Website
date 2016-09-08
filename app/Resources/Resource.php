@@ -82,6 +82,7 @@ class Resource extends Model implements ResourceInterface
                 return 'blueprint';
             case 'txt': // to support old parks
                 return 'park';
+            case 'scenario':
             case 'park':
                 return 'park';
         }

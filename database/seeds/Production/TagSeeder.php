@@ -159,8 +159,8 @@ class TagSeeder extends BaseSeeder
                 'tag'            => 'Scenario',
                 'slug'           => 'scenario',
                 'parkitect_type' => 'Scenario',
-                'primary'        => 0,
-                'category'       => 'park',
+                'primary'        => 1,
+                'category'       => 'scenario',
             ],
             [
                 'type'           => 'park',

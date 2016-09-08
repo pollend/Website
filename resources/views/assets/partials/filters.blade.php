@@ -79,7 +79,7 @@
             </div>
         @endif
 
-        @if(count($tags) > 0)
+        @if(count($tags) > 1)
             <div class="panel panel-default filter-group">
                 <div class="panel-heading" data-toggle="collapse" data-target="#options-tags" aria-expanded="false"
                      aria-controls="options-tags">

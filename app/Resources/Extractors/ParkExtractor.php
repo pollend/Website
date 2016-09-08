@@ -21,6 +21,36 @@ class ParkExtractor implements ExtractorInterface
         $md5 = hash_file('md5', $this->path);
 
         return \Cache::remember('resource.extract.park.' . $md5, 10, function () {
+            // todo, delete this quick hack to support .park
+            if(ends_with($this->path, '.park') || ends_with($this->path, '.scenario') ) {
+                $gz = gzopen($this->path, 'rb');
+
+                if (!$gz) {
+                    throw new \UnexpectedValueException(
+                        'Could not open gzip file'
+                    );
+                }
+
+                $newSource = str_replace('.park', '.txt', $this->path);
+                $newSource = str_replace('.scenario', '.txt', $newSource);
+
+                $dest = fopen($newSource, 'wb');
+
+                if (!$dest) {
+                    gzclose($gz);
+                    throw new \UnexpectedValueException(
+                        'Could not open destination file'
+                    );
+                }
+
+                stream_copy_to_stream($gz, $dest);
+
+                gzclose($gz);
+                fclose($dest);
+
+                $this->path = $newSource;
+            }
+
             $arguments = escapeshellarg(app_path('../bin/ParkitectNexus.AssetTools.exe')) . " savegame " .
                 "--input " . \ResourceUtil::escapeArgument($this->path);
 
@@ -39,6 +69,9 @@ class ParkExtractor implements ExtractorInterface
             if ($json == null) {
                 throw new NotAValidPark($this->path);
             }
+
+            unlink($this->path);
+
             return $json;
         });
     }

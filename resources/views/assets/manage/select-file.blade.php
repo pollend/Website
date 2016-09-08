@@ -15,12 +15,16 @@
 				Blueprints are located in ~/Library/Application Support/Parkitect/Saves/Blueprints
 				<br>
 				Parks are located in ~/Library/Application Support/Parkitect/Saves/Savegames
+				<br>
+				Scenarios are located in ~/Library/Application Support/Parkitect/Saves/Scenarios
 			</div>
 		@else
 			<div class="alert alert-info">
 				Blueprints are located in Documents\Parkitect\Saves\Blueprints
 				<br>
 				Parks are located in Documents\Parkitect\Saves\Savegames
+				<br>
+				Scenarios are located in Documents\Parkitect\Saves\Scenarios
 			</div>
 		@endif
 
@@ -30,7 +34,7 @@
 					<label for="select-asset">
 						Select your asset
 					</label>
-					<input type="file" name="resource" id="select-asset" accept="image/png,text/plain,.park">
+					<input type="file" name="resource" id="select-asset" accept="image/png,text/plain,.park,.scenario">
 				</div>
 				<input type="submit" value="Upload" class="btn btn-primary">
 			</div>
@@ -41,6 +45,8 @@
 					Blueprint file (.png)
 					<br>
 					Park file (.txt, .park)
+					<br>
+					Scenario file (.scenario)
 				</div>
 			</div>
 			<div class="col-sm-4"></div>

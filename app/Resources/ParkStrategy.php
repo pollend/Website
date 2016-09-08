@@ -55,6 +55,12 @@ class ParkStrategy extends ResourceStrategy implements ResourceInterface
 
     public function getPrimaryTags() : Collection
     {
+        if(ends_with($this->resource->source, '.scenario')) {
+            return new Collection([
+                'Scenario'
+            ]);
+        }
+
         return new Collection([]);
     }
 

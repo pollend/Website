@@ -109,6 +109,11 @@
                     </a>
                 </li>
                 <li class="hidden-sm">
+                    <a href="/assets/scenario" title="Scenarios">
+                        Scenarios
+                    </a>
+                </li>
+                <li class="hidden-sm">
                     <a href="/screenshots" title="Screenshots">
                         Screenshots
                     </a>

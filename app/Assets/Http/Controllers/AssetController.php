@@ -101,7 +101,10 @@ class AssetController extends Controller
 
     public function filterPage($type)
     {
-        $filters = config('assetfilters.' . $type, []);
+        $morpedType = $type;
+        if($morpedType == 'scenario') $morpedType = 'park';
+
+        $filters = config('assetfilters.' . $morpedType, []);
 
         $tags = \TagRepo::findByCategory($type);
 
@@ -127,16 +130,30 @@ class AssetController extends Controller
 
     public function filterAssets($type)
     {
+        $morpedType = $type;
+        if($morpedType == 'scenario') $morpedType = 'park';
+
         // todo hotfix
         if(!\Request::has('sort')){
             \Request::replace(array_merge(\Request::all(), ['sort' => 'hot_score']));
         }
 
+        $onTags = $this->getOnTags();
+        $offTags = $this->getOffTags();
+
+        if($type == 'park' || $type == 'scenario') {
+            if($type == 'park') {
+                $offTags = $offTags->merge([\TagRepo::findByTagName('Scenario')]);
+            } else {
+                $onTags = $onTags->merge([\TagRepo::findByTagName('Scenario')]);
+            }
+        }
+
         $assetFilter = (new AssetFilter())
-            ->withType($type)
+            ->withType($morpedType)
             ->withNameLike(\Request::input('name', ''))
-            ->withTags($this->getOnTags())
-            ->withoutTags($this->getOffTags())
+            ->withTags($onTags)
+            ->withoutTags($offTags)
             ->withStats($this->getStats())
             ->withMaxAge($this->getMaxAge())
             ->sortBy(request('sort', 'hot_score'));

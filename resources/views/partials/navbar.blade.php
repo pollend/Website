@@ -32,7 +32,7 @@
                 </li>
                 <li>
                     <a href="{{ route('assets.manage.selectfile') }}">
-                        Park
+                        Park / Scenario
                     </a>
                 </li>
             </ul>
