@@ -1,3 +1,10 @@
+@if($asset->youtube != null)
+    <div class="videoWrapper">
+        <iframe src="{{ $asset->youtube }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <br>
+@endif
+
 <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <div class="item active">

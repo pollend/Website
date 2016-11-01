@@ -292,4 +292,13 @@ class Asset extends Model
         $this->attributes['name'] = $name;
         $this->slug = Str::slug($name);
     }
+
+    public function getYoutubeAttribute()
+    {
+        $matches = [];
+
+        preg_match('/^.*(youtu.be\/|v\/|embed\/|watch\?|youtube.com\/user\/[^#]*#([^\/]*?\/)*)\??v?=?([^#\&\?]*).*/', $this->attributes['youtube'], $matches);
+
+        return "https://www.youtube.com/embed/" . array_pop($matches);
+    }
 }
