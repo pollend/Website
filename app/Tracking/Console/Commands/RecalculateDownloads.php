@@ -32,6 +32,8 @@ class RecalculateDownloads extends Command
                 $downloadable->timestamps = false;
 
                 $downloadable->save();
+
+                sleep(1);
             }
         }
     }

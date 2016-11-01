@@ -32,6 +32,8 @@ class RecalculateViews extends Command
                 $viewable->timestamps = false;
 
                 $viewable->save();
+
+                sleep(1);
             }
         }
     }

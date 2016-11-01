@@ -39,8 +39,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('buildoffs:rank')->hourly();
-        $schedule->command('downloads:recalculate')->everyMinute();
-        $schedule->command('views:recalculate')->everyMinute();
+        $schedule->command('downloads:recalculate')->hourly();
+        $schedule->command('views:recalculate')->hourly();
         $schedule->command('likes:recalculate')->everyMinute();
         $schedule->command('score:recalculate')->everyMinute();
     }
