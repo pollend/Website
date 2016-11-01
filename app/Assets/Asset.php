@@ -295,6 +295,10 @@ class Asset extends Model
 
     public function getYoutubeAttribute()
     {
+        if(empty($this->attributes['youtube'])) {
+            return null;
+        }
+        
         $matches = [];
 
         preg_match('/^.*(youtu.be\/|v\/|embed\/|watch\?|youtube.com\/user\/[^#]*#([^\/]*?\/)*)\??v?=?([^#\&\?]*).*/', $this->attributes['youtube'], $matches);
