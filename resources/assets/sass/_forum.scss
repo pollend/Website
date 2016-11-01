@@ -39,7 +39,6 @@
 
   .locked {
     & > * {
-      color: $alert-warning-bg !important;
       font-weight: bold;
       font-size: $font-size-base + 3;
     }
@@ -47,7 +46,6 @@
 
   .pinned {
     & > * {
-      color: $alert-info-bg !important;
       font-weight: bold;
       font-size: $font-size-base + 3;
     }
