@@ -31,9 +31,10 @@
         {{ $thread->view_count }}
     </div>
     <div class="col-xs-4 col-sm-3 col-md-2 text-right">
-        {{ $thread->lastPost->userName }}
-        <p>({{ $thread->lastPost->posted }})</p>
-
+        @if($thread->lastPost != null)
+            {{ $thread->lastPost->userName }}
+            <p>({{ $thread->lastPost->posted }})</p>
+        @endif
 
         @can ('manageThreads', $category)
             <input type="checkbox" name="items[]" value="{{ $thread->id }}">
