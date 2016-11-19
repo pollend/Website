@@ -43,5 +43,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('views:recalculate')->hourly();
         $schedule->command('likes:recalculate')->everyMinute();
         $schedule->command('score:recalculate')->everyMinute();
+        $schedule->command('backup:run')->twiceDaily(0, 12);
     }
 }
