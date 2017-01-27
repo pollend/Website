@@ -3,17 +3,14 @@
 namespace PN\Assets\Http\Controllers;
 
 
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use PN\Assets\AssetFilter;
 use PN\Assets\Events\UserDownloadedAsset;
 use PN\Assets\Events\UserViewingAsset;
 use PN\Assets\Exceptions\AssetCantBeDownloadedException;
 use PN\Assets\Repositories\AssetRepositoryInterface;
-use PN\Foundation\Http\Controllers\Controller;
 use PN\Foundation\StorageUtil;
 
-class AssetController extends Controller
+class AssetController extends BaseAssetController
 {
     /**
      * @var AssetRepositoryInterface
@@ -88,8 +85,8 @@ class AssetController extends Controller
             \Request::replace(array_merge(\Request::all(), ['sort' => 'hot_score']));
         }
 
-        $onTags = $this->getOnTags();
-        $offTags = $this->getOffTags();
+        $onTags = $this->getOnTags(\Request::input('tags'));
+        $offTags = $this->getOffTags(\Request::input('tags'));
 
         if ($type == 'park' || $type == 'scenario') {
             if ($type == 'park') {
@@ -104,8 +101,8 @@ class AssetController extends Controller
             ->withNameLike(\Request::input('name', ''))
             ->withTags($onTags)
             ->withoutTags($offTags)
-            ->withStats($this->getStats())
-            ->withMaxAge($this->getMaxAge())
+            ->withStats($this->getStats(\Request::input('stats', [])))
+            ->withMaxAge($this->getMaxAge(\Request::has('range')))
             ->sortBy(request('sort', 'hot_score'));
 
         $assets = $assetFilter->filterPaginated();

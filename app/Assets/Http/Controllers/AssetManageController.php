@@ -19,7 +19,6 @@ use PN\Assets\Jobs\UpdateAsset;
 use PN\Foundation\Http\Controllers\Controller;
 use PN\Media\Jobs\AddImageToAsset;
 use PN\Media\Jobs\CreateImageFromRaw;
-use PN\Resources\Exceptions\InvalidResource;
 use PN\Resources\Jobs\StoreResource;
 
 class AssetManageController extends Controller
