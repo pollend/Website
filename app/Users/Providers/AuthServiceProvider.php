@@ -31,9 +31,9 @@ class AuthServiceProvider extends ServiceProvider
      * @param  \Illuminate\Contracts\Events\Dispatcher $events
      * @return void
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        parent::boot($events);
+        parent::boot();
     }
 
     /**
@@ -43,32 +43,98 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Route::group(['middleware' => ['web']], function () {
-            \Route::controller('auth', AuthController::class, [
-                'getLogin' => 'auth.login',
-                'postLogin' => 'auth.login',
-                'getRegister' => 'auth.register',
-                'postRegister' => 'auth.register',
-                'getForgotPassword' => 'auth.forgotpassword',
-                'postForgotPassword' => 'auth.forgotpassword',
-                'getSetNewPassword' => 'auth.newpassword',
-                'postSetNewPassword' => 'auth.newpassword',
-                'getLogout' => 'auth.logout',
-                'getConfirm' => 'auth.confirm',
-            ]);
+        $router = $this->app['router'];
 
-            \Route::controller('social-auth', SocialAuthController::class, [
-                'getGoogle' => 'socialauth.google',
-                'getFacebook' => 'socialauth.facebook',
-                'getGithub' => 'socialauth.github',
-                'getSteam' => 'socialauth.steam',
-                'getGoogleCallback' => 'socialauth.google.callback',
-                'getFacebookCallback' => 'socialauth.facebook.callback',
-                'getGithubCallback' => 'socialauth.github.callback',
-                'getSteamCallback' => 'socialauth.steam.callback',
-                'getSetUsername' => 'socialauth.setusername',
-                'postSetUsername' => 'socialauth.setusername',
-            ]);
+        $router->group(['middleware' => ['web']], function () use ($router) {
+            $router->group(['prefix' => 'auth'], function () use ($router) {
+                $router->get('login', [
+                    'as' => 'auth.login',
+                    'uses' => AuthController::class . '@getLogin'
+                ]);
+                $router->post('login', [
+                    'as' => 'auth.login',
+                    'uses' => AuthController::class . '@postLogin'
+                ]);
+                $router->get('register', [
+                    'as' => 'auth.register',
+                    'uses' => AuthController::class . '@getRegister'
+                ]);
+                $router->post('register', [
+                    'as' => 'auth.register',
+                    'uses' => AuthController::class . '@postRegister'
+                ]);
+                $router->get('forgot-password', [
+                    'as' => 'auth.forgotpassword',
+                    'uses' => AuthController::class . '@getForgotPassword'
+                ]);
+                $router->post('forgot-password', [
+                    'as' => 'auth.forgotpassword',
+                    'uses' => AuthController::class . '@postForgotPassword'
+                ]);
+                $router->get('new-password', [
+                    'as' => 'auth.newpassword',
+                    'uses' => AuthController::class . '@getSetNewPassword'
+                ]);
+                $router->post('new-password', [
+                    'as' => 'auth.newpassword',
+                    'uses' => AuthController::class . '@postSetNewPassword'
+                ]);
+                $router->get('logout', [
+                    'as' => 'auth.logout',
+                    'uses' => AuthController::class . '@getLogout'
+                ]);
+                $router->get('confirm', [
+                    'as' => 'auth.confirm',
+                    'uses' => AuthController::class . '@getConfirm'
+                ]);
+            });
+
+            $router->group(['prefix' => 'social-auth'], function () use ($router) {
+                $router->get('google', [
+                    'as' => 'socialauth.google',
+                    'uses' => SocialAuthController::class . '@getGoogle'
+                ]);
+                $router->get('google', [
+                    'as' => 'socialauth.google',
+                    'uses' => SocialAuthController::class . '@getGoogle'
+                ]);
+                $router->get('facebook', [
+                    'as' => 'socialauth.facebook',
+                    'uses' => SocialAuthController::class . '@getFacebook'
+                ]);
+                $router->get('github', [
+                    'as' => 'socialauth.github',
+                    'uses' => SocialAuthController::class . '@getGithub'
+                ]);
+                $router->get('steam', [
+                    'as' => 'socialauth.steam',
+                    'uses' => SocialAuthController::class . '@getSteam'
+                ]);
+                $router->get('google-callback', [
+                    'as' => 'socialauth.google.callback',
+                    'uses' => SocialAuthController::class . '@getGoogleCallback'
+                ]);
+                $router->get('facebook-callback', [
+                    'as' => 'socialauth.facebook.callback',
+                    'uses' => SocialAuthController::class . '@getFacebookCallback'
+                ]);
+                $router->get('github-callback', [
+                    'as' => 'socialauth.github.callback',
+                    'uses' => SocialAuthController::class . '@getGithubCallback'
+                ]);
+                $router->get('steam-callback', [
+                    'as' => 'socialauth.steam.callback',
+                    'uses' => SocialAuthController::class . '@getSteamCallback'
+                ]);
+                $router->get('set-username', [
+                    'as' => 'socialauth.setusername',
+                    'uses' => SocialAuthController::class . '@getSetUsername'
+                ]);
+                $router->post('set-username', [
+                    'as' => 'socialauth.setusername',
+                    'uses' => SocialAuthController::class . '@postSetUsername'
+                ]);
+            });
         });
     }
 }

@@ -27,17 +27,28 @@ class AssetServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
 
-        \Route::group(['middleware' => ['web']], function() use ($router) {
+        $router->group(['middleware' => ['web']], function() use ($router) {
 
             $router->group(['prefix' => 'assets', 'as' => 'assets.'], function () use ($router) {
-
-
-                $router->controller('manage', AssetManageController::class, [
-                    'getSelectMod' => 'manage.selectmod',
-                    'getSelectFile' => 'manage.selectfile',
-                    'getCreate' => 'manage.create',
-                    'getUpdate' => 'manage.update',
-                    'deleteDelete' => 'manage.delete'
+                $router->get('manage/selectmod', [
+                    'as' => 'manage.selectmod',
+                    'uses' => AssetManageController::class . '@getSelectMod'
+                ]);
+                $router->get('manage/selectfile', [
+                    'as' => 'manage.selectfile',
+                    'uses' => AssetManageController::class . '@getSelectFile'
+                ]);
+                $router->get('manage/create', [
+                    'as' => 'manage.create',
+                    'uses' => AssetManageController::class . '@getCreate'
+                ]);
+                $router->get('manage/update', [
+                    'as' => 'manage.update',
+                    'uses' => AssetManageController::class . '@getUpdate'
+                ]);
+                $router->delete('manage/delete', [
+                    'as' => 'manage.delete',
+                    'uses' => AssetManageController::class . '@deleteDelete'
                 ]);
                 $router->get('{type}', [
                     'as' => 'filter',

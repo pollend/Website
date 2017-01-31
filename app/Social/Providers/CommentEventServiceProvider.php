@@ -32,9 +32,9 @@ class CommentEventServiceProvider extends EventServiceProvider
      * @param  Dispatcher $events
      * @return void
      */
-    public function boot(Dispatcher $events)
+    public function boot()
     {
-        parent::boot($events);
+        parent::boot();
 
         //
     }

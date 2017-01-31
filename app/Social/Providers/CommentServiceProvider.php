@@ -16,9 +16,9 @@ class CommentServiceProvider extends AuthServiceProvider
         Comment::class => CommentPolicy::class,
     ];
 
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
     }
 
     /**

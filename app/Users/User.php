@@ -3,11 +3,12 @@
 namespace PN\Users;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use PN\Foundation\Presenters\PresenterTrait;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
-    use PresenterTrait;
+    use PresenterTrait, Notifiable;
 
     const USER = 0;
     const MODERATOR = 1;

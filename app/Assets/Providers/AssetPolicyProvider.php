@@ -15,9 +15,9 @@ class AssetPolicyProvider extends AuthServiceProvider
         Asset::class => AssetPolicy::class,
     ];
 
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
     }
 
 }
