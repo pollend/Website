@@ -29,7 +29,7 @@ install:
 
 before_script:
   - cp .env.testing .env
-  - mysql -e 'create database parkitect;'
+  - mysql -e 'create database parkitectnexus_testing;'
   - composer self-update
   - composer install --no-interaction
   - php artisan migrate --force;
