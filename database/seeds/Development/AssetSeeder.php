@@ -67,7 +67,7 @@ class AssetSeeder extends BaseSeeder
             $asset->addTag($tag);
         }
 
-        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+        $this->dispatch(new SetPrimaryTags($asset));
 
         $this->dispatch(new \PN\Resources\Stats\Jobs\CreateStats($resource));
     }
