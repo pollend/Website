@@ -5,7 +5,6 @@ namespace PN\Users\Jobs;
 
 use PN\Jobs\Job;
 use PN\Users\Mail\ConfirmUser;
-use PN\Users\Repositories\UserRepositoryInterface;
 use PN\Users\User;
 
 class SendConfirmEmail extends Job
