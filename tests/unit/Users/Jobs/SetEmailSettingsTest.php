@@ -26,17 +26,12 @@ class SetEmailSettingsTest extends \Codeception\Test\Unit
         $user->shouldReceive("setAvatar")
             ->with("nawenfa9wnefasndfnawienfkd");
 
-        $userData = [
-            'user' => $user,
-            'notificationRate' => 'notificationRate',
-            'recapRate' => 'recapRate'
-        ];
         \UserRepo::shouldReceive("edit")
             ->once()
             ->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(SetEmailSettings::class, $userData));
+        $this->dispatch(new SetEmailSettings($user, 'notificationRate', 'recapRate'));
 
         //assert
         $this->assertTrue($user->notification_rate == 'notificationRate');

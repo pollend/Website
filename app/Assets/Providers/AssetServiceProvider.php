@@ -34,19 +34,35 @@ class AssetServiceProvider extends ServiceProvider
                     'as' => 'manage.selectmod',
                     'uses' => AssetManageController::class . '@getSelectMod'
                 ]);
+                $router->post('manage/selectmod', [
+                    'as' => 'manage.selectmod',
+                    'uses' => AssetManageController::class . '@postSelectMod'
+                ]);
                 $router->get('manage/selectfile', [
                     'as' => 'manage.selectfile',
                     'uses' => AssetManageController::class . '@getSelectFile'
+                ]);
+                $router->post('manage/selectfile', [
+                    'as' => 'manage.selectfile',
+                    'uses' => AssetManageController::class . '@postSelectFile'
                 ]);
                 $router->get('manage/create', [
                     'as' => 'manage.create',
                     'uses' => AssetManageController::class . '@getCreate'
                 ]);
+                $router->post('manage/create', [
+                    'as' => 'manage.create',
+                    'uses' => AssetManageController::class . '@postCreate'
+                ]);
                 $router->get('manage/update', [
                     'as' => 'manage.update',
                     'uses' => AssetManageController::class . '@getUpdate'
                 ]);
-                $router->delete('manage/delete', [
+                $router->post('manage/update', [
+                    'as' => 'manage.update',
+                    'uses' => AssetManageController::class . '@postUpdate'
+                ]);
+                $router->delete('manage/delete/{id}', [
                     'as' => 'manage.delete',
                     'uses' => AssetManageController::class . '@deleteDelete'
                 ]);
@@ -65,8 +81,8 @@ class AssetServiceProvider extends ServiceProvider
 
                 $router->get('{identifier}/{slug}', [
                     'as' => 'show',
-                    'uses' => AssetController::class . '@getShow']);
-
+                    'uses' => AssetController::class . '@getShow'
+                ]);
             });
 
         });

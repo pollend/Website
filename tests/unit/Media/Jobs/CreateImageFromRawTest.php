@@ -30,7 +30,7 @@ class CreateImageFromRawTest extends \Codeception\Test\Unit
         $raw = file_get_contents(base_path('tests/_data/files/blueprint.png'));
 
         //act
-        $image = $this->dispatch(app(CreateImageFromRaw::class, [$raw]));
+        $image = $this->dispatch(new CreateImageFromRaw($raw));
 
         //assert
         $this->assertInstanceOf(Image::class, $image);

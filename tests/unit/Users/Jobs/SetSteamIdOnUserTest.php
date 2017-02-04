@@ -27,14 +27,10 @@ class SetSteamIdOnUserTest extends \Codeception\Test\Unit
         $user->recap_rate = "old_recap_rate";
         $user->steam_id = "old_blalba";
 
-        $userData = [
-            'user' => $user,
-            'steamID' => 'asdfnaiwenfawnef'
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(SetSteamIdOnUser::class, $userData));
+        $this->dispatch(new SetSteamIdOnUser($user, 'asdfnaiwenfawnef'));
 
         //assert
         $this->assertTrue($user->steam_id == 'asdfnaiwenfawnef');

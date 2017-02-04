@@ -63,13 +63,8 @@ class RankBuildOffTest extends \Codeception\Test\Unit
             return true;
         }));
 
-
-        $data = [
-            "buildOff" => $buildOff
-        ];
-
         //act
-        $this->dispatch(app(RankBuildOff::class, $data));
+        $this->dispatch(new RankBuildOff($buildOff));
 
         //assert
         $this->assertContains([

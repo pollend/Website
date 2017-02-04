@@ -91,13 +91,13 @@ class SocialAuthController extends Controller
             $user = \UserRepo::findBySocial($userData->id, $driver, $userData->email);
 
             if($user == null) {
-                $user = $this->dispatch(app(CreateSocialUser::class, [
+                $user = $this->dispatch(new CreateSocialUser(
                     $userData->name,
                     $userData->email,
                     $userData->avatar,
                     $userData->id,
                     $driver
-                ]));
+                ));
             } else {
                 $user->fill([
                     'social_name' => $driver,
@@ -217,7 +217,7 @@ class SocialAuthController extends Controller
 
         $user = \UserRepo::findByIdentifier($identifier);
 
-        $user = $this->dispatch(app(SetUsername::class, [$user->id, \Request::get('username')]));
+        $user = $this->dispatch(new SetUsername($user->id, \Request::get('username'), app(UserRepositoryInterface::class)));
 
         \Auth::login($user, true);
 

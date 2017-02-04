@@ -25,13 +25,9 @@ class AttachTagToAssetTest extends \Codeception\Test\Unit
         $this->tester->cantSeeEventTriggered(TagWasAttachedToAsset::class);
 
         $tag = \Mockery::mock(Tag::class)->makePartial();
-        $data = [
-            "asset" => $asset,
-            "tag" => $tag
-        ];
 
         //act
-        $this->dispatch(app(AttachTagToAsset::class, $data));
+        $this->dispatch(new AttachTagToAsset($asset, $tag));
 
         //assert
     }
@@ -49,17 +45,11 @@ class AttachTagToAssetTest extends \Codeception\Test\Unit
             ->andThrow($exception);
 
         $tag = \Mockery::mock(Tag::class)->makePartial();
-        $data = [
-            "asset" => $asset,
-            "tag" => $tag
-        ];
 
         //act
-        $this->dispatch(app(AttachTagToAsset::class, $data));
+        $this->dispatch(new AttachTagToAsset($asset, $tag));
 
         //assert
         $this->tester->cantSeeEventTriggered(TagWasAttachedToAsset::class);
-
-
     }
 }

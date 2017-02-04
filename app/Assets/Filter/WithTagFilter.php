@@ -19,7 +19,7 @@ class WithTagFilter implements FilterInterface
 
     public function appendQuery($model) : Builder
     {
-        $tagIds = $this->tags->lists('id');
+        $tagIds = $this->tags->pluck('id');
 
         return $model->where(function ($query) use ($tagIds, $model) {
             foreach ($tagIds as $tagId) {

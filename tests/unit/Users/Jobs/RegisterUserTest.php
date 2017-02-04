@@ -17,12 +17,6 @@ class RegisterUserTest extends \Codeception\Test\Unit
         //arrange
         $this->tester->disableEvents();
 
-        $userData = [
-            'username' => 'Nice_username',
-            'name' => 'Even nicer name',
-            'email' => 'ihaveaweakpass@ema.il',
-            'password' => '123456'
-        ];
         \UserRepo::shouldReceive("add")->once()->with(\Mockery::on(function (User $user) {
             $this->assertTrue($user->username == 'Nice_username');
             $this->assertTrue($user->name == 'Even nicer name');
@@ -31,7 +25,7 @@ class RegisterUserTest extends \Codeception\Test\Unit
         }));
 
         //act
-        $user = $this->dispatch(app(RegisterUser::class, $userData));
+        $user = $this->dispatch(new RegisterUser('Nice_username', 'Even nicer name', 'ihaveaweakpass@ema.il', '123456'));
 
         //assert;
         $this->assertTrue(\Hash::check('123456', $user->password));

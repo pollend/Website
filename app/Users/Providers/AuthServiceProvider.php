@@ -71,11 +71,11 @@ class AuthServiceProvider extends ServiceProvider
                     'as' => 'auth.forgotpassword',
                     'uses' => AuthController::class . '@postForgotPassword'
                 ]);
-                $router->get('new-password', [
+                $router->get('new-password/{hash}', [
                     'as' => 'auth.newpassword',
                     'uses' => AuthController::class . '@getSetNewPassword'
                 ]);
-                $router->post('new-password', [
+                $router->post('new-password/{hash}', [
                     'as' => 'auth.newpassword',
                     'uses' => AuthController::class . '@postSetNewPassword'
                 ]);

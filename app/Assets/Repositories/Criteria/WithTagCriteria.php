@@ -29,7 +29,7 @@ class WithTagCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $tagIds = Tag::whereIn('slug', $this->tags)->get(['id'])->lists('id');
+        $tagIds = Tag::whereIn('slug', $this->tags)->get(['id'])->pluck('id');
 
         return $model->where(function ($query) use ($tagIds, $model) {
             foreach ($tagIds as $tagId) {

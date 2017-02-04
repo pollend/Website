@@ -23,18 +23,11 @@ class CreateSocialUserTest extends \Codeception\Test\Unit
         $user->password = '5555';
         $user->confirmed = 0;
 
-        $userData = [
-            "name" => "some_name",
-            "email" => "fake@email.com",
-            "avatar" => "http://image?sz=50",
-            "socialId" => "1245152v1234",
-            "socialProvider" => "google"
-        ];
         \UserRepo::shouldReceive("add");
         \UserRepo::shouldReceive("edit");
 
         //act
-        $user = $this->dispatch(app(CreateSocialUser::class, $userData));
+        $user = $this->dispatch(new CreateSocialUser("some_name", "fake@email.com", "http://image?sz=50", "1245152v1234", "google"));
 
         //assert
         $this->assertTrue($user->username == '');
@@ -54,18 +47,11 @@ class CreateSocialUserTest extends \Codeception\Test\Unit
         $user->password = '5555';
         $user->confirmed = 0;
 
-        $userData = [
-            "name" => "some_name",
-            "email" => "fake@email.com",
-            "avatar" => "http://image?type=normal",
-            "socialId" => "1245152v1234",
-            "socialProvider" => "facebook"
-        ];
         \UserRepo::shouldReceive("add");
         \UserRepo::shouldReceive("edit");
 
         //act
-        $user = $this->dispatch(app(CreateSocialUser::class, $userData));
+        $user = $this->dispatch(new CreateSocialUser("some_name", "fake@email.com", "http://image?type=large", "1245152v1234", "facebook"));
 
         //assert
         $this->assertTrue($user->username == '');
@@ -85,18 +71,11 @@ class CreateSocialUserTest extends \Codeception\Test\Unit
         $user->password = '5555';
         $user->confirmed = 0;
 
-        $userData = [
-            "name" => "some_name",
-            "email" => "",
-            "avatar" => "http://image?sz=50",
-            "socialId" => "1245152v1234",
-            "socialProvider" => "google"
-        ];
         \UserRepo::shouldReceive("add");
         \UserRepo::shouldReceive("edit");
 
         //act
-        $user = $this->dispatch(app(CreateSocialUser::class, $userData));
+        $user = $this->dispatch(new CreateSocialUser("some_name", "1245152v1234@google.com", "http://image?sz=50", "1245152v1234", "google"));
 
         //assert
         $this->assertTrue($user->username == '');

@@ -30,6 +30,8 @@ class Notification extends Model
 
     public function getNotification()
     {
-        return app($this->type, [$this]);
+        $type = $this->type;
+
+        return new $type($this);
     }
 }

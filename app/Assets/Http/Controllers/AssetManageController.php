@@ -19,6 +19,7 @@ use PN\Assets\Jobs\UpdateAsset;
 use PN\Foundation\Http\Controllers\Controller;
 use PN\Media\Jobs\AddImageToAsset;
 use PN\Media\Jobs\CreateImageFromRaw;
+use PN\Resources\Exceptions\InvalidResource;
 use PN\Resources\Jobs\StoreResource;
 
 class AssetManageController extends Controller
@@ -37,7 +38,7 @@ class AssetManageController extends Controller
     {
         $resource = \ResourceUtil::make('resource');
 
-        \Session::set('resource', $resource);
+        \Session::put('resource', $resource);
 
         return redirect(route('assets.manage.create'));
     }
@@ -55,7 +56,7 @@ class AssetManageController extends Controller
             return back()->withErrors("Please provided a valid Github repository.");
         }
 
-        \Session::set('resource', $resource);
+        \Session::put('resource', $resource);
 
         return redirect(route('assets.manage.create'));
     }
@@ -129,7 +130,7 @@ class AssetManageController extends Controller
         foreach (\Request::get('tags', []) as $tagId => $state) {
             $tag = \TagRepo::find($tagId);
 
-            $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
+            $this->dispatch(new AttachTagToAsset($asset, $tag));
         }
 
         if (request('buildoff', 0) != 0) {
@@ -227,7 +228,7 @@ class AssetManageController extends Controller
         foreach (\Request::get('tags', []) as $tagId => $state) {
             $tag = \TagRepo::find($tagId);
 
-            $this->dispatch(app(AttachTagToAsset::class, [$asset, $tag]));
+            $this->dispatch(new AttachTagToAsset($asset, $tag));
         }
 
         $this->dispatch(new ResetDependencies($asset));

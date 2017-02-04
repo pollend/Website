@@ -103,7 +103,7 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
 
         if(count($tags) > 0) {
             $buildOffs = $buildOffs->where(function($query) use ($tags) {
-                $query->whereIn('tag_id', $tags->lists('id')->toArray())->orWhereNull('tag_id');
+                $query->whereIn('tag_id', $tags->pluck('id')->toArray())->orWhereNull('tag_id');
             });
         }
 

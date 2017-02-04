@@ -44,7 +44,7 @@ class AuthControllerCest
         $I->dispatch(new GenerateNewPasswordToken($this->user));
 
         //act
-        $I->amOnPage(route('auth.newpassword') . "/" . $this->user->password_token);
+        $I->amOnPage(route('auth.newpassword', $this->user->password_token));
         $I->fillField("email", $this->user->email);
         $I->fillField("password", $new_password);
         $I->fillField("password_confirmation", $new_password);
@@ -65,7 +65,7 @@ class AuthControllerCest
         $I->dispatch(new GenerateNewPasswordToken($this->user));
 
         //act
-        $I->amOnPage(route('auth.newpassword') . "/invalid token");
+        $I->amOnPage(route('auth.newpassword', "invalid token"));
         $I->fillField("email", $this->user->email);
         $I->fillField("password", $new_password);
         $I->fillField("password_confirmation", $new_password);
@@ -113,7 +113,6 @@ class AuthControllerCest
         $I->disableEvents();
         $new_password = str_random(10);
 
-
         $I->haveBinding('captcha', function () {
             $no_captcha = \Mockery::mock(Anhskohbo\NoCaptcha\NoCaptcha::class);
             // prevent validation error on captcha
@@ -125,6 +124,8 @@ class AuthControllerCest
                 ->andReturn('<input type="hidden" name="g-recaptcha-response" value="1" />');
             return $no_captcha;
         });
+
+        \Mail::fake();
 
         //act
         $I->amOnPage(route('auth.register'));

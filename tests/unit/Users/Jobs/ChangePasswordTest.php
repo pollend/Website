@@ -21,14 +21,10 @@ class ChangePasswordTest extends \Codeception\Test\Unit
         $user->username = 'Nice_username';
         $user->password = '5555';
 
-        $userData = [
-            'user' => $user,
-            'password' => '123456'
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(ChangePassword::class, $userData));
+        $this->dispatch(new ChangePassword($user, '123456'));
 
         //assert
         $this->assertTrue(\Hash::check('123456', $user->password));

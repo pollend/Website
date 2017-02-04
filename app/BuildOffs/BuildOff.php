@@ -64,7 +64,7 @@ class BuildOff extends Model
 
     public function setRanks($ranks)
     {
-        $this->ranks()->sync($ranks->lists('id'));
+        $this->ranks()->sync($ranks->pluck('id'));
     }
 
     public function addRank($rank)

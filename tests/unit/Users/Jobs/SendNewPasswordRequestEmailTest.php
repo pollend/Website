@@ -24,29 +24,13 @@ class SendNewPasswordRequestEmailTest extends \Codeception\Test\Unit
         $user->name = 'test';
         $user->confirmed = 0;
 
-        $userData = [
-            'user' => $user,
-        ];
-
-        \Mail::shouldReceive("send")->once()->with("auth.emails.new-password", \Mockery::on(function ($arg) {
-            $this->assertArrayHasKey('user', $arg);
-            return true;
-
-        }), \Mockery::on(function (\Closure $closure) {
-            $mock = \Mockery::mock('Illuminate\Mailer\Message');
-            $mock->shouldReceive('from')->once()->with('info@parkitectnexus.com', 'ParkitectNexus')->andReturn($mock);
-            $mock->shouldReceive('to')->once()->with("fake@email.com", "test")->andReturn($mock);
-            $mock->shouldReceive('subject')->with(\Mockery::any())->andReturn($mock);
-
-            $closure($mock);
-
-            return true;
-        }));
+        \Mail::fake();
 
         //act
-        $this->dispatch(app(SendNewPasswordRequestEmail::class, $userData));
+        $this->dispatch(new SendNewPasswordRequestEmail($user));
 
         //assert
+        \Mail::assertSent(\PN\Users\Mail\NewPassword::class);
     }
 
 

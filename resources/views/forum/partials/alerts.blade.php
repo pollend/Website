@@ -4,7 +4,7 @@
     @endforeach
 @endif
 
-@if (isset($errors) && $errors->has())
+@if (isset($errors) && $errors->count() > 0)
     @foreach ($errors->all() as $error)
         @include ('forum.partials.alert', ['type' => 'danger', 'message' => $error])
     @endforeach

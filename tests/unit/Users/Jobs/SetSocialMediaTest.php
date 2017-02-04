@@ -24,15 +24,10 @@ class SetSocialMediaTest extends \Codeception\Test\Unit
         $user->notification_rate = "old_notification_rate";
         $user->recap_rate = "old_recap_rate";
 
-        $userData = [
-            'user' => $user,
-            'twitter' => 'asdfnaiwenfawnef',
-            'twitch' => 'awsefawienfawrecapRate'
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(SetSocialMedia::class, $userData));
+        $this->dispatch(new SetSocialMedia($user, 'asdfnaiwenfawnef', 'awsefawienfawrecapRate'));
 
         //assert
         $this->assertTrue($user->twitter == 'asdfnaiwenfawnef');

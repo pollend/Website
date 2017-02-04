@@ -32,7 +32,7 @@ class DetachPrimaryTagsFromAssetTest extends \Codeception\Test\Unit
             ->andReturn(new Collection([$tag1, $tag2, $tag3]));
 
         //act
-        $this->dispatch(app(DetachPrimaryTagsFromAsset::class, [$asset]));
+        $this->dispatch(new DetachPrimaryTagsFromAsset($asset));
 
         //assert
     }

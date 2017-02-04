@@ -26,7 +26,7 @@ class DetachTagFromAssetTest extends \Codeception\Test\Unit
             ->with(\Mockery::type(Tag::class))->once();
 
         //act
-        $this->dispatch(app(DetachTagFromAsset::class, [$asset, $tag]));
+        $this->dispatch(new DetachTagFromAsset($asset, $tag));
 
         //assert
 

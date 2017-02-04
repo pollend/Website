@@ -22,13 +22,10 @@ class ConfirmUserTest extends \Codeception\Test\Unit
         $user->password = '5555';
         $user->confirmed = 0;
 
-        $userData = [
-            'user' => $user
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(ConfirmUser::class, $userData));
+        $this->dispatch(new ConfirmUser($user));
 
         //assert
         $this->assertTrue($user->confirmed == 1);

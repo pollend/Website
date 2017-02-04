@@ -22,13 +22,10 @@ class RegenerateApiKeyTest extends \Codeception\Test\Unit
         $user->password_token = "old_token";
         $user->api_key = "old_key";
 
-        $userData = [
-            'user' => $user
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(RegenerateApiKey::class, $userData));
+        $this->dispatch(new RegenerateApiKey($user));
 
         //assert
         $this->assertFalse($user->api_key == "old_key");

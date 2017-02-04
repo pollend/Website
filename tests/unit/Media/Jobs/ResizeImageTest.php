@@ -30,7 +30,7 @@ class ResizeImageTest extends \Codeception\Test\Unit
         $image->shouldReceive("getRaw")->andReturn($raw);
 
         //act
-        $this->dispatch(app(ResizeImage::class, [$image]));
+        $this->dispatch(new ResizeImage($image));
 
         //assert
     }

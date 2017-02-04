@@ -20,8 +20,6 @@ use Illuminate\Contracts\Bus\Dispatcher;
 class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
-    use MailThief\Testing\InteractsWithMail;
-
 
     public function dispatch($job)
     {

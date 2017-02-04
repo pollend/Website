@@ -31,7 +31,7 @@ class SetPrimaryTagsTest extends \Codeception\Test\Unit
         \TagRepo::shouldReceive("findByPrimaryTags")->with([])->andReturn([]);
 
         //act
-        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+        $this->dispatch(new SetPrimaryTags($asset));
 
         //assert
     }
@@ -59,7 +59,7 @@ class SetPrimaryTagsTest extends \Codeception\Test\Unit
         ])->andReturn(new Collection([$tag1, $tag2, $tag3]))->once();
 
         //act
-        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+        $this->dispatch(new SetPrimaryTags($asset));
 
         //assert
     }

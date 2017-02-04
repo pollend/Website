@@ -8,14 +8,10 @@ class CategoryControllerCest
 
     public function _before(FunctionalTester $I)
     {
-
         //arrange
         $this->mod_user = $I->factory()->Create(User::class,[
             'level' => 2 //set user to mod
         ]);
-
-
-
     }
 
     public function _after(FunctionalTester $I)
@@ -36,12 +32,11 @@ class CategoryControllerCest
             'enable_threads' => 1
         ]);
 
-        $category = $I->grabRecord(Category::class,['title' => $temp_category->title]);
+        $category = $I->grabRecord(Category::class, ['title' => $temp_category->title]);
         $I->seeCurrentRouteIs('forum.category.index',[
             'category' => $category->id,
             'category_slug' => $category->title
         ]);
-
     }
 
     public function tryCreateSubCategory(FunctionalTester $I)

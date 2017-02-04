@@ -23,15 +23,11 @@ class CreateScreenShotTest extends \Codeception\Test\Unit
         $user->id = 100;
         $image = \Mockery::mock(Image::class)->makePartial();
         $image->id = 20;
-        $data = [
-            'user' => $user,
-            'image' => $image,
-            'title' => "some_title"
-        ];
+
         \ScreenshotRepo::shouldReceive("add")->with(\Mockery::type(Screenshot::class))->once();
 
         //act
-        $screenShot = $this->dispatch(app(CreateScreenshot::class, $data));
+        $screenShot = $this->dispatch(new CreateScreenshot($user, $image, "some_title"));
 
         //assert
         $this->assertInstanceOf(Screenshot::class, $screenShot);

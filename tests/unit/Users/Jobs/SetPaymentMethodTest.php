@@ -24,17 +24,12 @@ class SetPaymentMethodTest extends \Codeception\Test\Unit
         $user->notification_rate = "old_notification_rate";
         $user->recap_rate = "old_recap_rate";
 
-        $userData = [
-            'user' => $user,
-            'paypal' => 'asdfnaiwenfawnef',
-            'bitcoin' => 'awsefawienfawrecapRate'
-        ];
         \UserRepo::shouldReceive("edit")
             ->once()
             ->with(\Mockery::type(User::class));
 
         //act
-        $this->dispatch(app(SetPaymentMethods::class, $userData));
+        $this->dispatch(new SetPaymentMethods($user, 'asdfnaiwenfawnef', 'awsefawienfawrecapRate'));
 
         //assert
         $this->assertTrue($user->paypal == 'asdfnaiwenfawnef');

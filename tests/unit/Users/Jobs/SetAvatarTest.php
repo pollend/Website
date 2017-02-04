@@ -39,16 +39,12 @@ class SetAvatarTest extends \Codeception\Test\Unit
         $user->shouldReceive("setAvatar")
             ->with("nawenfa9wnefasndfnawienfkd");
 
-        $userData = [
-            'user' => $user,
-            'rawImage' => file_get_contents(base_path('tests/_data/files/blueprint.png'))
-        ];
         \UserRepo::shouldReceive("edit")->once()->with(\Mockery::on(function ($arg) {
             return true;
         }));
 
         //act
-        $this->dispatch(app(SetAvatar::class, $userData));
+        $this->dispatch(new SetAvatar($user, file_get_contents(base_path('tests/_data/files/blueprint.png'))));
 
         //assert
         $this->assertTrue($user->avatar == $this->image_source);

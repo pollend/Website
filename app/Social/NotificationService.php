@@ -16,7 +16,8 @@ class NotificationService
 
         foreach ($notificationModels as $notificationModel) {
             try{
-                $notification = app($notificationModel->type, [$notificationModel]);
+                $type = $notificationModel->type;
+                $notification = new $type($notificationModel);
 
                 try {
                     // todo, check somewhere else that this notification can be rendered

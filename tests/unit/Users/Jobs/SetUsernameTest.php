@@ -29,15 +29,10 @@ class SetUsernameTest extends \Codeception\Test\Unit
         $userRepository = \Mockery::mock(UserRepositoryInterface::class);
         $userRepository->shouldReceive("find")->with(1083)->andReturn($user);
 
-        $userData = [
-            'userId' => 1083,
-            'username' => 'asdfasdf',
-            'userRepo' => $userRepository
-        ];
         \UserRepo::shouldReceive("edit")->once();
 
         //act
-        $user = $this->dispatch(app(SetUsername::class, $userData));
+        $user = $this->dispatch(new SetUsername(1083, 'asdfasdf', $userRepository));
 
         //assert
         $this->assertTrue($user->username == 'asdfasdf');
