@@ -13,7 +13,7 @@ php:
   - 7.1
 
 install:
-  - 'if [ "${TEST_SUITE}" = "functional" ] || [ "${TEST_SUITE}" = "acceptance" ]; then
+  - 'if [ "${TEST_SUITE}" != "unit" ]; then
       . $HOME/.nvm/nvm.sh;
       nvm install stable;
       nvm use stable;
@@ -22,8 +22,7 @@ install:
       npm install -g yarn;
       npm -v;
       yarn --version;
-      npm install -g bower;
-      npm install -g gulp;
+      yarn global add gulp;
     fi'
   - sudo apt-get install mono-complete
   - mono --version
