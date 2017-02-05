@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "65869c61fded3d94780d84161230df99",
-    "content-hash": "e4e688e8d164afafd31c1971582d6615",
+    "hash": "076f008d20a768a0749e6f5589cf7654",
+    "content-hash": "a05e4005da249250ca911994cd504f85",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -582,16 +582,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.10",
+            "version": "v2.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
                 "shasum": ""
             },
             "require": {
@@ -649,7 +649,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-23 23:17:10"
+            "time": "2017-02-04 21:20:13"
         },
         {
             "name": "doctrine/inflector",
@@ -774,16 +774,16 @@
         },
         {
             "name": "edvinaskrucas/notification",
-            "version": "5.1.1",
+            "version": "5.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/edvinaskrucas/notification.git",
-                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9"
+                "url": "https://github.com/pollend/notification.git",
+                "reference": "ceccb79e91ac8c9f16eef34f64d6d0135b6e92d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/edvinaskrucas/notification/zipball/04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
-                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
+                "url": "https://api.github.com/repos/pollend/notification/zipball/ceccb79e91ac8c9f16eef34f64d6d0135b6e92d5",
+                "reference": "ceccb79e91ac8c9f16eef34f64d6d0135b6e92d5",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,6 @@
                     "Krucas\\Notification": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -818,7 +817,10 @@
                 "messages",
                 "notifications"
             ],
-            "time": "2016-01-19 14:26:18"
+            "support": {
+                "source": "https://github.com/pollend/notification/tree/5.2"
+            },
+            "time": "2017-02-05 08:36:08"
         },
         {
             "name": "erusev/parsedown",
