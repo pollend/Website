@@ -1,20 +1,22 @@
 @inject('notificationService', 'PN\Social\NotificationService')
 <ul class="nav navbar-nav navbar-right">
     @if(\Auth::check())
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                <i class="fa fa-envelope"></i> {{ $notificationService->notificationCount() }} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                @foreach($notificationService->getNotifications() as $notification)
-                    <li>
-                        <a href="{{ $notification->getUrl() }}">
-                            {{ $notification->getText() }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </li>
+        {{--<li class="dropdown">--}}
+            {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">--}}
+                {{--<i class="fa fa-envelope"></i> {{ $notificationService->notificationCount() }} <span class="caret"></span>--}}
+            {{--</a>--}}
+            {{--<ul class="dropdown-menu">--}}
+                {{--@foreach($notificationService->getNotifications() as $notification)--}}
+                    {{--<li>--}}
+                        {{--<a href="{{ $notification->getUrl() }}">--}}
+                            {{--{{ $notification->getText() }}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--@endforeach--}}
+            {{--</ul>--}}
+        {{--</li>--}}
+
+        <notification-dropdown></notification-dropdown>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                 Upload <span class="caret"></span>

@@ -11,19 +11,25 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\WebPush\WebPushMessage;
 use NotificationChannels\WebPush\WebPushChannel;
+use PN\Social\Comment;
+use PN\Users\User;
 
 class CommentMentionNotification extends Notification
 {
     use Queueable;
+
+    protected  $comment ;
+    protected $mentionedUser ;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Comment $comment,User $mentionedUser)
     {
-        //
+        $this->mentionedUser = $mentionedUser;
+        $this->comment = $comment;
     }
     /**
      * Get the notification's delivery channels.
@@ -33,7 +39,7 @@ class CommentMentionNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast', WebPushChannel::class];
+        return ['database', WebPushChannel::class];
     }
 
 
@@ -41,8 +47,8 @@ class CommentMentionNotification extends Notification
     {
         return [
             'title' => 'Someone Mentioned You!',
-            'body' => 'Thank you for using our application.',
-            'action_url' => 'https://laravel.com',
+            'body' => $this->getText(),
+            'action_url' => $this->getFinalUrl(),
             'created' => Carbon::now()->toIso8601String()
         ];
     }
@@ -52,16 +58,16 @@ class CommentMentionNotification extends Notification
      *
      * @param  mixed  $notifiable
      * @param  mixed  $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
+     * @return WebPushMessage
      */
     public function toWebPush($notifiable, $notification)
     {
         return WebPushMessage::create()
             ->id($notification->id)
-            ->title('Hello from Laravel!')
+            ->title('Someone Mentioned You!')
             ->icon('/notification-icon.png')
-            ->body('Thank you for using our application.')
-            ->action('View app', 'view_app');
+            ->body($this->getText())
+            ->action('url', $this->getFinalUrl());
     }
 
 
@@ -70,28 +76,18 @@ class CommentMentionNotification extends Notification
      *
      * @return string
      */
-//    public function getText() : string
-//    {
-//        $context = json_decode($this->notification->context);
-//
-//
-//        $comment = \CommentRepo::find($context->comment_id);
-//        $user = $comment->getUser();
-//
-//        return sprintf("%s mentioned you in a comment of %s", $user->getPresenter()->displayName(), $comment->getAsset()->name);
-//    }
-//
-//    /**
-//     * Returns the url to where this notification was triggered
-//     *
-//     * @return string
-//     */
-//    public function getFinalUrl() : string
-//    {
-//        $context = json_decode($this->notification->context);
-//
-//        $comment = \CommentRepo::find($context->comment_id);
-//
-//        return $comment->getPresenter()->url();
-//    }
+    public function getText() : string
+    {
+        return sprintf("%s mentioned you in a comment of %s", $this->mentionedUser->getPresenter()->displayName(), $this->comment->getAsset()->name);
+    }
+
+    /**
+     * Returns the url to where this notification was triggered
+     *
+     * @return string
+     */
+    public function getFinalUrl() : string
+    {
+        return $this->comment->getPresenter()->url;
+    }
 }

@@ -1,33 +1,20 @@
 <template>
   <li ref="dropdown" class="dropdown dropdown-notifications">
+
     <a @click.prevent="toggleDropdown" class="dropdown-toggle" href="#">
-      <i :data-count="total" class="fa fa-bell notification-icon" :class="{ 'hide-count': !hasUnread }"></i>
+      <i :data-count="total" class="fa fa-envelope" :class="{ 'hide-count': !hasUnread }"></i> ({{ total }}) <span class="caret"></span>
     </a>
-
-    <div class="dropdown-container">
-      <div class="dropdown-toolbar">
-        <div v-show="hasUnread" class="dropdown-toolbar-actions">
-          <a href="#" @click.prevent="markAllRead">Mark all as read</a>
-        </div>
-
-        <h3 class="dropdown-toolbar-title">Notifications ({{ total }})</h3>
-      </div>
-
       <ul class="dropdown-menu">
-        <notification v-for="notification in notifications"
-          :notification="notification"
-          v-on:read="markAsRead(notification)"
-        ></notification>
-
-        <li v-if="!hasUnread" class="notification">
-          You don't have any unread notifications.
-        </li>
+          <notification v-for="notification in notifications"
+                        :notification="notification"
+                        v-on:read="markAsRead(notification)"></notification>
+          <li v-if="!hasUnread" class="notification">
+              Nothing here!
+          </li>
+          <li v-if="hasUnread" class="dropdown-footer text-center">
+              <a href="#" @click.prevent="fetchAll(null)">View All</a>
+          </li>
       </ul>
-
-      <div v-if="hasUnread" class="dropdown-footer text-center">
-        <a href="#" @click.prevent="fetchAll(null)">View All</a>
-      </div>
-    </div>
   </li>
 </template>
 

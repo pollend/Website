@@ -52,6 +52,10 @@ return [
         'client_secret' => getenv('GOOGLE_CLIENT_SECRET'),
         'redirect' => getenv('GOOGLE_REDIRECT')
     ],
+    'gcm' => [
+        'key' => env('GCM_KEY'),
+        'sender_id' => env('GCM_SENDER_ID'),
+    ],
 
 
 ];

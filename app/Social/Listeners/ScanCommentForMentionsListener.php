@@ -18,12 +18,14 @@ class ScanCommentForMentionsListener extends MentionScanner
         $users = $this->getUsers($event->getComment()->body);
 
         foreach ($users as $user) {
-            $type = CommentMentionNotification::class;
-            $context = json_encode([
-                'comment_id' => $event->getComment()->id
-            ]);
+//            $type = CommentMentionNotification::class;
+//            $context = json_encode([
+//                'comment_id' => $event->getComment()->id
+//            ]);
 
-            $this->dispatch(new NotifyUser($user, $type, $context));
+            $user->notify(new CommentMentionNotification($event->getComment(),$user));
+
+//            $this->dispatch(new NotifyUser($user, $type, $context));
         }
     }
 }
