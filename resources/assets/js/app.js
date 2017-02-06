@@ -1,3 +1,17 @@
+import './bootstrap'
+import Vue from 'vue'
+
+import NotificationDropdown from './components/NotificationDropdown'
+
+
+new Vue({
+    el: '#app',
+
+    components: {
+        NotificationDropdown
+    }
+})
+
 $('.dropdown-toggle').dropdown();
 
 function registerDownload(type, id) {

@@ -4,11 +4,12 @@ namespace PN\Users;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use PN\Foundation\Presenters\PresenterTrait;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
-    use PresenterTrait, Notifiable;
+    use PresenterTrait, Notifiable, HasPushSubscriptions;
 
     const USER = 0;
     const MODERATOR = 1;

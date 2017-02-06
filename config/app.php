@@ -166,6 +166,7 @@ return [
         Weidner\Goutte\GoutteServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        NotificationChannels\WebPush\WebPushServiceProvider::class,
 
         /*
          * Application Service Providers...

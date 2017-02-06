@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
+
     <title>@yield('pagetitle', 'ParkitectNexus - Share your mods, blueprints and parks')</title>
 
     <meta name="description" content="Here you will find mods, coasters and parks created by players for Parkitect.  We already have 68 mods, 785 blueprints and 113 parks ready for download!"/>
 
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
-    <link rel="stylesheet" media="screen" type="text/css" href="{{ elixir('css/app.css') }}"/>
+    <link rel="stylesheet" media="screen" type="text/css" href="{{ mix('css/app.css') }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.1.5/css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/css/bootstrap-markdown.min.css">
@@ -21,6 +22,7 @@
     @yield('head')
 </head>
 <body>
+<div id="app">
 @section('body')
     @include('partials.topbar')
 
@@ -46,6 +48,7 @@
         @include('partials.footer')
     </div>
 @show
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.1.5/bootstrap-slider.min.js"></script>
@@ -53,7 +56,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/commonmark/0.25.1/commonmark.min.js"></script>
-<script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
+
+<script>
+    window.USER = {!! Auth::check() ? Auth::user() : 'null' !!};
+    window.PUSHER_OPTIONS = {
+        key: '{{ config('broadcasting.connections.pusher.key') }}',
+        cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}'
+    };
+</script>
+
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 @yield('js')
 <script>
     (function (i, s, o, g, r, a, m) {
