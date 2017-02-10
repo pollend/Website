@@ -107,6 +107,12 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
             });
         }
 
+        if($resource->getType() == 'blueprint') {
+            $price = $resource->getExtractor()->getStats()['ApproximateCost'];
+
+            $buildOffs->where('max_price', '>=', $price);
+        }
+
         return $buildOffs->where('type_requirement', $resource->type)
             ->where('start', '<=', date('Y-m-d H:i:s'))
             ->where('end', '>=', date('Y-m-d H:i:s'))

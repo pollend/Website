@@ -127,12 +127,21 @@ class BuildOff extends Model
 
         if($this->tag_id != null) {
             foreach ($asset->getTags() as $tag) {
-                if($tag->id == $this->tag_id) {
-                    return true;
+                if($tag->id != $this->tag_id) {
+                    break;
                 }
+
+                return false;
             }
 
-            return false;
+        }
+
+        if($asset->type == "blueprint") {
+            $price = $asset->getResource()->getExtractor()->getStats()["ApproximateCost"];
+
+            if($price > $this->max_price) {
+                return false;
+            }
         }
 
         return true;

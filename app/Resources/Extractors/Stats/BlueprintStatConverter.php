@@ -47,6 +47,7 @@ class BlueprintStatConverter implements DataToStatConverterInterface
             $converted['TrainCount'] = $data['Coaster']['TrainCount'];
             $converted['TrainLength'] = $data['Coaster']['TrainLength'];
             $converted['TrainTotal'] = $converted['TrainCount'] * $converted['TrainLength'];
+            $converted['ApproximateCost'] = $data['Header']['ApproximateCost'];
 
             if ($converted['RideLengthTime'] != 0) {
                 $converted['MaximumEstimatedProfit'] = (3600 / $converted['RideLengthTime']) * ($converted['TrainTotal'] * 4);

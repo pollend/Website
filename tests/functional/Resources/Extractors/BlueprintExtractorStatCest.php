@@ -33,6 +33,7 @@ class BlueprintExtractorStatCest
             "TrainLength" => 7,
             "TrainTotal" => 28,
             "MaximumEstimatedProfit" => 3930.9795260996,
+            "ApproximateCost" => 12662.0
         ]);
 
         //act
