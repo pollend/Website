@@ -29,7 +29,9 @@ class CategoryControllerCest
             'private' => 0,
             'title' =>  $temp_category->title,
             'description' => $temp_category->description,
-            'enable_threads' => 1
+            'enable_threads' => 1,
+            'weight' => 0,
+            'category_id' => 0
         ]);
 
         $category = $I->grabRecord(Category::class, ['title' => $temp_category->title]);

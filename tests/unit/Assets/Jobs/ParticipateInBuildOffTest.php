@@ -30,12 +30,18 @@ class ParticipateInBuildOffTest extends \Codeception\Test\Unit
         $asset = \Mockery::mock(Asset::class)->makePartial();
         $asset->type = 'blueprint';
         $asset->shouldReceive("getTags")->andReturn([$tag1, $tag2, $tag3]);
+        $resource = \Mockery::mock(\PN\Resources\Resource::class)->makePartial();
+        $resource->shouldReceive("getStats")->andReturn([
+            "ApproximateCost" => 1000
+        ]);
+        $asset->shouldReceive("getResource")->andReturn($resource);
         $asset->id = 4123;
 
         $buildOff = \Mockery::mock(BuildOff::class)->makePartial();
         $buildOff->type_requirement = 'blueprint';
         $buildOff->tag_id = 44;
         $buildOff->id = 100;
+        $buildOff->max_price = 1500;
 
         \AssetRepo::shouldReceive("edit")
             ->with(\Mockery::type(Asset::class))->once();
