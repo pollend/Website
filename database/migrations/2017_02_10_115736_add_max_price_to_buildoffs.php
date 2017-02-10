@@ -14,7 +14,7 @@ class AddMaxPriceToBuildoffs extends Migration
     public function up()
     {
         Schema::table("buildoffs", function (Blueprint $table) {
-            $table->integer("max_price")->default(-1)->after("type_requirement");
+            $table->integer("max_price")->default(100000)->after("type_requirement");
         });
     }
 
