@@ -1,10 +1,10 @@
-@if(isset($errors) && $errors->has())
+@if(isset($errors) && $errors->count() > 0)
+
     <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         @foreach($errors->all() as $error)
-            {!! $error !!}
-            <br/>
+        <div>{!! $error !!}</div>
         @endforeach
-        <a href="#" class="close">&times;</a>
     </div>
 @endif
 

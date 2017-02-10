@@ -74,9 +74,9 @@ class ScreenshotServiceProvider extends AuthServiceProvider
      * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
     }
 
     public static function compiles() {

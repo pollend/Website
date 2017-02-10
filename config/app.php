@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'ParkitectNexus',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +148,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
         /**
          * Package Service Providers
@@ -226,6 +228,7 @@ return [
         'Lang'      => Illuminate\Support\Facades\Lang::class,
         'Log'       => Illuminate\Support\Facades\Log::class,
         'Mail'      => Illuminate\Support\Facades\Mail::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password'  => Illuminate\Support\Facades\Password::class,
         'Queue'     => Illuminate\Support\Facades\Queue::class,
         'Redirect'  => Illuminate\Support\Facades\Redirect::class,
@@ -249,6 +252,7 @@ return [
         'Agent'         => Jenssegers\Agent\Facades\Agent::class,
         'Ads'           => Mastergalen\AdsenseAds\AdsFacade::class,
         'Goutte'        => Weidner\Goutte\GoutteFacade::class,
+        'NoCaptcha'     => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
         /**
          * Application Facades
@@ -271,7 +275,6 @@ return [
         'DownloadRepo'  => PN\Tracking\Repositories\Facades\DownloadRepositoryFacade::class,
         'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
         'PostRepo'      => PN\Forum\Repositories\Facades\PostRepositoryFacade::class,
-        'NotificationRepo' => PN\Social\Repositories\Facades\NotificationRepositoryFacade::class,
         'ClientRepo'    => PN\Client\Repositories\Facades\ClientRepositoryFacade::class,
         'OptionRepo'    => PN\Foundation\Repositories\Facades\OptionRepositoryFacade::class,
     ],

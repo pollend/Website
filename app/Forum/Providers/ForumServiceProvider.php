@@ -39,7 +39,7 @@ class ForumServiceProvider extends ServiceProvider
     {
         $this->observeModels();
 
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
         if (config('forum.routing.enabled')) {
             $this->registerMiddleware($router);
@@ -63,15 +63,15 @@ class ForumServiceProvider extends ServiceProvider
      * @param  GateContract  $gate
      * @return void
      */
-    public function registerPolicies(GateContract $gate)
+    public function registerPolicies()
     {
         $forumPolicy = config('forum.integration.policies.forum');
         foreach (get_class_methods(new $forumPolicy()) as $method) {
-            $gate->define($method, "{$forumPolicy}@{$method}");
+            \Gate::define($method, "{$forumPolicy}@{$method}");
         }
 
         foreach (config('forum.integration.policies.model') as $model => $policy) {
-            $gate->policy($model, $policy);
+            \Gate::policy($model, $policy);
         }
     }
 

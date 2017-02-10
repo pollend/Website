@@ -1,15 +1,41 @@
+dist: trusty
+sudo: required
+
+env:
+  - TEST_SUITE=unit
+  - TEST_SUITE=functional
+  - TEST_SUITE=acceptance
+
 language: php
 
 php:
   - 7.0
+  - 7.1
+
+install:
+  - 'if [ "${TEST_SUITE}" != "unit" ]; then
+      . $HOME/.nvm/nvm.sh;
+      nvm install stable;
+      nvm use stable;
+      node -v;
+      npm install -g npm@latest;
+      npm install -g yarn;
+      npm -v;
+      yarn --version;
+    fi'
+  - sudo apt-get install mono-complete
+  - mono --version
 
 before_script:
-  - sudo apt-get install -y mono-complete
-  - cp .env.travis .env
-  - mysql -e 'create database parkitectnexus_test;'
+  - cp .env.testing .env
+  - mysql -e 'create database parkitectnexus_testing;'
   - composer self-update
   - composer install --no-interaction
-  - php artisan migrate --force
+  - php artisan migrate --force;
+  - 'if [ "${TEST_SUITE}" != "unit" ]; then
+     yarn install;
+     yarn run production;
+    fi'
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/codecept run ${TEST_SUITE}

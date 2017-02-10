@@ -27,7 +27,7 @@ class DetachPrimaryTagsFromAsset extends Job
         $tags = \TagRepo::findPrimary($this->asset->type);
 
         foreach($tags as $tag) {
-            $this->dispatch(app(DetachTagFromAsset::class, [$this->asset, $tag]));
+            $this->dispatch(new DetachTagFromAsset($this->asset, $tag));
         }
     }
 }

@@ -6,22 +6,22 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.4.*",
         "barryvdh/laravel-ide-helper": "^2.1",
         "intervention/image": "^2.3",
         "prettus/l5-repository": "^2.1",
-        "laravel/socialite": "^2.0",
-        "barryvdh/laravel-debugbar": "^2.2",
+        "laravel/socialite": "^3.0",
+        "barryvdh/laravel-debugbar": "^2.3",
         "predis/predis": "^1.0",
         "league/commonmark": "0.13",
         "edvinaskrucas/notification": "^5.1",
         "doctrine/dbal": "^2.5",
         "league/fractal": "^0.13.0",
         "jenssegers/agent": "^2.3",
-        "mastergalen/adsense-ads": "^0.1.2",
+        "mastergalen/adsense-ads": "^0.1.4",
         "ikkentim/wikiclone": "^0.4.0",
         "knplabs/github-api": "^1.6",
-        "invisnik/laravel-steam-auth": "dev-master",
+        "invisnik/laravel-steam-auth": "2.*",
         "weidner/goutte": "@dev",
         "maknz/slack": "^1.7",
         "spatie/laravel-backup": "^3.7",
@@ -30,15 +30,23 @@
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "mockery/mockery": "^0.9.6",
+        "phpunit/phpunit": "~5.0",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*",
+        "codeception/codeception": "^2.2",
+        "league/factory-muffin": "^3.0",
+        "league/factory-muffin-faker": "^1.0",
+        "flow/jsonpath": "^0.3.4"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/ParkitectNexus/laravel-steam-auth.git"
+            "url": "https://github.com/ParkitectNexus/Adsense-Ads.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pollend/notification.git"
         }
     ],
     "autoload": {
@@ -51,9 +59,6 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
     },
     "scripts": {
         "post-root-package-install": [

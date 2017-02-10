@@ -4,8 +4,8 @@
 namespace PN\Social\Http\Controllers;
 
 
+use Illuminate\Notifications\DatabaseNotification;
 use PN\Foundation\Http\Controllers\Controller;
-use PN\Social\Jobs\ReadNotification;
 
 class NotificationController extends Controller
 {
@@ -13,10 +13,10 @@ class NotificationController extends Controller
     {
         $id = \Crypt::decrypt($encryptedId);
 
-        $notification = \NotificationRepo::find($id);
-        
-        $this->dispatch(new ReadNotification($notification));
+        $notification = DatabaseNotification::find($id);
 
-        return redirect($notification->getNotification()->getFinalUrl());
+        $notification->markAsRead();
+
+        return redirect($notification->data["url"]);
     }
 }

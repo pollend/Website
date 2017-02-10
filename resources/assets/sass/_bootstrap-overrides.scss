@@ -4,7 +4,7 @@ $font-size-base: 15px;
 $text-color: #5a5a5a;
 
 // Load original vars so we may use them
-@import "../libs/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 
 $navbar-border-radius: 0px;
 $navbar-default-bg: darken($gray-lighter, 10%);
@@ -32,6 +32,7 @@ $btn-default-border:             #ccc;
 $btn-primary-color:              $brand-primary;
 $btn-primary-bg:                 #fff;
 $btn-primary-border:             darken($brand-primary, 5%);
+$body-bg:  $brand-primary;
 
 $btn-success-color:              $brand-success;
 $btn-success-bg:                 #fff;

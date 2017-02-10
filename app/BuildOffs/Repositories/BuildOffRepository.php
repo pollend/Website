@@ -103,8 +103,14 @@ class BuildOffRepository extends BaseRepository implements BuildOffRepositoryInt
 
         if(count($tags) > 0) {
             $buildOffs = $buildOffs->where(function($query) use ($tags) {
-                $query->whereIn('tag_id', $tags->lists('id')->toArray())->orWhereNull('tag_id');
+                $query->whereIn('tag_id', $tags->pluck('id')->toArray())->orWhereNull('tag_id');
             });
+        }
+
+        if($resource->getType() == 'blueprint') {
+            $price = $resource->getExtractor()->getStats()['ApproximateCost'];
+
+            $buildOffs->where('max_price', '>=', $price);
         }
 
         return $buildOffs->where('type_requirement', $resource->type)

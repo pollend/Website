@@ -50,6 +50,6 @@ class StatCriteria implements CriteriaInterface
 
         $resource = $resource->get();
 
-        return $model->whereIn('resource_id', $resource->lists('id'));
+        return $model->whereIn('resource_id', $resource->pluck('id'));
     }
 }

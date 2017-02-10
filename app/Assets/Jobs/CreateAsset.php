@@ -69,7 +69,7 @@ class CreateAsset extends Job
 
         \AssetRepo::add($asset);
 
-        $this->dispatch(app(SetPrimaryTags::class, [$asset]));
+        $this->dispatch(new SetPrimaryTags($asset));
 
         return $asset;
     }

@@ -4,7 +4,7 @@ namespace PN\Users\Jobs;
 
 
 use PN\Jobs\Job;
-use PN\Users\Repositories\UserRepositoryInterface;
+use PN\Users\Mail\ConfirmUserMail;
 use PN\Users\User;
 
 class SendConfirmEmail extends Job
@@ -22,11 +22,7 @@ class SendConfirmEmail extends Job
         
         // only send confirmation mails to non social unconfirmed accounts
         if($user->confirmed == 0) {
-            \Mail::send('auth.emails.confirm', ['user' => $user], function ($m) use ($user) {
-                $m->from('info@parkitectnexus.com', 'ParkitectNexus');
-
-                $m->to($user->email, $user->getPresenter()->displayName)->subject('Confirm your account on ParkitectNexus');
-            });
+            \Mail::to($user->email)->send(new ConfirmUserMail($user));
         }
     }
 }

@@ -55,13 +55,13 @@ class CreateSocialUser extends Job
             }
         }
 
-        $user = $this->dispatch(app(RegisterUser::class, [
+        $user = $this->dispatch(new RegisterUser(
             '',
             $this->name,
             $this->email,
             str_random(32),
             true
-        ]));
+        ));
 
         $user = $user->fill([
             'social_id' => $this->socialId,
@@ -73,7 +73,7 @@ class CreateSocialUser extends Job
 
         $this->dispatch(new ConfirmUser($user));
 
-//        $this->dispatch(app(SetDefaultRole::class, [$user->id]));
+//        $this->dispatch(new SetDefaultRole($user->id));
 
         return $user;
     }

@@ -23,11 +23,12 @@
                         <strong>{{ $buildOff->getRanks()->count() }}</strong>
                         contestants,
                         <strong>
-                            <a href="https://parkitectnexus.com/assets/3bba39453d/the-enigma">
+                            <a href="{{ $buildOff->getWinner()->getAsset()->getPresenter()->url() }}">
                                 {{ $buildOff->getWinner()->getAsset()->name }}
                             </a>
                         </strong> made by
-                        <strong><a href="https://parkitectnexus.com/user/lord-gonchar">
+                        <strong>
+                            <a href="{{ $buildOff->getWinner()->getAsset()->getUser()->getPresenter()->url() }}">
                                 {{ $buildOff->getWinner()->getAsset()->getUser()->getPresenter()->displayName() }}
                             </a>
                         </strong>

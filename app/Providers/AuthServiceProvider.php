@@ -8,30 +8,17 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
-    protected $policies = [
-        
-    ];
-
-    /**
      * Register any application authentication / authorization services.
      *
      * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $gate->before(function ($user, $ability) {
+        \Gate::before(function ($user, $ability) {
             if ($user->isAdmin()) {
                 return true;
             }
         });
-
-        $this->registerPolicies($gate);
-
-
     }
 }

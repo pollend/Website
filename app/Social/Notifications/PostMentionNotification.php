@@ -1,41 +1,60 @@
 <?php
 
-
 namespace PN\Social\Notifications;
 
+use Illuminate\Notifications\Notification;
+use PN\Assets\Asset;
+use PN\Forum\Post;
+use PN\Users\User;
 
-/**
- * Class PostMentionNotification
- * @package PN\Social\Notifications
- */
-class PostMentionNotification extends AbstractNotification
+class PostMentionNotification extends Notification
 {
     /**
-     * Returns the human readable text for this notification
-     *
-     * @return string
+     * @var User
      */
-    public function getText() : string
+    private $poster;
+
+    /**
+     * @var Asset
+     */
+    private $post;
+
+    /**
+     * Create a new notification instance.
+     * @param User $poster
+     * @param Post $post
+     */
+    public function __construct(User $poster, Post $post)
     {
-        $context = json_decode($this->notification->context);
-
-        $post = \PostRepo::find($context->post_id);
-        $user = $post->getUser();
-
-        return sprintf("%s mentioned you in %s", $user->getPresenter()->displayName(), $post->getThread()->title);
+        $this->poster = $poster;
+        $this->post = $post;
     }
 
     /**
-     * Returns the url to where this notification was triggered
+     * Get the notification's delivery channels.
      *
-     * @return string
+     * @param  mixed  $notifiable
+     * @return array
      */
-    public function getFinalUrl() : string
+    public function via($notifiable)
     {
-        $context = json_decode($this->notification->context);
+        return [
+            'database',
+//            'broadcast'
+        ];
+    }
 
-        $post = \PostRepo::find($context->post_id);
-
-        return $post->url;
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            'text' => sprintf("%s mentioned you", $this->poster->getPresenter()->displayName()),
+            'url' => $this->post->url
+        ];
     }
 }

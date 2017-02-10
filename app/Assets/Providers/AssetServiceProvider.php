@@ -6,6 +6,7 @@ namespace PN\Assets\Providers;
 use Illuminate\Support\ServiceProvider;
 use PN\Assets\Http\Controllers\Api\ApiAssetController;
 use PN\Assets\Http\Controllers\Api\ApiAssetManageController;
+use PN\Assets\Http\Controllers\Api\ApiAssetModController;
 use PN\Assets\Http\Controllers\AssetController;
 use PN\Assets\Http\Controllers\AssetManageController;
 use PN\Assets\Repositories\AssetRepository;
@@ -13,6 +14,7 @@ use PN\Assets\Repositories\AssetRepositoryInterface;
 use PN\Assets\Repositories\TagRepository;
 use PN\Assets\Repositories\TagRepositoryInterface;
 use PN\Foundation\Providers\CompileHelperTrait;
+use Symfony\Component\Routing\Router;
 
 class AssetServiceProvider extends ServiceProvider
 {
@@ -25,37 +27,77 @@ class AssetServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
 
-        $router->group(['middleware' => ['web']], function () use ($router) {
-            $router->controller('assets/manage', AssetManageController::class, [
-                'getSelectMod' => 'assets.manage.selectmod',
-                'getSelectFile' => 'assets.manage.selectfile',
-                'getCreate' => 'assets.manage.create',
-                'getUpdate' => 'assets.manage.update',
-                'deleteDelete' => 'assets.manage.delete'
-            ]);
-            $router->get('assets/{type}', [
-                'as' => 'assets.filter',
-                'uses' => AssetController::class . '@filterPage'
-            ]);
-            $router->get('assets/download/{identifier}', [
-                'as' => 'assets.download',
-                'uses' => AssetController::class . '@download'
-            ]);
-            $router->get('assets/{type}/filter', [
-                'as' => 'assets.filter.list',
-                'uses' => AssetController::class . '@filterAssets'
-            ]);
+        $router->group(['middleware' => ['web']], function() use ($router) {
 
-            $router->get('assets/{identifier}/{slug}', [
-                'uses' => AssetController::class . '@getShow',
-                'as' => 'assets.show'
-            ]);
+            $router->group(['prefix' => 'assets', 'as' => 'assets.'], function () use ($router) {
+                $router->get('manage/selectmod', [
+                    'as' => 'manage.selectmod',
+                    'uses' => AssetManageController::class . '@getSelectMod'
+                ]);
+                $router->post('manage/selectmod', [
+                    'as' => 'manage.selectmod',
+                    'uses' => AssetManageController::class . '@postSelectMod'
+                ]);
+                $router->get('manage/selectfile', [
+                    'as' => 'manage.selectfile',
+                    'uses' => AssetManageController::class . '@getSelectFile'
+                ]);
+                $router->post('manage/selectfile', [
+                    'as' => 'manage.selectfile',
+                    'uses' => AssetManageController::class . '@postSelectFile'
+                ]);
+                $router->get('manage/create', [
+                    'as' => 'manage.create',
+                    'uses' => AssetManageController::class . '@getCreate'
+                ]);
+                $router->post('manage/create', [
+                    'as' => 'manage.create',
+                    'uses' => AssetManageController::class . '@postCreate'
+                ]);
+                $router->get('manage/update/{identifier}', [
+                    'as' => 'manage.update',
+                    'uses' => AssetManageController::class . '@getUpdate'
+                ]);
+                $router->post('manage/update/{identifier}', [
+                    'as' => 'manage.update',
+                    'uses' => AssetManageController::class . '@postUpdate'
+                ]);
+                $router->delete('manage/delete/{id}', [
+                    'as' => 'manage.delete',
+                    'uses' => AssetManageController::class . '@deleteDelete'
+                ]);
+                $router->get('{type}', [
+                    'as' => 'filter',
+                    'uses' => AssetController::class . '@filterPage'
+                ]);
+                $router->get('download/{identifier}', [
+                    'as' => 'download',
+                    'uses' => AssetController::class . '@download'
+                ]);
+                $router->get('{type}/filter', [
+                    'as' => 'filter.list',
+                    'uses' => AssetController::class . '@filterAssets'
+                ]);
 
-            $router->get('api/assets/required', ApiAssetController::class . '@required');
-            $router->resource('api/assets', ApiAssetController::class);
+                $router->get('{identifier}/{slug}', [
+                    'as' => 'show',
+                    'uses' => AssetController::class . '@getShow'
+                ]);
+            });
+
         });
 
-        $router->controller('api/assets/manage', ApiAssetManageController::class);
+        \Route::group(['prefix' => 'api/assets', 'as' => 'api.assets.'], function () {
+            \Route::get('required', ['as' => 'required', 'uses' => ApiAssetController::class . '@required']);
+            \Route::get('/', ['as' => 'index', 'uses' => ApiAssetController::class . '@index']);
+            \Route::get('/{identifier}', ['as' => 'index', 'uses' => ApiAssetController::class . '@fetch']);
+            \Route::get('/{identifier}/dependencies', ['as' => 'dependencies', 'uses' => ApiAssetController::class . '@dependencies']);
+
+            \Route::group(['prefix' => 'manage', 'as' => 'manage.'], function () {
+                \Route::post("upload-asset", ['as' => "upload", "uses" => ApiAssetManageController::class . "@uploadAsset"]);
+            });
+
+        });
 
         $this->app->singleton(AssetRepositoryInterface::class, AssetRepository::class);
         $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);

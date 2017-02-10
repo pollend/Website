@@ -13,13 +13,7 @@
 			</p>
 
 			@if($asset->type == 'mod')
-				<div id="dependencies-box">
-					<select id="dependencies" multiple="multiple" name="dependencies[]">
-						@foreach($mods as $mod)
-							<option value="{{ $mod->identifier }}") @if($asset->isDependency($mod)) selected @endif>{{ $mod->name }}</option>
-						@endforeach
-					</select>
-				</div>
+				<dependency-list identifier="{{$asset->identifier}}" type="mod"></dependency-list>
 			@else
 				<p>
 					Not available for {{ $asset->type }}
@@ -28,3 +22,4 @@
 		</div>
 	</div>
 </div>
+

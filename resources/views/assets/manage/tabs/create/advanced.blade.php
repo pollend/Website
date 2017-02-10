@@ -13,13 +13,7 @@
 			</p>
 
 			@if($resource->type == 'mod')
-				<div id="dependencies-box">
-					<select id="dependencies" multiple="multiple" name="dependencies[]">
-						@foreach($mods as $mod)
-							<option value="{{ $mod->identifier }}")>{{ $mod->name }}</option>
-						@endforeach
-					</select>
-				</div>
+				<dependency-list identifier="" type="mod"></dependency-list>
 			@else
 				<p>
 					Not available for {{ $resource->type }}

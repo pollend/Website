@@ -3,11 +3,12 @@
 namespace PN\Users;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use PN\Foundation\Presenters\PresenterTrait;
 
 class User extends \Illuminate\Foundation\Auth\User
 {
-    use PresenterTrait;
+    use PresenterTrait, Notifiable;
 
     const USER = 0;
     const MODERATOR = 1;
@@ -129,11 +130,6 @@ class User extends \Illuminate\Foundation\Auth\User
     public function comments()
     {
         return $this->hasMany(\PN\Social\Comment::class);
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(\PN\Social\Notification::class);
     }
 
     public function getAssets()

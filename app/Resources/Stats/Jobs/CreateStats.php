@@ -37,10 +37,10 @@ class CreateStats extends Job
     {
         switch($this->resource->type) {
             case 'blueprint':
-                $this->dispatch(app(CreateBlueprintStats::class, [$this->resource]));
+                $this->dispatch(new CreateBlueprintStats($this->resource));
                 break;
             case 'park':
-                $this->dispatch(app(CreateParkStats::class, [$this->resource]));
+                $this->dispatch(new CreateParkStats($this->resource));
                 break;
         }
     }

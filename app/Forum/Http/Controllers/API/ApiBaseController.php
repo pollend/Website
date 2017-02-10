@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Routing\Controller;
 
 abstract class ApiBaseController extends Controller
@@ -249,7 +249,7 @@ abstract class ApiBaseController extends Controller
      * @param  array  $customAttributes
      * @return void
      *
-     * @throws \Illuminate\Http\Exception\HttpResponseException
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     public function validate(Request $request, array $rules = [], array $messages = [], array $customAttributes = [])
     {
