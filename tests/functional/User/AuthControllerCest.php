@@ -138,7 +138,6 @@ class AuthControllerCest
         $I->seeCurrentRouteIs('auth.login');
         //$I->cantSeeEventTriggered(UserRegistered::class);
 
-        \Mockery::close();
         //assert
         $registered_user = \UserRepo::findByField('email', $user->email)->first();
         $I->assertFalse(\Auth::check());
