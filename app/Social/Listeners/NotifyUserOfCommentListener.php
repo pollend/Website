@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use PN\Social\Events\UserCommentedOnAsset;
 use PN\Social\Jobs\NotifyUser;
 use PN\Social\Notifications\CommentOnAssetNotification;
+use PN\Social\Notifications\NewCommentOnAsset;
 
 /**
  * Class NotifyUserOfCommentListener
@@ -22,9 +23,10 @@ class NotifyUserOfCommentListener
      */
     public function handle(UserCommentedOnAsset $event)
     {
-        $type = CommentOnAssetNotification::class;
-        $context = json_encode(['comment_id' => $event->comment->id]);
+        $user = $event->comment->getAsset()->getUser();
 
-        $this->dispatch(new NotifyUser($event->comment->getAsset()->getUser(), $type, $context));
+        if($user->id != $event->user->id) {
+            $user->notify(new NewCommentOnAsset($event->user, $event->comment->getAsset()));
+        }
     }
 }

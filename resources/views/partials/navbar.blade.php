@@ -1,15 +1,14 @@
-@inject('notificationService', 'PN\Social\NotificationService')
 <ul class="nav navbar-nav navbar-right">
     @if(\Auth::check())
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                <i class="fa fa-envelope"></i> {{ $notificationService->notificationCount() }} <span class="caret"></span>
+                <i class="fa fa-envelope"></i> {{ \Auth::user()->unreadNotifications->count() }} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                @foreach($notificationService->getNotifications() as $notification)
+                @foreach(\Auth::user()->unreadNotifications as $notification)
                     <li>
-                        <a href="{{ $notification->getUrl() }}">
-                            {{ $notification->getText() }}
+                        <a href="{{ route("notifications.redirect", \Crypt::encrypt($notification->id)) }}">
+                            {{ $notification->data["text"] }}
                         </a>
                     </li>
                 @endforeach

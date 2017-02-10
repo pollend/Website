@@ -10,3 +10,4 @@ _ide_helper.php
 .phpintel
 tests/_output/*
 tests/_output/*
+/public/mix-manifest.json

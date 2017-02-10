@@ -1,38 +1,59 @@
 <?php
 
-
 namespace PN\Social\Notifications;
 
+use Illuminate\Notifications\Notification;
+use PN\Assets\Asset;
+use PN\Users\User;
 
-class CommentMentionNotification extends AbstractNotification
+class CommentMentionNotification extends Notification
 {
     /**
-     * Returns the human readable text for this notification
-     *
-     * @return string
+     * @var User
      */
-    public function getText() : string
+    private $commenter;
+
+    /**
+     * @var Asset
+     */
+    private $asset;
+
+    /**
+     * Create a new notification instance.
+     * @param User $commenter
+     * @param Asset $asset
+     */
+    public function __construct(User $commenter, Asset $asset)
     {
-        $context = json_decode($this->notification->context);
-
-
-        $comment = \CommentRepo::find($context->comment_id);
-        $user = $comment->getUser();
-
-        return sprintf("%s mentioned you in a comment of %s", $user->getPresenter()->displayName(), $comment->getAsset()->name);
+        $this->commenter = $commenter;
+        $this->asset = $asset;
     }
 
     /**
-     * Returns the url to where this notification was triggered
+     * Get the notification's delivery channels.
      *
-     * @return string
+     * @param  mixed  $notifiable
+     * @return array
      */
-    public function getFinalUrl() : string
+    public function via($notifiable)
     {
-        $context = json_decode($this->notification->context);
+        return [
+            'database',
+//            'broadcast'
+        ];
+    }
 
-        $comment = \CommentRepo::find($context->comment_id);
-
-        return $comment->getPresenter()->url();
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            'text' => sprintf("%s mentioned you", $this->commenter->getPresenter()->displayName()),
+            'url' => $this->asset->getPresenter()->url()
+        ];
     }
 }

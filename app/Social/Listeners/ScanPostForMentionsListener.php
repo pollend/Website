@@ -18,12 +18,9 @@ class ScanPostForMentionsListener extends MentionScanner
         $users = $this->getUsers($event->post->content);
 
         foreach ($users as $user) {
-            $type = PostMentionNotification::class;
-            $context = json_encode([
-                'post_id' => $event->post->id
-            ]);
-
-            $this->dispatch(new NotifyUser($user, $type, $context));
+            if($user->id != $event->post->user->id) {
+                $user->notify(new PostMentionNotification($event->post->user, $event->post));
+            }
         }
     }
 }

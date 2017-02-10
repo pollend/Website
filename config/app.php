@@ -275,7 +275,6 @@ return [
         'DownloadRepo'  => PN\Tracking\Repositories\Facades\DownloadRepositoryFacade::class,
         'ViewRepo'      => PN\Tracking\Repositories\Facades\ViewRepositoryFacade::class,
         'PostRepo'      => PN\Forum\Repositories\Facades\PostRepositoryFacade::class,
-        'NotificationRepo' => PN\Social\Repositories\Facades\NotificationRepositoryFacade::class,
         'ClientRepo'    => PN\Client\Repositories\Facades\ClientRepositoryFacade::class,
         'OptionRepo'    => PN\Foundation\Repositories\Facades\OptionRepositoryFacade::class,
     ],

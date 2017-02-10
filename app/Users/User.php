@@ -132,11 +132,6 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->hasMany(\PN\Social\Comment::class);
     }
 
-    public function notifications()
-    {
-        return $this->hasMany(\PN\Social\Notification::class);
-    }
-
     public function getAssets()
     {
         return $this->assets;

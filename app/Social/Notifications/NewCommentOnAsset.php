@@ -4,30 +4,29 @@ namespace PN\Social\Notifications;
 
 use Illuminate\Notifications\Notification;
 use PN\Assets\Asset;
-use PN\Forum\Post;
 use PN\Users\User;
 
-class PostMentionNotification extends Notification
+class NewCommentOnAsset extends Notification
 {
     /**
      * @var User
      */
-    private $poster;
+    private $commenter;
 
     /**
      * @var Asset
      */
-    private $post;
+    private $asset;
 
     /**
      * Create a new notification instance.
-     * @param User $poster
-     * @param Post $post
+     * @param User $commenter
+     * @param Asset $asset
      */
-    public function __construct(User $poster, Post $post)
+    public function __construct(User $commenter, Asset $asset)
     {
-        $this->poster = $poster;
-        $this->post = $post;
+        $this->commenter = $commenter;
+        $this->asset = $asset;
     }
 
     /**
@@ -53,8 +52,8 @@ class PostMentionNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'text' => sprintf("%s mentioned you", $this->poster->getPresenter()->displayName()),
-            'url' => $this->post->url
+            'text' => sprintf("%s commented on %s", $this->commenter->getPresenter()->displayName(), $this->asset->name),
+            'url' => $this->asset->getPresenter()->url()
         ];
     }
 }
