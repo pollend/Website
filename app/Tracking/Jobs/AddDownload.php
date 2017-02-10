@@ -13,7 +13,7 @@ use PN\Users\User;
  * Class AddDownload
  * @package PN\Tracking\Jobs
  */
-class AddDownload extends Job
+class AddDownload extends Job implements ShouldQueue
 {
     use SerializesModels;
     
