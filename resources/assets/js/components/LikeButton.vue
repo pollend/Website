@@ -7,13 +7,11 @@
             <i v-else class="fa icon-xl fa fa-heart fa-heart-o"></i>
         </div>
         <div class="col-xs-6 text-center" title="Downloads">
-            <div v-if="hideCount">
-                <p>
-                    <span v-if="liked"> You like this </span>
-                    <span v-else> You didn't like this yet </span>
-                </p>
-            </div>
-            <div v-else>
+            <div v-if="!hideCount">
+
+                <b>
+                    {{ likeCount }}
+                </b>
 
                 <p v-if="likeCount == 1">
                     Person liked this
@@ -21,10 +19,6 @@
                 <p v-else>
                     People liked this
                 </p>
-
-                <b>
-                    {{ likeCount }}
-                </b>
             </div>
 
         </div>
@@ -41,13 +35,17 @@
     export default{
         props: ['type','id','liked','canLike','hideCount',"numLikes"],
         data: function() {
-
             return {
-                likeState: (this.liked == 'true' || this.liked=== true),
-                likeCount: (Number(this.numLikes) + ((this.liked == 'true' || this.liked=== true) ? 1 : 0))
-
+                likeState: (this.liked == 'true' || this.liked=== true)
             };
         },
+
+        computed: {
+            likeCount() {
+                return (Number(this.numLikes) + ((this.liked == 'true' || this.liked === true) ? 1 : 0));
+            }
+        },
+
         methods: {
             toggleLike: function()
             {
@@ -62,19 +60,18 @@
             like: function() {
                 this.likeState = true;
 
-                if(this.likeCount != null) {
-                    this.likeCount++;
+                if(this.numLikes != null) {
+                    this.numLikes++;
                 }
 
                 axios.post('/api/likes/like/' + this.type + '/' + this.id);
             },
             unlike: function() {
                 this.likeState = false;
-                if(this.likeCount != null) {
-                    this.likeCount--;
+                if(this.numLikes != null) {
+                    this.numLikes--;
                 }
                 axios.delete('/api/likes/unlike/' + this.type + '/' + this.id);
-
             }
         }
     }

@@ -6,15 +6,16 @@
         <li>
             @if($asset->canBeLiked())
                 <like-thumbnail
-                        @if($asset->showLikes()) num-likes="{{ $asset->like_count }}" @endif
+                        likes="{{ $asset->like_count }}"
                         type="asset"
                         id="{{ $asset->id }}"
                         @if(\Auth::check())
                         liked="{{ var_export(\Auth::user()->liked($asset), true) }}"
                         @endif
-                        can-like="{{\Auth::check()}}"
+                        can-like="{{ $asset->canBeLiked() }}"
+                        hide-count="{{ $asset->inBuildOff() }}"
+                        @if($asset->showLikes()) num-likes="{{ $asset->like_count }}" @endif
                 ></like-thumbnail>
-
             @endif
         </li>
     </ul>
