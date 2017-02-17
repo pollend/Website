@@ -137,7 +137,7 @@ class BuildOff extends Model
         }
 
         if($asset->type == "blueprint") {
-            $price = $asset->getResource()->getStats()["ApproximateCost"];
+            $price = $asset->getResource()->getExtractor()->getStats()['ApproximateCost'];
 
             if($price > $this->max_price) {
                 return false;
