@@ -128,10 +128,10 @@ class SocialAuthController extends Controller
 
         if (!is_null($info)) {
             // steam provides no emails, generate one based on id
-            $email = $info->getSteamID64() . '@steam.com';
+            $email = $info->steamID64 . '@steam.com';
 
             // try to find someone who is already linked with steam, if they do we need to log them in without doing anything
-            $user = \UserRepo::findBySteamId($info->getSteamID64());
+            $user = \UserRepo::findBySteamId($info->steamID64);
 
             // couldnt find it
             if ($user == null) {
@@ -139,20 +139,20 @@ class SocialAuthController extends Controller
                 if(\Auth::check()) {
                     $user = \Auth::user();
 
-                    $this->dispatch(new SetSteamIdOnUser($user, $info->getSteamID64()));
+                    $this->dispatch(new SetSteamIdOnUser($user, $info->steamID64));
 
                     \Notification::info('Steam was successfully linked to your account');
                 } else {
                     // this is a call to create a new user with steam
                     $user = $this->dispatch(new CreateSocialUser(
-                        $info->getName(),
+                        $info->realname,
                         $email,
-                        $info->getProfilePictureFull(),
+                        $info->avatarfull,
                         '', // don't copy steam username, let them choose themselves
                         'steam'
                     ));
 
-                    $this->dispatch(new SetSteamIdOnUser($user, $info->getSteamID64()));
+                    $this->dispatch(new SetSteamIdOnUser($user, $info->steamID64));
 
                     if ($user->username == '') {
                         return redirect(route('socialauth.setusername', [\Crypt::encrypt($user->identifier)]));
@@ -163,7 +163,7 @@ class SocialAuthController extends Controller
                 \Auth::login($user);
             }
 
-            $user->avatar = $info->getProfilePictureFull();
+            $user->avatar = $info->avatarfull;
 
             \UserRepo::edit($user);
 
