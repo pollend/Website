@@ -135,14 +135,14 @@ class BuildOff extends Model
             }
 
         }
-
-        if($asset->type == "blueprint") {
-            $price = $asset->getResource()->getStats()["ApproximateCost"];
-
-            if($price > $this->max_price) {
-                return false;
-            }
-        }
+//
+//        if($asset->type == "blueprint") {
+//            $price = $asset->getResource()->getExtractor()->getStats()['ApproximateCost'];
+//
+//            if($price > $this->max_price) {
+//                return false;
+//            }
+//        }
 
         return true;
     }
