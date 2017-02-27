@@ -43,6 +43,17 @@ class UserProfileController extends Controller
         ));
     }
 
+    public function workshop($username)
+    {
+
+        $user = \UserRepo::findByUsername($username);
+
+        $url ='http://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails';
+
+
+        return @file_get_contents($url);
+    }
+
     public function views($username)
     {
         $tab = 'views';

@@ -80,6 +80,12 @@ class UserServiceProvider extends ServiceProvider
                 'uses' => UserProfileController::class.'@views'
             ]);
 
+
+            $router->get('users/workshop/{username}', [
+                'as' => 'users.views',
+                'uses' => UserProfileController::class.'@workshop'
+            ]);
+
             $router->get('users/likes/{username}', [
                 'as' => 'users.likes',
                 'uses' => UserProfileController::class.'@likes'
